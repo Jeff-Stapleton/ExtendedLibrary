@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0.0",
+	"FriendlyName": "UE4 Extended Library",
+	"Description": "XL extends the basic UE4 API providing common functionality.",
+	"Category": "",
+	"CreatedBy": "Jeff Stapleton",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"EnabledByDefault": false,
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "ExtendedLibrary",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		}
+	]
+}
