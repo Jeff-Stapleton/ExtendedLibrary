@@ -13,19 +13,39 @@ void EmptyLinkFunctionForGeneratedCode1ExtendedLibrary() {}
 	{
 	}
 	IMPLEMENT_CLASS(AXLCharacter, 2939563634);
+	void UXLCharacterResources::StaticRegisterNativesUXLCharacterResources()
+	{
+	}
+	IMPLEMENT_CLASS(UXLCharacterResources, 3394640110);
+	void UXLCharacterStats::StaticRegisterNativesUXLCharacterStats()
+	{
+	}
+	IMPLEMENT_CLASS(UXLCharacterStats, 203760155);
 	void AXLPlayerController::StaticRegisterNativesAXLPlayerController()
 	{
 	}
 	IMPLEMENT_CLASS(AXLPlayerController, 2997435374);
+	void AXLWeapon::StaticRegisterNativesAXLWeapon()
+	{
+	}
+	IMPLEMENT_CLASS(AXLWeapon, 1074312903);
 #if USE_COMPILED_IN_NATIVES
 // Cross Module References
 	ENGINE_API class UClass* Z_Construct_UClass_ACharacter();
+	ENGINE_API class UClass* Z_Construct_UClass_UActorComponent();
 	ENGINE_API class UClass* Z_Construct_UClass_APlayerController();
+	ENGINE_API class UClass* Z_Construct_UClass_AActor();
 
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLCharacter_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLCharacter();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterResources_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterResources();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterStats_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterStats();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPlayerController_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPlayerController();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLWeapon_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLWeapon();
 	EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
 	UClass* Z_Construct_UClass_AXLCharacter_NoRegister()
 	{
@@ -60,6 +80,136 @@ void EmptyLinkFunctionForGeneratedCode1ExtendedLibrary() {}
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLCharacter(Z_Construct_UClass_AXLCharacter, &AXLCharacter::StaticClass, TEXT("AXLCharacter"), false, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLCharacter);
+	UClass* Z_Construct_UClass_UXLCharacterResources_NoRegister()
+	{
+		return UXLCharacterResources::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLCharacterResources()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLCharacterResources::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_MaxShield = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MaxShield"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(MaxShield, UXLCharacterResources), 0x0010000000000005);
+				UProperty* NewProp_MaxUltimate = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MaxUltimate"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(MaxUltimate, UXLCharacterResources), 0x0010000000000005);
+				UProperty* NewProp_MaxStamina = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MaxStamina"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(MaxStamina, UXLCharacterResources), 0x0010000000000005);
+				UProperty* NewProp_MaxEnergy = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MaxEnergy"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(MaxEnergy, UXLCharacterResources), 0x0010000000000005);
+				UProperty* NewProp_MaxHealth = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MaxHealth"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(MaxHealth, UXLCharacterResources), 0x0010000000000005);
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
+				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Data/XLCharacterResources.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
+				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
+				MetaData->SetValue(NewProp_MaxShield, TEXT("Category"), TEXT("Resources"));
+				MetaData->SetValue(NewProp_MaxShield, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
+				MetaData->SetValue(NewProp_MaxShield, TEXT("ToolTip"), TEXT("The amount of shield the Pawn has"));
+				MetaData->SetValue(NewProp_MaxUltimate, TEXT("Category"), TEXT("Resources"));
+				MetaData->SetValue(NewProp_MaxUltimate, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
+				MetaData->SetValue(NewProp_MaxUltimate, TEXT("ToolTip"), TEXT("The amount of Ultimate the Pawn has"));
+				MetaData->SetValue(NewProp_MaxStamina, TEXT("Category"), TEXT("Resources"));
+				MetaData->SetValue(NewProp_MaxStamina, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
+				MetaData->SetValue(NewProp_MaxStamina, TEXT("ToolTip"), TEXT("The amount of stamina the Pawn has"));
+				MetaData->SetValue(NewProp_MaxEnergy, TEXT("Category"), TEXT("Resources"));
+				MetaData->SetValue(NewProp_MaxEnergy, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
+				MetaData->SetValue(NewProp_MaxEnergy, TEXT("ToolTip"), TEXT("The amount of energy the Pawn has"));
+				MetaData->SetValue(NewProp_MaxHealth, TEXT("Category"), TEXT("Resources"));
+				MetaData->SetValue(NewProp_MaxHealth, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
+				MetaData->SetValue(NewProp_MaxHealth, TEXT("ToolTip"), TEXT("The amount of health the Pawn has"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLCharacterResources(Z_Construct_UClass_UXLCharacterResources, &UXLCharacterResources::StaticClass, TEXT("UXLCharacterResources"), false, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLCharacterResources);
+	UClass* Z_Construct_UClass_UXLCharacterStats_NoRegister()
+	{
+		return UXLCharacterStats::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLCharacterStats()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLCharacterStats::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_EnergyDefense = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("EnergyDefense"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(EnergyDefense, UXLCharacterStats), 0x0010000000000005);
+				UProperty* NewProp_PhysicalDefense = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PhysicalDefense"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(PhysicalDefense, UXLCharacterStats), 0x0010000000000005);
+				UProperty* NewProp_AbilityPower = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("AbilityPower"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(AbilityPower, UXLCharacterStats), 0x0010000000000005);
+				UProperty* NewProp_CooldownReduction = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CooldownReduction"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(CooldownReduction, UXLCharacterStats), 0x0010000000000005);
+				UProperty* NewProp_AttackPower = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("AttackPower"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(AttackPower, UXLCharacterStats), 0x0010000000000005);
+				UProperty* NewProp_AttackSpeed = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("AttackSpeed"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(AttackSpeed, UXLCharacterStats), 0x0010000000000005);
+				UProperty* NewProp_StaminaRegen = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("StaminaRegen"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(StaminaRegen, UXLCharacterStats), 0x0010000000000005);
+				UProperty* NewProp_EnergyRegen = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("EnergyRegen"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(EnergyRegen, UXLCharacterStats), 0x0010000000000005);
+				UProperty* NewProp_HealthRegen = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("HealthRegen"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(HealthRegen, UXLCharacterStats), 0x0010000000000005);
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
+				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Data/XLCharacterStats.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterStats.h"));
+				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
+				MetaData->SetValue(NewProp_EnergyDefense, TEXT("Category"), TEXT("Stats"));
+				MetaData->SetValue(NewProp_EnergyDefense, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterStats.h"));
+				MetaData->SetValue(NewProp_EnergyDefense, TEXT("ToolTip"), TEXT("The precentage of damage reduced from energy attacks"));
+				MetaData->SetValue(NewProp_PhysicalDefense, TEXT("Category"), TEXT("Stats"));
+				MetaData->SetValue(NewProp_PhysicalDefense, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterStats.h"));
+				MetaData->SetValue(NewProp_PhysicalDefense, TEXT("ToolTip"), TEXT("The precentage of damage reduced from physical attacks"));
+				MetaData->SetValue(NewProp_AbilityPower, TEXT("Category"), TEXT("Stats"));
+				MetaData->SetValue(NewProp_AbilityPower, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterStats.h"));
+				MetaData->SetValue(NewProp_AbilityPower, TEXT("ToolTip"), TEXT("The precentage of damage all abilities are increased"));
+				MetaData->SetValue(NewProp_CooldownReduction, TEXT("Category"), TEXT("Stats"));
+				MetaData->SetValue(NewProp_CooldownReduction, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterStats.h"));
+				MetaData->SetValue(NewProp_CooldownReduction, TEXT("ToolTip"), TEXT("The percentage of time all ability cooldowns are reduced"));
+				MetaData->SetValue(NewProp_AttackPower, TEXT("Category"), TEXT("Stats"));
+				MetaData->SetValue(NewProp_AttackPower, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterStats.h"));
+				MetaData->SetValue(NewProp_AttackPower, TEXT("ToolTip"), TEXT("The amount of damage a basic attack deals"));
+				MetaData->SetValue(NewProp_AttackSpeed, TEXT("Category"), TEXT("Stats"));
+				MetaData->SetValue(NewProp_AttackSpeed, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterStats.h"));
+				MetaData->SetValue(NewProp_AttackSpeed, TEXT("ToolTip"), TEXT("The time between consecutive attacks"));
+				MetaData->SetValue(NewProp_StaminaRegen, TEXT("Category"), TEXT("Stats"));
+				MetaData->SetValue(NewProp_StaminaRegen, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterStats.h"));
+				MetaData->SetValue(NewProp_StaminaRegen, TEXT("ToolTip"), TEXT("The amount of stamina restored per second"));
+				MetaData->SetValue(NewProp_EnergyRegen, TEXT("Category"), TEXT("Stats"));
+				MetaData->SetValue(NewProp_EnergyRegen, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterStats.h"));
+				MetaData->SetValue(NewProp_EnergyRegen, TEXT("ToolTip"), TEXT("The amount of energy restored per second"));
+				MetaData->SetValue(NewProp_HealthRegen, TEXT("Category"), TEXT("Stats"));
+				MetaData->SetValue(NewProp_HealthRegen, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterStats.h"));
+				MetaData->SetValue(NewProp_HealthRegen, TEXT("ToolTip"), TEXT("The amount of health restored per second"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLCharacterStats(Z_Construct_UClass_UXLCharacterStats, &UXLCharacterStats::StaticClass, TEXT("UXLCharacterStats"), false, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLCharacterStats);
 	UClass* Z_Construct_UClass_AXLPlayerController_NoRegister()
 	{
 		return AXLPlayerController::StaticClass();
@@ -94,6 +244,38 @@ void EmptyLinkFunctionForGeneratedCode1ExtendedLibrary() {}
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLPlayerController(Z_Construct_UClass_AXLPlayerController, &AXLPlayerController::StaticClass, TEXT("AXLPlayerController"), false, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLPlayerController);
+	UClass* Z_Construct_UClass_AXLWeapon_NoRegister()
+	{
+		return AXLWeapon::StaticClass();
+	}
+	UClass* Z_Construct_UClass_AXLWeapon()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_AActor();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = AXLWeapon::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20800080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Weapons/XLWeapon.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Weapons/XLWeapon.h"));
+				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLWeapon(Z_Construct_UClass_AXLWeapon, &AXLWeapon::StaticClass, TEXT("AXLWeapon"), false, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLWeapon);
 	UPackage* Z_Construct_UPackage__Script_ExtendedLibrary()
 	{
 		static UPackage* ReturnPackage = NULL;
@@ -102,8 +284,8 @@ void EmptyLinkFunctionForGeneratedCode1ExtendedLibrary() {}
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/ExtendedLibrary")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000040);
 			FGuid Guid;
-			Guid.A = 0x0A7024D0;
-			Guid.B = 0xA2AF5CC6;
+			Guid.A = 0xE5F60A11;
+			Guid.B = 0x4F0BE666;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);
