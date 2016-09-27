@@ -9,6 +9,42 @@
 #include "ExtendedLibrary.generated.dep.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCode1ExtendedLibrary() {}
+static class UEnum* EHealthState_StaticEnum()
+{
+	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
+	static class UEnum* Singleton = NULL;
+	if (!Singleton)
+	{
+		extern EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EHealthState();
+		Singleton = GetStaticEnum(Z_Construct_UEnum_ExtendedLibrary_EHealthState, Z_Construct_UPackage__Script_ExtendedLibrary(), TEXT("EHealthState"));
+	}
+	return Singleton;
+}
+static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EHealthState(EHealthState_StaticEnum, TEXT("/Script/ExtendedLibrary"), TEXT("EHealthState"), false, nullptr, nullptr);
+static class UEnum* ECombatState_StaticEnum()
+{
+	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
+	static class UEnum* Singleton = NULL;
+	if (!Singleton)
+	{
+		extern EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_ECombatState();
+		Singleton = GetStaticEnum(Z_Construct_UEnum_ExtendedLibrary_ECombatState, Z_Construct_UPackage__Script_ExtendedLibrary(), TEXT("ECombatState"));
+	}
+	return Singleton;
+}
+static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_ECombatState(ECombatState_StaticEnum, TEXT("/Script/ExtendedLibrary"), TEXT("ECombatState"), false, nullptr, nullptr);
+static class UEnum* EMovementState_StaticEnum()
+{
+	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
+	static class UEnum* Singleton = NULL;
+	if (!Singleton)
+	{
+		extern EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EMovementState();
+		Singleton = GetStaticEnum(Z_Construct_UEnum_ExtendedLibrary_EMovementState, Z_Construct_UPackage__Script_ExtendedLibrary(), TEXT("EMovementState"));
+	}
+	return Singleton;
+}
+static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovementState_StaticEnum, TEXT("/Script/ExtendedLibrary"), TEXT("EMovementState"), false, nullptr, nullptr);
 	void AXLCharacter::StaticRegisterNativesAXLCharacter()
 	{
 	}
@@ -36,6 +72,9 @@ void EmptyLinkFunctionForGeneratedCode1ExtendedLibrary() {}
 	ENGINE_API class UClass* Z_Construct_UClass_APlayerController();
 	ENGINE_API class UClass* Z_Construct_UClass_AActor();
 
+	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EHealthState();
+	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_ECombatState();
+	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EMovementState();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLCharacter_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLCharacter();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterResources_NoRegister();
@@ -47,6 +86,85 @@ void EmptyLinkFunctionForGeneratedCode1ExtendedLibrary() {}
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLWeapon_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLWeapon();
 	EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
+	UEnum* Z_Construct_UEnum_ExtendedLibrary_EHealthState()
+	{
+		UPackage* Outer=Z_Construct_UPackage__Script_ExtendedLibrary();
+		extern uint32 Get_Z_Construct_UEnum_ExtendedLibrary_EHealthState_CRC();
+		static UEnum* ReturnEnum = FindExistingEnumIfHotReloadOrDynamic(Outer, TEXT("EHealthState"), 0, Get_Z_Construct_UEnum_ExtendedLibrary_EHealthState_CRC(), false);
+		if (!ReturnEnum)
+		{
+			ReturnEnum = new(EC_InternalUseOnlyConstructor, Outer, TEXT("EHealthState"), RF_Public|RF_Transient|RF_MarkAsNative) UEnum(FObjectInitializer());
+			TArray<TPair<FName, uint8>> EnumNames;
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EHealthState::Alive")), 0));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EHealthState::Dying")), 1));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EHealthState::Dead")), 2));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EHealthState::EHealthState_MAX")), 3));
+			ReturnEnum->SetEnums(EnumNames, UEnum::ECppForm::Namespaced);
+			ReturnEnum->CppType = TEXT("EHealthState::Type");
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnEnum->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnEnum, TEXT("BlueprintType"), TEXT("true"));
+			MetaData->SetValue(ReturnEnum, TEXT("Category"), TEXT("Character"));
+			MetaData->SetValue(ReturnEnum, TEXT("ModuleRelativePath"), TEXT("Public/Enums/XLHealthState.h"));
+#endif
+		}
+		return ReturnEnum;
+	}
+	uint32 Get_Z_Construct_UEnum_ExtendedLibrary_EHealthState_CRC() { return 336115640U; }
+	UEnum* Z_Construct_UEnum_ExtendedLibrary_ECombatState()
+	{
+		UPackage* Outer=Z_Construct_UPackage__Script_ExtendedLibrary();
+		extern uint32 Get_Z_Construct_UEnum_ExtendedLibrary_ECombatState_CRC();
+		static UEnum* ReturnEnum = FindExistingEnumIfHotReloadOrDynamic(Outer, TEXT("ECombatState"), 0, Get_Z_Construct_UEnum_ExtendedLibrary_ECombatState_CRC(), false);
+		if (!ReturnEnum)
+		{
+			ReturnEnum = new(EC_InternalUseOnlyConstructor, Outer, TEXT("ECombatState"), RF_Public|RF_Transient|RF_MarkAsNative) UEnum(FObjectInitializer());
+			TArray<TPair<FName, uint8>> EnumNames;
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("ECombatState::Passive")), 0));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("ECombatState::Aggressive")), 1));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("ECombatState::ECombatState_MAX")), 2));
+			ReturnEnum->SetEnums(EnumNames, UEnum::ECppForm::Namespaced);
+			ReturnEnum->CppType = TEXT("ECombatState::Type");
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnEnum->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnEnum, TEXT("BlueprintType"), TEXT("true"));
+			MetaData->SetValue(ReturnEnum, TEXT("Category"), TEXT("Character"));
+			MetaData->SetValue(ReturnEnum, TEXT("ModuleRelativePath"), TEXT("Public/Enums/XLCombatState.h"));
+#endif
+		}
+		return ReturnEnum;
+	}
+	uint32 Get_Z_Construct_UEnum_ExtendedLibrary_ECombatState_CRC() { return 2348786571U; }
+	UEnum* Z_Construct_UEnum_ExtendedLibrary_EMovementState()
+	{
+		UPackage* Outer=Z_Construct_UPackage__Script_ExtendedLibrary();
+		extern uint32 Get_Z_Construct_UEnum_ExtendedLibrary_EMovementState_CRC();
+		static UEnum* ReturnEnum = FindExistingEnumIfHotReloadOrDynamic(Outer, TEXT("EMovementState"), 0, Get_Z_Construct_UEnum_ExtendedLibrary_EMovementState_CRC(), false);
+		if (!ReturnEnum)
+		{
+			ReturnEnum = new(EC_InternalUseOnlyConstructor, Outer, TEXT("EMovementState"), RF_Public|RF_Transient|RF_MarkAsNative) UEnum(FObjectInitializer());
+			TArray<TPair<FName, uint8>> EnumNames;
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::Idle")), 0));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::Moving")), 1));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::Sprinting")), 2));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::Jumping")), 3));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::Crouching")), 4));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::Prone")), 5));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::Dodging")), 6));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::Climbing")), 7));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::EMovementState_MAX")), 8));
+			ReturnEnum->SetEnums(EnumNames, UEnum::ECppForm::Namespaced);
+			ReturnEnum->CppType = TEXT("EMovementState::Type");
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnEnum->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnEnum, TEXT("BlueprintType"), TEXT("true"));
+			MetaData->SetValue(ReturnEnum, TEXT("Category"), TEXT("Character"));
+			MetaData->SetValue(ReturnEnum, TEXT("ModuleRelativePath"), TEXT("Public/Enums/XLMovementState.h"));
+#endif
+		}
+		return ReturnEnum;
+	}
+	uint32 Get_Z_Construct_UEnum_ExtendedLibrary_EMovementState_CRC() { return 1125351979U; }
 	UClass* Z_Construct_UClass_AXLCharacter_NoRegister()
 	{
 		return AXLCharacter::StaticClass();
@@ -284,8 +402,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/ExtendedLibrary")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000040);
 			FGuid Guid;
-			Guid.A = 0xE5F60A11;
-			Guid.B = 0x4F0BE666;
+			Guid.A = 0xC58E198A;
+			Guid.B = 0x3620AF41;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

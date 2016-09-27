@@ -5,6 +5,15 @@
 	DO NOT modify this manually! Edit the corresponding .h files instead!
 ===========================================================================*/
 
+#ifndef EXTENDEDLIBRARY_XLHealthState_generated_h
+	#include "Public/Enums/XLHealthState.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLCombatState_generated_h
+	#include "Public/Enums/XLCombatState.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLMovementState_generated_h
+	#include "Public/Enums/XLMovementState.h"
+#endif
 #ifndef EXTENDEDLIBRARY_XLCharacter_generated_h
 	#include "Public/Characters/XLCharacter.h"
 #endif

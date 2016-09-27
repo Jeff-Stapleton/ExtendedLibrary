@@ -10,6 +10,7 @@ public:
 	static bool Strafe(AXLPlayerController* Controller);
 
 	static bool Turn(AXLPlayerController* Controller);
+	static bool Look(AXLPlayerController* Controller);
 
 	static bool Jump(AXLPlayerController* Controller);
 

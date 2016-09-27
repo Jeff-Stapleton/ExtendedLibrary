@@ -39,6 +39,18 @@ bool XLControllerCan::Turn(AXLPlayerController* Controller)
 	}
 }
 
+bool XLControllerCan::Look(AXLPlayerController* Controller)
+{
+	if (Controller->GetPawn())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 bool XLControllerCan::Jump(AXLPlayerController* Controller)
 {
  if (Controller->GetPawn())

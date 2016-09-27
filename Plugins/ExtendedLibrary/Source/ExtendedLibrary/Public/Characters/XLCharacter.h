@@ -1,6 +1,9 @@
 #pragma once
 
 #include "GameFramework/Character.h"
+#include "Enums/XLHealthState.h"
+#include "Enums/XLCombatState.h"
+#include "Enums/XLMovementState.h"
 #include "XLCharacter.generated.h"
 
 UCLASS()
@@ -15,6 +18,22 @@ public:
 
 	virtual void Tick(float DeltaSeconds) override;
 
+	void Move(float Direction);
+
+	void Strafe(float Direction);
+
+	void Turn(float Direction);
+	void Look(float Direction);
+
+	void StartSprint();
+	void StopSprint();
+
+	void StartAttack();
+	void StopAttack();
+
+	void Reload();
+
+	void Melee();
 
 	float TakeDamage(float Damage, FDamageEvent const & DamageEvent, AController * EventInstigator, AActor * DamageCauser);
 
@@ -31,4 +50,9 @@ public:
 
 	void StopAllAnimMontages();
 
+protected:
+
+	TEnumAsByte<EHealthState::Type> HealthState;
+	TEnumAsByte<ECombatState::Type> CombatState;
+	TEnumAsByte<EMovementState::Type> MovementState;
 };

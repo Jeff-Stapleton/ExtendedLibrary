@@ -70,27 +70,42 @@ void AXLPlayerController::SetupInputComponent()
 
 void AXLPlayerController::Move(float Direction)
 {
-	
+	if (XLControllerCan::Move(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->Move(Direction);
+	}
 }
 
 void AXLPlayerController::Strafe(float Direction)
 {
-
+	if (XLControllerCan::Strafe(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->Strafe(Direction);
+	}
 }
 
 void AXLPlayerController::Turn(float Direction)
 {
-	
+	if (XLControllerCan::Turn(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->Turn(Direction);
+	}
 }
 
 void AXLPlayerController::Look(float Direction)
 {
-
+	if (XLControllerCan::Look(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->Look(Direction);
+	}
 }
 
 void AXLPlayerController::Jump()
 {
-	
+	if (XLControllerCan::Jump(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->Jump();
+	}
 }
 
 void AXLPlayerController::Dodge()
@@ -100,32 +115,50 @@ void AXLPlayerController::Dodge()
 
 void AXLPlayerController::StartSprint()
 {
-	
+	if (XLControllerCan::StartSprint(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->StartSprint();
+	}
 }
 
 void AXLPlayerController::StopSprint()
 {
-	
+	if (XLControllerCan::StopSprint(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->StopSprint();
+	}
 }
 
 void AXLPlayerController::StartAttack()
 {
-	
+	if (XLControllerCan::StartAttack(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->StartAttack();
+	}
 }
 
 void AXLPlayerController::StopAttack()
 {
-	
+	if (XLControllerCan::StopAttack(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->StopAttack();
+	}
 }
 
 void AXLPlayerController::Reload()
 {
-	
+	if (XLControllerCan::Reload(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->Reload();
+	}
 }
 
 void AXLPlayerController::Melee()
 {
-	
+	if (XLControllerCan::Melee(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->Melee();
+	}
 }
 
 void AXLPlayerController::StartSpecial()
