@@ -5,4 +5,6 @@ C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\E
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Enums\XLCombatState.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Enums\XLHealthState.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Enums\XLMovementState.h
+C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Managers\XLAbilityManager.h
+C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Managers\XLWeaponManager.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Weapons\XLWeapon.h

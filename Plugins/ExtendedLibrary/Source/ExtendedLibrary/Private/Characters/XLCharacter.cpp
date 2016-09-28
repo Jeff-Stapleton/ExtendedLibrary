@@ -10,6 +10,11 @@ AXLCharacter::AXLCharacter()
 	HealthState = EHealthState::Alive;
 	MovementState = EMovementState::Idle;
 	CombatState = ECombatState::Passive;
+
+	CharacterResources = CreateDefaultSubobject<UXLCharacterResources>(TEXT("CharacterResources"));
+	CharacterStats = CreateDefaultSubobject<UXLCharacterStats>(TEXT("CharacterStats"));
+	CharacterWeapons = CreateDefaultSubobject<UXLWeaponManager>(TEXT("CharacterWeapons"));
+	CharacterAbilities = CreateDefaultSubobject<UXLAbilityManager>(TEXT("CharacterAbilities"));
 }
 
 void AXLCharacter::BeginPlay()

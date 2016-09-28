@@ -55,4 +55,16 @@ protected:
 	TEnumAsByte<EHealthState::Type> HealthState;
 	TEnumAsByte<ECombatState::Type> CombatState;
 	TEnumAsByte<EMovementState::Type> MovementState;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
+	class UXLCharacterResources* CharacterResources;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats)
+	class UXLCharacterStats* CharacterStats;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Weapons)
+	class UXLWeaponManager* CharacterWeapons;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Abilities)
+	class UXLAbilityManager* CharacterAbilities;
 };

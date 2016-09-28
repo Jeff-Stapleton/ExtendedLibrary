@@ -5,6 +5,9 @@
 	DO NOT modify this manually! Edit the corresponding .h files instead!
 ===========================================================================*/
 
+#ifndef EXTENDEDLIBRARY_XLAbilityManager_generated_h
+	#include "Public/Managers/XLAbilityManager.h"
+#endif
 #ifndef EXTENDEDLIBRARY_XLHealthState_generated_h
 	#include "Public/Enums/XLHealthState.h"
 #endif
@@ -28,4 +31,7 @@
 #endif
 #ifndef EXTENDEDLIBRARY_XLWeapon_generated_h
 	#include "Public/Weapons/XLWeapon.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLWeaponManager_generated_h
+	#include "Public/Managers/XLWeaponManager.h"
 #endif

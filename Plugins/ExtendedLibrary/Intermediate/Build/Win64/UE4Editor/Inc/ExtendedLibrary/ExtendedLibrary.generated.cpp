@@ -9,6 +9,10 @@
 #include "ExtendedLibrary.generated.dep.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCode1ExtendedLibrary() {}
+	void UXLAbilityManager::StaticRegisterNativesUXLAbilityManager()
+	{
+	}
+	IMPLEMENT_CLASS(UXLAbilityManager, 3180100724);
 static class UEnum* EHealthState_StaticEnum()
 {
 	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -48,7 +52,7 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 	void AXLCharacter::StaticRegisterNativesAXLCharacter()
 	{
 	}
-	IMPLEMENT_CLASS(AXLCharacter, 2939563634);
+	IMPLEMENT_CLASS(AXLCharacter, 3528104821);
 	void UXLCharacterResources::StaticRegisterNativesUXLCharacterResources()
 	{
 	}
@@ -65,13 +69,19 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 	{
 	}
 	IMPLEMENT_CLASS(AXLWeapon, 1074312903);
+	void UXLWeaponManager::StaticRegisterNativesUXLWeaponManager()
+	{
+	}
+	IMPLEMENT_CLASS(UXLWeaponManager, 776737041);
 #if USE_COMPILED_IN_NATIVES
 // Cross Module References
-	ENGINE_API class UClass* Z_Construct_UClass_ACharacter();
 	ENGINE_API class UClass* Z_Construct_UClass_UActorComponent();
+	ENGINE_API class UClass* Z_Construct_UClass_ACharacter();
 	ENGINE_API class UClass* Z_Construct_UClass_APlayerController();
 	ENGINE_API class UClass* Z_Construct_UClass_AActor();
 
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbilityManager_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbilityManager();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EHealthState();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_ECombatState();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EMovementState();
@@ -85,7 +95,44 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPlayerController();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLWeapon_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLWeapon();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLWeaponManager_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLWeaponManager();
 	EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
+	UClass* Z_Construct_UClass_UXLAbilityManager_NoRegister()
+	{
+		return UXLAbilityManager::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLAbilityManager()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLAbilityManager::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
+				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLAbilityManager.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLAbilityManager.h"));
+				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLAbilityManager(Z_Construct_UClass_UXLAbilityManager, &UXLAbilityManager::StaticClass, TEXT("UXLAbilityManager"), false, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLAbilityManager);
 	UEnum* Z_Construct_UEnum_ExtendedLibrary_EHealthState()
 	{
 		UPackage* Outer=Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -183,6 +230,12 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 				OuterClass->ClassFlags |= 0x20800080;
 
 
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_CharacterAbilities = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterAbilities"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterAbilities, AXLCharacter), 0x002008000008000d, Z_Construct_UClass_UXLAbilityManager_NoRegister());
+				UProperty* NewProp_CharacterWeapons = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterWeapons"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterWeapons, AXLCharacter), 0x002008000008000d, Z_Construct_UClass_UXLWeaponManager_NoRegister());
+				UProperty* NewProp_CharacterStats = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterStats"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterStats, AXLCharacter), 0x002008000008000d, Z_Construct_UClass_UXLCharacterStats_NoRegister());
+				UProperty* NewProp_CharacterResources = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterResources"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterResources, AXLCharacter), 0x002008000008000d, Z_Construct_UClass_UXLCharacterResources_NoRegister());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->StaticLink();
 #if WITH_METADATA
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
@@ -190,6 +243,18 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Characters/XLCharacter.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
 				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
+				MetaData->SetValue(NewProp_CharacterAbilities, TEXT("Category"), TEXT("Abilities"));
+				MetaData->SetValue(NewProp_CharacterAbilities, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_CharacterAbilities, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+				MetaData->SetValue(NewProp_CharacterWeapons, TEXT("Category"), TEXT("Weapons"));
+				MetaData->SetValue(NewProp_CharacterWeapons, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_CharacterWeapons, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+				MetaData->SetValue(NewProp_CharacterStats, TEXT("Category"), TEXT("Stats"));
+				MetaData->SetValue(NewProp_CharacterStats, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_CharacterStats, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+				MetaData->SetValue(NewProp_CharacterResources, TEXT("Category"), TEXT("Resources"));
+				MetaData->SetValue(NewProp_CharacterResources, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_CharacterResources, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
 #endif
 			}
 		}
@@ -394,6 +459,47 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLWeapon(Z_Construct_UClass_AXLWeapon, &AXLWeapon::StaticClass, TEXT("AXLWeapon"), false, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLWeapon);
+	UClass* Z_Construct_UClass_UXLWeaponManager_NoRegister()
+	{
+		return UXLWeaponManager::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLWeaponManager()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLWeaponManager::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_DefaultInventoryClasses = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("DefaultInventoryClasses"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(DefaultInventoryClasses, UXLWeaponManager), 0x0014000000010001);
+				UProperty* NewProp_DefaultInventoryClasses_Inner = new(EC_InternalUseOnlyConstructor, NewProp_DefaultInventoryClasses, TEXT("DefaultInventoryClasses"), RF_Public|RF_Transient|RF_MarkAsNative) UClassProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0004000000000000, Z_Construct_UClass_AXLWeapon_NoRegister(), UClass::StaticClass());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
+				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLWeaponManager.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponManager.h"));
+				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
+				MetaData->SetValue(NewProp_DefaultInventoryClasses, TEXT("Category"), TEXT("Inventory"));
+				MetaData->SetValue(NewProp_DefaultInventoryClasses, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponManager.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLWeaponManager(Z_Construct_UClass_UXLWeaponManager, &UXLWeaponManager::StaticClass, TEXT("UXLWeaponManager"), false, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLWeaponManager);
 	UPackage* Z_Construct_UPackage__Script_ExtendedLibrary()
 	{
 		static UPackage* ReturnPackage = NULL;
@@ -402,8 +508,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/ExtendedLibrary")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000040);
 			FGuid Guid;
-			Guid.A = 0xC58E198A;
-			Guid.B = 0x3620AF41;
+			Guid.A = 0x585BD4F9;
+			Guid.B = 0x340276E8;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

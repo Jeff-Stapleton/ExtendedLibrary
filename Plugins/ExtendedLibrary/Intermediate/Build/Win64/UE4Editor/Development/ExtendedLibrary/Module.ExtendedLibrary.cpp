@@ -8,4 +8,6 @@
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Data\XLCharacterResources.cpp"
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Data\XLCharacterStats.cpp"
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\ExtendedLibraryModule.cpp"
+#include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Managers\XLAbilityManager.cpp"
+#include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Managers\XLWeaponsManager.cpp"
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Weapons\XLWeapon.cpp"
