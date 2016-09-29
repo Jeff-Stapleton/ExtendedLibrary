@@ -8,6 +8,9 @@
 #ifndef EXTENDEDLIBRARY_XLAbilityManager_generated_h
 	#include "Public/Managers/XLAbilityManager.h"
 #endif
+#ifndef EXTENDEDLIBRARY_XLAnimationManager_generated_h
+	#include "Public/Managers/XLAnimationManager.h"
+#endif
 #ifndef EXTENDEDLIBRARY_XLHealthState_generated_h
 	#include "Public/Enums/XLHealthState.h"
 #endif
@@ -25,6 +28,12 @@
 #endif
 #ifndef EXTENDEDLIBRARY_XLCharacterStats_generated_h
 	#include "Public/Data/XLCharacterStats.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLEffectManager_generated_h
+	#include "Public/Managers/XLEffectManager.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLMovementComponent_generated_h
+	#include "Public/Components/XLMovementComponent.h"
 #endif
 #ifndef EXTENDEDLIBRARY_XLPlayerController_generated_h
 	#include "Public/Controllers/XLPlayerController.h"

@@ -13,6 +13,10 @@ void EmptyLinkFunctionForGeneratedCode1ExtendedLibrary() {}
 	{
 	}
 	IMPLEMENT_CLASS(UXLAbilityManager, 3180100724);
+	void UXLAnimationManager::StaticRegisterNativesUXLAnimationManager()
+	{
+	}
+	IMPLEMENT_CLASS(UXLAnimationManager, 3502105241);
 static class UEnum* EHealthState_StaticEnum()
 {
 	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -61,6 +65,14 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 	{
 	}
 	IMPLEMENT_CLASS(UXLCharacterStats, 203760155);
+	void UXLEffectManager::StaticRegisterNativesUXLEffectManager()
+	{
+	}
+	IMPLEMENT_CLASS(UXLEffectManager, 3146296348);
+	void UXLMovementComponent::StaticRegisterNativesUXLMovementComponent()
+	{
+	}
+	IMPLEMENT_CLASS(UXLMovementComponent, 1077157251);
 	void AXLPlayerController::StaticRegisterNativesAXLPlayerController()
 	{
 	}
@@ -77,11 +89,14 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 // Cross Module References
 	ENGINE_API class UClass* Z_Construct_UClass_UActorComponent();
 	ENGINE_API class UClass* Z_Construct_UClass_ACharacter();
+	ENGINE_API class UClass* Z_Construct_UClass_UCharacterMovementComponent();
 	ENGINE_API class UClass* Z_Construct_UClass_APlayerController();
 	ENGINE_API class UClass* Z_Construct_UClass_AActor();
 
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbilityManager_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbilityManager();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAnimationManager_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAnimationManager();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EHealthState();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_ECombatState();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EMovementState();
@@ -91,6 +106,10 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterResources();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterStats_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterStats();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLEffectManager_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLEffectManager();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLMovementComponent_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLMovementComponent();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPlayerController_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPlayerController();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLWeapon_NoRegister();
@@ -133,6 +152,41 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLAbilityManager(Z_Construct_UClass_UXLAbilityManager, &UXLAbilityManager::StaticClass, TEXT("UXLAbilityManager"), false, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLAbilityManager);
+	UClass* Z_Construct_UClass_UXLAnimationManager_NoRegister()
+	{
+		return UXLAnimationManager::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLAnimationManager()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLAnimationManager::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
+				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLAnimationManager.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLAnimationManager.h"));
+				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLAnimationManager(Z_Construct_UClass_UXLAnimationManager, &UXLAnimationManager::StaticClass, TEXT("UXLAnimationManager"), false, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLAnimationManager);
 	UEnum* Z_Construct_UEnum_ExtendedLibrary_EHealthState()
 	{
 		UPackage* Outer=Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -393,6 +447,112 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLCharacterStats(Z_Construct_UClass_UXLCharacterStats, &UXLCharacterStats::StaticClass, TEXT("UXLCharacterStats"), false, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLCharacterStats);
+	UClass* Z_Construct_UClass_UXLEffectManager_NoRegister()
+	{
+		return UXLEffectManager::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLEffectManager()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLEffectManager::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
+				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLEffectManager.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLEffectManager.h"));
+				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLEffectManager(Z_Construct_UClass_UXLEffectManager, &UXLEffectManager::StaticClass, TEXT("UXLEffectManager"), false, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLEffectManager);
+	UClass* Z_Construct_UClass_UXLMovementComponent_NoRegister()
+	{
+		return UXLMovementComponent::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLMovementComponent()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UCharacterMovementComponent();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLMovementComponent::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00084;
+
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_TargetingMovementSpeed = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("TargetingMovementSpeed"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(TargetingMovementSpeed, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_CrouchedMovementSpeed = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CrouchedMovementSpeed"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(CrouchedMovementSpeed, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_RunningMovementSpeed = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("RunningMovementSpeed"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(RunningMovementSpeed, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_BaseMovementSpeed = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BaseMovementSpeed"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(BaseMovementSpeed, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_MovementSpeedModifier = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MovementSpeedModifier"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(MovementSpeedModifier, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_BaseLookUpRate = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BaseLookUpRate"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(BaseLookUpRate, UXLMovementComponent), 0x0010000000000000);
+				UProperty* NewProp_BaseTurnRate = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BaseTurnRate"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(BaseTurnRate, UXLMovementComponent), 0x0010000000000000);
+				UProperty* NewProp_DodgeCost = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("DodgeCost"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(DodgeCost, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_ClimbCost = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("ClimbCost"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(ClimbCost, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_VaultCost = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("VaultCost"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(VaultCost, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_JumpCost = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("JumpCost"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(JumpCost, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_SprintCost = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("SprintCost"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(SprintCost, UXLMovementComponent), 0x0010000000010001);
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->ClassConfigName = FName(TEXT("Engine"));
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Components/XLMovementComponent.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
+				MetaData->SetValue(NewProp_TargetingMovementSpeed, TEXT("Category"), TEXT("Movement"));
+				MetaData->SetValue(NewProp_TargetingMovementSpeed, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_CrouchedMovementSpeed, TEXT("Category"), TEXT("Movement"));
+				MetaData->SetValue(NewProp_CrouchedMovementSpeed, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_RunningMovementSpeed, TEXT("Category"), TEXT("Movement"));
+				MetaData->SetValue(NewProp_RunningMovementSpeed, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_BaseMovementSpeed, TEXT("Category"), TEXT("Movement"));
+				MetaData->SetValue(NewProp_BaseMovementSpeed, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_MovementSpeedModifier, TEXT("Category"), TEXT("Movement"));
+				MetaData->SetValue(NewProp_MovementSpeedModifier, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_MovementSpeedModifier, TEXT("ToolTip"), TEXT("Movement Speed"));
+				MetaData->SetValue(NewProp_BaseLookUpRate, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_BaseTurnRate, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_DodgeCost, TEXT("Category"), TEXT("Config"));
+				MetaData->SetValue(NewProp_DodgeCost, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_ClimbCost, TEXT("Category"), TEXT("Config"));
+				MetaData->SetValue(NewProp_ClimbCost, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_VaultCost, TEXT("Category"), TEXT("Config"));
+				MetaData->SetValue(NewProp_VaultCost, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_JumpCost, TEXT("Category"), TEXT("Config"));
+				MetaData->SetValue(NewProp_JumpCost, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_SprintCost, TEXT("Category"), TEXT("Config"));
+				MetaData->SetValue(NewProp_SprintCost, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLMovementComponent(Z_Construct_UClass_UXLMovementComponent, &UXLMovementComponent::StaticClass, TEXT("UXLMovementComponent"), false, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLMovementComponent);
 	UClass* Z_Construct_UClass_AXLPlayerController_NoRegister()
 	{
 		return AXLPlayerController::StaticClass();
@@ -508,8 +668,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/ExtendedLibrary")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000040);
 			FGuid Guid;
-			Guid.A = 0x585BD4F9;
-			Guid.B = 0x340276E8;
+			Guid.A = 0xA29EF7EC;
+			Guid.B = 0xB3DF3715;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

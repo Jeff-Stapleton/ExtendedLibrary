@@ -1,4 +1,5 @@
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Characters\XLCharacter.h
+C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Components\XLMovementComponent.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Controllers\XLPlayerController.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Data\XLCharacterResources.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Data\XLCharacterStats.h
@@ -6,5 +7,7 @@ C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\E
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Enums\XLHealthState.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Enums\XLMovementState.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Managers\XLAbilityManager.h
+C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Managers\XLAnimationManager.h
+C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Managers\XLEffectManager.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Managers\XLWeaponManager.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Weapons\XLWeapon.h
