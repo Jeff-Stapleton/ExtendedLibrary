@@ -12,6 +12,37 @@ class AXLCharacter : public ACharacter
 	GENERATED_BODY()
 
 public: 
+
+	TEnumAsByte<EHealthState::Type> HealthState;
+	TEnumAsByte<ECombatState::Type> CombatState;
+	TEnumAsByte<EMovementState::Type> MovementState;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
+	class UXLCharacterResources* CharacterResources;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats)
+	class UXLCharacterStats* CharacterStats;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Weapons)
+	class UXLWeaponManager* CharacterWeapons;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Abilities)
+	class UXLAbilityManager* CharacterAbilities;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
+	class UXLAnimationManager* CharacterAnimations;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
+	class UXLEffectManager* CharacterEffects;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Cover)
+	class UXLCoverComponent* CoverComponent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Movement)
+	class UXLMovementComponent* MovementComponent;
+
+public: 
+
 	AXLCharacter();
 
 	virtual void BeginPlay() override;
@@ -49,22 +80,4 @@ public:
 	virtual void StopAnimMontage(class UAnimMontage* AnimMontage) override;
 
 	void StopAllAnimMontages();
-
-protected:
-
-	TEnumAsByte<EHealthState::Type> HealthState;
-	TEnumAsByte<ECombatState::Type> CombatState;
-	TEnumAsByte<EMovementState::Type> MovementState;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
-	class UXLCharacterResources* CharacterResources;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats)
-	class UXLCharacterStats* CharacterStats;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Weapons)
-	class UXLWeaponManager* CharacterWeapons;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Abilities)
-	class UXLAbilityManager* CharacterAbilities;
 };

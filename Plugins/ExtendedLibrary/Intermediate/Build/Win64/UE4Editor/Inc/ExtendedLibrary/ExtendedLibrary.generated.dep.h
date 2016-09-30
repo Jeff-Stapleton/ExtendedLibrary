@@ -29,6 +29,9 @@
 #ifndef EXTENDEDLIBRARY_XLCharacterStats_generated_h
 	#include "Public/Data/XLCharacterStats.h"
 #endif
+#ifndef EXTENDEDLIBRARY_XLCoverComponent_generated_h
+	#include "Public/Components/XLCoverComponent.h"
+#endif
 #ifndef EXTENDEDLIBRARY_XLEffectManager_generated_h
 	#include "Public/Managers/XLEffectManager.h"
 #endif

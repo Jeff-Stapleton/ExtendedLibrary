@@ -4,6 +4,7 @@
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Cans\XLControllerCan.cpp"
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Cans\XLWeaponCan.cpp"
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Characters\XLCharacter.cpp"
+#include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Components\XLCoverComponent.cpp"
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Components\XLMovementComponent.cpp"
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Controllers\XLPlayerController.cpp"
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Data\XLCharacterResources.cpp"

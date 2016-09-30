@@ -15,6 +15,10 @@ AXLCharacter::AXLCharacter()
 	CharacterStats = CreateDefaultSubobject<UXLCharacterStats>(TEXT("CharacterStats"));
 	CharacterWeapons = CreateDefaultSubobject<UXLWeaponManager>(TEXT("CharacterWeapons"));
 	CharacterAbilities = CreateDefaultSubobject<UXLAbilityManager>(TEXT("CharacterAbilities"));
+	CharacterAnimations = CreateDefaultSubobject<UXLAnimationManager>(TEXT("CharacterAnimations"));
+	CharacterEffects = CreateDefaultSubobject<UXLEffectManager>(TEXT("CharacterEffects"));
+	CoverComponent = CreateDefaultSubobject<UXLCoverComponent>(TEXT("CoverComponent"));
+	MovementComponent = CreateDefaultSubobject<UXLMovementComponent>(TEXT("MovementComponent"));
 }
 
 void AXLCharacter::BeginPlay()

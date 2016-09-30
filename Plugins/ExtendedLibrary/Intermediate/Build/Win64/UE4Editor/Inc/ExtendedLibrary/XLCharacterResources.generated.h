@@ -13,9 +13,85 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define EXTENDEDLIBRARY_XLCharacterResources_generated_h
 
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_9_RPC_WRAPPERS
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_9_RPC_WRAPPERS_NO_PURE_DECLS
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_9_INCLASS_NO_PURE_DECLS \
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_10_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execRegenerateShield) \
+	{ \
+		P_GET_PROPERTY(UFloatProperty,Z_Param_DeltaTime); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->RegenerateShield(Z_Param_DeltaTime); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execRegenerateEnergy) \
+	{ \
+		P_GET_PROPERTY(UFloatProperty,Z_Param_DeltaTime); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->RegenerateEnergy(Z_Param_DeltaTime); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execRegenerateStamina) \
+	{ \
+		P_GET_PROPERTY(UFloatProperty,Z_Param_DeltaTime); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->RegenerateStamina(Z_Param_DeltaTime); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execRegenerateHealth) \
+	{ \
+		P_GET_PROPERTY(UFloatProperty,Z_Param_DeltaTime); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->RegenerateHealth(Z_Param_DeltaTime); \
+		P_NATIVE_END; \
+	}
+
+
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_10_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execRegenerateShield) \
+	{ \
+		P_GET_PROPERTY(UFloatProperty,Z_Param_DeltaTime); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->RegenerateShield(Z_Param_DeltaTime); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execRegenerateEnergy) \
+	{ \
+		P_GET_PROPERTY(UFloatProperty,Z_Param_DeltaTime); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->RegenerateEnergy(Z_Param_DeltaTime); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execRegenerateStamina) \
+	{ \
+		P_GET_PROPERTY(UFloatProperty,Z_Param_DeltaTime); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->RegenerateStamina(Z_Param_DeltaTime); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execRegenerateHealth) \
+	{ \
+		P_GET_PROPERTY(UFloatProperty,Z_Param_DeltaTime); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->RegenerateHealth(Z_Param_DeltaTime); \
+		P_NATIVE_END; \
+	}
+
+
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_10_INCLASS_NO_PURE_DECLS \
 	private: \
 	static void StaticRegisterNativesUXLCharacterResources(); \
 	friend EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterResources(); \
@@ -26,7 +102,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	enum {IsIntrinsic=COMPILED_IN_INTRINSIC};
 
 
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_9_INCLASS \
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_10_INCLASS \
 	private: \
 	static void StaticRegisterNativesUXLCharacterResources(); \
 	friend EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterResources(); \
@@ -37,7 +113,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	enum {IsIntrinsic=COMPILED_IN_INTRINSIC};
 
 
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_9_STANDARD_CONSTRUCTORS \
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_10_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UXLCharacterResources(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UXLCharacterResources) \
@@ -49,7 +125,7 @@ private: \
 public:
 
 
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_9_ENHANCED_CONSTRUCTORS \
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_10_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private copy-constructor, should never be used */ \
 	NO_API UXLCharacterResources(const UXLCharacterResources& InCopy); \
@@ -59,23 +135,23 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UXLCharacterResources); \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(UXLCharacterResources)
 
 
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_6_PROLOG
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_9_GENERATED_BODY_LEGACY \
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_7_PROLOG
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_10_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_9_RPC_WRAPPERS \
-	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_9_INCLASS \
-	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_9_STANDARD_CONSTRUCTORS \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_10_RPC_WRAPPERS \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_10_INCLASS \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_10_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_9_GENERATED_BODY \
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_10_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_9_RPC_WRAPPERS_NO_PURE_DECLS \
-	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_9_INCLASS_NO_PURE_DECLS \
-	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_9_ENHANCED_CONSTRUCTORS \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_10_RPC_WRAPPERS_NO_PURE_DECLS \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_10_INCLASS_NO_PURE_DECLS \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_10_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

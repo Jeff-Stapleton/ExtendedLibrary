@@ -56,15 +56,23 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 	void AXLCharacter::StaticRegisterNativesAXLCharacter()
 	{
 	}
-	IMPLEMENT_CLASS(AXLCharacter, 3528104821);
+	IMPLEMENT_CLASS(AXLCharacter, 2457217778);
 	void UXLCharacterResources::StaticRegisterNativesUXLCharacterResources()
 	{
+		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "RegenerateEnergy",(Native)&UXLCharacterResources::execRegenerateEnergy);
+		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "RegenerateHealth",(Native)&UXLCharacterResources::execRegenerateHealth);
+		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "RegenerateShield",(Native)&UXLCharacterResources::execRegenerateShield);
+		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "RegenerateStamina",(Native)&UXLCharacterResources::execRegenerateStamina);
 	}
-	IMPLEMENT_CLASS(UXLCharacterResources, 3394640110);
+	IMPLEMENT_CLASS(UXLCharacterResources, 3363736619);
 	void UXLCharacterStats::StaticRegisterNativesUXLCharacterStats()
 	{
 	}
-	IMPLEMENT_CLASS(UXLCharacterStats, 203760155);
+	IMPLEMENT_CLASS(UXLCharacterStats, 1883702017);
+	void UXLCoverComponent::StaticRegisterNativesUXLCoverComponent()
+	{
+	}
+	IMPLEMENT_CLASS(UXLCoverComponent, 3133295166);
 	void UXLEffectManager::StaticRegisterNativesUXLEffectManager()
 	{
 	}
@@ -102,10 +110,16 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EMovementState();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLCharacter_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLCharacter();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateEnergy();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateHealth();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateShield();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateStamina();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterResources_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterResources();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterStats_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterStats();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCoverComponent_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCoverComponent();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLEffectManager_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLEffectManager();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLMovementComponent_NoRegister();
@@ -285,10 +299,14 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
-				UProperty* NewProp_CharacterAbilities = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterAbilities"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterAbilities, AXLCharacter), 0x002008000008000d, Z_Construct_UClass_UXLAbilityManager_NoRegister());
-				UProperty* NewProp_CharacterWeapons = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterWeapons"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterWeapons, AXLCharacter), 0x002008000008000d, Z_Construct_UClass_UXLWeaponManager_NoRegister());
-				UProperty* NewProp_CharacterStats = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterStats"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterStats, AXLCharacter), 0x002008000008000d, Z_Construct_UClass_UXLCharacterStats_NoRegister());
-				UProperty* NewProp_CharacterResources = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterResources"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterResources, AXLCharacter), 0x002008000008000d, Z_Construct_UClass_UXLCharacterResources_NoRegister());
+				UProperty* NewProp_MovementComponent = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MovementComponent"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(MovementComponent, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLMovementComponent_NoRegister());
+				UProperty* NewProp_CoverComponent = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CoverComponent"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CoverComponent, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLCoverComponent_NoRegister());
+				UProperty* NewProp_CharacterEffects = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterEffects"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterEffects, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLEffectManager_NoRegister());
+				UProperty* NewProp_CharacterAnimations = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterAnimations"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterAnimations, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLAnimationManager_NoRegister());
+				UProperty* NewProp_CharacterAbilities = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterAbilities"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterAbilities, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLAbilityManager_NoRegister());
+				UProperty* NewProp_CharacterWeapons = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterWeapons"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterWeapons, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLWeaponManager_NoRegister());
+				UProperty* NewProp_CharacterStats = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterStats"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterStats, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLCharacterStats_NoRegister());
+				UProperty* NewProp_CharacterResources = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterResources"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterResources, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLCharacterResources_NoRegister());
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->StaticLink();
 #if WITH_METADATA
@@ -297,6 +315,18 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Characters/XLCharacter.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
 				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
+				MetaData->SetValue(NewProp_MovementComponent, TEXT("Category"), TEXT("Movement"));
+				MetaData->SetValue(NewProp_MovementComponent, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_MovementComponent, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+				MetaData->SetValue(NewProp_CoverComponent, TEXT("Category"), TEXT("Cover"));
+				MetaData->SetValue(NewProp_CoverComponent, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_CoverComponent, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+				MetaData->SetValue(NewProp_CharacterEffects, TEXT("Category"), TEXT("Effects"));
+				MetaData->SetValue(NewProp_CharacterEffects, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_CharacterEffects, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+				MetaData->SetValue(NewProp_CharacterAnimations, TEXT("Category"), TEXT("Animation"));
+				MetaData->SetValue(NewProp_CharacterAnimations, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_CharacterAnimations, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
 				MetaData->SetValue(NewProp_CharacterAbilities, TEXT("Category"), TEXT("Abilities"));
 				MetaData->SetValue(NewProp_CharacterAbilities, TEXT("EditInline"), TEXT("true"));
 				MetaData->SetValue(NewProp_CharacterAbilities, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
@@ -317,6 +347,94 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLCharacter(Z_Construct_UClass_AXLCharacter, &AXLCharacter::StaticClass, TEXT("AXLCharacter"), false, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLCharacter);
+	UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateEnergy()
+	{
+		struct XLCharacterResources_eventRegenerateEnergy_Parms
+		{
+			float DeltaTime;
+		};
+		UObject* Outer=Z_Construct_UClass_UXLCharacterResources();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("RegenerateEnergy"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(XLCharacterResources_eventRegenerateEnergy_Parms));
+			UProperty* NewProp_DeltaTime = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("DeltaTime"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(DeltaTime, XLCharacterResources_eventRegenerateEnergy_Parms), 0x0010000000000080);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Behavior"));
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateHealth()
+	{
+		struct XLCharacterResources_eventRegenerateHealth_Parms
+		{
+			float DeltaTime;
+		};
+		UObject* Outer=Z_Construct_UClass_UXLCharacterResources();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("RegenerateHealth"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(XLCharacterResources_eventRegenerateHealth_Parms));
+			UProperty* NewProp_DeltaTime = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("DeltaTime"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(DeltaTime, XLCharacterResources_eventRegenerateHealth_Parms), 0x0010000000000080);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Behavior"));
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateShield()
+	{
+		struct XLCharacterResources_eventRegenerateShield_Parms
+		{
+			float DeltaTime;
+		};
+		UObject* Outer=Z_Construct_UClass_UXLCharacterResources();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("RegenerateShield"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(XLCharacterResources_eventRegenerateShield_Parms));
+			UProperty* NewProp_DeltaTime = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("DeltaTime"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(DeltaTime, XLCharacterResources_eventRegenerateShield_Parms), 0x0010000000000080);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Behavior"));
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateStamina()
+	{
+		struct XLCharacterResources_eventRegenerateStamina_Parms
+		{
+			float DeltaTime;
+		};
+		UObject* Outer=Z_Construct_UClass_UXLCharacterResources();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("RegenerateStamina"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(XLCharacterResources_eventRegenerateStamina_Parms));
+			UProperty* NewProp_DeltaTime = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("DeltaTime"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(DeltaTime, XLCharacterResources_eventRegenerateStamina_Parms), 0x0010000000000080);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Behavior"));
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
 	UClass* Z_Construct_UClass_UXLCharacterResources_NoRegister()
 	{
 		return UXLCharacterResources::StaticClass();
@@ -334,6 +452,10 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				UObjectForceRegistration(OuterClass);
 				OuterClass->ClassFlags |= 0x20A00080;
 
+				OuterClass->LinkChild(Z_Construct_UFunction_UXLCharacterResources_RegenerateEnergy());
+				OuterClass->LinkChild(Z_Construct_UFunction_UXLCharacterResources_RegenerateHealth());
+				OuterClass->LinkChild(Z_Construct_UFunction_UXLCharacterResources_RegenerateShield());
+				OuterClass->LinkChild(Z_Construct_UFunction_UXLCharacterResources_RegenerateStamina());
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_MaxShield = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MaxShield"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(MaxShield, UXLCharacterResources), 0x0010000000000005);
@@ -342,6 +464,10 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_MaxEnergy = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MaxEnergy"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(MaxEnergy, UXLCharacterResources), 0x0010000000000005);
 				UProperty* NewProp_MaxHealth = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MaxHealth"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(MaxHealth, UXLCharacterResources), 0x0010000000000005);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLCharacterResources_RegenerateEnergy(), "RegenerateEnergy"); // 499213532
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLCharacterResources_RegenerateHealth(), "RegenerateHealth"); // 1561968213
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLCharacterResources_RegenerateShield(), "RegenerateShield"); // 2337256261
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLCharacterResources_RegenerateStamina(), "RegenerateStamina"); // 3833291807
 				OuterClass->StaticLink();
 #if WITH_METADATA
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
@@ -399,6 +525,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_CooldownReduction = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CooldownReduction"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(CooldownReduction, UXLCharacterStats), 0x0010000000000005);
 				UProperty* NewProp_AttackPower = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("AttackPower"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(AttackPower, UXLCharacterStats), 0x0010000000000005);
 				UProperty* NewProp_AttackSpeed = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("AttackSpeed"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(AttackSpeed, UXLCharacterStats), 0x0010000000000005);
+				UProperty* NewProp_ShieldRegen = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("ShieldRegen"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(ShieldRegen, UXLCharacterStats), 0x0010000000000005);
 				UProperty* NewProp_StaminaRegen = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("StaminaRegen"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(StaminaRegen, UXLCharacterStats), 0x0010000000000005);
 				UProperty* NewProp_EnergyRegen = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("EnergyRegen"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(EnergyRegen, UXLCharacterStats), 0x0010000000000005);
 				UProperty* NewProp_HealthRegen = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("HealthRegen"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(HealthRegen, UXLCharacterStats), 0x0010000000000005);
@@ -430,6 +557,9 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(NewProp_AttackSpeed, TEXT("Category"), TEXT("Stats"));
 				MetaData->SetValue(NewProp_AttackSpeed, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterStats.h"));
 				MetaData->SetValue(NewProp_AttackSpeed, TEXT("ToolTip"), TEXT("The time between consecutive attacks"));
+				MetaData->SetValue(NewProp_ShieldRegen, TEXT("Category"), TEXT("Stats"));
+				MetaData->SetValue(NewProp_ShieldRegen, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterStats.h"));
+				MetaData->SetValue(NewProp_ShieldRegen, TEXT("ToolTip"), TEXT("The amount of stamina restored per second"));
 				MetaData->SetValue(NewProp_StaminaRegen, TEXT("Category"), TEXT("Stats"));
 				MetaData->SetValue(NewProp_StaminaRegen, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterStats.h"));
 				MetaData->SetValue(NewProp_StaminaRegen, TEXT("ToolTip"), TEXT("The amount of stamina restored per second"));
@@ -447,6 +577,41 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLCharacterStats(Z_Construct_UClass_UXLCharacterStats, &UXLCharacterStats::StaticClass, TEXT("UXLCharacterStats"), false, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLCharacterStats);
+	UClass* Z_Construct_UClass_UXLCoverComponent_NoRegister()
+	{
+		return UXLCoverComponent::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLCoverComponent()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLCoverComponent::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
+				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Components/XLCoverComponent.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLCoverComponent.h"));
+				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLCoverComponent(Z_Construct_UClass_UXLCoverComponent, &UXLCoverComponent::StaticClass, TEXT("UXLCoverComponent"), false, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLCoverComponent);
 	UClass* Z_Construct_UClass_UXLEffectManager_NoRegister()
 	{
 		return UXLEffectManager::StaticClass();
@@ -668,8 +833,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/ExtendedLibrary")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000040);
 			FGuid Guid;
-			Guid.A = 0xA29EF7EC;
-			Guid.B = 0xB3DF3715;
+			Guid.A = 0x09BE608E;
+			Guid.B = 0x3BD37BBB;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

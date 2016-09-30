@@ -39,18 +39,6 @@ protected:
 
 	virtual void Melee();
 
-	virtual void StartSpecial();
-	virtual void StopSpecial();
-
-	virtual void StartPrimaryAbility();
-	virtual void StopPrimaryAbility();
-
-	virtual void StartSecondaryAbility();
-	virtual void StopSecondaryAbility();
-
-	virtual void StartUltimate();
-	virtual void StopUltimate();
-
 	virtual void UnFreeze() override;
 
 	void Reset() override;

@@ -54,18 +54,6 @@ void AXLPlayerController::SetupInputComponent()
 	InputComponent->BindAction("Reload", IE_Pressed, this, &AXLPlayerController::Reload);
 
 	InputComponent->BindAction("Melee", IE_Pressed, this, &AXLPlayerController::Melee);
-
-	InputComponent->BindAction("Special", IE_Pressed, this, &AXLPlayerController::StartSpecial);
-	InputComponent->BindAction("Special", IE_Released, this, &AXLPlayerController::StopSpecial);
-
-	InputComponent->BindAction("Primary Ability", IE_Pressed, this, &AXLPlayerController::StartPrimaryAbility);
-	InputComponent->BindAction("Primary Ability", IE_Released, this, &AXLPlayerController::StopPrimaryAbility);
-
-	InputComponent->BindAction("Secondary Ability", IE_Pressed, this, &AXLPlayerController::StartSecondaryAbility);
-	InputComponent->BindAction("Secondary Ability", IE_Released, this, &AXLPlayerController::StopSecondaryAbility);
-
-	InputComponent->BindAction("Ultimate", IE_Pressed, this, &AXLPlayerController::StartUltimate);
-	InputComponent->BindAction("Ultimate", IE_Released, this, &AXLPlayerController::StartUltimate);
 }
 
 void AXLPlayerController::Move(float Direction)
@@ -159,46 +147,6 @@ void AXLPlayerController::Melee()
 	{
 		(Cast<AXLCharacter>(GetPawn()))->Melee();
 	}
-}
-
-void AXLPlayerController::StartSpecial()
-{
-	
-}
-
-void AXLPlayerController::StopSpecial()
-{
-	
-}
-
-void AXLPlayerController::StartPrimaryAbility()
-{
-	
-}
-
-void AXLPlayerController::StopPrimaryAbility()
-{
-	
-}
-
-void AXLPlayerController::StartSecondaryAbility()
-{
-	
-}
-
-void AXLPlayerController::StopSecondaryAbility()
-{
-	
-}
-
-void AXLPlayerController::StartUltimate()
-{
-	
-}
-
-void AXLPlayerController::StopUltimate()
-{
-	
 }
 
 void AXLPlayerController::UnFreeze()

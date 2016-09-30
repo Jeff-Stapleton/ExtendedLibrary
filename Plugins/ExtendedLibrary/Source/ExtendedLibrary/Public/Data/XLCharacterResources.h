@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
+#include "XLCharacter.h"
 #include "XLCharacterResources.generated.h"
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -14,6 +15,8 @@ public:
 	virtual void BeginPlay() override;
 
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	class AXLCharacter* Character;
 
 	/** The amount of health the Pawn has */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
@@ -39,4 +42,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
 	float MaxShield;
 	float CurrentShield;
+
+	UFUNCTION(BlueprintCallable, Category = Behavior)
+	void RegenerateHealth(float DeltaTime);
+
+	UFUNCTION(BlueprintCallable, Category = Behavior)
+	void RegenerateStamina(float DeltaTime);
+
+	UFUNCTION(BlueprintCallable, Category = Behavior)
+	void RegenerateEnergy(float DeltaTime);
+
+	UFUNCTION(BlueprintCallable, Category = Behavior)
+	void RegenerateShield(float DeltaTime);
 };

@@ -23,6 +23,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats)
 	float StaminaRegen;
 
+	/** The amount of stamina restored per second */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats)
+	float ShieldRegen;
+
 	/** The time between consecutive attacks */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Stats)
 	float AttackSpeed;
