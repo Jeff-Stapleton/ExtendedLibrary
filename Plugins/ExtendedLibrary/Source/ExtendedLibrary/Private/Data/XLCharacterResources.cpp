@@ -30,65 +30,99 @@ void UXLCharacterResources::TickComponent( float DeltaTime, ELevelTick TickType,
 	RegenerateStamina(DeltaTime);
 	RegenerateEnergy(DeltaTime);
 	RegenerateShield(DeltaTime);
+
+	CooldownTimer(DeltaTime);
 }
 
 void UXLCharacterResources::RegenerateHealth(float DeltaTime)
 {
-	if (Character->CharacterStats->HealthRegen > 0 && CurrentHealth < MaxHealth)
+	if (XLCharacterResourcesCan::RegenerateHealth(this))
 	{
-		if (CurrentHealth < MaxHealth)
+		if (Character->CharacterStats->HealthRegen > 0 && CurrentHealth < MaxHealth)
 		{
-			CurrentHealth += CurrentHealth + (Character->CharacterStats->HealthRegen * DeltaTime);
-		}
-		else
-		{
-			CurrentHealth = MaxHealth;
+			if (CurrentHealth < MaxHealth)
+			{
+				CurrentHealth += CurrentHealth + (Character->CharacterStats->HealthRegen * DeltaTime);
+			}
+			else
+			{
+				CurrentHealth = MaxHealth;
+			}
 		}
 	}
 }
 
 void UXLCharacterResources::RegenerateStamina(float DeltaTime)
 {
-	if (Character->CharacterStats->StaminaRegen > 0 && CurrentStamina < MaxStamina)
+	if (XLCharacterResourcesCan::RegenerateStamina(this))
 	{
-		if (CurrentStamina < MaxStamina)
+		if (Character->CharacterStats->StaminaRegen > 0 && CurrentStamina < MaxStamina)
 		{
-			CurrentStamina += CurrentStamina + (Character->CharacterStats->StaminaRegen * DeltaTime);
-		}
-		else
-		{
-			CurrentStamina = MaxStamina;
+			if (CurrentStamina < MaxStamina)
+			{
+				CurrentStamina += CurrentStamina + (Character->CharacterStats->StaminaRegen * DeltaTime);
+			}
+			else
+			{
+				CurrentStamina = MaxStamina;
+			}
 		}
 	}
 }
 
 void UXLCharacterResources::RegenerateEnergy(float DeltaTime)
 {
-	if (Character->CharacterStats->EnergyRegen > 0 && CurrentEnergy < MaxEnergy)
+	if (XLCharacterResourcesCan::RegenerateEnergy(this))
 	{
-		if (CurrentEnergy < MaxEnergy)
+		if (Character->CharacterStats->EnergyRegen > 0 && CurrentEnergy < MaxEnergy)
 		{
-			CurrentEnergy += CurrentEnergy + (Character->CharacterStats->EnergyRegen  * DeltaTime);
-		}
-		else
-		{
-			CurrentEnergy = MaxEnergy;
+			if (CurrentEnergy < MaxEnergy)
+			{
+				CurrentEnergy += CurrentEnergy + (Character->CharacterStats->EnergyRegen  * DeltaTime);
+			}
+			else
+			{
+				CurrentEnergy = MaxEnergy;
+			}
 		}
 	}
 }
 
 void UXLCharacterResources::RegenerateShield(float DeltaTime)
 {
-	if (Character->CharacterStats->ShieldRegen > 0 && CurrentShield < MaxShield)
+	if (XLCharacterResourcesCan::RegenerateShield(this))
 	{
-		if (CurrentShield < MaxShield)
+		if (Character->CharacterStats->ShieldRegen > 0 && CurrentShield < MaxShield)
 		{
-			CurrentShield += CurrentShield + (Character->CharacterStats->ShieldRegen * DeltaTime);
+			if (CurrentShield < MaxShield)
+			{
+				CurrentShield += CurrentShield + (Character->CharacterStats->ShieldRegen * DeltaTime);
+			}
+			else
+			{
+				CurrentShield = MaxShield;
+			}
 		}
-		else
-		{
-			CurrentShield = MaxShield;
-		}
+	}
+}
+
+void UXLCharacterResources::CooldownTimer(float DeltaTime)
+{
+	if (HealthCooldown > 0)
+	{
+		HealthCooldown -= DeltaTime;
+	}
+	if (StaminaCooldown > 0)
+	{
+		StaminaCooldown -= DeltaTime;
+	}
+	if (EnergyCooldown > 0)
+	{
+		EnergyCooldown -= DeltaTime;
+	}
+	if (ShieldCooldown > 0)
+	{
+		ShieldCooldown -= DeltaTime;
 	}
 }
 

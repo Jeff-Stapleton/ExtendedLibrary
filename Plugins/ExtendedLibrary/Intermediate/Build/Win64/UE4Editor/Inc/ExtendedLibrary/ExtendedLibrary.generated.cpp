@@ -59,12 +59,13 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 	IMPLEMENT_CLASS(AXLCharacter, 2457217778);
 	void UXLCharacterResources::StaticRegisterNativesUXLCharacterResources()
 	{
+		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "CooldownTimer",(Native)&UXLCharacterResources::execCooldownTimer);
 		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "RegenerateEnergy",(Native)&UXLCharacterResources::execRegenerateEnergy);
 		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "RegenerateHealth",(Native)&UXLCharacterResources::execRegenerateHealth);
 		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "RegenerateShield",(Native)&UXLCharacterResources::execRegenerateShield);
 		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "RegenerateStamina",(Native)&UXLCharacterResources::execRegenerateStamina);
 	}
-	IMPLEMENT_CLASS(UXLCharacterResources, 3363736619);
+	IMPLEMENT_CLASS(UXLCharacterResources, 548246109);
 	void UXLCharacterStats::StaticRegisterNativesUXLCharacterStats()
 	{
 	}
@@ -110,6 +111,7 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EMovementState();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLCharacter_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLCharacter();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLCharacterResources_CooldownTimer();
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateEnergy();
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateHealth();
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateShield();
@@ -347,6 +349,28 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLCharacter(Z_Construct_UClass_AXLCharacter, &AXLCharacter::StaticClass, TEXT("AXLCharacter"), false, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLCharacter);
+	UFunction* Z_Construct_UFunction_UXLCharacterResources_CooldownTimer()
+	{
+		struct XLCharacterResources_eventCooldownTimer_Parms
+		{
+			float DeltaTime;
+		};
+		UObject* Outer=Z_Construct_UClass_UXLCharacterResources();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("CooldownTimer"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(XLCharacterResources_eventCooldownTimer_Parms));
+			UProperty* NewProp_DeltaTime = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("DeltaTime"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(DeltaTime, XLCharacterResources_eventCooldownTimer_Parms), 0x0010000000000080);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Behavior"));
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
 	UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateEnergy()
 	{
 		struct XLCharacterResources_eventRegenerateEnergy_Parms
@@ -452,18 +476,24 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				UObjectForceRegistration(OuterClass);
 				OuterClass->ClassFlags |= 0x20A00080;
 
+				OuterClass->LinkChild(Z_Construct_UFunction_UXLCharacterResources_CooldownTimer());
 				OuterClass->LinkChild(Z_Construct_UFunction_UXLCharacterResources_RegenerateEnergy());
 				OuterClass->LinkChild(Z_Construct_UFunction_UXLCharacterResources_RegenerateHealth());
 				OuterClass->LinkChild(Z_Construct_UFunction_UXLCharacterResources_RegenerateShield());
 				OuterClass->LinkChild(Z_Construct_UFunction_UXLCharacterResources_RegenerateStamina());
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
-				UProperty* NewProp_MaxShield = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MaxShield"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(MaxShield, UXLCharacterResources), 0x0010000000000005);
 				UProperty* NewProp_MaxUltimate = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MaxUltimate"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(MaxUltimate, UXLCharacterResources), 0x0010000000000005);
+				UProperty* NewProp_ShieldRenerationCooldown = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("ShieldRenerationCooldown"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(ShieldRenerationCooldown, UXLCharacterResources), 0x0010000000000005);
+				UProperty* NewProp_MaxShield = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MaxShield"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(MaxShield, UXLCharacterResources), 0x0010000000000005);
+				UProperty* NewProp_StaminaRenerationCooldown = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("StaminaRenerationCooldown"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(StaminaRenerationCooldown, UXLCharacterResources), 0x0010000000000005);
 				UProperty* NewProp_MaxStamina = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MaxStamina"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(MaxStamina, UXLCharacterResources), 0x0010000000000005);
+				UProperty* NewProp_EnergyRenerationCooldown = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("EnergyRenerationCooldown"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(EnergyRenerationCooldown, UXLCharacterResources), 0x0010000000000005);
 				UProperty* NewProp_MaxEnergy = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MaxEnergy"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(MaxEnergy, UXLCharacterResources), 0x0010000000000005);
+				UProperty* NewProp_HealthRenerationCooldown = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("HealthRenerationCooldown"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(HealthRenerationCooldown, UXLCharacterResources), 0x0010000000000005);
 				UProperty* NewProp_MaxHealth = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MaxHealth"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(MaxHealth, UXLCharacterResources), 0x0010000000000005);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLCharacterResources_CooldownTimer(), "CooldownTimer"); // 2812378412
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLCharacterResources_RegenerateEnergy(), "RegenerateEnergy"); // 499213532
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLCharacterResources_RegenerateHealth(), "RegenerateHealth"); // 1561968213
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLCharacterResources_RegenerateShield(), "RegenerateShield"); // 2337256261
@@ -477,18 +507,30 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Data/XLCharacterResources.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
 				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
-				MetaData->SetValue(NewProp_MaxShield, TEXT("Category"), TEXT("Resources"));
-				MetaData->SetValue(NewProp_MaxShield, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
-				MetaData->SetValue(NewProp_MaxShield, TEXT("ToolTip"), TEXT("The amount of shield the Pawn has"));
 				MetaData->SetValue(NewProp_MaxUltimate, TEXT("Category"), TEXT("Resources"));
 				MetaData->SetValue(NewProp_MaxUltimate, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
 				MetaData->SetValue(NewProp_MaxUltimate, TEXT("ToolTip"), TEXT("The amount of Ultimate the Pawn has"));
+				MetaData->SetValue(NewProp_ShieldRenerationCooldown, TEXT("Category"), TEXT("Cooldowns"));
+				MetaData->SetValue(NewProp_ShieldRenerationCooldown, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
+				MetaData->SetValue(NewProp_ShieldRenerationCooldown, TEXT("ToolTip"), TEXT("The amount of time before Shield starts regenerating"));
+				MetaData->SetValue(NewProp_MaxShield, TEXT("Category"), TEXT("Resources"));
+				MetaData->SetValue(NewProp_MaxShield, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
+				MetaData->SetValue(NewProp_MaxShield, TEXT("ToolTip"), TEXT("The amount of shield the Pawn has"));
+				MetaData->SetValue(NewProp_StaminaRenerationCooldown, TEXT("Category"), TEXT("Cooldowns"));
+				MetaData->SetValue(NewProp_StaminaRenerationCooldown, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
+				MetaData->SetValue(NewProp_StaminaRenerationCooldown, TEXT("ToolTip"), TEXT("The amount of time before stamina starts regenerating"));
 				MetaData->SetValue(NewProp_MaxStamina, TEXT("Category"), TEXT("Resources"));
 				MetaData->SetValue(NewProp_MaxStamina, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
 				MetaData->SetValue(NewProp_MaxStamina, TEXT("ToolTip"), TEXT("The amount of stamina the Pawn has"));
+				MetaData->SetValue(NewProp_EnergyRenerationCooldown, TEXT("Category"), TEXT("Cooldowns"));
+				MetaData->SetValue(NewProp_EnergyRenerationCooldown, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
+				MetaData->SetValue(NewProp_EnergyRenerationCooldown, TEXT("ToolTip"), TEXT("The amount of time before energy starts regenerating"));
 				MetaData->SetValue(NewProp_MaxEnergy, TEXT("Category"), TEXT("Resources"));
 				MetaData->SetValue(NewProp_MaxEnergy, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
 				MetaData->SetValue(NewProp_MaxEnergy, TEXT("ToolTip"), TEXT("The amount of energy the Pawn has"));
+				MetaData->SetValue(NewProp_HealthRenerationCooldown, TEXT("Category"), TEXT("Cooldowns"));
+				MetaData->SetValue(NewProp_HealthRenerationCooldown, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
+				MetaData->SetValue(NewProp_HealthRenerationCooldown, TEXT("ToolTip"), TEXT("The amount of time before health starts regenerating"));
 				MetaData->SetValue(NewProp_MaxHealth, TEXT("Category"), TEXT("Resources"));
 				MetaData->SetValue(NewProp_MaxHealth, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
 				MetaData->SetValue(NewProp_MaxHealth, TEXT("ToolTip"), TEXT("The amount of health the Pawn has"));
@@ -833,8 +875,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/ExtendedLibrary")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000040);
 			FGuid Guid;
-			Guid.A = 0x09BE608E;
-			Guid.B = 0x3BD37BBB;
+			Guid.A = 0x9C8A689E;
+			Guid.B = 0x364C000B;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

@@ -23,26 +23,46 @@ public:
 	float MaxHealth;
 	float CurrentHealth;
 
+	/** The amount of time before health starts regenerating */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Cooldowns)
+	float HealthRenerationCooldown;
+	float HealthCooldown;
+
 	/** The amount of energy the Pawn has */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
 	float MaxEnergy;
 	float CurrentEnergy;
+
+	/** The amount of time before energy starts regenerating */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Cooldowns)
+	float EnergyRenerationCooldown;
+	float EnergyCooldown;
 
 	/** The amount of stamina the Pawn has */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
 	float MaxStamina;
 	float CurrentStamina;
 
-	/** The amount of Ultimate the Pawn has */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
-	float MaxUltimate;
-	float CurrentUltimate;
+	/** The amount of time before stamina starts regenerating */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Cooldowns)
+	float StaminaRenerationCooldown;
+	float StaminaCooldown;
 
 	/** The amount of shield the Pawn has */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
 	float MaxShield;
 	float CurrentShield;
 
+	/** The amount of time before Shield starts regenerating */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Cooldowns)
+	float ShieldRenerationCooldown;
+	float ShieldCooldown;
+
+	/** The amount of Ultimate the Pawn has */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
+	float MaxUltimate;
+	float CurrentUltimate;
+	
 	UFUNCTION(BlueprintCallable, Category = Behavior)
 	void RegenerateHealth(float DeltaTime);
 
@@ -54,4 +74,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Behavior)
 	void RegenerateShield(float DeltaTime);
+
+	UFUNCTION(BlueprintCallable, Category = Behavior)
+	void CooldownTimer(float DeltaTime);
 };

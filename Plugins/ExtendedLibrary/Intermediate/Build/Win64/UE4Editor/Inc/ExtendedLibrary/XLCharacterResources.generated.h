@@ -15,6 +15,15 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_10_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execCooldownTimer) \
+	{ \
+		P_GET_PROPERTY(UFloatProperty,Z_Param_DeltaTime); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->CooldownTimer(Z_Param_DeltaTime); \
+		P_NATIVE_END; \
+	} \
+ \
 	DECLARE_FUNCTION(execRegenerateShield) \
 	{ \
 		P_GET_PROPERTY(UFloatProperty,Z_Param_DeltaTime); \
@@ -53,6 +62,15 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterResources_h_10_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execCooldownTimer) \
+	{ \
+		P_GET_PROPERTY(UFloatProperty,Z_Param_DeltaTime); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->CooldownTimer(Z_Param_DeltaTime); \
+		P_NATIVE_END; \
+	} \
  \
 	DECLARE_FUNCTION(execRegenerateShield) \
 	{ \

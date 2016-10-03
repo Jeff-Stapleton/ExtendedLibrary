@@ -16,7 +16,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UPROPERTY(EditDefaultsOnly, Category = Inventory)
-	TArray<TSubclassOf<class AXLWeapon> > DefaultInventoryClasses;
+	TArray<TSubclassOf<class AXLWeapon> > DefaultInventory;
 	TArray<class AXLWeapon*> Inventory;
 
 };

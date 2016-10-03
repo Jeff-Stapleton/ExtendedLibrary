@@ -15,4 +15,7 @@ public:
 
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	UPROPERTY(EditDefaultsOnly, Category = Animation)
+	UAnimMontage* DeathAnim;
+
 };
