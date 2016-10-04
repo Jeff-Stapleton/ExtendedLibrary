@@ -12,11 +12,11 @@ void EmptyLinkFunctionForGeneratedCode1ExtendedLibrary() {}
 	void UXLAbilityManager::StaticRegisterNativesUXLAbilityManager()
 	{
 	}
-	IMPLEMENT_CLASS(UXLAbilityManager, 3180100724);
+	IMPLEMENT_CLASS(UXLAbilityManager, 971471910);
 	void UXLAnimationManager::StaticRegisterNativesUXLAnimationManager()
 	{
 	}
-	IMPLEMENT_CLASS(UXLAnimationManager, 3502105241);
+	IMPLEMENT_CLASS(UXLAnimationManager, 2598317695);
 static class UEnum* EHealthState_StaticEnum()
 {
 	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -56,7 +56,7 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 	void AXLCharacter::StaticRegisterNativesAXLCharacter()
 	{
 	}
-	IMPLEMENT_CLASS(AXLCharacter, 2457217778);
+	IMPLEMENT_CLASS(AXLCharacter, 3308995384);
 	void UXLCharacterResources::StaticRegisterNativesUXLCharacterResources()
 	{
 		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "CooldownTimer",(Native)&UXLCharacterResources::execCooldownTimer);
@@ -65,38 +65,51 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "RegenerateShield",(Native)&UXLCharacterResources::execRegenerateShield);
 		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "RegenerateStamina",(Native)&UXLCharacterResources::execRegenerateStamina);
 	}
-	IMPLEMENT_CLASS(UXLCharacterResources, 548246109);
+	IMPLEMENT_CLASS(UXLCharacterResources, 3774559643);
 	void UXLCharacterStats::StaticRegisterNativesUXLCharacterStats()
 	{
 	}
-	IMPLEMENT_CLASS(UXLCharacterStats, 1883702017);
+	IMPLEMENT_CLASS(UXLCharacterStats, 1023988016);
 	void UXLCoverComponent::StaticRegisterNativesUXLCoverComponent()
 	{
 	}
-	IMPLEMENT_CLASS(UXLCoverComponent, 3133295166);
+	IMPLEMENT_CLASS(UXLCoverComponent, 136658281);
 	void UXLEffectManager::StaticRegisterNativesUXLEffectManager()
 	{
 	}
-	IMPLEMENT_CLASS(UXLEffectManager, 3146296348);
+	IMPLEMENT_CLASS(UXLEffectManager, 3507281695);
 	void UXLMovementComponent::StaticRegisterNativesUXLMovementComponent()
 	{
 	}
-	IMPLEMENT_CLASS(UXLMovementComponent, 1077157251);
+	IMPLEMENT_CLASS(UXLMovementComponent, 1241303497);
 	void AXLPlayerController::StaticRegisterNativesAXLPlayerController()
 	{
 	}
-	IMPLEMENT_CLASS(AXLPlayerController, 2997435374);
+	IMPLEMENT_CLASS(AXLPlayerController, 4284552502);
+	void AXLProjectile::StaticRegisterNativesAXLProjectile()
+	{
+	}
+	IMPLEMENT_CLASS(AXLProjectile, 1302812797);
 	void AXLWeapon::StaticRegisterNativesAXLWeapon()
 	{
 	}
-	IMPLEMENT_CLASS(AXLWeapon, 1074312903);
+	IMPLEMENT_CLASS(AXLWeapon, 12861424);
+	void AXLMeleeWeapon::StaticRegisterNativesAXLMeleeWeapon()
+	{
+	}
+	IMPLEMENT_CLASS(AXLMeleeWeapon, 3624833073);
+	void AXLRangedWeapon::StaticRegisterNativesAXLRangedWeapon()
+	{
+	}
+	IMPLEMENT_CLASS(AXLRangedWeapon, 3137990586);
 	void UXLWeaponManager::StaticRegisterNativesUXLWeaponManager()
 	{
 	}
-	IMPLEMENT_CLASS(UXLWeaponManager, 776737041);
+	IMPLEMENT_CLASS(UXLWeaponManager, 3993750127);
 #if USE_COMPILED_IN_NATIVES
 // Cross Module References
 	ENGINE_API class UClass* Z_Construct_UClass_UActorComponent();
+	ENGINE_API class UClass* Z_Construct_UClass_UAnimMontage_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_ACharacter();
 	ENGINE_API class UClass* Z_Construct_UClass_UCharacterMovementComponent();
 	ENGINE_API class UClass* Z_Construct_UClass_APlayerController();
@@ -128,8 +141,14 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLMovementComponent();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPlayerController_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPlayerController();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLProjectile_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLProjectile();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLWeapon_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLWeapon();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLMeleeWeapon_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLMeleeWeapon();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLRangedWeapon_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLRangedWeapon();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLWeaponManager_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLWeaponManager();
 	EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -159,14 +178,13 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLAbilityManager.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLAbilityManager.h"));
-				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
 #endif
 			}
 		}
 		check(OuterClass->GetClass());
 		return OuterClass;
 	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLAbilityManager(Z_Construct_UClass_UXLAbilityManager, &UXLAbilityManager::StaticClass, TEXT("UXLAbilityManager"), false, nullptr, nullptr);
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLAbilityManager(Z_Construct_UClass_UXLAbilityManager, &UXLAbilityManager::StaticClass, TEXT("UXLAbilityManager"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLAbilityManager);
 	UClass* Z_Construct_UClass_UXLAnimationManager_NoRegister()
 	{
@@ -186,6 +204,9 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 				OuterClass->ClassFlags |= 0x20A00080;
 
 
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_DeathAnim = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("DeathAnim"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(DeathAnim, UXLAnimationManager), 0x0010000000010001, Z_Construct_UClass_UAnimMontage_NoRegister());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->StaticLink();
 #if WITH_METADATA
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
@@ -194,14 +215,15 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLAnimationManager.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLAnimationManager.h"));
-				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
+				MetaData->SetValue(NewProp_DeathAnim, TEXT("Category"), TEXT("Animation"));
+				MetaData->SetValue(NewProp_DeathAnim, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLAnimationManager.h"));
 #endif
 			}
 		}
 		check(OuterClass->GetClass());
 		return OuterClass;
 	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLAnimationManager(Z_Construct_UClass_UXLAnimationManager, &UXLAnimationManager::StaticClass, TEXT("UXLAnimationManager"), false, nullptr, nullptr);
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLAnimationManager(Z_Construct_UClass_UXLAnimationManager, &UXLAnimationManager::StaticClass, TEXT("UXLAnimationManager"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLAnimationManager);
 	UEnum* Z_Construct_UEnum_ExtendedLibrary_EHealthState()
 	{
@@ -316,7 +338,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Navigation"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Characters/XLCharacter.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
-				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
 				MetaData->SetValue(NewProp_MovementComponent, TEXT("Category"), TEXT("Movement"));
 				MetaData->SetValue(NewProp_MovementComponent, TEXT("EditInline"), TEXT("true"));
 				MetaData->SetValue(NewProp_MovementComponent, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
@@ -347,7 +368,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 		check(OuterClass->GetClass());
 		return OuterClass;
 	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLCharacter(Z_Construct_UClass_AXLCharacter, &AXLCharacter::StaticClass, TEXT("AXLCharacter"), false, nullptr, nullptr);
+	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLCharacter(Z_Construct_UClass_AXLCharacter, &AXLCharacter::StaticClass, TEXT("AXLCharacter"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLCharacter);
 	UFunction* Z_Construct_UFunction_UXLCharacterResources_CooldownTimer()
 	{
@@ -506,7 +527,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Data/XLCharacterResources.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
-				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
 				MetaData->SetValue(NewProp_MaxUltimate, TEXT("Category"), TEXT("Resources"));
 				MetaData->SetValue(NewProp_MaxUltimate, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
 				MetaData->SetValue(NewProp_MaxUltimate, TEXT("ToolTip"), TEXT("The amount of Ultimate the Pawn has"));
@@ -540,7 +560,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 		check(OuterClass->GetClass());
 		return OuterClass;
 	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLCharacterResources(Z_Construct_UClass_UXLCharacterResources, &UXLCharacterResources::StaticClass, TEXT("UXLCharacterResources"), false, nullptr, nullptr);
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLCharacterResources(Z_Construct_UClass_UXLCharacterResources, &UXLCharacterResources::StaticClass, TEXT("UXLCharacterResources"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLCharacterResources);
 	UClass* Z_Construct_UClass_UXLCharacterStats_NoRegister()
 	{
@@ -580,7 +600,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Data/XLCharacterStats.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterStats.h"));
-				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
 				MetaData->SetValue(NewProp_EnergyDefense, TEXT("Category"), TEXT("Stats"));
 				MetaData->SetValue(NewProp_EnergyDefense, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterStats.h"));
 				MetaData->SetValue(NewProp_EnergyDefense, TEXT("ToolTip"), TEXT("The precentage of damage reduced from energy attacks"));
@@ -617,7 +636,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 		check(OuterClass->GetClass());
 		return OuterClass;
 	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLCharacterStats(Z_Construct_UClass_UXLCharacterStats, &UXLCharacterStats::StaticClass, TEXT("UXLCharacterStats"), false, nullptr, nullptr);
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLCharacterStats(Z_Construct_UClass_UXLCharacterStats, &UXLCharacterStats::StaticClass, TEXT("UXLCharacterStats"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLCharacterStats);
 	UClass* Z_Construct_UClass_UXLCoverComponent_NoRegister()
 	{
@@ -645,14 +664,13 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Components/XLCoverComponent.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLCoverComponent.h"));
-				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
 #endif
 			}
 		}
 		check(OuterClass->GetClass());
 		return OuterClass;
 	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLCoverComponent(Z_Construct_UClass_UXLCoverComponent, &UXLCoverComponent::StaticClass, TEXT("UXLCoverComponent"), false, nullptr, nullptr);
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLCoverComponent(Z_Construct_UClass_UXLCoverComponent, &UXLCoverComponent::StaticClass, TEXT("UXLCoverComponent"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLCoverComponent);
 	UClass* Z_Construct_UClass_UXLEffectManager_NoRegister()
 	{
@@ -680,14 +698,13 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLEffectManager.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLEffectManager.h"));
-				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
 #endif
 			}
 		}
 		check(OuterClass->GetClass());
 		return OuterClass;
 	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLEffectManager(Z_Construct_UClass_UXLEffectManager, &UXLEffectManager::StaticClass, TEXT("UXLEffectManager"), false, nullptr, nullptr);
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLEffectManager(Z_Construct_UClass_UXLEffectManager, &UXLEffectManager::StaticClass, TEXT("UXLEffectManager"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLEffectManager);
 	UClass* Z_Construct_UClass_UXLMovementComponent_NoRegister()
 	{
@@ -728,7 +745,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Components/XLMovementComponent.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
-				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
 				MetaData->SetValue(NewProp_TargetingMovementSpeed, TEXT("Category"), TEXT("Movement"));
 				MetaData->SetValue(NewProp_TargetingMovementSpeed, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
 				MetaData->SetValue(NewProp_CrouchedMovementSpeed, TEXT("Category"), TEXT("Movement"));
@@ -758,7 +774,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 		check(OuterClass->GetClass());
 		return OuterClass;
 	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLMovementComponent(Z_Construct_UClass_UXLMovementComponent, &UXLMovementComponent::StaticClass, TEXT("UXLMovementComponent"), false, nullptr, nullptr);
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLMovementComponent(Z_Construct_UClass_UXLMovementComponent, &UXLMovementComponent::StaticClass, TEXT("UXLMovementComponent"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLMovementComponent);
 	UClass* Z_Construct_UClass_AXLPlayerController_NoRegister()
 	{
@@ -785,15 +801,45 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Collision Rendering Utilities|Transformation"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Controllers/XLPlayerController.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Controllers/XLPlayerController.h"));
-				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
 #endif
 			}
 		}
 		check(OuterClass->GetClass());
 		return OuterClass;
 	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLPlayerController(Z_Construct_UClass_AXLPlayerController, &AXLPlayerController::StaticClass, TEXT("AXLPlayerController"), false, nullptr, nullptr);
+	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLPlayerController(Z_Construct_UClass_AXLPlayerController, &AXLPlayerController::StaticClass, TEXT("AXLPlayerController"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLPlayerController);
+	UClass* Z_Construct_UClass_AXLProjectile_NoRegister()
+	{
+		return AXLProjectile::StaticClass();
+	}
+	UClass* Z_Construct_UClass_AXLProjectile()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_AActor();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = AXLProjectile::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20800080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Projectiles/XLProjectile.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Projectiles/XLProjectile.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLProjectile(Z_Construct_UClass_AXLProjectile, &AXLProjectile::StaticClass, TEXT("AXLProjectile"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLProjectile);
 	UClass* Z_Construct_UClass_AXLWeapon_NoRegister()
 	{
 		return AXLWeapon::StaticClass();
@@ -817,15 +863,76 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Weapons/XLWeapon.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Weapons/XLWeapon.h"));
-				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
 #endif
 			}
 		}
 		check(OuterClass->GetClass());
 		return OuterClass;
 	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLWeapon(Z_Construct_UClass_AXLWeapon, &AXLWeapon::StaticClass, TEXT("AXLWeapon"), false, nullptr, nullptr);
+	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLWeapon(Z_Construct_UClass_AXLWeapon, &AXLWeapon::StaticClass, TEXT("AXLWeapon"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLWeapon);
+	UClass* Z_Construct_UClass_AXLMeleeWeapon_NoRegister()
+	{
+		return AXLMeleeWeapon::StaticClass();
+	}
+	UClass* Z_Construct_UClass_AXLMeleeWeapon()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_AXLWeapon();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = AXLMeleeWeapon::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20800080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Weapons/XLMeleeWeapon.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Weapons/XLMeleeWeapon.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLMeleeWeapon(Z_Construct_UClass_AXLMeleeWeapon, &AXLMeleeWeapon::StaticClass, TEXT("AXLMeleeWeapon"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLMeleeWeapon);
+	UClass* Z_Construct_UClass_AXLRangedWeapon_NoRegister()
+	{
+		return AXLRangedWeapon::StaticClass();
+	}
+	UClass* Z_Construct_UClass_AXLRangedWeapon()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_AXLWeapon();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = AXLRangedWeapon::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20800080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Weapons/XLRangedWeapon.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Weapons/XLRangedWeapon.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLRangedWeapon(Z_Construct_UClass_AXLRangedWeapon, &AXLRangedWeapon::StaticClass, TEXT("AXLRangedWeapon"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLRangedWeapon);
 	UClass* Z_Construct_UClass_UXLWeaponManager_NoRegister()
 	{
 		return UXLWeaponManager::StaticClass();
@@ -845,8 +952,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
-				UProperty* NewProp_DefaultInventoryClasses = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("DefaultInventoryClasses"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(DefaultInventoryClasses, UXLWeaponManager), 0x0014000000010001);
-				UProperty* NewProp_DefaultInventoryClasses_Inner = new(EC_InternalUseOnlyConstructor, NewProp_DefaultInventoryClasses, TEXT("DefaultInventoryClasses"), RF_Public|RF_Transient|RF_MarkAsNative) UClassProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0004000000000000, Z_Construct_UClass_AXLWeapon_NoRegister(), UClass::StaticClass());
+				UProperty* NewProp_DefaultInventory = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("DefaultInventory"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(DefaultInventory, UXLWeaponManager), 0x0014000000010001);
+				UProperty* NewProp_DefaultInventory_Inner = new(EC_InternalUseOnlyConstructor, NewProp_DefaultInventory, TEXT("DefaultInventory"), RF_Public|RF_Transient|RF_MarkAsNative) UClassProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0004000000000000, Z_Construct_UClass_AXLWeapon_NoRegister(), UClass::StaticClass());
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->StaticLink();
 #if WITH_METADATA
@@ -856,16 +963,15 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLWeaponManager.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponManager.h"));
-				MetaData->SetValue(OuterClass, TEXT("OnlyDefaultConstructorDeclared"), TEXT(""));
-				MetaData->SetValue(NewProp_DefaultInventoryClasses, TEXT("Category"), TEXT("Inventory"));
-				MetaData->SetValue(NewProp_DefaultInventoryClasses, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponManager.h"));
+				MetaData->SetValue(NewProp_DefaultInventory, TEXT("Category"), TEXT("Inventory"));
+				MetaData->SetValue(NewProp_DefaultInventory, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponManager.h"));
 #endif
 			}
 		}
 		check(OuterClass->GetClass());
 		return OuterClass;
 	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLWeaponManager(Z_Construct_UClass_UXLWeaponManager, &UXLWeaponManager::StaticClass, TEXT("UXLWeaponManager"), false, nullptr, nullptr);
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLWeaponManager(Z_Construct_UClass_UXLWeaponManager, &UXLWeaponManager::StaticClass, TEXT("UXLWeaponManager"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLWeaponManager);
 	UPackage* Z_Construct_UPackage__Script_ExtendedLibrary()
 	{
@@ -875,8 +981,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/ExtendedLibrary")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000040);
 			FGuid Guid;
-			Guid.A = 0x9C8A689E;
-			Guid.B = 0x364C000B;
+			Guid.A = 0x9FF0BA5F;
+			Guid.B = 0xF02AC98A;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

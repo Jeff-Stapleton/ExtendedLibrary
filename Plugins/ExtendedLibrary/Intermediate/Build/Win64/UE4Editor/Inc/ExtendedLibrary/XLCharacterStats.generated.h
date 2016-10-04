@@ -44,15 +44,17 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UXLCharacterStats); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UXLCharacterStats); \
 private: \
-	/** Private copy-constructor, should never be used */ \
-	NO_API UXLCharacterStats(const UXLCharacterStats& InCopy); \
+	/** Private move- and copy-constructors, should never be used */ \
+	NO_API UXLCharacterStats(UXLCharacterStats&&); \
+	NO_API UXLCharacterStats(const UXLCharacterStats&); \
 public:
 
 
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Data_XLCharacterStats_h_9_ENHANCED_CONSTRUCTORS \
 private: \
-	/** Private copy-constructor, should never be used */ \
-	NO_API UXLCharacterStats(const UXLCharacterStats& InCopy); \
+	/** Private move- and copy-constructors, should never be used */ \
+	NO_API UXLCharacterStats(UXLCharacterStats&&); \
+	NO_API UXLCharacterStats(const UXLCharacterStats&); \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UXLCharacterStats); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UXLCharacterStats); \

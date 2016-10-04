@@ -15,4 +15,7 @@
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Managers\XLAnimationManager.cpp"
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Managers\XLEffectManager.cpp"
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Managers\XLWeaponsManager.cpp"
+#include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Projectile\XLProjectile.cpp"
+#include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Weapons\XLMeleeWeapon.cpp"
+#include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Weapons\XLRangedWeapon.cpp"
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Weapons\XLWeapon.cpp"

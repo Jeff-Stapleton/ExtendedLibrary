@@ -44,15 +44,17 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UXLAbilityManager); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UXLAbilityManager); \
 private: \
-	/** Private copy-constructor, should never be used */ \
-	NO_API UXLAbilityManager(const UXLAbilityManager& InCopy); \
+	/** Private move- and copy-constructors, should never be used */ \
+	NO_API UXLAbilityManager(UXLAbilityManager&&); \
+	NO_API UXLAbilityManager(const UXLAbilityManager&); \
 public:
 
 
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLAbilityManager_h_9_ENHANCED_CONSTRUCTORS \
 private: \
-	/** Private copy-constructor, should never be used */ \
-	NO_API UXLAbilityManager(const UXLAbilityManager& InCopy); \
+	/** Private move- and copy-constructors, should never be used */ \
+	NO_API UXLAbilityManager(UXLAbilityManager&&); \
+	NO_API UXLAbilityManager(const UXLAbilityManager&); \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UXLAbilityManager); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UXLAbilityManager); \

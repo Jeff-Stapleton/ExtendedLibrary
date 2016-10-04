@@ -44,15 +44,17 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, AXLWeapon); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AXLWeapon); \
 private: \
-	/** Private copy-constructor, should never be used */ \
-	NO_API AXLWeapon(const AXLWeapon& InCopy); \
+	/** Private move- and copy-constructors, should never be used */ \
+	NO_API AXLWeapon(AXLWeapon&&); \
+	NO_API AXLWeapon(const AXLWeapon&); \
 public:
 
 
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Weapons_XLWeapon_h_9_ENHANCED_CONSTRUCTORS \
 private: \
-	/** Private copy-constructor, should never be used */ \
-	NO_API AXLWeapon(const AXLWeapon& InCopy); \
+	/** Private move- and copy-constructors, should never be used */ \
+	NO_API AXLWeapon(AXLWeapon&&); \
+	NO_API AXLWeapon(const AXLWeapon&); \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, AXLWeapon); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AXLWeapon); \

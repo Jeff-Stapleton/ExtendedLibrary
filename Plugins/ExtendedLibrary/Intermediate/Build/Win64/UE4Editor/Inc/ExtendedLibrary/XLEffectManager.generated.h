@@ -44,15 +44,17 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UXLEffectManager); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UXLEffectManager); \
 private: \
-	/** Private copy-constructor, should never be used */ \
-	NO_API UXLEffectManager(const UXLEffectManager& InCopy); \
+	/** Private move- and copy-constructors, should never be used */ \
+	NO_API UXLEffectManager(UXLEffectManager&&); \
+	NO_API UXLEffectManager(const UXLEffectManager&); \
 public:
 
 
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLEffectManager_h_9_ENHANCED_CONSTRUCTORS \
 private: \
-	/** Private copy-constructor, should never be used */ \
-	NO_API UXLEffectManager(const UXLEffectManager& InCopy); \
+	/** Private move- and copy-constructors, should never be used */ \
+	NO_API UXLEffectManager(UXLEffectManager&&); \
+	NO_API UXLEffectManager(const UXLEffectManager&); \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UXLEffectManager); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UXLEffectManager); \

@@ -5,12 +5,6 @@
 
 AXLCharacter::AXLCharacter()
 {
-	PrimaryActorTick.bCanEverTick = true;
-
-	HealthState = EHealthState::Alive;
-	MovementState = EMovementState::Idle;
-	CombatState = ECombatState::Passive;
-
 	CharacterResources = CreateDefaultSubobject<UXLCharacterResources>(TEXT("CharacterResources"));
 	CharacterStats = CreateDefaultSubobject<UXLCharacterStats>(TEXT("CharacterStats"));
 	CharacterWeapons = CreateDefaultSubobject<UXLWeaponManager>(TEXT("CharacterWeapons"));
@@ -18,7 +12,25 @@ AXLCharacter::AXLCharacter()
 	CharacterAnimations = CreateDefaultSubobject<UXLAnimationManager>(TEXT("CharacterAnimations"));
 	CharacterEffects = CreateDefaultSubobject<UXLEffectManager>(TEXT("CharacterEffects"));
 	CoverComponent = CreateDefaultSubobject<UXLCoverComponent>(TEXT("CoverComponent"));
-	MovementComponent = CreateDefaultSubobject<UXLMovementComponent>(TEXT("MovementComponent"));
+	MovementComponent = Cast<UXLMovementComponent>(GetMovementComponent());
+
+	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
+
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationYaw = true;
+	bUseControllerRotationRoll = false;
+
+	//MovementComponent->bOrientRotationToMovement = true;
+	//MovementComponent->RotationRate = FRotator(0.0f, 540.0f, 0.0f);
+	//MovementComponent->JumpZVelocity = 400.f;
+	//MovementComponent->MaxWalkSpeed = 400.f;
+	//MovementComponent->AirControl = 0.2f;
+
+	PrimaryActorTick.bCanEverTick = true;
+
+	HealthState = EHealthState::Alive;
+	MovementState = EMovementState::Idle;
+	CombatState = ECombatState::Passive;
 }
 
 void AXLCharacter::BeginPlay()
@@ -123,16 +135,16 @@ void AXLCharacter::Melee()
 float AXLCharacter::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser)
 {
 	AXLPlayerController* MyPC = Cast<AXLPlayerController>(Controller);
-	/*if (CharacterAttributes->GetCurrentHealth() <= 0.f)
+	if (CharacterResources->CurrentHealth <= 0.f)
 	{
 		return 0.f;
-	}*/
+	}
 
 	float ActualDamage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
-	if (0/*CharacterAttributes->GetCurrentShield()*/ > 0)
+	if (CharacterResources->CurrentShield > 0)
 	{
-		float temp = 0;// ActualDamage - CharacterAttributes->GetCurrentShield();
-		//CharacterAttributes->SetCurrentShield(CharacterAttributes->GetCurrentShield() - ActualDamage);
+		float temp = ActualDamage - CharacterResources->CurrentShield;
+		CharacterResources->CurrentShield = CharacterResources->CurrentShield - ActualDamage;
 		if (temp > 0)
 		{
 			ActualDamage = temp;
@@ -141,8 +153,8 @@ float AXLCharacter::TakeDamage(float Damage, struct FDamageEvent const& DamageEv
 	else
 	{
 		//Need to check armor and reduce damage accordingly based on damage type.
-		//CharacterAttributes->SetCurrentHealth(CharacterAttributes->GetCurrentHealth() - ActualDamage);
-		if (0/*CharacterAttributes->GetCurrentHealth()*/ <= 0)
+		CharacterResources->CurrentHealth = CharacterResources->CurrentHealth - ActualDamage;
+		if (CharacterResources->CurrentHealth <= 0)
 		{
 			Die(ActualDamage, DamageEvent, EventInstigator, DamageCauser);
 		}
@@ -162,7 +174,7 @@ bool AXLCharacter::Die(float KillingDamage, FDamageEvent const& DamageEvent, ACo
 		return false;
 	}
 
-	//CharacterAttributes->SetCurrentHealth(FMath::Min(0.0f, CharacterAttributes->GetCurrentHealth()));
+	CharacterResources->CurrentHealth = FMath::Min(0.0f, CharacterResources->CurrentHealth);
 
 	// if this is an environmental death then refer to the previous killer so that they receive credit (knocked into lava pits, etc)
 	UDamageType const* const DamageType = DamageEvent.DamageTypeClass ? DamageEvent.DamageTypeClass->GetDefaultObject<UDamageType>() : GetDefault<UDamageType>();

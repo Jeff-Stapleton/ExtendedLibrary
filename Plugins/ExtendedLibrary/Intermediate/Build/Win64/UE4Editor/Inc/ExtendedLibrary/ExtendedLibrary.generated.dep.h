@@ -41,8 +41,17 @@
 #ifndef EXTENDEDLIBRARY_XLPlayerController_generated_h
 	#include "Public/Controllers/XLPlayerController.h"
 #endif
+#ifndef EXTENDEDLIBRARY_XLProjectile_generated_h
+	#include "Public/Projectiles/XLProjectile.h"
+#endif
 #ifndef EXTENDEDLIBRARY_XLWeapon_generated_h
 	#include "Public/Weapons/XLWeapon.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLMeleeWeapon_generated_h
+	#include "Public/Weapons/XLMeleeWeapon.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLRangedWeapon_generated_h
+	#include "Public/Weapons/XLRangedWeapon.h"
 #endif
 #ifndef EXTENDEDLIBRARY_XLWeaponManager_generated_h
 	#include "Public/Managers/XLWeaponManager.h"

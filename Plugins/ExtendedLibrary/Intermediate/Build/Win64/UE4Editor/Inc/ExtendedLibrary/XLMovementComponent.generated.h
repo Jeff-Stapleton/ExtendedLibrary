@@ -44,15 +44,17 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UXLMovementComponent); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UXLMovementComponent); \
 private: \
-	/** Private copy-constructor, should never be used */ \
-	NO_API UXLMovementComponent(const UXLMovementComponent& InCopy); \
+	/** Private move- and copy-constructors, should never be used */ \
+	NO_API UXLMovementComponent(UXLMovementComponent&&); \
+	NO_API UXLMovementComponent(const UXLMovementComponent&); \
 public:
 
 
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Components_XLMovementComponent_h_8_ENHANCED_CONSTRUCTORS \
 private: \
-	/** Private copy-constructor, should never be used */ \
-	NO_API UXLMovementComponent(const UXLMovementComponent& InCopy); \
+	/** Private move- and copy-constructors, should never be used */ \
+	NO_API UXLMovementComponent(UXLMovementComponent&&); \
+	NO_API UXLMovementComponent(const UXLMovementComponent&); \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UXLMovementComponent); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UXLMovementComponent); \

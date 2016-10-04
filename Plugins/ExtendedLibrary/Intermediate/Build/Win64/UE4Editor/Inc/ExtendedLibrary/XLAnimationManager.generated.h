@@ -44,15 +44,17 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UXLAnimationManager); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UXLAnimationManager); \
 private: \
-	/** Private copy-constructor, should never be used */ \
-	NO_API UXLAnimationManager(const UXLAnimationManager& InCopy); \
+	/** Private move- and copy-constructors, should never be used */ \
+	NO_API UXLAnimationManager(UXLAnimationManager&&); \
+	NO_API UXLAnimationManager(const UXLAnimationManager&); \
 public:
 
 
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLAnimationManager_h_9_ENHANCED_CONSTRUCTORS \
 private: \
-	/** Private copy-constructor, should never be used */ \
-	NO_API UXLAnimationManager(const UXLAnimationManager& InCopy); \
+	/** Private move- and copy-constructors, should never be used */ \
+	NO_API UXLAnimationManager(UXLAnimationManager&&); \
+	NO_API UXLAnimationManager(const UXLAnimationManager&); \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UXLAnimationManager); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UXLAnimationManager); \

@@ -44,15 +44,17 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, AXLPlayerController); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AXLPlayerController); \
 private: \
-	/** Private copy-constructor, should never be used */ \
-	NO_API AXLPlayerController(const AXLPlayerController& InCopy); \
+	/** Private move- and copy-constructors, should never be used */ \
+	NO_API AXLPlayerController(AXLPlayerController&&); \
+	NO_API AXLPlayerController(const AXLPlayerController&); \
 public:
 
 
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Controllers_XLPlayerController_h_9_ENHANCED_CONSTRUCTORS \
 private: \
-	/** Private copy-constructor, should never be used */ \
-	NO_API AXLPlayerController(const AXLPlayerController& InCopy); \
+	/** Private move- and copy-constructors, should never be used */ \
+	NO_API AXLPlayerController(AXLPlayerController&&); \
+	NO_API AXLPlayerController(const AXLPlayerController&); \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, AXLPlayerController); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AXLPlayerController); \

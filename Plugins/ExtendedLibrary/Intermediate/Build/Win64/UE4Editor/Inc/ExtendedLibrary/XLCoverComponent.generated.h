@@ -44,15 +44,17 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UXLCoverComponent); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UXLCoverComponent); \
 private: \
-	/** Private copy-constructor, should never be used */ \
-	NO_API UXLCoverComponent(const UXLCoverComponent& InCopy); \
+	/** Private move- and copy-constructors, should never be used */ \
+	NO_API UXLCoverComponent(UXLCoverComponent&&); \
+	NO_API UXLCoverComponent(const UXLCoverComponent&); \
 public:
 
 
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Components_XLCoverComponent_h_9_ENHANCED_CONSTRUCTORS \
 private: \
-	/** Private copy-constructor, should never be used */ \
-	NO_API UXLCoverComponent(const UXLCoverComponent& InCopy); \
+	/** Private move- and copy-constructors, should never be used */ \
+	NO_API UXLCoverComponent(UXLCoverComponent&&); \
+	NO_API UXLCoverComponent(const UXLCoverComponent&); \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UXLCoverComponent); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UXLCoverComponent); \
