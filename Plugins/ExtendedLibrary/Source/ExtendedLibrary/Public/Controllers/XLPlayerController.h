@@ -17,7 +17,7 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void SetPlayer(UPlayer* Player);
 
-public:
+protected:
 
 	virtual void Move(float Direction);
 	virtual void Strafe(float Direction);
@@ -43,19 +43,9 @@ public:
 
 	void Reset() override;
 
-	UFUNCTION()
-	void ClientGameStarted();
-
-	UFUNCTION()
-	void ClientStartOnlineGame();
-
-
 private:
 
 	UPROPERTY()
 	AXLCharacter* MyCharacter;
-
-	FTimerHandle StartGame_Timer;
-
 
 };

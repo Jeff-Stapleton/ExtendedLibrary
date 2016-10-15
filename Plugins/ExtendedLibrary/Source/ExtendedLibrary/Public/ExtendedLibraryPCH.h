@@ -4,30 +4,8 @@
 #include "Animation/AnimInstance.h"
 #include "Animation/AnimMontage.h"
 
-#include "SlateBasics.h"
-#include "SlateExtras.h"
-#include "Particles/ParticleSystemComponent.h"
-#include "UnrealNetwork.h"
-#include "Runtime/UMG/Public/UMG.h"
-#include "Runtime/UMG/Public/UMGStyle.h"
-#include "Runtime/UMG/Public/Slate/SObjectWidget.h"
-#include "Runtime/UMG/Public/IUMGModule.h"
-#include "Runtime/UMG/Public/Blueprint/UserWidget.h"
-#include "Kismet/GameplayStatics.h"
-
 #include "XLCharacter.h"
-#include "XLPlayerAnimationManager.h"
 #include "XLCharacterStats.h"
-#include "XLPlayerState.h"
-#include "XLGameState.h"
-#include "XLGameMode.h"
-#include "XLGameSession.h"
-#include "XLOnlineGameSettings.h"
-
-
-#define COLLISION_WEAPON			ECC_GameTraceChannel1
-#define COLLISION_PROJECTILE		ECC_GameTraceChannel2
-#define COLLISION_PICKUP			ECC_GameTraceChannel3
 
 #define XL_SURFACE_Default		SurfaceType_Default
 #define XL_SURFACE_Concrete		SurfaceType1

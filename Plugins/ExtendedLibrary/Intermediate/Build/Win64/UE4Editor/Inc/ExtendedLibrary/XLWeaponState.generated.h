@@ -14,7 +14,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define EXTENDEDLIBRARY_XLWeaponState_generated_h
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID TheAristonaut_SneakStreet_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Enums_XLWeaponState_h
+#define CURRENT_FILE_ID UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Enums_XLWeaponState_h
 
 
 #define FOREACH_ENUM_EWEAPONSTATE(op) \

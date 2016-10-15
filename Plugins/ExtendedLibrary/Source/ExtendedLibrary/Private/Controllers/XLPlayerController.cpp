@@ -159,41 +159,6 @@ void AXLPlayerController::Reset()
 	Super::Reset();
 }
 
-void AXLPlayerController::ClientGameStarted()
-{
-	/*AXLHUD* XLHUD = GetXLHUD();
-	if (XLHUD)
-	{
-	XLHUD->SetMatchState(EXLMatchState::Playing);
-	}
 
-	QueryAchievements();*/
-}
-
-void AXLPlayerController::ClientStartOnlineGame()
-{
-	if (!IsPrimaryPlayer())
-		return;
-
-	AXLPlayerState* CharacterState = Cast<AXLPlayerState>(PlayerState);
-	if (CharacterState)
-	{
-		IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get();
-		if (OnlineSub)
-		{
-			IOnlineSessionPtr Sessions = OnlineSub->GetSessionInterface();
-			if (Sessions.IsValid())
-			{
-				UE_LOG(LogOnline, Log, TEXT("Starting session %s on client"), *CharacterState->SessionName.ToString());
-				Sessions->StartSession(CharacterState->SessionName);
-			}
-		}
-	}
-	else
-	{
-		// Keep retrying until player state is replicated
-		GetWorld()->GetTimerManager().SetTimer(StartGame_Timer, FTimerDelegate::CreateUObject(this, &AXLPlayerController::ClientStartOnlineGame), 0.2f, false);
-	}
-}
 
 

@@ -67,10 +67,8 @@ public:
 
 	void Melee();
 
-	UFUNCTION(BlueprintCallable, Category = Combat)
 	float TakeDamage(float Damage, FDamageEvent const & DamageEvent, AController * EventInstigator, AActor * DamageCauser);
 
-	UFUNCTION(BlueprintCallable, Category = Combat)
 	bool Die(float KillingDamage, FDamageEvent const & DamageEvent, AController * Killer, AActor * DamageCauser);
 
 	void OnDeath(float KillingDamage, FDamageEvent const & DamageEvent, APawn * PawnInstigator, AActor * DamageCauser);

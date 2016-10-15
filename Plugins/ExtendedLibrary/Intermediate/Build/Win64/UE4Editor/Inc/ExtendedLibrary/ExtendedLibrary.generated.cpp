@@ -13,13 +13,6 @@ void EmptyLinkFunctionForGeneratedCode1ExtendedLibrary() {}
 	{
 	}
 	IMPLEMENT_CLASS(UXLAbilityManager, 971471910);
-	void AXLAIController::StaticRegisterNativesAXLAIController()
-	{
-		FNativeFunctionRegistrar::RegisterFunction(AXLAIController::StaticClass(), "FindClosestEnemy",(Native)&AXLAIController::execFindClosestEnemy);
-		FNativeFunctionRegistrar::RegisterFunction(AXLAIController::StaticClass(), "FindClosestEnemyWithLOS",(Native)&AXLAIController::execFindClosestEnemyWithLOS);
-		FNativeFunctionRegistrar::RegisterFunction(AXLAIController::StaticClass(), "ShootEnemy",(Native)&AXLAIController::execShootEnemy);
-	}
-	IMPLEMENT_CLASS(AXLAIController, 3917539558);
 static class UEnum* EHealthState_StaticEnum()
 {
 	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -58,18 +51,8 @@ static class UEnum* EMovementState_StaticEnum()
 static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovementState_StaticEnum, TEXT("/Script/ExtendedLibrary"), TEXT("EMovementState"), false, nullptr, nullptr);
 	void AXLCharacter::StaticRegisterNativesAXLCharacter()
 	{
-		FNativeFunctionRegistrar::RegisterFunction(AXLCharacter::StaticClass(), "Die",(Native)&AXLCharacter::execDie);
-		FNativeFunctionRegistrar::RegisterFunction(AXLCharacter::StaticClass(), "TakeDamage",(Native)&AXLCharacter::execTakeDamage);
 	}
-	IMPLEMENT_CLASS(AXLCharacter, 1431512938);
-	void AXLAI::StaticRegisterNativesAXLAI()
-	{
-	}
-	IMPLEMENT_CLASS(AXLAI, 4013695801);
-	void AXLPlayerCharacter::StaticRegisterNativesAXLPlayerCharacter()
-	{
-	}
-	IMPLEMENT_CLASS(AXLPlayerCharacter, 85523595);
+	IMPLEMENT_CLASS(AXLCharacter, 376188786);
 	void UXLCharacterResources::StaticRegisterNativesUXLCharacterResources()
 	{
 		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "CooldownTimer",(Native)&UXLCharacterResources::execCooldownTimer);
@@ -78,7 +61,7 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "RegenerateShield",(Native)&UXLCharacterResources::execRegenerateShield);
 		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "RegenerateStamina",(Native)&UXLCharacterResources::execRegenerateStamina);
 	}
-	IMPLEMENT_CLASS(UXLCharacterResources, 1245714283);
+	IMPLEMENT_CLASS(UXLCharacterResources, 3774559643);
 	void UXLCharacterStats::StaticRegisterNativesUXLCharacterStats()
 	{
 	}
@@ -87,38 +70,6 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 	{
 	}
 	IMPLEMENT_CLASS(UXLCoverComponent, 136658281);
-	void UXLFindPointNearEnemy::StaticRegisterNativesUXLFindPointNearEnemy()
-	{
-	}
-	IMPLEMENT_CLASS(UXLFindPointNearEnemy, 2973291549);
-	void UXLGameInstance::StaticRegisterNativesUXLGameInstance()
-	{
-		FNativeFunctionRegistrar::RegisterFunction(UXLGameInstance::StaticClass(), "BeginHostingQuickMatch",(Native)&UXLGameInstance::execBeginHostingQuickMatch);
-		FNativeFunctionRegistrar::RegisterFunction(UXLGameInstance::StaticClass(), "FindSessions",(Native)&UXLGameInstance::execFindSessions);
-		FNativeFunctionRegistrar::RegisterFunction(UXLGameInstance::StaticClass(), "GetSessionID",(Native)&UXLGameInstance::execGetSessionID);
-		FNativeFunctionRegistrar::RegisterFunction(UXLGameInstance::StaticClass(), "HostGame",(Native)&UXLGameInstance::execHostGame);
-		FNativeFunctionRegistrar::RegisterFunction(UXLGameInstance::StaticClass(), "SetSessionID",(Native)&UXLGameInstance::execSetSessionID);
-	}
-	IMPLEMENT_CLASS(UXLGameInstance, 2076835287);
-	void AXLGameMode::StaticRegisterNativesAXLGameMode()
-	{
-		FNativeFunctionRegistrar::RegisterFunction(AXLGameMode::StaticClass(), "CheckTeamElimination",(Native)&AXLGameMode::execCheckTeamElimination);
-		FNativeFunctionRegistrar::RegisterFunction(AXLGameMode::StaticClass(), "FinishMatch",(Native)&AXLGameMode::execFinishMatch);
-		FNativeFunctionRegistrar::RegisterFunction(AXLGameMode::StaticClass(), "SetAllowBots",(Native)&AXLGameMode::execSetAllowBots);
-	}
-	IMPLEMENT_CLASS(AXLGameMode, 3636664437);
-	void AXLGameSession::StaticRegisterNativesAXLGameSession()
-	{
-	}
-	IMPLEMENT_CLASS(AXLGameSession, 422053843);
-	void AXLGameState::StaticRegisterNativesAXLGameState()
-	{
-	}
-	IMPLEMENT_CLASS(AXLGameState, 2733834228);
-	void UXLHasLineOfSightTo::StaticRegisterNativesUXLHasLineOfSightTo()
-	{
-	}
-	IMPLEMENT_CLASS(UXLHasLineOfSightTo, 260267085);
 class UScriptStruct* FDecalData::StaticStruct()
 {
 	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -153,10 +104,8 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFDecalData
 	IMPLEMENT_CLASS(UXLPlayerAnimationManager, 3788153921);
 	void AXLPlayerController::StaticRegisterNativesAXLPlayerController()
 	{
-		FNativeFunctionRegistrar::RegisterFunction(AXLPlayerController::StaticClass(), "ClientGameStarted",(Native)&AXLPlayerController::execClientGameStarted);
-		FNativeFunctionRegistrar::RegisterFunction(AXLPlayerController::StaticClass(), "ClientStartOnlineGame",(Native)&AXLPlayerController::execClientStartOnlineGame);
 	}
-	IMPLEMENT_CLASS(AXLPlayerController, 764517741);
+	IMPLEMENT_CLASS(AXLPlayerController, 2519319151);
 	void UXLPlayerEffectManager::StaticRegisterNativesUXLPlayerEffectManager()
 	{
 	}
@@ -165,24 +114,6 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFDecalData
 	{
 	}
 	IMPLEMENT_CLASS(UXLPlayerSoundManager, 2044852930);
-static class UEnum* EWinningState_StaticEnum()
-{
-	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
-	static class UEnum* Singleton = NULL;
-	if (!Singleton)
-	{
-		extern EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EWinningState();
-		Singleton = GetStaticEnum(Z_Construct_UEnum_ExtendedLibrary_EWinningState, Z_Construct_UPackage__Script_ExtendedLibrary(), TEXT("EWinningState"));
-	}
-	return Singleton;
-}
-static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EWinningState(EWinningState_StaticEnum, TEXT("/Script/ExtendedLibrary"), TEXT("EWinningState"), false, nullptr, nullptr);
-	void AXLPlayerState::StaticRegisterNativesAXLPlayerState()
-	{
-		FNativeFunctionRegistrar::RegisterFunction(AXLPlayerState::StaticClass(), "BroadcastDeath",(Native)&AXLPlayerState::execBroadcastDeath);
-		FNativeFunctionRegistrar::RegisterFunction(AXLPlayerState::StaticClass(), "InformAboutKill",(Native)&AXLPlayerState::execInformAboutKill);
-	}
-	IMPLEMENT_CLASS(AXLPlayerState, 2445524674);
 	void AXLProjectile::StaticRegisterNativesAXLProjectile()
 	{
 	}
@@ -250,23 +181,7 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 #if USE_COMPILED_IN_NATIVES
 // Cross Module References
 	ENGINE_API class UClass* Z_Construct_UClass_UActorComponent();
-	AIMODULE_API class UClass* Z_Construct_UClass_AAIController();
-	AIMODULE_API class UClass* Z_Construct_UClass_UBehaviorTreeComponent_NoRegister();
-	AIMODULE_API class UClass* Z_Construct_UClass_UBlackboardComponent_NoRegister();
-	ENGINE_API class UClass* Z_Construct_UClass_AActor_NoRegister();
-	ENGINE_API class UClass* Z_Construct_UClass_AController_NoRegister();
-	ENGINE_API class UScriptStruct* Z_Construct_UScriptStruct_FDamageEvent();
 	ENGINE_API class UClass* Z_Construct_UClass_ACharacter();
-	AIMODULE_API class UClass* Z_Construct_UClass_UBehaviorTree_NoRegister();
-	AIMODULE_API class UClass* Z_Construct_UClass_UBTTask_BlackboardBase();
-	ENGINE_API class UClass* Z_Construct_UClass_ULocalPlayer_NoRegister();
-	ENGINE_API class UClass* Z_Construct_UClass_UGameInstance();
-	ENGINE_API class UClass* Z_Construct_UClass_AGameMode();
-	ENGINE_API class UClass* Z_Construct_UClass_APawn_NoRegister();
-	ENGINE_API class UClass* Z_Construct_UClass_AGameSession();
-	ENGINE_API class UClass* Z_Construct_UClass_AGameState();
-	AIMODULE_API class UClass* Z_Construct_UClass_UBTDecorator();
-	AIMODULE_API class UScriptStruct* Z_Construct_UScriptStruct_FBlackboardKeySelector();
 	ENGINE_API class UClass* Z_Construct_UClass_UMaterial_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_AActor();
 	ENGINE_API class UScriptStruct* Z_Construct_UScriptStruct_FHitResult();
@@ -276,33 +191,22 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	ENGINE_API class UClass* Z_Construct_UClass_UCharacterMovementComponent();
 	ENGINE_API class UClass* Z_Construct_UClass_UAnimMontage_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_APlayerController();
-	ENGINE_API class UClass* Z_Construct_UClass_UDamageType_NoRegister();
-	ENGINE_API class UClass* Z_Construct_UClass_APlayerState();
 	ENGINE_API class UClass* Z_Construct_UClass_USkeletalMeshComponent_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_UCameraShake_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_UParticleSystemComponent_NoRegister();
 	ENGINE_API class UScriptStruct* Z_Construct_UScriptStruct_FRadialDamageEvent();
 	ENGINE_API class UScriptStruct* Z_Construct_UScriptStruct_FPointDamageEvent();
+	ENGINE_API class UScriptStruct* Z_Construct_UScriptStruct_FDamageEvent();
+	ENGINE_API class UClass* Z_Construct_UClass_AActor_NoRegister();
 	COREUOBJECT_API class UClass* Z_Construct_UClass_UObject_NoRegister();
 
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbilityManager_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbilityManager();
-	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLAIController_FindClosestEnemy();
-	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLAIController_FindClosestEnemyWithLOS();
-	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLAIController_ShootEnemy();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLAIController_NoRegister();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLAIController();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EHealthState();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_ECombatState();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EMovementState();
-	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLCharacter_Die();
-	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLCharacter_TakeDamage();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLCharacter_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLCharacter();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLAI_NoRegister();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLAI();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPlayerCharacter_NoRegister();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPlayerCharacter();
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLCharacterResources_CooldownTimer();
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateEnergy();
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateHealth();
@@ -314,26 +218,6 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterStats();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCoverComponent_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCoverComponent();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLFindPointNearEnemy_NoRegister();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLFindPointNearEnemy();
-	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLGameInstance_BeginHostingQuickMatch();
-	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLGameInstance_FindSessions();
-	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLGameInstance_GetSessionID();
-	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLGameInstance_HostGame();
-	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLGameInstance_SetSessionID();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLGameInstance_NoRegister();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLGameInstance();
-	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLGameMode_CheckTeamElimination();
-	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLGameMode_FinishMatch();
-	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLGameMode_SetAllowBots();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLGameMode_NoRegister();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLGameMode();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLGameSession_NoRegister();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLGameSession();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLGameState_NoRegister();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLGameState();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLHasLineOfSightTo_NoRegister();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLHasLineOfSightTo();
 	EXTENDEDLIBRARY_API class UScriptStruct* Z_Construct_UScriptStruct_FDecalData();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLImpactEffect_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLImpactEffect();
@@ -341,19 +225,12 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLMovementComponent();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPlayerAnimationManager_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPlayerAnimationManager();
-	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLPlayerController_ClientGameStarted();
-	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLPlayerController_ClientStartOnlineGame();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPlayerController_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPlayerController();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPlayerEffectManager_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPlayerEffectManager();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPlayerSoundManager_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPlayerSoundManager();
-	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EWinningState();
-	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLPlayerState_BroadcastDeath();
-	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLPlayerState_InformAboutKill();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPlayerState_NoRegister();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPlayerState();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLProjectile_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLProjectile();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EWeaponState();
@@ -407,114 +284,6 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLAbilityManager(Z_Construct_UClass_UXLAbilityManager, &UXLAbilityManager::StaticClass, TEXT("UXLAbilityManager"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLAbilityManager);
-	UFunction* Z_Construct_UFunction_AXLAIController_FindClosestEnemy()
-	{
-		UObject* Outer=Z_Construct_UClass_AXLAIController();
-		static UFunction* ReturnFunction = NULL;
-		if (!ReturnFunction)
-		{
-			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("FindClosestEnemy"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535);
-			ReturnFunction->Bind();
-			ReturnFunction->StaticLink();
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Behavior"));
-			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Controllers/XLAIController.h"));
-			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("Finds the closest enemy and sets them as current target"));
-#endif
-		}
-		return ReturnFunction;
-	}
-	UFunction* Z_Construct_UFunction_AXLAIController_FindClosestEnemyWithLOS()
-	{
-		struct XLAIController_eventFindClosestEnemyWithLOS_Parms
-		{
-			AXLPlayerCharacter* ExcludeEnemy;
-			bool ReturnValue;
-		};
-		UObject* Outer=Z_Construct_UClass_AXLAIController();
-		static UFunction* ReturnFunction = NULL;
-		if (!ReturnFunction)
-		{
-			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("FindClosestEnemyWithLOS"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(XLAIController_eventFindClosestEnemyWithLOS_Parms));
-			CPP_BOOL_PROPERTY_BITMASK_STRUCT(ReturnValue, XLAIController_eventFindClosestEnemyWithLOS_Parms, bool);
-			UProperty* NewProp_ReturnValue = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("ReturnValue"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(ReturnValue, XLAIController_eventFindClosestEnemyWithLOS_Parms), 0x0010000000000580, CPP_BOOL_PROPERTY_BITMASK(ReturnValue, XLAIController_eventFindClosestEnemyWithLOS_Parms), sizeof(bool), true);
-			UProperty* NewProp_ExcludeEnemy = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("ExcludeEnemy"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(ExcludeEnemy, XLAIController_eventFindClosestEnemyWithLOS_Parms), 0x0010000000000080, Z_Construct_UClass_AXLPlayerCharacter_NoRegister());
-			ReturnFunction->Bind();
-			ReturnFunction->StaticLink();
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Behavior"));
-			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Controllers/XLAIController.h"));
-#endif
-		}
-		return ReturnFunction;
-	}
-	UFunction* Z_Construct_UFunction_AXLAIController_ShootEnemy()
-	{
-		UObject* Outer=Z_Construct_UClass_AXLAIController();
-		static UFunction* ReturnFunction = NULL;
-		if (!ReturnFunction)
-		{
-			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("ShootEnemy"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535);
-			ReturnFunction->Bind();
-			ReturnFunction->StaticLink();
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Behavior"));
-			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Controllers/XLAIController.h"));
-			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("If there is line of sight to current enemy, start firing at them"));
-#endif
-		}
-		return ReturnFunction;
-	}
-	UClass* Z_Construct_UClass_AXLAIController_NoRegister()
-	{
-		return AXLAIController::StaticClass();
-	}
-	UClass* Z_Construct_UClass_AXLAIController()
-	{
-		static UClass* OuterClass = NULL;
-		if (!OuterClass)
-		{
-			Z_Construct_UClass_AAIController();
-			Z_Construct_UPackage__Script_ExtendedLibrary();
-			OuterClass = AXLAIController::StaticClass();
-			if (!(OuterClass->ClassFlags & CLASS_Constructed))
-			{
-				UObjectForceRegistration(OuterClass);
-				OuterClass->ClassFlags |= 0x20800280;
-
-				OuterClass->LinkChild(Z_Construct_UFunction_AXLAIController_FindClosestEnemy());
-				OuterClass->LinkChild(Z_Construct_UFunction_AXLAIController_FindClosestEnemyWithLOS());
-				OuterClass->LinkChild(Z_Construct_UFunction_AXLAIController_ShootEnemy());
-
-PRAGMA_DISABLE_DEPRECATION_WARNINGS
-				UProperty* NewProp_BehaviorComp = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BehaviorComp"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(BehaviorComp, AXLAIController), 0x0040000000082008, Z_Construct_UClass_UBehaviorTreeComponent_NoRegister());
-				UProperty* NewProp_BlackboardComp = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BlackboardComp"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(BlackboardComp, AXLAIController), 0x0040000000082008, Z_Construct_UClass_UBlackboardComponent_NoRegister());
-PRAGMA_ENABLE_DEPRECATION_WARNINGS
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLAIController_FindClosestEnemy(), "FindClosestEnemy"); // 724081328
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLAIController_FindClosestEnemyWithLOS(), "FindClosestEnemyWithLOS"); // 646235851
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLAIController_ShootEnemy(), "ShootEnemy"); // 2857834671
-				OuterClass->StaticLink();
-#if WITH_METADATA
-				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Collision Rendering Utilities|Transformation"));
-				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Controllers/XLAIController.h"));
-				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Controllers/XLAIController.h"));
-				MetaData->SetValue(NewProp_BehaviorComp, TEXT("EditInline"), TEXT("true"));
-				MetaData->SetValue(NewProp_BehaviorComp, TEXT("ModuleRelativePath"), TEXT("Public/Controllers/XLAIController.h"));
-				MetaData->SetValue(NewProp_BehaviorComp, TEXT("ToolTip"), TEXT("Cached BT component"));
-				MetaData->SetValue(NewProp_BlackboardComp, TEXT("EditInline"), TEXT("true"));
-				MetaData->SetValue(NewProp_BlackboardComp, TEXT("ModuleRelativePath"), TEXT("Public/Controllers/XLAIController.h"));
-#endif
-			}
-		}
-		check(OuterClass->GetClass());
-		return OuterClass;
-	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLAIController(Z_Construct_UClass_AXLAIController, &AXLAIController::StaticClass, TEXT("AXLAIController"), false, nullptr, nullptr, nullptr);
-	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLAIController);
 	UEnum* Z_Construct_UEnum_ExtendedLibrary_EHealthState()
 	{
 		UPackage* Outer=Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -594,69 +363,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 		return ReturnEnum;
 	}
 	uint32 Get_Z_Construct_UEnum_ExtendedLibrary_EMovementState_CRC() { return 1125351979U; }
-	UFunction* Z_Construct_UFunction_AXLCharacter_Die()
-	{
-		struct XLCharacter_eventDie_Parms
-		{
-			float KillingDamage;
-			FDamageEvent DamageEvent;
-			AController* Killer;
-			AActor* DamageCauser;
-			bool ReturnValue;
-		};
-		UObject* Outer=Z_Construct_UClass_AXLCharacter();
-		static UFunction* ReturnFunction = NULL;
-		if (!ReturnFunction)
-		{
-			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("Die"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04420401, 65535, sizeof(XLCharacter_eventDie_Parms));
-			CPP_BOOL_PROPERTY_BITMASK_STRUCT(ReturnValue, XLCharacter_eventDie_Parms, bool);
-			UProperty* NewProp_ReturnValue = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("ReturnValue"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(ReturnValue, XLCharacter_eventDie_Parms), 0x0010000000000580, CPP_BOOL_PROPERTY_BITMASK(ReturnValue, XLCharacter_eventDie_Parms), sizeof(bool), true);
-			UProperty* NewProp_DamageCauser = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("DamageCauser"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(DamageCauser, XLCharacter_eventDie_Parms), 0x0010000000000080, Z_Construct_UClass_AActor_NoRegister());
-			UProperty* NewProp_Killer = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("Killer"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(Killer, XLCharacter_eventDie_Parms), 0x0010000000000080, Z_Construct_UClass_AController_NoRegister());
-			UProperty* NewProp_DamageEvent = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("DamageEvent"), RF_Public|RF_Transient|RF_MarkAsNative) UStructProperty(CPP_PROPERTY_BASE(DamageEvent, XLCharacter_eventDie_Parms), 0x0010000008000182, Z_Construct_UScriptStruct_FDamageEvent());
-			UProperty* NewProp_KillingDamage = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("KillingDamage"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(KillingDamage, XLCharacter_eventDie_Parms), 0x0010000000000080);
-			ReturnFunction->Bind();
-			ReturnFunction->StaticLink();
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Combat"));
-			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
-			MetaData->SetValue(NewProp_DamageEvent, TEXT("NativeConst"), TEXT(""));
-#endif
-		}
-		return ReturnFunction;
-	}
-	UFunction* Z_Construct_UFunction_AXLCharacter_TakeDamage()
-	{
-		struct XLCharacter_eventTakeDamage_Parms
-		{
-			float Damage;
-			FDamageEvent DamageEvent;
-			AController* EventInstigator;
-			AActor* DamageCauser;
-			float ReturnValue;
-		};
-		UObject* Outer=Z_Construct_UClass_AXLCharacter();
-		static UFunction* ReturnFunction = NULL;
-		if (!ReturnFunction)
-		{
-			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("TakeDamage"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04420401, 65535, sizeof(XLCharacter_eventTakeDamage_Parms));
-			UProperty* NewProp_ReturnValue = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("ReturnValue"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(ReturnValue, XLCharacter_eventTakeDamage_Parms), 0x0010000000000580);
-			UProperty* NewProp_DamageCauser = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("DamageCauser"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(DamageCauser, XLCharacter_eventTakeDamage_Parms), 0x0010000000000080, Z_Construct_UClass_AActor_NoRegister());
-			UProperty* NewProp_EventInstigator = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("EventInstigator"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(EventInstigator, XLCharacter_eventTakeDamage_Parms), 0x0010000000000080, Z_Construct_UClass_AController_NoRegister());
-			UProperty* NewProp_DamageEvent = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("DamageEvent"), RF_Public|RF_Transient|RF_MarkAsNative) UStructProperty(CPP_PROPERTY_BASE(DamageEvent, XLCharacter_eventTakeDamage_Parms), 0x0010000008000182, Z_Construct_UScriptStruct_FDamageEvent());
-			UProperty* NewProp_Damage = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("Damage"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(Damage, XLCharacter_eventTakeDamage_Parms), 0x0010000000000080);
-			ReturnFunction->Bind();
-			ReturnFunction->StaticLink();
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Combat"));
-			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
-			MetaData->SetValue(NewProp_DamageEvent, TEXT("NativeConst"), TEXT(""));
-#endif
-		}
-		return ReturnFunction;
-	}
 	UClass* Z_Construct_UClass_AXLCharacter_NoRegister()
 	{
 		return AXLCharacter::StaticClass();
@@ -674,8 +380,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				UObjectForceRegistration(OuterClass);
 				OuterClass->ClassFlags |= 0x20800080;
 
-				OuterClass->LinkChild(Z_Construct_UFunction_AXLCharacter_Die());
-				OuterClass->LinkChild(Z_Construct_UFunction_AXLCharacter_TakeDamage());
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_MovementComponent = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MovementComponent"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(MovementComponent, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLMovementComponent_NoRegister());
@@ -687,8 +391,6 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_CharacterStats = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterStats"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterStats, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLCharacterStats_NoRegister());
 				UProperty* NewProp_CharacterResources = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterResources"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterResources, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLCharacterResources_NoRegister());
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLCharacter_Die(), "Die"); // 3833109386
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLCharacter_TakeDamage(), "TakeDamage"); // 180194685
 				OuterClass->StaticLink();
 #if WITH_METADATA
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
@@ -727,75 +429,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLCharacter(Z_Construct_UClass_AXLCharacter, &AXLCharacter::StaticClass, TEXT("AXLCharacter"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLCharacter);
-	UClass* Z_Construct_UClass_AXLAI_NoRegister()
-	{
-		return AXLAI::StaticClass();
-	}
-	UClass* Z_Construct_UClass_AXLAI()
-	{
-		static UClass* OuterClass = NULL;
-		if (!OuterClass)
-		{
-			Z_Construct_UClass_AXLCharacter();
-			Z_Construct_UPackage__Script_ExtendedLibrary();
-			OuterClass = AXLAI::StaticClass();
-			if (!(OuterClass->ClassFlags & CLASS_Constructed))
-			{
-				UObjectForceRegistration(OuterClass);
-				OuterClass->ClassFlags |= 0x20800080;
-
-
-PRAGMA_DISABLE_DEPRECATION_WARNINGS
-				UProperty* NewProp_BotBehavior = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BotBehavior"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(BotBehavior, AXLAI), 0x0010000000000001, Z_Construct_UClass_UBehaviorTree_NoRegister());
-PRAGMA_ENABLE_DEPRECATION_WARNINGS
-				OuterClass->StaticLink();
-#if WITH_METADATA
-				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Navigation"));
-				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("AI/XLAI.h"));
-				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/AI/XLAI.h"));
-				MetaData->SetValue(NewProp_BotBehavior, TEXT("Category"), TEXT("Behavior"));
-				MetaData->SetValue(NewProp_BotBehavior, TEXT("ModuleRelativePath"), TEXT("Public/AI/XLAI.h"));
-#endif
-			}
-		}
-		check(OuterClass->GetClass());
-		return OuterClass;
-	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLAI(Z_Construct_UClass_AXLAI, &AXLAI::StaticClass, TEXT("AXLAI"), false, nullptr, nullptr, nullptr);
-	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLAI);
-	UClass* Z_Construct_UClass_AXLPlayerCharacter_NoRegister()
-	{
-		return AXLPlayerCharacter::StaticClass();
-	}
-	UClass* Z_Construct_UClass_AXLPlayerCharacter()
-	{
-		static UClass* OuterClass = NULL;
-		if (!OuterClass)
-		{
-			Z_Construct_UClass_AXLCharacter();
-			Z_Construct_UPackage__Script_ExtendedLibrary();
-			OuterClass = AXLPlayerCharacter::StaticClass();
-			if (!(OuterClass->ClassFlags & CLASS_Constructed))
-			{
-				UObjectForceRegistration(OuterClass);
-				OuterClass->ClassFlags |= 0x20800080;
-
-
-				OuterClass->StaticLink();
-#if WITH_METADATA
-				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Navigation"));
-				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Characters/XLPlayerCharacter.h"));
-				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLPlayerCharacter.h"));
-#endif
-			}
-		}
-		check(OuterClass->GetClass());
-		return OuterClass;
-	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLPlayerCharacter(Z_Construct_UClass_AXLPlayerCharacter, &AXLPlayerCharacter::StaticClass, TEXT("AXLPlayerCharacter"), false, nullptr, nullptr, nullptr);
-	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLPlayerCharacter);
 	UFunction* Z_Construct_UFunction_UXLCharacterResources_CooldownTimer()
 	{
 		struct XLCharacterResources_eventCooldownTimer_Parms
@@ -938,7 +571,6 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_EnergyRenerationCooldown = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("EnergyRenerationCooldown"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(EnergyRenerationCooldown, UXLCharacterResources), 0x0010000000000005);
 				UProperty* NewProp_MaxEnergy = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MaxEnergy"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(MaxEnergy, UXLCharacterResources), 0x0010000000000005);
 				UProperty* NewProp_HealthRenerationCooldown = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("HealthRenerationCooldown"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(HealthRenerationCooldown, UXLCharacterResources), 0x0010000000000005);
-				UProperty* NewProp_CurrentHealth = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CurrentHealth"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(CurrentHealth, UXLCharacterResources), 0x0010000000000005);
 				UProperty* NewProp_MaxHealth = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MaxHealth"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(MaxHealth, UXLCharacterResources), 0x0010000000000005);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLCharacterResources_CooldownTimer(), "CooldownTimer"); // 2812378412
@@ -978,8 +610,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(NewProp_HealthRenerationCooldown, TEXT("Category"), TEXT("Cooldowns"));
 				MetaData->SetValue(NewProp_HealthRenerationCooldown, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
 				MetaData->SetValue(NewProp_HealthRenerationCooldown, TEXT("ToolTip"), TEXT("The amount of time before health starts regenerating"));
-				MetaData->SetValue(NewProp_CurrentHealth, TEXT("Category"), TEXT("Cooldowns"));
-				MetaData->SetValue(NewProp_CurrentHealth, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
 				MetaData->SetValue(NewProp_MaxHealth, TEXT("Category"), TEXT("Resources"));
 				MetaData->SetValue(NewProp_MaxHealth, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
 				MetaData->SetValue(NewProp_MaxHealth, TEXT("ToolTip"), TEXT("The amount of health the Pawn has"));
@@ -1101,452 +731,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLCoverComponent(Z_Construct_UClass_UXLCoverComponent, &UXLCoverComponent::StaticClass, TEXT("UXLCoverComponent"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLCoverComponent);
-	UClass* Z_Construct_UClass_UXLFindPointNearEnemy_NoRegister()
-	{
-		return UXLFindPointNearEnemy::StaticClass();
-	}
-	UClass* Z_Construct_UClass_UXLFindPointNearEnemy()
-	{
-		static UClass* OuterClass = NULL;
-		if (!OuterClass)
-		{
-			Z_Construct_UClass_UBTTask_BlackboardBase();
-			Z_Construct_UPackage__Script_ExtendedLibrary();
-			OuterClass = UXLFindPointNearEnemy::StaticClass();
-			if (!(OuterClass->ClassFlags & CLASS_Constructed))
-			{
-				UObjectForceRegistration(OuterClass);
-				OuterClass->ClassFlags |= 0x20000080;
-
-
-				OuterClass->StaticLink();
-#if WITH_METADATA
-				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
-				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Tasks/XLFindPointNearEnemy.h"));
-				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Tasks/XLFindPointNearEnemy.h"));
-#endif
-			}
-		}
-		check(OuterClass->GetClass());
-		return OuterClass;
-	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLFindPointNearEnemy(Z_Construct_UClass_UXLFindPointNearEnemy, &UXLFindPointNearEnemy::StaticClass, TEXT("UXLFindPointNearEnemy"), false, nullptr, nullptr, nullptr);
-	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLFindPointNearEnemy);
-	UFunction* Z_Construct_UFunction_UXLGameInstance_BeginHostingQuickMatch()
-	{
-		UObject* Outer=Z_Construct_UClass_UXLGameInstance();
-		static UFunction* ReturnFunction = NULL;
-		if (!ReturnFunction)
-		{
-			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("BeginHostingQuickMatch"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535);
-			ReturnFunction->Bind();
-			ReturnFunction->StaticLink();
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Multiplayer"));
-			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameInstance.h"));
-			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("Begin a hosted quick match"));
-#endif
-		}
-		return ReturnFunction;
-	}
-	UFunction* Z_Construct_UFunction_UXLGameInstance_FindSessions()
-	{
-		struct XLGameInstance_eventFindSessions_Parms
-		{
-			ULocalPlayer* PlayerOwner;
-			bool bLANMatch;
-			bool ReturnValue;
-		};
-		UObject* Outer=Z_Construct_UClass_UXLGameInstance();
-		static UFunction* ReturnFunction = NULL;
-		if (!ReturnFunction)
-		{
-			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("FindSessions"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(XLGameInstance_eventFindSessions_Parms));
-			CPP_BOOL_PROPERTY_BITMASK_STRUCT(ReturnValue, XLGameInstance_eventFindSessions_Parms, bool);
-			UProperty* NewProp_ReturnValue = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("ReturnValue"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(ReturnValue, XLGameInstance_eventFindSessions_Parms), 0x0010000000000580, CPP_BOOL_PROPERTY_BITMASK(ReturnValue, XLGameInstance_eventFindSessions_Parms), sizeof(bool), true);
-			CPP_BOOL_PROPERTY_BITMASK_STRUCT(bLANMatch, XLGameInstance_eventFindSessions_Parms, bool);
-			UProperty* NewProp_bLANMatch = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("bLANMatch"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(bLANMatch, XLGameInstance_eventFindSessions_Parms), 0x0010000000000080, CPP_BOOL_PROPERTY_BITMASK(bLANMatch, XLGameInstance_eventFindSessions_Parms), sizeof(bool), true);
-			UProperty* NewProp_PlayerOwner = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("PlayerOwner"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(PlayerOwner, XLGameInstance_eventFindSessions_Parms), 0x0010000000000080, Z_Construct_UClass_ULocalPlayer_NoRegister());
-			ReturnFunction->Bind();
-			ReturnFunction->StaticLink();
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Multiplayer"));
-			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameInstance.h"));
-			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("Initiates the session searching"));
-#endif
-		}
-		return ReturnFunction;
-	}
-	UFunction* Z_Construct_UFunction_UXLGameInstance_GetSessionID()
-	{
-		struct XLGameInstance_eventGetSessionID_Parms
-		{
-			FString ReturnValue;
-		};
-		UObject* Outer=Z_Construct_UClass_UXLGameInstance();
-		static UFunction* ReturnFunction = NULL;
-		if (!ReturnFunction)
-		{
-			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("GetSessionID"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(XLGameInstance_eventGetSessionID_Parms));
-			UProperty* NewProp_ReturnValue = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("ReturnValue"), RF_Public|RF_Transient|RF_MarkAsNative) UStrProperty(CPP_PROPERTY_BASE(ReturnValue, XLGameInstance_eventGetSessionID_Parms), 0x0010000000000580);
-			ReturnFunction->Bind();
-			ReturnFunction->StaticLink();
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Menu"));
-			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameInstance.h"));
-#endif
-		}
-		return ReturnFunction;
-	}
-	UFunction* Z_Construct_UFunction_UXLGameInstance_HostGame()
-	{
-		struct XLGameInstance_eventHostGame_Parms
-		{
-			ULocalPlayer* LocalPlayer;
-			FString GameType;
-			FString InTravelURL;
-			bool ReturnValue;
-		};
-		UObject* Outer=Z_Construct_UClass_UXLGameInstance();
-		static UFunction* ReturnFunction = NULL;
-		if (!ReturnFunction)
-		{
-			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("HostGame"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(XLGameInstance_eventHostGame_Parms));
-			CPP_BOOL_PROPERTY_BITMASK_STRUCT(ReturnValue, XLGameInstance_eventHostGame_Parms, bool);
-			UProperty* NewProp_ReturnValue = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("ReturnValue"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(ReturnValue, XLGameInstance_eventHostGame_Parms), 0x0010000000000580, CPP_BOOL_PROPERTY_BITMASK(ReturnValue, XLGameInstance_eventHostGame_Parms), sizeof(bool), true);
-			UProperty* NewProp_InTravelURL = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("InTravelURL"), RF_Public|RF_Transient|RF_MarkAsNative) UStrProperty(CPP_PROPERTY_BASE(InTravelURL, XLGameInstance_eventHostGame_Parms), 0x0010000000000080);
-			UProperty* NewProp_GameType = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("GameType"), RF_Public|RF_Transient|RF_MarkAsNative) UStrProperty(CPP_PROPERTY_BASE(GameType, XLGameInstance_eventHostGame_Parms), 0x0010000000000080);
-			UProperty* NewProp_LocalPlayer = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("LocalPlayer"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(LocalPlayer, XLGameInstance_eventHostGame_Parms), 0x0010000000000080, Z_Construct_UClass_ULocalPlayer_NoRegister());
-			ReturnFunction->Bind();
-			ReturnFunction->StaticLink();
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Multiplayer"));
-			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameInstance.h"));
-			MetaData->SetValue(NewProp_InTravelURL, TEXT("NativeConst"), TEXT(""));
-			MetaData->SetValue(NewProp_GameType, TEXT("NativeConst"), TEXT(""));
-#endif
-		}
-		return ReturnFunction;
-	}
-	UFunction* Z_Construct_UFunction_UXLGameInstance_SetSessionID()
-	{
-		struct XLGameInstance_eventSetSessionID_Parms
-		{
-			FString NewSessionID;
-		};
-		UObject* Outer=Z_Construct_UClass_UXLGameInstance();
-		static UFunction* ReturnFunction = NULL;
-		if (!ReturnFunction)
-		{
-			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("SetSessionID"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(XLGameInstance_eventSetSessionID_Parms));
-			UProperty* NewProp_NewSessionID = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("NewSessionID"), RF_Public|RF_Transient|RF_MarkAsNative) UStrProperty(CPP_PROPERTY_BASE(NewSessionID, XLGameInstance_eventSetSessionID_Parms), 0x0010000000000080);
-			ReturnFunction->Bind();
-			ReturnFunction->StaticLink();
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Menu"));
-			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameInstance.h"));
-#endif
-		}
-		return ReturnFunction;
-	}
-	UClass* Z_Construct_UClass_UXLGameInstance_NoRegister()
-	{
-		return UXLGameInstance::StaticClass();
-	}
-	UClass* Z_Construct_UClass_UXLGameInstance()
-	{
-		static UClass* OuterClass = NULL;
-		if (!OuterClass)
-		{
-			Z_Construct_UClass_UGameInstance();
-			Z_Construct_UPackage__Script_ExtendedLibrary();
-			OuterClass = UXLGameInstance::StaticClass();
-			if (!(OuterClass->ClassFlags & CLASS_Constructed))
-			{
-				UObjectForceRegistration(OuterClass);
-				OuterClass->ClassFlags |= 0x2000008C;
-
-				OuterClass->LinkChild(Z_Construct_UFunction_UXLGameInstance_BeginHostingQuickMatch());
-				OuterClass->LinkChild(Z_Construct_UFunction_UXLGameInstance_FindSessions());
-				OuterClass->LinkChild(Z_Construct_UFunction_UXLGameInstance_GetSessionID());
-				OuterClass->LinkChild(Z_Construct_UFunction_UXLGameInstance_HostGame());
-				OuterClass->LinkChild(Z_Construct_UFunction_UXLGameInstance_SetSessionID());
-
-PRAGMA_DISABLE_DEPRECATION_WARNINGS
-				UProperty* NewProp_SessionID = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("SessionID"), RF_Public|RF_Transient|RF_MarkAsNative) UStrProperty(CPP_PROPERTY_BASE(SessionID, UXLGameInstance), 0x0040000000000000);
-				UProperty* NewProp_MainMenuMap = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MainMenuMap"), RF_Public|RF_Transient|RF_MarkAsNative) UStrProperty(CPP_PROPERTY_BASE(MainMenuMap, UXLGameInstance), 0x0040000000004000);
-				UProperty* NewProp_WelcomeScreenMap = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("WelcomeScreenMap"), RF_Public|RF_Transient|RF_MarkAsNative) UStrProperty(CPP_PROPERTY_BASE(WelcomeScreenMap, UXLGameInstance), 0x0040000000004000);
-PRAGMA_ENABLE_DEPRECATION_WARNINGS
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLGameInstance_BeginHostingQuickMatch(), "BeginHostingQuickMatch"); // 1651261303
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLGameInstance_FindSessions(), "FindSessions"); // 4087538742
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLGameInstance_GetSessionID(), "GetSessionID"); // 88097865
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLGameInstance_HostGame(), "HostGame"); // 4289314202
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLGameInstance_SetSessionID(), "SetSessionID"); // 394810768
-				OuterClass->ClassConfigName = FName(TEXT("Game"));
-				OuterClass->StaticLink();
-#if WITH_METADATA
-				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
-				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Game/XLGameInstance.h"));
-				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameInstance.h"));
-				MetaData->SetValue(NewProp_SessionID, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameInstance.h"));
-				MetaData->SetValue(NewProp_MainMenuMap, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameInstance.h"));
-				MetaData->SetValue(NewProp_WelcomeScreenMap, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameInstance.h"));
-#endif
-			}
-		}
-		check(OuterClass->GetClass());
-		return OuterClass;
-	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLGameInstance(Z_Construct_UClass_UXLGameInstance, &UXLGameInstance::StaticClass, TEXT("UXLGameInstance"), false, nullptr, nullptr, nullptr);
-	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLGameInstance);
-	UFunction* Z_Construct_UFunction_AXLGameMode_CheckTeamElimination()
-	{
-		UObject* Outer=Z_Construct_UClass_AXLGameMode();
-		static UFunction* ReturnFunction = NULL;
-		if (!ReturnFunction)
-		{
-			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("CheckTeamElimination"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020400, 65535);
-			ReturnFunction->Bind();
-			ReturnFunction->StaticLink();
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Match"));
-			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameMode.h"));
-			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("check who won"));
-#endif
-		}
-		return ReturnFunction;
-	}
-	UFunction* Z_Construct_UFunction_AXLGameMode_FinishMatch()
-	{
-		UObject* Outer=Z_Construct_UClass_AXLGameMode();
-		static UFunction* ReturnFunction = NULL;
-		if (!ReturnFunction)
-		{
-			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("FinishMatch"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x00020601, 65535);
-			ReturnFunction->Bind();
-			ReturnFunction->StaticLink();
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameMode.h"));
-			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("finish current match and lock players"));
-#endif
-		}
-		return ReturnFunction;
-	}
-	UFunction* Z_Construct_UFunction_AXLGameMode_SetAllowBots()
-	{
-		struct XLGameMode_eventSetAllowBots_Parms
-		{
-			bool bInAllowBots;
-			int32 InMaxBots;
-		};
-		UObject* Outer=Z_Construct_UClass_AXLGameMode();
-		static UFunction* ReturnFunction = NULL;
-		if (!ReturnFunction)
-		{
-			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("SetAllowBots"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x00020601, 65535, sizeof(XLGameMode_eventSetAllowBots_Parms));
-			UProperty* NewProp_InMaxBots = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("InMaxBots"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(InMaxBots, XLGameMode_eventSetAllowBots_Parms), 0x0010000000000080);
-			CPP_BOOL_PROPERTY_BITMASK_STRUCT(bInAllowBots, XLGameMode_eventSetAllowBots_Parms, bool);
-			UProperty* NewProp_bInAllowBots = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("bInAllowBots"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(bInAllowBots, XLGameMode_eventSetAllowBots_Parms), 0x0010000000000080, CPP_BOOL_PROPERTY_BITMASK(bInAllowBots, XLGameMode_eventSetAllowBots_Parms), sizeof(bool), true);
-			ReturnFunction->Bind();
-			ReturnFunction->StaticLink();
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnFunction, TEXT("CPP_Default_InMaxBots"), TEXT("0"));
-			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameMode.h"));
-#endif
-		}
-		return ReturnFunction;
-	}
-	UClass* Z_Construct_UClass_AXLGameMode_NoRegister()
-	{
-		return AXLGameMode::StaticClass();
-	}
-	UClass* Z_Construct_UClass_AXLGameMode()
-	{
-		static UClass* OuterClass = NULL;
-		if (!OuterClass)
-		{
-			Z_Construct_UClass_AGameMode();
-			Z_Construct_UPackage__Script_ExtendedLibrary();
-			OuterClass = AXLGameMode::StaticClass();
-			if (!(OuterClass->ClassFlags & CLASS_Constructed))
-			{
-				UObjectForceRegistration(OuterClass);
-				OuterClass->ClassFlags |= 0x2080028C;
-
-				OuterClass->LinkChild(Z_Construct_UFunction_AXLGameMode_CheckTeamElimination());
-				OuterClass->LinkChild(Z_Construct_UFunction_AXLGameMode_FinishMatch());
-				OuterClass->LinkChild(Z_Construct_UFunction_AXLGameMode_SetAllowBots());
-
-PRAGMA_DISABLE_DEPRECATION_WARNINGS
-				UProperty* NewProp_MaxBots = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MaxBots"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(MaxBots, AXLGameMode), 0x0020080000004000);
-				UProperty* NewProp_DamageSelfScale = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("DamageSelfScale"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(DamageSelfScale, AXLGameMode), 0x0020080000004000);
-				UProperty* NewProp_DeathScore = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("DeathScore"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(DeathScore, AXLGameMode), 0x0020080000004000);
-				UProperty* NewProp_KillScore = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("KillScore"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(KillScore, AXLGameMode), 0x0020080000004000);
-				UProperty* NewProp_TimeBetweenMatches = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("TimeBetweenMatches"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(TimeBetweenMatches, AXLGameMode), 0x0020080000004000);
-				UProperty* NewProp_RoundKillLimit = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("RoundKillLimit"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(RoundKillLimit, AXLGameMode), 0x0020080000004000);
-				UProperty* NewProp_RoundTime = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("RoundTime"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(RoundTime, AXLGameMode), 0x0020080000004000);
-				UProperty* NewProp_WarmupTime = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("WarmupTime"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(WarmupTime, AXLGameMode), 0x0020080000004000);
-				UProperty* NewProp_BotPawnClass = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BotPawnClass"), RF_Public|RF_Transient|RF_MarkAsNative) UClassProperty(CPP_PROPERTY_BASE(BotPawnClass, AXLGameMode), 0x0014000000000005, Z_Construct_UClass_APawn_NoRegister(), UClass::StaticClass());
-PRAGMA_ENABLE_DEPRECATION_WARNINGS
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLGameMode_CheckTeamElimination(), "CheckTeamElimination"); // 1568076042
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLGameMode_FinishMatch(), "FinishMatch"); // 3271917754
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLGameMode_SetAllowBots(), "SetAllowBots"); // 3847100944
-				OuterClass->ClassConfigName = FName(TEXT("Game"));
-				OuterClass->StaticLink();
-#if WITH_METADATA
-				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Info Rendering MovementReplication Replication Actor Input Movement Collision Rendering Utilities|Transformation"));
-				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Game/XLGameMode.h"));
-				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameMode.h"));
-				MetaData->SetValue(OuterClass, TEXT("ShowCategories"), TEXT("Input|MouseInput Input|TouchInput"));
-				MetaData->SetValue(NewProp_MaxBots, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameMode.h"));
-				MetaData->SetValue(NewProp_DamageSelfScale, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameMode.h"));
-				MetaData->SetValue(NewProp_DamageSelfScale, TEXT("ToolTip"), TEXT("scale for self instigated damage"));
-				MetaData->SetValue(NewProp_DeathScore, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameMode.h"));
-				MetaData->SetValue(NewProp_DeathScore, TEXT("ToolTip"), TEXT("score for death"));
-				MetaData->SetValue(NewProp_KillScore, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameMode.h"));
-				MetaData->SetValue(NewProp_KillScore, TEXT("ToolTip"), TEXT("score for kill"));
-				MetaData->SetValue(NewProp_TimeBetweenMatches, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameMode.h"));
-				MetaData->SetValue(NewProp_RoundKillLimit, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameMode.h"));
-				MetaData->SetValue(NewProp_RoundKillLimit, TEXT("ToolTip"), TEXT("match kills to win"));
-				MetaData->SetValue(NewProp_RoundTime, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameMode.h"));
-				MetaData->SetValue(NewProp_RoundTime, TEXT("ToolTip"), TEXT("match duration"));
-				MetaData->SetValue(NewProp_WarmupTime, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameMode.h"));
-				MetaData->SetValue(NewProp_WarmupTime, TEXT("ToolTip"), TEXT("delay between first player login and starting match"));
-				MetaData->SetValue(NewProp_BotPawnClass, TEXT("Category"), TEXT("GameMode"));
-				MetaData->SetValue(NewProp_BotPawnClass, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameMode.h"));
-				MetaData->SetValue(NewProp_BotPawnClass, TEXT("ToolTip"), TEXT("The bot pawn class"));
-#endif
-			}
-		}
-		check(OuterClass->GetClass());
-		return OuterClass;
-	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLGameMode(Z_Construct_UClass_AXLGameMode, &AXLGameMode::StaticClass, TEXT("AXLGameMode"), false, nullptr, nullptr, nullptr);
-	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLGameMode);
-	UClass* Z_Construct_UClass_AXLGameSession_NoRegister()
-	{
-		return AXLGameSession::StaticClass();
-	}
-	UClass* Z_Construct_UClass_AXLGameSession()
-	{
-		static UClass* OuterClass = NULL;
-		if (!OuterClass)
-		{
-			Z_Construct_UClass_AGameSession();
-			Z_Construct_UPackage__Script_ExtendedLibrary();
-			OuterClass = AXLGameSession::StaticClass();
-			if (!(OuterClass->ClassFlags & CLASS_Constructed))
-			{
-				UObjectForceRegistration(OuterClass);
-				OuterClass->ClassFlags |= 0x20800284;
-
-
-				OuterClass->ClassConfigName = FName(TEXT("game"));
-				OuterClass->StaticLink();
-#if WITH_METADATA
-				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Input Movement Collision Rendering Utilities|Transformation"));
-				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Game/XLGameSession.h"));
-				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameSession.h"));
-				MetaData->SetValue(OuterClass, TEXT("ShowCategories"), TEXT("Input|MouseInput Input|TouchInput"));
-#endif
-			}
-		}
-		check(OuterClass->GetClass());
-		return OuterClass;
-	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLGameSession(Z_Construct_UClass_AXLGameSession, &AXLGameSession::StaticClass, TEXT("AXLGameSession"), false, nullptr, nullptr, nullptr);
-	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLGameSession);
-	UClass* Z_Construct_UClass_AXLGameState_NoRegister()
-	{
-		return AXLGameState::StaticClass();
-	}
-	UClass* Z_Construct_UClass_AXLGameState()
-	{
-		static UClass* OuterClass = NULL;
-		if (!OuterClass)
-		{
-			Z_Construct_UClass_AGameState();
-			Z_Construct_UPackage__Script_ExtendedLibrary();
-			OuterClass = AXLGameState::StaticClass();
-			if (!(OuterClass->ClassFlags & CLASS_Constructed))
-			{
-				UObjectForceRegistration(OuterClass);
-				OuterClass->ClassFlags |= 0x20800280;
-
-
-PRAGMA_DISABLE_DEPRECATION_WARNINGS
-				CPP_BOOL_PROPERTY_BITMASK_STRUCT(bTimerPaused, AXLGameState, bool);
-				UProperty* NewProp_bTimerPaused = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("bTimerPaused"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(bTimerPaused, AXLGameState), 0x0010000000002000, CPP_BOOL_PROPERTY_BITMASK(bTimerPaused, AXLGameState), sizeof(bool), true);
-				UProperty* NewProp_RemainingTime = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("RemainingTime"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(RemainingTime, AXLGameState), 0x0010000000002000);
-				UProperty* NewProp_TeamScores = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("TeamScores"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(TeamScores, AXLGameState), 0x0010000000002000);
-				UProperty* NewProp_TeamScores_Inner = new(EC_InternalUseOnlyConstructor, NewProp_TeamScores, TEXT("TeamScores"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0000000000000000);
-				UProperty* NewProp_NumTeams = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("NumTeams"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(NumTeams, AXLGameState), 0x0010000000002000);
-PRAGMA_ENABLE_DEPRECATION_WARNINGS
-				OuterClass->StaticLink();
-#if WITH_METADATA
-				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Input Movement Collision Rendering Utilities|Transformation"));
-				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("States/XLGameState.h"));
-				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/States/XLGameState.h"));
-				MetaData->SetValue(OuterClass, TEXT("ShowCategories"), TEXT("Input|MouseInput Input|TouchInput"));
-				MetaData->SetValue(NewProp_bTimerPaused, TEXT("ModuleRelativePath"), TEXT("Public/States/XLGameState.h"));
-				MetaData->SetValue(NewProp_RemainingTime, TEXT("ModuleRelativePath"), TEXT("Public/States/XLGameState.h"));
-				MetaData->SetValue(NewProp_TeamScores, TEXT("ModuleRelativePath"), TEXT("Public/States/XLGameState.h"));
-				MetaData->SetValue(NewProp_NumTeams, TEXT("ModuleRelativePath"), TEXT("Public/States/XLGameState.h"));
-#endif
-			}
-		}
-		check(OuterClass->GetClass());
-		return OuterClass;
-	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLGameState(Z_Construct_UClass_AXLGameState, &AXLGameState::StaticClass, TEXT("AXLGameState"), false, nullptr, nullptr, nullptr);
-	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLGameState);
-	UClass* Z_Construct_UClass_UXLHasLineOfSightTo_NoRegister()
-	{
-		return UXLHasLineOfSightTo::StaticClass();
-	}
-	UClass* Z_Construct_UClass_UXLHasLineOfSightTo()
-	{
-		static UClass* OuterClass = NULL;
-		if (!OuterClass)
-		{
-			Z_Construct_UClass_UBTDecorator();
-			Z_Construct_UPackage__Script_ExtendedLibrary();
-			OuterClass = UXLHasLineOfSightTo::StaticClass();
-			if (!(OuterClass->ClassFlags & CLASS_Constructed))
-			{
-				UObjectForceRegistration(OuterClass);
-				OuterClass->ClassFlags |= 0x20000080;
-
-
-PRAGMA_DISABLE_DEPRECATION_WARNINGS
-				UProperty* NewProp_EnemyKey = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("EnemyKey"), RF_Public|RF_Transient|RF_MarkAsNative) UStructProperty(CPP_PROPERTY_BASE(EnemyKey, UXLHasLineOfSightTo), 0x0020080000000001, Z_Construct_UScriptStruct_FBlackboardKeySelector());
-PRAGMA_ENABLE_DEPRECATION_WARNINGS
-				OuterClass->StaticLink();
-#if WITH_METADATA
-				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
-				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Tasks/XLHasLineOfSightTo.h"));
-				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Tasks/XLHasLineOfSightTo.h"));
-				MetaData->SetValue(NewProp_EnemyKey, TEXT("Category"), TEXT("Condition"));
-				MetaData->SetValue(NewProp_EnemyKey, TEXT("ModuleRelativePath"), TEXT("Public/Tasks/XLHasLineOfSightTo.h"));
-#endif
-			}
-		}
-		check(OuterClass->GetClass());
-		return OuterClass;
-	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLHasLineOfSightTo(Z_Construct_UClass_UXLHasLineOfSightTo, &UXLHasLineOfSightTo::StaticClass, TEXT("UXLHasLineOfSightTo"), false, nullptr, nullptr, nullptr);
-	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLHasLineOfSightTo);
 	UScriptStruct* Z_Construct_UScriptStruct_FDecalData()
 	{
 		UPackage* Outer = Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -1815,38 +999,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLPlayerAnimationManager(Z_Construct_UClass_UXLPlayerAnimationManager, &UXLPlayerAnimationManager::StaticClass, TEXT("UXLPlayerAnimationManager"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLPlayerAnimationManager);
-	UFunction* Z_Construct_UFunction_AXLPlayerController_ClientGameStarted()
-	{
-		UObject* Outer=Z_Construct_UClass_AXLPlayerController();
-		static UFunction* ReturnFunction = NULL;
-		if (!ReturnFunction)
-		{
-			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("ClientGameStarted"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x00020401, 65535);
-			ReturnFunction->Bind();
-			ReturnFunction->StaticLink();
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Controllers/XLPlayerController.h"));
-#endif
-		}
-		return ReturnFunction;
-	}
-	UFunction* Z_Construct_UFunction_AXLPlayerController_ClientStartOnlineGame()
-	{
-		UObject* Outer=Z_Construct_UClass_AXLPlayerController();
-		static UFunction* ReturnFunction = NULL;
-		if (!ReturnFunction)
-		{
-			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("ClientStartOnlineGame"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x00020401, 65535);
-			ReturnFunction->Bind();
-			ReturnFunction->StaticLink();
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Controllers/XLPlayerController.h"));
-#endif
-		}
-		return ReturnFunction;
-	}
 	UClass* Z_Construct_UClass_AXLPlayerController_NoRegister()
 	{
 		return AXLPlayerController::StaticClass();
@@ -1864,14 +1016,10 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				UObjectForceRegistration(OuterClass);
 				OuterClass->ClassFlags |= 0x20800284;
 
-				OuterClass->LinkChild(Z_Construct_UFunction_AXLPlayerController_ClientGameStarted());
-				OuterClass->LinkChild(Z_Construct_UFunction_AXLPlayerController_ClientStartOnlineGame());
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_MyCharacter = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MyCharacter"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(MyCharacter, AXLPlayerController), 0x0040000000000000, Z_Construct_UClass_AXLCharacter_NoRegister());
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLPlayerController_ClientGameStarted(), "ClientGameStarted"); // 2164594727
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLPlayerController_ClientStartOnlineGame(), "ClientStartOnlineGame"); // 275249496
 				OuterClass->ClassConfigName = FName(TEXT("Game"));
 				OuterClass->StaticLink();
 #if WITH_METADATA
@@ -1956,146 +1104,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLPlayerSoundManager(Z_Construct_UClass_UXLPlayerSoundManager, &UXLPlayerSoundManager::StaticClass, TEXT("UXLPlayerSoundManager"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLPlayerSoundManager);
-	UEnum* Z_Construct_UEnum_ExtendedLibrary_EWinningState()
-	{
-		UPackage* Outer=Z_Construct_UPackage__Script_ExtendedLibrary();
-		extern uint32 Get_Z_Construct_UEnum_ExtendedLibrary_EWinningState_CRC();
-		static UEnum* ReturnEnum = FindExistingEnumIfHotReloadOrDynamic(Outer, TEXT("EWinningState"), 0, Get_Z_Construct_UEnum_ExtendedLibrary_EWinningState_CRC(), false);
-		if (!ReturnEnum)
-		{
-			ReturnEnum = new(EC_InternalUseOnlyConstructor, Outer, TEXT("EWinningState"), RF_Public|RF_Transient|RF_MarkAsNative) UEnum(FObjectInitializer());
-			TArray<TPair<FName, uint8>> EnumNames;
-			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EWinningState::Winner")), 0));
-			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EWinningState::Loser")), 1));
-			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EWinningState::Playing")), 2));
-			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EWinningState::EWinningState_MAX")), 3));
-			ReturnEnum->SetEnums(EnumNames, UEnum::ECppForm::Namespaced);
-			ReturnEnum->CppType = TEXT("EWinningState::Type");
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnEnum->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnEnum, TEXT("BlueprintType"), TEXT("true"));
-			MetaData->SetValue(ReturnEnum, TEXT("Category"), TEXT("Character"));
-			MetaData->SetValue(ReturnEnum, TEXT("ModuleRelativePath"), TEXT("Public/States/XLPlayerState.h"));
-#endif
-		}
-		return ReturnEnum;
-	}
-	uint32 Get_Z_Construct_UEnum_ExtendedLibrary_EWinningState_CRC() { return 2995193337U; }
-	UFunction* Z_Construct_UFunction_AXLPlayerState_BroadcastDeath()
-	{
-		struct XLPlayerState_eventBroadcastDeath_Parms
-		{
-			AXLPlayerState* KillerPlayerState;
-			const UDamageType* KillerDamageType;
-			AXLPlayerState* KilledPlayerState;
-		};
-		UObject* Outer=Z_Construct_UClass_AXLPlayerState();
-		static UFunction* ReturnFunction = NULL;
-		if (!ReturnFunction)
-		{
-			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("BroadcastDeath"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x00020401, 65535, sizeof(XLPlayerState_eventBroadcastDeath_Parms));
-			UProperty* NewProp_KilledPlayerState = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("KilledPlayerState"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(KilledPlayerState, XLPlayerState_eventBroadcastDeath_Parms), 0x0010000000000080, Z_Construct_UClass_AXLPlayerState_NoRegister());
-			UProperty* NewProp_KillerDamageType = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("KillerDamageType"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(KillerDamageType, XLPlayerState_eventBroadcastDeath_Parms), 0x0010000000000082, Z_Construct_UClass_UDamageType_NoRegister());
-			UProperty* NewProp_KillerPlayerState = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("KillerPlayerState"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(KillerPlayerState, XLPlayerState_eventBroadcastDeath_Parms), 0x0010000000000080, Z_Construct_UClass_AXLPlayerState_NoRegister());
-			ReturnFunction->Bind();
-			ReturnFunction->StaticLink();
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/States/XLPlayerState.h"));
-			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("broadcast death to local clients"));
-			MetaData->SetValue(NewProp_KillerDamageType, TEXT("NativeConst"), TEXT(""));
-#endif
-		}
-		return ReturnFunction;
-	}
-	UFunction* Z_Construct_UFunction_AXLPlayerState_InformAboutKill()
-	{
-		struct XLPlayerState_eventInformAboutKill_Parms
-		{
-			AXLPlayerState* KillerPlayerState;
-			const UDamageType* KillerDamageType;
-			AXLPlayerState* KilledPlayerState;
-		};
-		UObject* Outer=Z_Construct_UClass_AXLPlayerState();
-		static UFunction* ReturnFunction = NULL;
-		if (!ReturnFunction)
-		{
-			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("InformAboutKill"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x00020401, 65535, sizeof(XLPlayerState_eventInformAboutKill_Parms));
-			UProperty* NewProp_KilledPlayerState = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("KilledPlayerState"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(KilledPlayerState, XLPlayerState_eventInformAboutKill_Parms), 0x0010000000000080, Z_Construct_UClass_AXLPlayerState_NoRegister());
-			UProperty* NewProp_KillerDamageType = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("KillerDamageType"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(KillerDamageType, XLPlayerState_eventInformAboutKill_Parms), 0x0010000000000082, Z_Construct_UClass_UDamageType_NoRegister());
-			UProperty* NewProp_KillerPlayerState = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("KillerPlayerState"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(KillerPlayerState, XLPlayerState_eventInformAboutKill_Parms), 0x0010000000000080, Z_Construct_UClass_AXLPlayerState_NoRegister());
-			ReturnFunction->Bind();
-			ReturnFunction->StaticLink();
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/States/XLPlayerState.h"));
-			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("Sends kill (excluding self) to clients"));
-			MetaData->SetValue(NewProp_KillerDamageType, TEXT("NativeConst"), TEXT(""));
-#endif
-		}
-		return ReturnFunction;
-	}
-	UClass* Z_Construct_UClass_AXLPlayerState_NoRegister()
-	{
-		return AXLPlayerState::StaticClass();
-	}
-	UClass* Z_Construct_UClass_AXLPlayerState()
-	{
-		static UClass* OuterClass = NULL;
-		if (!OuterClass)
-		{
-			Z_Construct_UClass_APlayerState();
-			Z_Construct_UPackage__Script_ExtendedLibrary();
-			OuterClass = AXLPlayerState::StaticClass();
-			if (!(OuterClass->ClassFlags & CLASS_Constructed))
-			{
-				UObjectForceRegistration(OuterClass);
-				OuterClass->ClassFlags |= 0x20800280;
-
-				OuterClass->LinkChild(Z_Construct_UFunction_AXLPlayerState_BroadcastDeath());
-				OuterClass->LinkChild(Z_Construct_UFunction_AXLPlayerState_InformAboutKill());
-
-PRAGMA_DISABLE_DEPRECATION_WARNINGS
-				UProperty* NewProp_NumRocketsFired = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("NumRocketsFired"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(NumRocketsFired, AXLPlayerState), 0x0020080000000000);
-				UProperty* NewProp_NumBulletsFired = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("NumBulletsFired"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(NumBulletsFired, AXLPlayerState), 0x0020080000000000);
-				UProperty* NewProp_NumDeaths = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("NumDeaths"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(NumDeaths, AXLPlayerState), 0x0020080000000000);
-				UProperty* NewProp_NumKills = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("NumKills"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(NumKills, AXLPlayerState), 0x0020080000000000);
-				UProperty* NewProp_TeamNumber = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("TeamNumber"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(TeamNumber, AXLPlayerState), 0x0020080000000000);
-				UProperty* NewProp_WinningState = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("WinningState"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(WinningState, AXLPlayerState), 0x0010000000000005, Z_Construct_UEnum_ExtendedLibrary_EWinningState());
-				UProperty* NewProp_CandyCount = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CandyCount"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(CandyCount, AXLPlayerState), 0x0010000000000005);
-PRAGMA_ENABLE_DEPRECATION_WARNINGS
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLPlayerState_BroadcastDeath(), "BroadcastDeath"); // 2875550207
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLPlayerState_InformAboutKill(), "InformAboutKill"); // 2784177480
-				OuterClass->StaticLink();
-#if WITH_METADATA
-				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Input Movement Collision Rendering Utilities|Transformation"));
-				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("States/XLPlayerState.h"));
-				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/States/XLPlayerState.h"));
-				MetaData->SetValue(OuterClass, TEXT("ShowCategories"), TEXT("Input|MouseInput Input|TouchInput"));
-				MetaData->SetValue(NewProp_NumRocketsFired, TEXT("ModuleRelativePath"), TEXT("Public/States/XLPlayerState.h"));
-				MetaData->SetValue(NewProp_NumRocketsFired, TEXT("ToolTip"), TEXT("number of rockets fired this match"));
-				MetaData->SetValue(NewProp_NumBulletsFired, TEXT("ModuleRelativePath"), TEXT("Public/States/XLPlayerState.h"));
-				MetaData->SetValue(NewProp_NumBulletsFired, TEXT("ToolTip"), TEXT("number of bullets fired this match"));
-				MetaData->SetValue(NewProp_NumDeaths, TEXT("ModuleRelativePath"), TEXT("Public/States/XLPlayerState.h"));
-				MetaData->SetValue(NewProp_NumDeaths, TEXT("ToolTip"), TEXT("number of deaths"));
-				MetaData->SetValue(NewProp_NumKills, TEXT("ModuleRelativePath"), TEXT("Public/States/XLPlayerState.h"));
-				MetaData->SetValue(NewProp_NumKills, TEXT("ToolTip"), TEXT("number of kills"));
-				MetaData->SetValue(NewProp_TeamNumber, TEXT("ModuleRelativePath"), TEXT("Public/States/XLPlayerState.h"));
-				MetaData->SetValue(NewProp_TeamNumber, TEXT("ToolTip"), TEXT("team number"));
-				MetaData->SetValue(NewProp_WinningState, TEXT("Category"), TEXT("Winning"));
-				MetaData->SetValue(NewProp_WinningState, TEXT("ModuleRelativePath"), TEXT("Public/States/XLPlayerState.h"));
-				MetaData->SetValue(NewProp_CandyCount, TEXT("Category"), TEXT("Candy"));
-				MetaData->SetValue(NewProp_CandyCount, TEXT("ModuleRelativePath"), TEXT("Public/States/XLPlayerState.h"));
-				MetaData->SetValue(NewProp_CandyCount, TEXT("ToolTip"), TEXT("number of candies"));
-#endif
-			}
-		}
-		check(OuterClass->GetClass());
-		return OuterClass;
-	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLPlayerState(Z_Construct_UClass_AXLPlayerState, &AXLPlayerState::StaticClass, TEXT("AXLPlayerState"), false, nullptr, nullptr, nullptr);
-	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLPlayerState);
 	UClass* Z_Construct_UClass_AXLProjectile_NoRegister()
 	{
 		return AXLProjectile::StaticClass();
@@ -2518,10 +1526,10 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 		if (!ReturnPackage)
 		{
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/ExtendedLibrary")), false, false));
-			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
+			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000040);
 			FGuid Guid;
-			Guid.A = 0x3D9A72B7;
-			Guid.B = 0x533DEC07;
+			Guid.A = 0xB5810B07;
+			Guid.B = 0x543882E4;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

@@ -12,19 +12,19 @@ AXLCharacter::AXLCharacter()
 	CharacterAnimations = CreateDefaultSubobject<UXLPlayerAnimationManager>(TEXT("CharacterAnimations"));
 	CharacterEffects = CreateDefaultSubobject<UXLPlayerEffectManager>(TEXT("CharacterEffects"));
 	CoverComponent = CreateDefaultSubobject<UXLCoverComponent>(TEXT("CoverComponent"));
-	MovementComponent = Cast<UXLMovementComponent>(GetCharacterMovement());
+	MovementComponent = Cast<UXLMovementComponent>(GetMovementComponent());
 
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
 	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = false;
+	bUseControllerRotationYaw = true;
 	bUseControllerRotationRoll = false;
 
-	GetCharacterMovement()->bOrientRotationToMovement = true;
-	//GetCharacterMovement()->RotationRate = FRotator(0.0f, 540.0f, 0.0f);
-	GetCharacterMovement()->JumpZVelocity = 400.f;
-	GetCharacterMovement()->MaxWalkSpeed = 400.f;
-	GetCharacterMovement()->AirControl = 0.2f;
+	//MovementComponent->bOrientRotationToMovement = true;
+	//MovementComponent->RotationRate = FRotator(0.0f, 540.0f, 0.0f);
+	//MovementComponent->JumpZVelocity = 400.f;
+	//MovementComponent->MaxWalkSpeed = 400.f;
+	//MovementComponent->AirControl = 0.2f;
 
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -214,13 +214,9 @@ void AXLCharacter::OnDeath(float KillingDamage, struct FDamageEvent const& Damag
 	}*/
 
 	// Death anim
-	float DeathAnimDuration = 2.0f;
-	if (CharacterAnimations->DeathAnim)
-	{
-		DeathAnimDuration = PlayAnimMontage(CharacterAnimations->DeathAnim);
-	}
+	//float DeathAnimDuration = PlayAnimMontage(CharacterEffects->GetDeathAnim());
 	//CharacterWeapon->SetLifeSpan(2.1f);
-	SetLifeSpan(DeathAnimDuration * 0.7f);
+	SetLifeSpan(2.1f);
 }
 
 void AXLCharacter::PlayHit(float DamageTaken, struct FDamageEvent const& DamageEvent, class APawn* PawnInstigator, class AActor* DamageCauser)

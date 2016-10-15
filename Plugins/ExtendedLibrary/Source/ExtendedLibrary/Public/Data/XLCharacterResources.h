@@ -21,7 +21,6 @@ public:
 	/** The amount of health the Pawn has */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
 	float MaxHealth;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Cooldowns)
 	float CurrentHealth;
 
 	/** The amount of time before health starts regenerating */

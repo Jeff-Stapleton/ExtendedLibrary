@@ -9,17 +9,17 @@ UXLCharacterResources::UXLCharacterResources()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	Character = Cast<AXLCharacter>(GetOwner());
-}
-
-void UXLCharacterResources::BeginPlay()
-{
-	Super::BeginPlay();
 
 	CurrentHealth = MaxHealth;
 	CurrentEnergy = MaxEnergy;
 	CurrentStamina = MaxStamina;
 	CurrentUltimate = MaxUltimate;
 	CurrentShield = MaxShield;
+}
+
+void UXLCharacterResources::BeginPlay()
+{
+	Super::BeginPlay();
 }
 
 void UXLCharacterResources::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )

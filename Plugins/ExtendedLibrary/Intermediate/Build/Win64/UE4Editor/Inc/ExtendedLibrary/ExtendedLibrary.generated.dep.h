@@ -8,9 +8,6 @@
 #ifndef EXTENDEDLIBRARY_XLAbilityManager_generated_h
 	#include "Public/Managers/XLAbilityManager.h"
 #endif
-#ifndef EXTENDEDLIBRARY_XLAIController_generated_h
-	#include "Public/Controllers/XLAIController.h"
-#endif
 #ifndef EXTENDEDLIBRARY_XLHealthState_generated_h
 	#include "Public/Enums/XLHealthState.h"
 #endif
@@ -23,12 +20,6 @@
 #ifndef EXTENDEDLIBRARY_XLCharacter_generated_h
 	#include "Public/Characters/XLCharacter.h"
 #endif
-#ifndef EXTENDEDLIBRARY_XLAI_generated_h
-	#include "Public/AI/XLAI.h"
-#endif
-#ifndef EXTENDEDLIBRARY_XLPlayerCharacter_generated_h
-	#include "Public/Characters/XLPlayerCharacter.h"
-#endif
 #ifndef EXTENDEDLIBRARY_XLCharacterResources_generated_h
 	#include "Public/Data/XLCharacterResources.h"
 #endif
@@ -37,24 +28,6 @@
 #endif
 #ifndef EXTENDEDLIBRARY_XLCoverComponent_generated_h
 	#include "Public/Components/XLCoverComponent.h"
-#endif
-#ifndef EXTENDEDLIBRARY_XLFindPointNearEnemy_generated_h
-	#include "Public/Tasks/XLFindPointNearEnemy.h"
-#endif
-#ifndef EXTENDEDLIBRARY_XLGameInstance_generated_h
-	#include "Public/Game/XLGameInstance.h"
-#endif
-#ifndef EXTENDEDLIBRARY_XLGameMode_generated_h
-	#include "Public/Game/XLGameMode.h"
-#endif
-#ifndef EXTENDEDLIBRARY_XLGameSession_generated_h
-	#include "Public/Game/XLGameSession.h"
-#endif
-#ifndef EXTENDEDLIBRARY_XLGameState_generated_h
-	#include "Public/States/XLGameState.h"
-#endif
-#ifndef EXTENDEDLIBRARY_XLHasLineOfSightTo_generated_h
-	#include "Public/Tasks/XLHasLineOfSightTo.h"
 #endif
 #ifndef EXTENDEDLIBRARY_XLDecalData_generated_h
 	#include "Public/Structs/XLDecalData.h"
@@ -76,9 +49,6 @@
 #endif
 #ifndef EXTENDEDLIBRARY_XLPlayerSoundManager_generated_h
 	#include "Public/Managers/XLPlayerSoundManager.h"
-#endif
-#ifndef EXTENDEDLIBRARY_XLPlayerState_generated_h
-	#include "Public/States/XLPlayerState.h"
 #endif
 #ifndef EXTENDEDLIBRARY_XLProjectile_generated_h
 	#include "Public/Projectiles/XLProjectile.h"
