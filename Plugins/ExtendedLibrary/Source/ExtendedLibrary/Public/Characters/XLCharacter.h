@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include "GameFramework/Character.h"
@@ -30,10 +31,10 @@ public:
 	class UXLAbilityManager* CharacterAbilities;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
-	class UXLAnimationManager* CharacterAnimations;
+	class UXLPlayerAnimationManager* CharacterAnimations;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
-	class UXLEffectManager* CharacterEffects;
+	class UXLPlayerEffectManager* CharacterEffects;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Cover)
 	class UXLCoverComponent* CoverComponent;

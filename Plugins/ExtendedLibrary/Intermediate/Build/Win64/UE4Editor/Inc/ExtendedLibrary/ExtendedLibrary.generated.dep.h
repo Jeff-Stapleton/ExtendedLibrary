@@ -8,9 +8,6 @@
 #ifndef EXTENDEDLIBRARY_XLAbilityManager_generated_h
 	#include "Public/Managers/XLAbilityManager.h"
 #endif
-#ifndef EXTENDEDLIBRARY_XLAnimationManager_generated_h
-	#include "Public/Managers/XLAnimationManager.h"
-#endif
 #ifndef EXTENDEDLIBRARY_XLHealthState_generated_h
 	#include "Public/Enums/XLHealthState.h"
 #endif
@@ -32,17 +29,32 @@
 #ifndef EXTENDEDLIBRARY_XLCoverComponent_generated_h
 	#include "Public/Components/XLCoverComponent.h"
 #endif
-#ifndef EXTENDEDLIBRARY_XLEffectManager_generated_h
-	#include "Public/Managers/XLEffectManager.h"
+#ifndef EXTENDEDLIBRARY_XLDecalData_generated_h
+	#include "Public/Structs/XLDecalData.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLImpactEffect_generated_h
+	#include "Public/Effects/XLImpactEffect.h"
 #endif
 #ifndef EXTENDEDLIBRARY_XLMovementComponent_generated_h
 	#include "Public/Components/XLMovementComponent.h"
 #endif
+#ifndef EXTENDEDLIBRARY_XLPlayerAnimationManager_generated_h
+	#include "Public/Managers/XLPlayerAnimationManager.h"
+#endif
 #ifndef EXTENDEDLIBRARY_XLPlayerController_generated_h
 	#include "Public/Controllers/XLPlayerController.h"
 #endif
+#ifndef EXTENDEDLIBRARY_XLPlayerEffectManager_generated_h
+	#include "Public/Managers/XLPlayerEffectManager.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLPlayerSoundManager_generated_h
+	#include "Public/Managers/XLPlayerSoundManager.h"
+#endif
 #ifndef EXTENDEDLIBRARY_XLProjectile_generated_h
 	#include "Public/Projectiles/XLProjectile.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLWeaponState_generated_h
+	#include "Public/Enums/XLWeaponState.h"
 #endif
 #ifndef EXTENDEDLIBRARY_XLWeapon_generated_h
 	#include "Public/Weapons/XLWeapon.h"
@@ -53,6 +65,18 @@
 #ifndef EXTENDEDLIBRARY_XLRangedWeapon_generated_h
 	#include "Public/Weapons/XLRangedWeapon.h"
 #endif
+#ifndef EXTENDEDLIBRARY_XLWeaponAnimationManager_generated_h
+	#include "Public/Managers/XLWeaponAnimationManager.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLWeaponEffectManager_generated_h
+	#include "Public/Managers/XLWeaponEffectManager.h"
+#endif
 #ifndef EXTENDEDLIBRARY_XLWeaponManager_generated_h
 	#include "Public/Managers/XLWeaponManager.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLWeaponSoundManager_generated_h
+	#include "Public/Managers/XLWeaponSoundManager.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLHitInfo_generated_h
+	#include "Public/Structs/XLHitInfo.h"
 #endif

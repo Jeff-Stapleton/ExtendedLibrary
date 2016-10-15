@@ -1,15 +1,15 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
-#include "XLAnimationManager.generated.h"
+#include "XLPlayerAnimationManager.generated.h"
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class UXLAnimationManager : public UActorComponent
+class UXLPlayerAnimationManager : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:
-	UXLAnimationManager();
+	UXLPlayerAnimationManager();
 
 	virtual void BeginPlay() override;
 

@@ -13,10 +13,6 @@ void EmptyLinkFunctionForGeneratedCode1ExtendedLibrary() {}
 	{
 	}
 	IMPLEMENT_CLASS(UXLAbilityManager, 971471910);
-	void UXLAnimationManager::StaticRegisterNativesUXLAnimationManager()
-	{
-	}
-	IMPLEMENT_CLASS(UXLAnimationManager, 2598317695);
 static class UEnum* EHealthState_StaticEnum()
 {
 	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -56,7 +52,7 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 	void AXLCharacter::StaticRegisterNativesAXLCharacter()
 	{
 	}
-	IMPLEMENT_CLASS(AXLCharacter, 3308995384);
+	IMPLEMENT_CLASS(AXLCharacter, 376188786);
 	void UXLCharacterResources::StaticRegisterNativesUXLCharacterResources()
 	{
 		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "CooldownTimer",(Native)&UXLCharacterResources::execCooldownTimer);
@@ -74,51 +70,138 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 	{
 	}
 	IMPLEMENT_CLASS(UXLCoverComponent, 136658281);
-	void UXLEffectManager::StaticRegisterNativesUXLEffectManager()
+class UScriptStruct* FDecalData::StaticStruct()
+{
+	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
+	static class UScriptStruct* Singleton = NULL;
+	if (!Singleton)
+	{
+		extern EXTENDEDLIBRARY_API class UScriptStruct* Z_Construct_UScriptStruct_FDecalData();
+		extern EXTENDEDLIBRARY_API uint32 Get_Z_Construct_UScriptStruct_FDecalData_CRC();
+		Singleton = GetStaticStruct(Z_Construct_UScriptStruct_FDecalData, Z_Construct_UPackage__Script_ExtendedLibrary(), TEXT("DecalData"), sizeof(FDecalData), Get_Z_Construct_UScriptStruct_FDecalData_CRC());
+	}
+	return Singleton;
+}
+static FCompiledInDeferStruct Z_CompiledInDeferStruct_UScriptStruct_FDecalData(FDecalData::StaticStruct, TEXT("/Script/ExtendedLibrary"), TEXT("DecalData"), false, nullptr, nullptr);
+static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFDecalData
+{
+	FScriptStruct_ExtendedLibrary_StaticRegisterNativesFDecalData()
+	{
+		UScriptStruct::DeferCppStructOps(FName(TEXT("DecalData")),new UScriptStruct::TCppStructOps<FDecalData>);
+	}
+} ScriptStruct_ExtendedLibrary_StaticRegisterNativesFDecalData;
+	void AXLImpactEffect::StaticRegisterNativesAXLImpactEffect()
 	{
 	}
-	IMPLEMENT_CLASS(UXLEffectManager, 3507281695);
+	IMPLEMENT_CLASS(AXLImpactEffect, 676621481);
 	void UXLMovementComponent::StaticRegisterNativesUXLMovementComponent()
 	{
 	}
 	IMPLEMENT_CLASS(UXLMovementComponent, 1241303497);
+	void UXLPlayerAnimationManager::StaticRegisterNativesUXLPlayerAnimationManager()
+	{
+	}
+	IMPLEMENT_CLASS(UXLPlayerAnimationManager, 3788153921);
 	void AXLPlayerController::StaticRegisterNativesAXLPlayerController()
 	{
 	}
-	IMPLEMENT_CLASS(AXLPlayerController, 4284552502);
+	IMPLEMENT_CLASS(AXLPlayerController, 2519319151);
+	void UXLPlayerEffectManager::StaticRegisterNativesUXLPlayerEffectManager()
+	{
+	}
+	IMPLEMENT_CLASS(UXLPlayerEffectManager, 4086652077);
+	void UXLPlayerSoundManager::StaticRegisterNativesUXLPlayerSoundManager()
+	{
+	}
+	IMPLEMENT_CLASS(UXLPlayerSoundManager, 2044852930);
 	void AXLProjectile::StaticRegisterNativesAXLProjectile()
 	{
 	}
 	IMPLEMENT_CLASS(AXLProjectile, 1302812797);
+static class UEnum* EWeaponState_StaticEnum()
+{
+	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
+	static class UEnum* Singleton = NULL;
+	if (!Singleton)
+	{
+		extern EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EWeaponState();
+		Singleton = GetStaticEnum(Z_Construct_UEnum_ExtendedLibrary_EWeaponState, Z_Construct_UPackage__Script_ExtendedLibrary(), TEXT("EWeaponState"));
+	}
+	return Singleton;
+}
+static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EWeaponState(EWeaponState_StaticEnum, TEXT("/Script/ExtendedLibrary"), TEXT("EWeaponState"), false, nullptr, nullptr);
 	void AXLWeapon::StaticRegisterNativesAXLWeapon()
 	{
 	}
-	IMPLEMENT_CLASS(AXLWeapon, 12861424);
+	IMPLEMENT_CLASS(AXLWeapon, 3830704064);
 	void AXLMeleeWeapon::StaticRegisterNativesAXLMeleeWeapon()
 	{
 	}
-	IMPLEMENT_CLASS(AXLMeleeWeapon, 3624833073);
+	IMPLEMENT_CLASS(AXLMeleeWeapon, 2535715106);
 	void AXLRangedWeapon::StaticRegisterNativesAXLRangedWeapon()
 	{
 	}
-	IMPLEMENT_CLASS(AXLRangedWeapon, 3137990586);
+	IMPLEMENT_CLASS(AXLRangedWeapon, 1204880803);
+	void UXLWeaponAnimationManager::StaticRegisterNativesUXLWeaponAnimationManager()
+	{
+	}
+	IMPLEMENT_CLASS(UXLWeaponAnimationManager, 1632396061);
+	void UXLWeaponEffectManager::StaticRegisterNativesUXLWeaponEffectManager()
+	{
+	}
+	IMPLEMENT_CLASS(UXLWeaponEffectManager, 862043445);
 	void UXLWeaponManager::StaticRegisterNativesUXLWeaponManager()
 	{
 	}
 	IMPLEMENT_CLASS(UXLWeaponManager, 3993750127);
+	void UXLWeaponSoundManager::StaticRegisterNativesUXLWeaponSoundManager()
+	{
+	}
+	IMPLEMENT_CLASS(UXLWeaponSoundManager, 4094684704);
+class UScriptStruct* FTakeHitInfo::StaticStruct()
+{
+	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
+	static class UScriptStruct* Singleton = NULL;
+	if (!Singleton)
+	{
+		extern EXTENDEDLIBRARY_API class UScriptStruct* Z_Construct_UScriptStruct_FTakeHitInfo();
+		extern EXTENDEDLIBRARY_API uint32 Get_Z_Construct_UScriptStruct_FTakeHitInfo_CRC();
+		Singleton = GetStaticStruct(Z_Construct_UScriptStruct_FTakeHitInfo, Z_Construct_UPackage__Script_ExtendedLibrary(), TEXT("TakeHitInfo"), sizeof(FTakeHitInfo), Get_Z_Construct_UScriptStruct_FTakeHitInfo_CRC());
+	}
+	return Singleton;
+}
+static FCompiledInDeferStruct Z_CompiledInDeferStruct_UScriptStruct_FTakeHitInfo(FTakeHitInfo::StaticStruct, TEXT("/Script/ExtendedLibrary"), TEXT("TakeHitInfo"), false, nullptr, nullptr);
+static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
+{
+	FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo()
+	{
+		UScriptStruct::DeferCppStructOps(FName(TEXT("TakeHitInfo")),new UScriptStruct::TCppStructOps<FTakeHitInfo>);
+	}
+} ScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo;
 #if USE_COMPILED_IN_NATIVES
 // Cross Module References
 	ENGINE_API class UClass* Z_Construct_UClass_UActorComponent();
-	ENGINE_API class UClass* Z_Construct_UClass_UAnimMontage_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_ACharacter();
-	ENGINE_API class UClass* Z_Construct_UClass_UCharacterMovementComponent();
-	ENGINE_API class UClass* Z_Construct_UClass_APlayerController();
+	ENGINE_API class UClass* Z_Construct_UClass_UMaterial_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_AActor();
+	ENGINE_API class UScriptStruct* Z_Construct_UScriptStruct_FHitResult();
+	ENGINE_API class UClass* Z_Construct_UClass_USoundBase_NoRegister();
+	ENGINE_API class UClass* Z_Construct_UClass_UParticleSystem_NoRegister();
+	ENGINE_API class UClass* Z_Construct_UClass_UPointLightComponent_NoRegister();
+	ENGINE_API class UClass* Z_Construct_UClass_UCharacterMovementComponent();
+	ENGINE_API class UClass* Z_Construct_UClass_UAnimMontage_NoRegister();
+	ENGINE_API class UClass* Z_Construct_UClass_APlayerController();
+	ENGINE_API class UClass* Z_Construct_UClass_USkeletalMeshComponent_NoRegister();
+	ENGINE_API class UClass* Z_Construct_UClass_UCameraShake_NoRegister();
+	ENGINE_API class UClass* Z_Construct_UClass_UParticleSystemComponent_NoRegister();
+	ENGINE_API class UScriptStruct* Z_Construct_UScriptStruct_FRadialDamageEvent();
+	ENGINE_API class UScriptStruct* Z_Construct_UScriptStruct_FPointDamageEvent();
+	ENGINE_API class UScriptStruct* Z_Construct_UScriptStruct_FDamageEvent();
+	ENGINE_API class UClass* Z_Construct_UClass_AActor_NoRegister();
+	COREUOBJECT_API class UClass* Z_Construct_UClass_UObject_NoRegister();
 
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbilityManager_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbilityManager();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAnimationManager_NoRegister();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAnimationManager();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EHealthState();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_ECombatState();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EMovementState();
@@ -135,22 +218,37 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterStats();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCoverComponent_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCoverComponent();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLEffectManager_NoRegister();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLEffectManager();
+	EXTENDEDLIBRARY_API class UScriptStruct* Z_Construct_UScriptStruct_FDecalData();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLImpactEffect_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLImpactEffect();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLMovementComponent_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLMovementComponent();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPlayerAnimationManager_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPlayerAnimationManager();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPlayerController_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPlayerController();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPlayerEffectManager_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPlayerEffectManager();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPlayerSoundManager_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPlayerSoundManager();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLProjectile_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLProjectile();
+	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EWeaponState();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLWeapon_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLWeapon();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLMeleeWeapon_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLMeleeWeapon();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLRangedWeapon_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLRangedWeapon();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLWeaponAnimationManager_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLWeaponAnimationManager();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLWeaponEffectManager_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLWeaponEffectManager();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLWeaponManager_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLWeaponManager();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLWeaponSoundManager_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLWeaponSoundManager();
+	EXTENDEDLIBRARY_API class UScriptStruct* Z_Construct_UScriptStruct_FTakeHitInfo();
 	EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
 	UClass* Z_Construct_UClass_UXLAbilityManager_NoRegister()
 	{
@@ -186,45 +284,6 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLAbilityManager(Z_Construct_UClass_UXLAbilityManager, &UXLAbilityManager::StaticClass, TEXT("UXLAbilityManager"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLAbilityManager);
-	UClass* Z_Construct_UClass_UXLAnimationManager_NoRegister()
-	{
-		return UXLAnimationManager::StaticClass();
-	}
-	UClass* Z_Construct_UClass_UXLAnimationManager()
-	{
-		static UClass* OuterClass = NULL;
-		if (!OuterClass)
-		{
-			Z_Construct_UClass_UActorComponent();
-			Z_Construct_UPackage__Script_ExtendedLibrary();
-			OuterClass = UXLAnimationManager::StaticClass();
-			if (!(OuterClass->ClassFlags & CLASS_Constructed))
-			{
-				UObjectForceRegistration(OuterClass);
-				OuterClass->ClassFlags |= 0x20A00080;
-
-
-PRAGMA_DISABLE_DEPRECATION_WARNINGS
-				UProperty* NewProp_DeathAnim = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("DeathAnim"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(DeathAnim, UXLAnimationManager), 0x0010000000010001, Z_Construct_UClass_UAnimMontage_NoRegister());
-PRAGMA_ENABLE_DEPRECATION_WARNINGS
-				OuterClass->StaticLink();
-#if WITH_METADATA
-				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
-				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
-				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
-				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLAnimationManager.h"));
-				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLAnimationManager.h"));
-				MetaData->SetValue(NewProp_DeathAnim, TEXT("Category"), TEXT("Animation"));
-				MetaData->SetValue(NewProp_DeathAnim, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLAnimationManager.h"));
-#endif
-			}
-		}
-		check(OuterClass->GetClass());
-		return OuterClass;
-	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLAnimationManager(Z_Construct_UClass_UXLAnimationManager, &UXLAnimationManager::StaticClass, TEXT("UXLAnimationManager"), false, nullptr, nullptr, nullptr);
-	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLAnimationManager);
 	UEnum* Z_Construct_UEnum_ExtendedLibrary_EHealthState()
 	{
 		UPackage* Outer=Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -325,8 +384,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_MovementComponent = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MovementComponent"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(MovementComponent, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLMovementComponent_NoRegister());
 				UProperty* NewProp_CoverComponent = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CoverComponent"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CoverComponent, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLCoverComponent_NoRegister());
-				UProperty* NewProp_CharacterEffects = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterEffects"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterEffects, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLEffectManager_NoRegister());
-				UProperty* NewProp_CharacterAnimations = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterAnimations"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterAnimations, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLAnimationManager_NoRegister());
+				UProperty* NewProp_CharacterEffects = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterEffects"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterEffects, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLPlayerEffectManager_NoRegister());
+				UProperty* NewProp_CharacterAnimations = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterAnimations"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterAnimations, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLPlayerAnimationManager_NoRegister());
 				UProperty* NewProp_CharacterAbilities = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterAbilities"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterAbilities, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLAbilityManager_NoRegister());
 				UProperty* NewProp_CharacterWeapons = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterWeapons"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterWeapons, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLWeaponManager_NoRegister());
 				UProperty* NewProp_CharacterStats = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterStats"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterStats, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLCharacterStats_NoRegister());
@@ -672,40 +731,165 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLCoverComponent(Z_Construct_UClass_UXLCoverComponent, &UXLCoverComponent::StaticClass, TEXT("UXLCoverComponent"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLCoverComponent);
-	UClass* Z_Construct_UClass_UXLEffectManager_NoRegister()
+	UScriptStruct* Z_Construct_UScriptStruct_FDecalData()
 	{
-		return UXLEffectManager::StaticClass();
+		UPackage* Outer = Z_Construct_UPackage__Script_ExtendedLibrary();
+		extern uint32 Get_Z_Construct_UScriptStruct_FDecalData_CRC();
+		static UScriptStruct* ReturnStruct = FindExistingStructIfHotReloadOrDynamic(Outer, TEXT("DecalData"), sizeof(FDecalData), Get_Z_Construct_UScriptStruct_FDecalData_CRC(), false);
+		if (!ReturnStruct)
+		{
+			ReturnStruct = new(EC_InternalUseOnlyConstructor, Outer, TEXT("DecalData"), RF_Public|RF_Transient|RF_MarkAsNative) UScriptStruct(FObjectInitializer(), NULL, new UScriptStruct::TCppStructOps<FDecalData>, EStructFlags(0x00000001));
+			UProperty* NewProp_LifeSpan = new(EC_InternalUseOnlyConstructor, ReturnStruct, TEXT("LifeSpan"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(LifeSpan, FDecalData), 0x0010000000010001);
+			UProperty* NewProp_DecalSize = new(EC_InternalUseOnlyConstructor, ReturnStruct, TEXT("DecalSize"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(DecalSize, FDecalData), 0x0010000000010001);
+			UProperty* NewProp_DecalMaterial = new(EC_InternalUseOnlyConstructor, ReturnStruct, TEXT("DecalMaterial"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(DecalMaterial, FDecalData), 0x0010000000010001, Z_Construct_UClass_UMaterial_NoRegister());
+			ReturnStruct->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnStruct->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnStruct, TEXT("ModuleRelativePath"), TEXT("Public/Structs/XLDecalData.h"));
+			MetaData->SetValue(NewProp_LifeSpan, TEXT("Category"), TEXT("Decal"));
+			MetaData->SetValue(NewProp_LifeSpan, TEXT("ModuleRelativePath"), TEXT("Public/Structs/XLDecalData.h"));
+			MetaData->SetValue(NewProp_LifeSpan, TEXT("ToolTip"), TEXT("lifespan"));
+			MetaData->SetValue(NewProp_DecalSize, TEXT("Category"), TEXT("Decal"));
+			MetaData->SetValue(NewProp_DecalSize, TEXT("ModuleRelativePath"), TEXT("Public/Structs/XLDecalData.h"));
+			MetaData->SetValue(NewProp_DecalSize, TEXT("ToolTip"), TEXT("quad size (width & height)"));
+			MetaData->SetValue(NewProp_DecalMaterial, TEXT("Category"), TEXT("Decal"));
+			MetaData->SetValue(NewProp_DecalMaterial, TEXT("ModuleRelativePath"), TEXT("Public/Structs/XLDecalData.h"));
+			MetaData->SetValue(NewProp_DecalMaterial, TEXT("ToolTip"), TEXT("material"));
+#endif
+		}
+		return ReturnStruct;
 	}
-	UClass* Z_Construct_UClass_UXLEffectManager()
+	uint32 Get_Z_Construct_UScriptStruct_FDecalData_CRC() { return 2552104729U; }
+	UClass* Z_Construct_UClass_AXLImpactEffect_NoRegister()
+	{
+		return AXLImpactEffect::StaticClass();
+	}
+	UClass* Z_Construct_UClass_AXLImpactEffect()
 	{
 		static UClass* OuterClass = NULL;
 		if (!OuterClass)
 		{
-			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UClass_AActor();
 			Z_Construct_UPackage__Script_ExtendedLibrary();
-			OuterClass = UXLEffectManager::StaticClass();
+			OuterClass = AXLImpactEffect::StaticClass();
 			if (!(OuterClass->ClassFlags & CLASS_Constructed))
 			{
 				UObjectForceRegistration(OuterClass);
-				OuterClass->ClassFlags |= 0x20A00080;
+				OuterClass->ClassFlags |= 0x20800081;
 
 
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_SurfaceHit = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("SurfaceHit"), RF_Public|RF_Transient|RF_MarkAsNative) UStructProperty(CPP_PROPERTY_BASE(SurfaceHit, AXLImpactEffect), 0x0010008000000014, Z_Construct_UScriptStruct_FHitResult());
+				UProperty* NewProp_DefaultDecal = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("DefaultDecal"), RF_Public|RF_Transient|RF_MarkAsNative) UStructProperty(CPP_PROPERTY_BASE(DefaultDecal, AXLImpactEffect), 0x0010000000010001, Z_Construct_UScriptStruct_FDecalData());
+				UProperty* NewProp_EnergySound = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("EnergySound"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(EnergySound, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_USoundBase_NoRegister());
+				UProperty* NewProp_FleshSound = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("FleshSound"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(FleshSound, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_USoundBase_NoRegister());
+				UProperty* NewProp_GrassSound = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("GrassSound"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(GrassSound, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_USoundBase_NoRegister());
+				UProperty* NewProp_GlassSound = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("GlassSound"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(GlassSound, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_USoundBase_NoRegister());
+				UProperty* NewProp_WoodSound = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("WoodSound"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(WoodSound, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_USoundBase_NoRegister());
+				UProperty* NewProp_MetalSound = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MetalSound"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(MetalSound, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_USoundBase_NoRegister());
+				UProperty* NewProp_WaterSound = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("WaterSound"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(WaterSound, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_USoundBase_NoRegister());
+				UProperty* NewProp_DirtSound = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("DirtSound"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(DirtSound, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_USoundBase_NoRegister());
+				UProperty* NewProp_ConcreteSound = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("ConcreteSound"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(ConcreteSound, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_USoundBase_NoRegister());
+				UProperty* NewProp_DefaultSound = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("DefaultSound"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(DefaultSound, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_USoundBase_NoRegister());
+				UProperty* NewProp_EnergyFX = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("EnergyFX"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(EnergyFX, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_UParticleSystem_NoRegister());
+				UProperty* NewProp_FleshFX = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("FleshFX"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(FleshFX, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_UParticleSystem_NoRegister());
+				UProperty* NewProp_GrassFX = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("GrassFX"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(GrassFX, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_UParticleSystem_NoRegister());
+				UProperty* NewProp_GlassFX = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("GlassFX"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(GlassFX, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_UParticleSystem_NoRegister());
+				UProperty* NewProp_WoodFX = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("WoodFX"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(WoodFX, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_UParticleSystem_NoRegister());
+				UProperty* NewProp_MetalFX = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MetalFX"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(MetalFX, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_UParticleSystem_NoRegister());
+				UProperty* NewProp_WaterFX = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("WaterFX"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(WaterFX, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_UParticleSystem_NoRegister());
+				UProperty* NewProp_DirtFX = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("DirtFX"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(DirtFX, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_UParticleSystem_NoRegister());
+				UProperty* NewProp_ConcreteFX = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("ConcreteFX"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(ConcreteFX, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_UParticleSystem_NoRegister());
+				UProperty* NewProp_DefaultFX = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("DefaultFX"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(DefaultFX, AXLImpactEffect), 0x0010000000010001, Z_Construct_UClass_UParticleSystem_NoRegister());
+				UProperty* NewProp_ImpactLightFadeOut = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("ImpactLightFadeOut"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(ImpactLightFadeOut, AXLImpactEffect), 0x0010000000010001);
+				UProperty* NewProp_ImpactLight = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("ImpactLight"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(ImpactLight, AXLImpactEffect), 0x00100000000b0009, Z_Construct_UClass_UPointLightComponent_NoRegister());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->StaticLink();
 #if WITH_METADATA
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
-				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
-				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
-				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLEffectManager.h"));
-				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLEffectManager.h"));
+				MetaData->SetValue(OuterClass, TEXT("BlueprintType"), TEXT("true"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Effects/XLImpactEffect.h"));
+				MetaData->SetValue(OuterClass, TEXT("IsBlueprintBase"), TEXT("true"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_SurfaceHit, TEXT("Category"), TEXT("Surface"));
+				MetaData->SetValue(NewProp_SurfaceHit, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_SurfaceHit, TEXT("ToolTip"), TEXT("surface data for spawning"));
+				MetaData->SetValue(NewProp_DefaultDecal, TEXT("Category"), TEXT("Defaults"));
+				MetaData->SetValue(NewProp_DefaultDecal, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_DefaultDecal, TEXT("ToolTip"), TEXT("default decal when material specific override doesn't exist"));
+				MetaData->SetValue(NewProp_EnergySound, TEXT("Category"), TEXT("Sound"));
+				MetaData->SetValue(NewProp_EnergySound, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_FleshSound, TEXT("Category"), TEXT("Sound"));
+				MetaData->SetValue(NewProp_FleshSound, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_FleshSound, TEXT("ToolTip"), TEXT("impact FX on flesh"));
+				MetaData->SetValue(NewProp_GrassSound, TEXT("Category"), TEXT("Sound"));
+				MetaData->SetValue(NewProp_GrassSound, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_GrassSound, TEXT("ToolTip"), TEXT("impact FX on grass"));
+				MetaData->SetValue(NewProp_GlassSound, TEXT("Category"), TEXT("Sound"));
+				MetaData->SetValue(NewProp_GlassSound, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_GlassSound, TEXT("ToolTip"), TEXT("impact FX on glass"));
+				MetaData->SetValue(NewProp_WoodSound, TEXT("Category"), TEXT("Sound"));
+				MetaData->SetValue(NewProp_WoodSound, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_WoodSound, TEXT("ToolTip"), TEXT("impact FX on wood"));
+				MetaData->SetValue(NewProp_MetalSound, TEXT("Category"), TEXT("Sound"));
+				MetaData->SetValue(NewProp_MetalSound, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_MetalSound, TEXT("ToolTip"), TEXT("impact FX on metal"));
+				MetaData->SetValue(NewProp_WaterSound, TEXT("Category"), TEXT("Sound"));
+				MetaData->SetValue(NewProp_WaterSound, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_WaterSound, TEXT("ToolTip"), TEXT("impact FX on water"));
+				MetaData->SetValue(NewProp_DirtSound, TEXT("Category"), TEXT("Sound"));
+				MetaData->SetValue(NewProp_DirtSound, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_DirtSound, TEXT("ToolTip"), TEXT("impact FX on dirt"));
+				MetaData->SetValue(NewProp_ConcreteSound, TEXT("Category"), TEXT("Sound"));
+				MetaData->SetValue(NewProp_ConcreteSound, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_ConcreteSound, TEXT("ToolTip"), TEXT("impact FX on concrete"));
+				MetaData->SetValue(NewProp_DefaultSound, TEXT("Category"), TEXT("Defaults"));
+				MetaData->SetValue(NewProp_DefaultSound, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_DefaultSound, TEXT("ToolTip"), TEXT("default impact sound used when material specific override doesn't exist"));
+				MetaData->SetValue(NewProp_EnergyFX, TEXT("Category"), TEXT("Visual"));
+				MetaData->SetValue(NewProp_EnergyFX, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_FleshFX, TEXT("Category"), TEXT("Visual"));
+				MetaData->SetValue(NewProp_FleshFX, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_FleshFX, TEXT("ToolTip"), TEXT("impact FX on flesh"));
+				MetaData->SetValue(NewProp_GrassFX, TEXT("Category"), TEXT("Visual"));
+				MetaData->SetValue(NewProp_GrassFX, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_GrassFX, TEXT("ToolTip"), TEXT("impact FX on grass"));
+				MetaData->SetValue(NewProp_GlassFX, TEXT("Category"), TEXT("Visual"));
+				MetaData->SetValue(NewProp_GlassFX, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_GlassFX, TEXT("ToolTip"), TEXT("impact FX on glass"));
+				MetaData->SetValue(NewProp_WoodFX, TEXT("Category"), TEXT("Visual"));
+				MetaData->SetValue(NewProp_WoodFX, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_WoodFX, TEXT("ToolTip"), TEXT("impact FX on wood"));
+				MetaData->SetValue(NewProp_MetalFX, TEXT("Category"), TEXT("Visual"));
+				MetaData->SetValue(NewProp_MetalFX, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_MetalFX, TEXT("ToolTip"), TEXT("impact FX on metal"));
+				MetaData->SetValue(NewProp_WaterFX, TEXT("Category"), TEXT("Visual"));
+				MetaData->SetValue(NewProp_WaterFX, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_WaterFX, TEXT("ToolTip"), TEXT("impact FX on water"));
+				MetaData->SetValue(NewProp_DirtFX, TEXT("Category"), TEXT("Visual"));
+				MetaData->SetValue(NewProp_DirtFX, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_DirtFX, TEXT("ToolTip"), TEXT("impact FX on dirt"));
+				MetaData->SetValue(NewProp_ConcreteFX, TEXT("Category"), TEXT("Visual"));
+				MetaData->SetValue(NewProp_ConcreteFX, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_ConcreteFX, TEXT("ToolTip"), TEXT("impact FX on concrete"));
+				MetaData->SetValue(NewProp_DefaultFX, TEXT("Category"), TEXT("Defaults"));
+				MetaData->SetValue(NewProp_DefaultFX, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_DefaultFX, TEXT("ToolTip"), TEXT("default impact FX used when material specific override doesn't exist"));
+				MetaData->SetValue(NewProp_ImpactLightFadeOut, TEXT("Category"), TEXT("Effect"));
+				MetaData->SetValue(NewProp_ImpactLightFadeOut, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_ImpactLightFadeOut, TEXT("ToolTip"), TEXT("how long keep explosion light on?"));
+				MetaData->SetValue(NewProp_ImpactLight, TEXT("Category"), TEXT("Effect"));
+				MetaData->SetValue(NewProp_ImpactLight, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_ImpactLight, TEXT("ModuleRelativePath"), TEXT("Public/Effects/XLImpactEffect.h"));
+				MetaData->SetValue(NewProp_ImpactLight, TEXT("ToolTip"), TEXT("explosion light"));
 #endif
 			}
 		}
 		check(OuterClass->GetClass());
 		return OuterClass;
 	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLEffectManager(Z_Construct_UClass_UXLEffectManager, &UXLEffectManager::StaticClass, TEXT("UXLEffectManager"), false, nullptr, nullptr, nullptr);
-	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLEffectManager);
+	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLImpactEffect(Z_Construct_UClass_AXLImpactEffect, &AXLImpactEffect::StaticClass, TEXT("AXLImpactEffect"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLImpactEffect);
 	UClass* Z_Construct_UClass_UXLMovementComponent_NoRegister()
 	{
 		return UXLMovementComponent::StaticClass();
@@ -776,6 +960,45 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLMovementComponent(Z_Construct_UClass_UXLMovementComponent, &UXLMovementComponent::StaticClass, TEXT("UXLMovementComponent"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLMovementComponent);
+	UClass* Z_Construct_UClass_UXLPlayerAnimationManager_NoRegister()
+	{
+		return UXLPlayerAnimationManager::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLPlayerAnimationManager()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLPlayerAnimationManager::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_DeathAnim = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("DeathAnim"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(DeathAnim, UXLPlayerAnimationManager), 0x0010000000010001, Z_Construct_UClass_UAnimMontage_NoRegister());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
+				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLPlayerAnimationManager.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLPlayerAnimationManager.h"));
+				MetaData->SetValue(NewProp_DeathAnim, TEXT("Category"), TEXT("Animation"));
+				MetaData->SetValue(NewProp_DeathAnim, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLPlayerAnimationManager.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLPlayerAnimationManager(Z_Construct_UClass_UXLPlayerAnimationManager, &UXLPlayerAnimationManager::StaticClass, TEXT("UXLPlayerAnimationManager"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLPlayerAnimationManager);
 	UClass* Z_Construct_UClass_AXLPlayerController_NoRegister()
 	{
 		return AXLPlayerController::StaticClass();
@@ -794,6 +1017,9 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->ClassFlags |= 0x20800284;
 
 
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_MyCharacter = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MyCharacter"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(MyCharacter, AXLPlayerController), 0x0040000000000000, Z_Construct_UClass_AXLCharacter_NoRegister());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->ClassConfigName = FName(TEXT("Game"));
 				OuterClass->StaticLink();
 #if WITH_METADATA
@@ -801,6 +1027,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Collision Rendering Utilities|Transformation"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Controllers/XLPlayerController.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Controllers/XLPlayerController.h"));
+				MetaData->SetValue(NewProp_MyCharacter, TEXT("ModuleRelativePath"), TEXT("Public/Controllers/XLPlayerController.h"));
 #endif
 			}
 		}
@@ -809,6 +1036,74 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLPlayerController(Z_Construct_UClass_AXLPlayerController, &AXLPlayerController::StaticClass, TEXT("AXLPlayerController"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLPlayerController);
+	UClass* Z_Construct_UClass_UXLPlayerEffectManager_NoRegister()
+	{
+		return UXLPlayerEffectManager::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLPlayerEffectManager()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLPlayerEffectManager::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
+				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLPlayerEffectManager.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLPlayerEffectManager.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLPlayerEffectManager(Z_Construct_UClass_UXLPlayerEffectManager, &UXLPlayerEffectManager::StaticClass, TEXT("UXLPlayerEffectManager"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLPlayerEffectManager);
+	UClass* Z_Construct_UClass_UXLPlayerSoundManager_NoRegister()
+	{
+		return UXLPlayerSoundManager::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLPlayerSoundManager()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLPlayerSoundManager::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
+				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLPlayerSoundManager.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLPlayerSoundManager.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLPlayerSoundManager(Z_Construct_UClass_UXLPlayerSoundManager, &UXLPlayerSoundManager::StaticClass, TEXT("UXLPlayerSoundManager"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLPlayerSoundManager);
 	UClass* Z_Construct_UClass_AXLProjectile_NoRegister()
 	{
 		return AXLProjectile::StaticClass();
@@ -840,6 +1135,32 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLProjectile(Z_Construct_UClass_AXLProjectile, &AXLProjectile::StaticClass, TEXT("AXLProjectile"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLProjectile);
+	UEnum* Z_Construct_UEnum_ExtendedLibrary_EWeaponState()
+	{
+		UPackage* Outer=Z_Construct_UPackage__Script_ExtendedLibrary();
+		extern uint32 Get_Z_Construct_UEnum_ExtendedLibrary_EWeaponState_CRC();
+		static UEnum* ReturnEnum = FindExistingEnumIfHotReloadOrDynamic(Outer, TEXT("EWeaponState"), 0, Get_Z_Construct_UEnum_ExtendedLibrary_EWeaponState_CRC(), false);
+		if (!ReturnEnum)
+		{
+			ReturnEnum = new(EC_InternalUseOnlyConstructor, Outer, TEXT("EWeaponState"), RF_Public|RF_Transient|RF_MarkAsNative) UEnum(FObjectInitializer());
+			TArray<TPair<FName, uint8>> EnumNames;
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EWeaponState::Idle")), 0));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EWeaponState::Firing")), 1));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EWeaponState::Reloading")), 2));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EWeaponState::Meleeing")), 3));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EWeaponState::EWeaponState_MAX")), 4));
+			ReturnEnum->SetEnums(EnumNames, UEnum::ECppForm::Namespaced);
+			ReturnEnum->CppType = TEXT("EWeaponState::Type");
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnEnum->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnEnum, TEXT("BlueprintType"), TEXT("true"));
+			MetaData->SetValue(ReturnEnum, TEXT("Category"), TEXT("Weapon"));
+			MetaData->SetValue(ReturnEnum, TEXT("ModuleRelativePath"), TEXT("Public/Enums/XLWeaponState.h"));
+#endif
+		}
+		return ReturnEnum;
+	}
+	uint32 Get_Z_Construct_UEnum_ExtendedLibrary_EWeaponState_CRC() { return 2239057730U; }
 	UClass* Z_Construct_UClass_AXLWeapon_NoRegister()
 	{
 		return AXLWeapon::StaticClass();
@@ -858,11 +1179,27 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->ClassFlags |= 0x20800080;
 
 
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_WeaponEffects = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("WeaponEffects"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(WeaponEffects, AXLWeapon), 0x001000000008000d, Z_Construct_UClass_UXLWeaponEffectManager_NoRegister());
+				UProperty* NewProp_WeaponAnimations = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("WeaponAnimations"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(WeaponAnimations, AXLWeapon), 0x001000000008000d, Z_Construct_UClass_UXLWeaponAnimationManager_NoRegister());
+				UProperty* NewProp_Mesh3P = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("Mesh3P"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(Mesh3P, AXLWeapon), 0x0010000000090009, Z_Construct_UClass_USkeletalMeshComponent_NoRegister());
+				UProperty* NewProp_Character = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("Character"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(Character, AXLWeapon), 0x0010000000000000, Z_Construct_UClass_AXLCharacter_NoRegister());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->StaticLink();
 #if WITH_METADATA
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Weapons/XLWeapon.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Weapons/XLWeapon.h"));
+				MetaData->SetValue(NewProp_WeaponEffects, TEXT("Category"), TEXT("Animations"));
+				MetaData->SetValue(NewProp_WeaponEffects, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_WeaponEffects, TEXT("ModuleRelativePath"), TEXT("Public/Weapons/XLWeapon.h"));
+				MetaData->SetValue(NewProp_WeaponAnimations, TEXT("Category"), TEXT("Animations"));
+				MetaData->SetValue(NewProp_WeaponAnimations, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_WeaponAnimations, TEXT("ModuleRelativePath"), TEXT("Public/Weapons/XLWeapon.h"));
+				MetaData->SetValue(NewProp_Mesh3P, TEXT("Category"), TEXT("Mesh"));
+				MetaData->SetValue(NewProp_Mesh3P, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_Mesh3P, TEXT("ModuleRelativePath"), TEXT("Public/Weapons/XLWeapon.h"));
+				MetaData->SetValue(NewProp_Character, TEXT("ModuleRelativePath"), TEXT("Public/Weapons/XLWeapon.h"));
 #endif
 			}
 		}
@@ -933,6 +1270,116 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLRangedWeapon(Z_Construct_UClass_AXLRangedWeapon, &AXLRangedWeapon::StaticClass, TEXT("AXLRangedWeapon"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLRangedWeapon);
+	UClass* Z_Construct_UClass_UXLWeaponAnimationManager_NoRegister()
+	{
+		return UXLWeaponAnimationManager::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLWeaponAnimationManager()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLWeaponAnimationManager::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_ReloadAnim = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("ReloadAnim"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(ReloadAnim, UXLWeaponAnimationManager), 0x0010000000010001, Z_Construct_UClass_UAnimMontage_NoRegister());
+				UProperty* NewProp_MeleeAnim = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MeleeAnim"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(MeleeAnim, UXLWeaponAnimationManager), 0x0010000000010001, Z_Construct_UClass_UAnimMontage_NoRegister());
+				UProperty* NewProp_UnEquipAnim = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("UnEquipAnim"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(UnEquipAnim, UXLWeaponAnimationManager), 0x0010000000010001, Z_Construct_UClass_UAnimMontage_NoRegister());
+				UProperty* NewProp_EquipAnim = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("EquipAnim"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(EquipAnim, UXLWeaponAnimationManager), 0x0010000000010001, Z_Construct_UClass_UAnimMontage_NoRegister());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
+				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLWeaponAnimationManager.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponAnimationManager.h"));
+				MetaData->SetValue(NewProp_ReloadAnim, TEXT("Category"), TEXT("Animation"));
+				MetaData->SetValue(NewProp_ReloadAnim, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponAnimationManager.h"));
+				MetaData->SetValue(NewProp_ReloadAnim, TEXT("ToolTip"), TEXT("reload animations"));
+				MetaData->SetValue(NewProp_MeleeAnim, TEXT("Category"), TEXT("Animation"));
+				MetaData->SetValue(NewProp_MeleeAnim, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponAnimationManager.h"));
+				MetaData->SetValue(NewProp_MeleeAnim, TEXT("ToolTip"), TEXT("melee animations"));
+				MetaData->SetValue(NewProp_UnEquipAnim, TEXT("Category"), TEXT("Animation"));
+				MetaData->SetValue(NewProp_UnEquipAnim, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponAnimationManager.h"));
+				MetaData->SetValue(NewProp_UnEquipAnim, TEXT("ToolTip"), TEXT("holster animations"));
+				MetaData->SetValue(NewProp_EquipAnim, TEXT("Category"), TEXT("Animation"));
+				MetaData->SetValue(NewProp_EquipAnim, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponAnimationManager.h"));
+				MetaData->SetValue(NewProp_EquipAnim, TEXT("ToolTip"), TEXT("equip animations"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLWeaponAnimationManager(Z_Construct_UClass_UXLWeaponAnimationManager, &UXLWeaponAnimationManager::StaticClass, TEXT("UXLWeaponAnimationManager"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLWeaponAnimationManager);
+	UClass* Z_Construct_UClass_UXLWeaponEffectManager_NoRegister()
+	{
+		return UXLWeaponEffectManager::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLWeaponEffectManager()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLWeaponEffectManager::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_FireCameraShake = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("FireCameraShake"), RF_Public|RF_Transient|RF_MarkAsNative) UClassProperty(CPP_PROPERTY_BASE(FireCameraShake, UXLWeaponEffectManager), 0x0014000000010001, Z_Construct_UClass_UCameraShake_NoRegister(), UClass::StaticClass());
+				UProperty* NewProp_TrailFX = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("TrailFX"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(TrailFX, UXLWeaponEffectManager), 0x0010000000010001, Z_Construct_UClass_UParticleSystem_NoRegister());
+				UProperty* NewProp_TrailTargetParam = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("TrailTargetParam"), RF_Public|RF_Transient|RF_MarkAsNative) UNameProperty(CPP_PROPERTY_BASE(TrailTargetParam, UXLWeaponEffectManager), 0x0010000000010001);
+				UProperty* NewProp_MuzzlePSC = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MuzzlePSC"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(MuzzlePSC, UXLWeaponEffectManager), 0x0010000000082008, Z_Construct_UClass_UParticleSystemComponent_NoRegister());
+				UProperty* NewProp_MuzzleFX = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MuzzleFX"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(MuzzleFX, UXLWeaponEffectManager), 0x0010000000010001, Z_Construct_UClass_UParticleSystem_NoRegister());
+				UProperty* NewProp_MuzzleFXPoint = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MuzzleFXPoint"), RF_Public|RF_Transient|RF_MarkAsNative) UNameProperty(CPP_PROPERTY_BASE(MuzzleFXPoint, UXLWeaponEffectManager), 0x0010000000010001);
+				CPP_BOOL_PROPERTY_BITMASK_STRUCT(bLoopedMuzzleFX, UXLWeaponEffectManager, bool);
+				UProperty* NewProp_bLoopedMuzzleFX = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("bLoopedMuzzleFX"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(bLoopedMuzzleFX, UXLWeaponEffectManager), 0x0010000000010001, CPP_BOOL_PROPERTY_BITMASK(bLoopedMuzzleFX, UXLWeaponEffectManager), sizeof(bool), true);
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
+				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLWeaponEffectManager.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponEffectManager.h"));
+				MetaData->SetValue(NewProp_FireCameraShake, TEXT("Category"), TEXT("CameraShake"));
+				MetaData->SetValue(NewProp_FireCameraShake, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponEffectManager.h"));
+				MetaData->SetValue(NewProp_TrailFX, TEXT("Category"), TEXT("TrailFX"));
+				MetaData->SetValue(NewProp_TrailFX, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponEffectManager.h"));
+				MetaData->SetValue(NewProp_TrailTargetParam, TEXT("Category"), TEXT("TrailFX"));
+				MetaData->SetValue(NewProp_TrailTargetParam, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponEffectManager.h"));
+				MetaData->SetValue(NewProp_MuzzlePSC, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_MuzzlePSC, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponEffectManager.h"));
+				MetaData->SetValue(NewProp_MuzzleFX, TEXT("Category"), TEXT("MuzzleFX"));
+				MetaData->SetValue(NewProp_MuzzleFX, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponEffectManager.h"));
+				MetaData->SetValue(NewProp_MuzzleFXPoint, TEXT("Category"), TEXT("MuzzleFX"));
+				MetaData->SetValue(NewProp_MuzzleFXPoint, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponEffectManager.h"));
+				MetaData->SetValue(NewProp_bLoopedMuzzleFX, TEXT("Category"), TEXT("MuzzleFX"));
+				MetaData->SetValue(NewProp_bLoopedMuzzleFX, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponEffectManager.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLWeaponEffectManager(Z_Construct_UClass_UXLWeaponEffectManager, &UXLWeaponEffectManager::StaticClass, TEXT("UXLWeaponEffectManager"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLWeaponEffectManager);
 	UClass* Z_Construct_UClass_UXLWeaponManager_NoRegister()
 	{
 		return UXLWeaponManager::StaticClass();
@@ -973,6 +1420,106 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLWeaponManager(Z_Construct_UClass_UXLWeaponManager, &UXLWeaponManager::StaticClass, TEXT("UXLWeaponManager"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLWeaponManager);
+	UClass* Z_Construct_UClass_UXLWeaponSoundManager_NoRegister()
+	{
+		return UXLWeaponSoundManager::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLWeaponSoundManager()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLWeaponSoundManager::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_ReloadAnim = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("ReloadAnim"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(ReloadAnim, UXLWeaponSoundManager), 0x0010000000010001, Z_Construct_UClass_UAnimMontage_NoRegister());
+				UProperty* NewProp_MeleeAnim = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MeleeAnim"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(MeleeAnim, UXLWeaponSoundManager), 0x0010000000010001, Z_Construct_UClass_UAnimMontage_NoRegister());
+				UProperty* NewProp_UnEquipAnim = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("UnEquipAnim"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(UnEquipAnim, UXLWeaponSoundManager), 0x0010000000010001, Z_Construct_UClass_UAnimMontage_NoRegister());
+				UProperty* NewProp_EquipAnim = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("EquipAnim"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(EquipAnim, UXLWeaponSoundManager), 0x0010000000010001, Z_Construct_UClass_UAnimMontage_NoRegister());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
+				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLWeaponSoundManager.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponSoundManager.h"));
+				MetaData->SetValue(NewProp_ReloadAnim, TEXT("Category"), TEXT("Animation"));
+				MetaData->SetValue(NewProp_ReloadAnim, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponSoundManager.h"));
+				MetaData->SetValue(NewProp_ReloadAnim, TEXT("ToolTip"), TEXT("reload animations"));
+				MetaData->SetValue(NewProp_MeleeAnim, TEXT("Category"), TEXT("Animation"));
+				MetaData->SetValue(NewProp_MeleeAnim, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponSoundManager.h"));
+				MetaData->SetValue(NewProp_MeleeAnim, TEXT("ToolTip"), TEXT("melee animations"));
+				MetaData->SetValue(NewProp_UnEquipAnim, TEXT("Category"), TEXT("Animation"));
+				MetaData->SetValue(NewProp_UnEquipAnim, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponSoundManager.h"));
+				MetaData->SetValue(NewProp_UnEquipAnim, TEXT("ToolTip"), TEXT("holster animations"));
+				MetaData->SetValue(NewProp_EquipAnim, TEXT("Category"), TEXT("Animation"));
+				MetaData->SetValue(NewProp_EquipAnim, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponSoundManager.h"));
+				MetaData->SetValue(NewProp_EquipAnim, TEXT("ToolTip"), TEXT("equip animations"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLWeaponSoundManager(Z_Construct_UClass_UXLWeaponSoundManager, &UXLWeaponSoundManager::StaticClass, TEXT("UXLWeaponSoundManager"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLWeaponSoundManager);
+	UScriptStruct* Z_Construct_UScriptStruct_FTakeHitInfo()
+	{
+		UPackage* Outer = Z_Construct_UPackage__Script_ExtendedLibrary();
+		extern uint32 Get_Z_Construct_UScriptStruct_FTakeHitInfo_CRC();
+		static UScriptStruct* ReturnStruct = FindExistingStructIfHotReloadOrDynamic(Outer, TEXT("TakeHitInfo"), sizeof(FTakeHitInfo), Get_Z_Construct_UScriptStruct_FTakeHitInfo_CRC(), false);
+		if (!ReturnStruct)
+		{
+			ReturnStruct = new(EC_InternalUseOnlyConstructor, Outer, TEXT("TakeHitInfo"), RF_Public|RF_Transient|RF_MarkAsNative) UScriptStruct(FObjectInitializer(), NULL, new UScriptStruct::TCppStructOps<FTakeHitInfo>, EStructFlags(0x00000005));
+			UProperty* NewProp_RadialDamageEvent = new(EC_InternalUseOnlyConstructor, ReturnStruct, TEXT("RadialDamageEvent"), RF_Public|RF_Transient|RF_MarkAsNative) UStructProperty(CPP_PROPERTY_BASE(RadialDamageEvent, FTakeHitInfo), 0x0040008000000000, Z_Construct_UScriptStruct_FRadialDamageEvent());
+			UProperty* NewProp_PointDamageEvent = new(EC_InternalUseOnlyConstructor, ReturnStruct, TEXT("PointDamageEvent"), RF_Public|RF_Transient|RF_MarkAsNative) UStructProperty(CPP_PROPERTY_BASE(PointDamageEvent, FTakeHitInfo), 0x0040008000000000, Z_Construct_UScriptStruct_FPointDamageEvent());
+			UProperty* NewProp_GeneralDamageEvent = new(EC_InternalUseOnlyConstructor, ReturnStruct, TEXT("GeneralDamageEvent"), RF_Public|RF_Transient|RF_MarkAsNative) UStructProperty(CPP_PROPERTY_BASE(GeneralDamageEvent, FTakeHitInfo), 0x0040000000000000, Z_Construct_UScriptStruct_FDamageEvent());
+			UProperty* NewProp_EnsureReplicationByte = new(EC_InternalUseOnlyConstructor, ReturnStruct, TEXT("EnsureReplicationByte"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(EnsureReplicationByte, FTakeHitInfo), 0x0040000000000000);
+			CPP_BOOL_PROPERTY_BITMASK_STRUCT(bKilled, FTakeHitInfo, uint8);
+			UProperty* NewProp_bKilled = new(EC_InternalUseOnlyConstructor, ReturnStruct, TEXT("bKilled"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(bKilled, FTakeHitInfo), 0x0010000000000000, CPP_BOOL_PROPERTY_BITMASK(bKilled, FTakeHitInfo), sizeof(uint8), false);
+			UProperty* NewProp_DamageEventClassID = new(EC_InternalUseOnlyConstructor, ReturnStruct, TEXT("DamageEventClassID"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(DamageEventClassID, FTakeHitInfo), 0x0010000000000000);
+			UProperty* NewProp_DamageCauser = new(EC_InternalUseOnlyConstructor, ReturnStruct, TEXT("DamageCauser"), RF_Public|RF_Transient|RF_MarkAsNative) UWeakObjectProperty(CPP_PROPERTY_BASE(DamageCauser, FTakeHitInfo), 0x0014000000000000, Z_Construct_UClass_AActor_NoRegister());
+			UProperty* NewProp_PawnInstigator = new(EC_InternalUseOnlyConstructor, ReturnStruct, TEXT("PawnInstigator"), RF_Public|RF_Transient|RF_MarkAsNative) UWeakObjectProperty(CPP_PROPERTY_BASE(PawnInstigator, FTakeHitInfo), 0x0014000000000000, Z_Construct_UClass_AXLCharacter_NoRegister());
+			UProperty* NewProp_DamageTypeClass = new(EC_InternalUseOnlyConstructor, ReturnStruct, TEXT("DamageTypeClass"), RF_Public|RF_Transient|RF_MarkAsNative) UClassProperty(CPP_PROPERTY_BASE(DamageTypeClass, FTakeHitInfo), 0x0010000000000000, Z_Construct_UClass_UObject_NoRegister(), UClass::StaticClass());
+			UProperty* NewProp_ActualDamage = new(EC_InternalUseOnlyConstructor, ReturnStruct, TEXT("ActualDamage"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(ActualDamage, FTakeHitInfo), 0x0010000000000000);
+			ReturnStruct->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnStruct->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnStruct, TEXT("ModuleRelativePath"), TEXT("Public/Structs/XLHitInfo.h"));
+			MetaData->SetValue(NewProp_RadialDamageEvent, TEXT("ModuleRelativePath"), TEXT("Public/Structs/XLHitInfo.h"));
+			MetaData->SetValue(NewProp_RadialDamageEvent, TEXT("ToolTip"), TEXT("Describes radial damage, if that is what was received."));
+			MetaData->SetValue(NewProp_PointDamageEvent, TEXT("ModuleRelativePath"), TEXT("Public/Structs/XLHitInfo.h"));
+			MetaData->SetValue(NewProp_PointDamageEvent, TEXT("ToolTip"), TEXT("Describes point damage, if that is what was received."));
+			MetaData->SetValue(NewProp_GeneralDamageEvent, TEXT("ModuleRelativePath"), TEXT("Public/Structs/XLHitInfo.h"));
+			MetaData->SetValue(NewProp_GeneralDamageEvent, TEXT("ToolTip"), TEXT("Describes general damage."));
+			MetaData->SetValue(NewProp_EnsureReplicationByte, TEXT("ModuleRelativePath"), TEXT("Public/Structs/XLHitInfo.h"));
+			MetaData->SetValue(NewProp_EnsureReplicationByte, TEXT("ToolTip"), TEXT("A rolling counter used to ensure the struct is dirty and will replicate."));
+			MetaData->SetValue(NewProp_bKilled, TEXT("ModuleRelativePath"), TEXT("Public/Structs/XLHitInfo.h"));
+			MetaData->SetValue(NewProp_bKilled, TEXT("ToolTip"), TEXT("Rather this was a kill"));
+			MetaData->SetValue(NewProp_DamageEventClassID, TEXT("ModuleRelativePath"), TEXT("Public/Structs/XLHitInfo.h"));
+			MetaData->SetValue(NewProp_DamageEventClassID, TEXT("ToolTip"), TEXT("Specifies which DamageEvent below describes the damage received."));
+			MetaData->SetValue(NewProp_DamageCauser, TEXT("ModuleRelativePath"), TEXT("Public/Structs/XLHitInfo.h"));
+			MetaData->SetValue(NewProp_DamageCauser, TEXT("ToolTip"), TEXT("Who actually caused the damage"));
+			MetaData->SetValue(NewProp_PawnInstigator, TEXT("ModuleRelativePath"), TEXT("Public/Structs/XLHitInfo.h"));
+			MetaData->SetValue(NewProp_PawnInstigator, TEXT("ToolTip"), TEXT("Who hit us"));
+			MetaData->SetValue(NewProp_DamageTypeClass, TEXT("ModuleRelativePath"), TEXT("Public/Structs/XLHitInfo.h"));
+			MetaData->SetValue(NewProp_DamageTypeClass, TEXT("ToolTip"), TEXT("The damage type we were hit with."));
+			MetaData->SetValue(NewProp_ActualDamage, TEXT("ModuleRelativePath"), TEXT("Public/Structs/XLHitInfo.h"));
+			MetaData->SetValue(NewProp_ActualDamage, TEXT("ToolTip"), TEXT("The amount of damage actually applied"));
+#endif
+		}
+		return ReturnStruct;
+	}
+	uint32 Get_Z_Construct_UScriptStruct_FTakeHitInfo_CRC() { return 4007705936U; }
 	UPackage* Z_Construct_UPackage__Script_ExtendedLibrary()
 	{
 		static UPackage* ReturnPackage = NULL;
@@ -981,8 +1528,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/ExtendedLibrary")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000040);
 			FGuid Guid;
-			Guid.A = 0x9FF0BA5F;
-			Guid.B = 0xF02AC98A;
+			Guid.A = 0xB5810B07;
+			Guid.B = 0x543882E4;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

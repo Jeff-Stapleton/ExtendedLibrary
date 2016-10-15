@@ -1,3 +1,4 @@
+
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
@@ -7,23 +8,23 @@ AXLWeapon::AXLWeapon()
 {
 	//WeaponState = CreateDefaultSubobject<USSWeaponState>(TEXT("WeaponState"));
 
-	/*Mesh3P = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh3P"));
+	Mesh3P = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh3P"));
 	Mesh3P->MeshComponentUpdateFlag = EMeshComponentUpdateFlag::OnlyTickPoseWhenRendered;
 	Mesh3P->bReceivesDecals = false;
 	Mesh3P->CastShadow = true;
 	Mesh3P->SetCollisionObjectType(ECC_WorldDynamic);
 	Mesh3P->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	Mesh3P->SetCollisionResponseToChannel(COLLISION_WEAPON, ECR_Block);
+	//Mesh3P->SetCollisionResponseToChannel(COLLISION_WEAPON, ECR_Block);
 	Mesh3P->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
-	Mesh3P->SetCollisionResponseToChannel(COLLISION_PROJECTILE, ECR_Block);
+	//Mesh3P->SetCollisionResponseToChannel(COLLISION_PROJECTILE, ECR_Block);
 
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.TickGroup = TG_PrePhysics;
 
-	if (MyPawn)
+	if (Character)
 	{
-		AttackSpeed = MyPawn->CharacterAttributes->GetAttackSpeed();
-	}*/
+		//AttackSpeed = Character->CharacterAttributes->GetAttackSpeed();
+	}
 }
 
 
@@ -41,7 +42,7 @@ void AXLWeapon::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 
-	//DetachMeshFromPawn();
+	DetachMeshFromPawn();
 }
 
 void AXLWeapon::Destroyed()
@@ -51,23 +52,23 @@ void AXLWeapon::Destroyed()
 
 bool AXLWeapon::StartAttack()
 {
-	/*if (SSWeaponCan::Attack(this))
+	if (XLWeaponCan::Attack(this))
 	{
 		PlayWeaponFX();
-		WeaponState->SetWeaponState(EWeaponState::Attacking);
-		AttackSpeed = MyPawn->CharacterAttributes->GetAttackSpeed();
+		WeaponState = EWeaponState::Firing;
+
+		//AttackSpeed = Character->CharacterAttributes->GetAttackSpeed();
 		return true;
 	}
 	else
 	{
 		return false;
-	}*/
-	return true;
+	}
 }
 void AXLWeapon::StopAttack()
 {
-	/*StopWeaponFX();
-	WeaponState->SetWeaponState(EWeaponState::Idling);*/
+	StopWeaponFX();
+	WeaponState = EWeaponState::Idle;
 }
 
 void AXLWeapon::StartReload()
@@ -81,16 +82,16 @@ void AXLWeapon::StopReload()
 
 void AXLWeapon::StartMelee()
 {
-	//if (ArenaWeaponCan::Melee(MyPawn, this))
-	/*{
+	if (XLWeaponCan::Melee(this))
+	{
 		Melee();
-	}*/
+	}
 }
 void AXLWeapon::StopMelee()
 {
 	//if (GetWeaponState()->GetWeaponState() == EWeaponState::Meleeing)
 	{
-		//GetWeaponState()->SetWeaponState(EWeaponState::Default);
+		WeaponState = EWeaponState::Idle;
 		//StopWeaponAnimation(GetWeaponEffects()->GetMeleeAnim());
 	}
 }
@@ -142,14 +143,14 @@ void AXLWeapon::Melee()
 
 	if (GameCharacter)
 	{
-	UGameplayStatics::ApplyDamage(OutOverlaps[i].GetActor(), 200.0f, Instigator->GetController(), MyPawn->Controller, UDamageType::StaticClass());
+	UGameplayStatics::ApplyDamage(OutOverlaps[i].GetActor(), 200.0f, Instigator->GetController(), Character->Controller, UDamageType::StaticClass());
 	}
 	}
 	OutOverlaps.Empty();
 	}
 	}
 
-	if (MyPawn && MyPawn->IsLocallyControlled())
+	if (Character && Character->IsLocallyControlled())
 	{
 	//PlayWeaponSound(GetWeaponEffects()->GetMeleeSound());
 	}*/
@@ -157,39 +158,36 @@ void AXLWeapon::Melee()
 
 float AXLWeapon::PlayAnimation(class UAnimMontage* Animation, float InPlayRate)
 {
-	//float Duration = 0.0f;
-	//if (MyPawn)
-	//{
-	//	UAnimMontage* UseAnim = Animation;
-	//	if (UseAnim)
-	//	{
-	//		Duration = MyPawn->PlayAnimMontage(UseAnim, InPlayRate);
-	//	}
-	//}
-
-	//return Duration;
-	return 0.0f;
+	float Duration = 0.0f;
+	if (Character)
+	{
+		UAnimMontage* UseAnim = Animation;
+		if (UseAnim)
+		{
+			Duration = Character->PlayAnimMontage(UseAnim, InPlayRate);
+		}
+	}
+	return Duration;
 }
 void AXLWeapon::StopAnimation(class UAnimMontage* Animation)
 {
-	//if (MyPawn)
-	//{
-	//	UAnimMontage* UseAnim = Animation;
-	//	if (UseAnim)
-	//	{
-	//		MyPawn->StopAnimMontage(UseAnim);
-	//	}
-	//}
+	if (Character)
+	{
+		UAnimMontage* UseAnim = Animation;
+		if (UseAnim)
+		{
+			Character->StopAnimMontage(UseAnim);
+		}
+	}
 }
 
 UAudioComponent* AXLWeapon::PlayWeaponSound(USoundCue* Sound)
 {
 	UAudioComponent* AC = NULL;
-	//if (Sound && MyPawn)
-	//{
-	//	AC = UGameplayStatics::SpawnSoundAttached(Sound, MyPawn->GetRootComponent());
-	//}
-
+	if (Sound && Character)
+	{
+		AC = UGameplayStatics::SpawnSoundAttached(Sound, Character->GetRootComponent());
+	}
 	return AC;
 }
 
@@ -200,9 +198,9 @@ void AXLWeapon::PlayWeaponFX()
 		USkeletalMeshComponent* UseWeaponMesh = GetWeaponMesh();
 		if (!WeaponEffects->IsLoopedMuzzleFX() || WeaponEffects->GetMuzzlePSC() == NULL)
 		{
-			if (MyPawn != NULL)
+			if (Character != NULL)
 			{
-				AController* PlayerCon = MyPawn->GetController();
+				AController* PlayerCon = Character->GetController();
 				if (PlayerCon != NULL)
 				{
 					Mesh3P->GetSocketLocation(WeaponEffects->GetWeaponFXPoint());
@@ -264,18 +262,18 @@ void AXLWeapon::StopWeaponFX()
 
 void AXLWeapon::AttachMeshToPawn()
 {
-	/*if (MyPawn)
+	if (Character)
 	{
 		DetachMeshFromPawn();
 
 		FName AttachPoint = "RightHand";
-		USkeletalMeshComponent* PawnMesh3p = MyPawn->GetMesh();
+		USkeletalMeshComponent* PawnMesh3p = Character->GetMesh();
 		Mesh3P->SetHiddenInGame(false);
-		Mesh3P->AttachTo(PawnMesh3p, AttachPoint);
-	}*/
+		Mesh3P->AttachToComponent(PawnMesh3p, FAttachmentTransformRules::KeepWorldTransform, AttachPoint);
+	}
 }
 void AXLWeapon::DetachMeshFromPawn()
 {
-	/*Mesh3P->DetachFromParent();
-	Mesh3P->SetHiddenInGame(true);*/
+	Mesh3P->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+	Mesh3P->SetHiddenInGame(true);
 }

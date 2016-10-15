@@ -1,20 +1,20 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLAnimationManager.h"
+#include "XLPlayerAnimationManager.h"
 
-UXLAnimationManager::UXLAnimationManager()
+UXLPlayerAnimationManager::UXLPlayerAnimationManager()
 {
 	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
-void UXLAnimationManager::BeginPlay()
+void UXLPlayerAnimationManager::BeginPlay()
 {
 	Super::BeginPlay();
 }
 
-void UXLAnimationManager::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
+void UXLPlayerAnimationManager::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
 }

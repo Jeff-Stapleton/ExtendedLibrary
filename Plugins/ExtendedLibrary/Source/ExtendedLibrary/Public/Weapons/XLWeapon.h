@@ -1,7 +1,9 @@
+#include "GameFramework/Actor.h"
+#include "Enums/XLWeaponState.h"
+#include "XLWeapon.generated.h"
+
 #pragma once
 
-#include "GameFramework/Actor.h"
-#include "XLWeapon.generated.h"
 
 UCLASS()
 class AXLWeapon : public AActor
@@ -38,5 +40,19 @@ public:
 
 	void AttachMeshToPawn();
 	void DetachMeshFromPawn();
+
+	UPROPERTY()
+	AXLCharacter* Character;
+
+	UPROPERTY(EditDefaultsOnly, Category = Mesh)
+	USkeletalMeshComponent* Mesh3P;
+
+	TEnumAsByte<EWeaponState::Type> WeaponState;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animations)
+	class UXLWeaponAnimationManager* WeaponAnimations;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animations)
+	class UXLWeaponEffectManager* WeaponEffects;
 
 };

@@ -45,7 +45,7 @@ protected:
 
 private:
 
-	//UPROPERTY()
-	//ASSPlayerCharacter* MyCharacter;
+	UPROPERTY()
+	AXLCharacter* MyCharacter;
 
 };
