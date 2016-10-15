@@ -17,7 +17,7 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void SetPlayer(UPlayer* Player);
 
-protected:
+public:
 
 	virtual void Move(float Direction);
 	virtual void Strafe(float Direction);
@@ -39,25 +39,23 @@ protected:
 
 	virtual void Melee();
 
-	virtual void StartSpecial();
-	virtual void StopSpecial();
-
-	virtual void StartPrimaryAbility();
-	virtual void StopPrimaryAbility();
-
-	virtual void StartSecondaryAbility();
-	virtual void StopSecondaryAbility();
-
-	virtual void StartUltimate();
-	virtual void StopUltimate();
-
 	virtual void UnFreeze() override;
 
 	void Reset() override;
 
+	UFUNCTION()
+	void ClientGameStarted();
+
+	UFUNCTION()
+	void ClientStartOnlineGame();
+
+
 private:
 
-	//UPROPERTY()
-	//ASSPlayerCharacter* MyCharacter;
+	UPROPERTY()
+	AXLCharacter* MyCharacter;
+
+	FTimerHandle StartGame_Timer;
+
 
 };

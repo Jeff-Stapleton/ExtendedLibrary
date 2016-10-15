@@ -8,7 +8,6 @@
 
 IMPLEMENT_MODULE(ExtendedLibraryModule, ExtendedLibrary);
 
-DEFINE_LOG_CATEGORY(ModuleLog)
 
 #define LOCTEXT_NAMESPACE "ExtendedLibrary"
 
@@ -19,11 +18,11 @@ ExtendedLibraryModule::ExtendedLibraryModule()
 void ExtendedLibraryModule::StartupModule()
 {
 // Startup LOG MSG
-	UE_LOG(ModuleLog, Warning, TEXT("ExtendedLibrary: Log Started"));
+	//UE_LOG(ModuleLog, Warning, TEXT("ExtendedLibrary: Log Started"));
 }
 
 void ExtendedLibraryModule::ShutdownModule()
 {
 // Shutdown LOG MSG
-	UE_LOG(ModuleLog, Warning, TEXT("ExtendedLibrary: Log Ended"));
+	//UE_LOG(ModuleLog, Warning, TEXT("ExtendedLibrary: Log Ended"));
 }

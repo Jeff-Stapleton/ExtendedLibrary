@@ -6,7 +6,6 @@
 
 #pragma once
 
-DECLARE_LOG_CATEGORY_EXTERN(ModuleLog, Log, All)
 
 class ExtendedLibraryModule : public IModuleInterface
 {
