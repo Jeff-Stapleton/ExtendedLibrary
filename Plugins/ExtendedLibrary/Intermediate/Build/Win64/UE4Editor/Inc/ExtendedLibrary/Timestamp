@@ -10,6 +10,8 @@ C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\E
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Enums\XLMovementState.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Enums\XLWeaponState.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Managers\XLAbilityManager.h
+C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Managers\XLPickupEffectManager.h
+C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Managers\XLPickupSoundManager.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Managers\XLPlayerAnimationManager.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Managers\XLPlayerEffectManager.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Managers\XLPlayerSoundManager.h
@@ -17,6 +19,7 @@ C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\E
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Managers\XLWeaponEffectManager.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Managers\XLWeaponManager.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Managers\XLWeaponSoundManager.h
+C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Pickups\XLPickup.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Projectiles\XLProjectile.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Structs\XLDecalData.h
 C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Public\Structs\XLHitInfo.h

@@ -5,8 +5,6 @@
 	DO NOT modify this manually! Edit the corresponding .h files instead!
 ===========================================================================*/
 
-#include "ObjectBase.h"
-
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #ifdef EXTENDEDLIBRARY_XLPlayerSoundManager_generated_h
 #error "XLPlayerSoundManager.generated.h already included, missing '#pragma once' in XLPlayerSoundManager.h"
@@ -61,10 +59,12 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UXLPlayerSoundManager); \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(UXLPlayerSoundManager)
 
 
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLPlayerSoundManager_h_9_PRIVATE_PROPERTY_OFFSET
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLPlayerSoundManager_h_6_PROLOG
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLPlayerSoundManager_h_9_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLPlayerSoundManager_h_9_PRIVATE_PROPERTY_OFFSET \
 	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLPlayerSoundManager_h_9_RPC_WRAPPERS \
 	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLPlayerSoundManager_h_9_INCLASS \
 	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLPlayerSoundManager_h_9_STANDARD_CONSTRUCTORS \
@@ -75,6 +75,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLPlayerSoundManager_h_9_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLPlayerSoundManager_h_9_PRIVATE_PROPERTY_OFFSET \
 	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLPlayerSoundManager_h_9_RPC_WRAPPERS_NO_PURE_DECLS \
 	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLPlayerSoundManager_h_9_INCLASS_NO_PURE_DECLS \
 	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLPlayerSoundManager_h_9_ENHANCED_CONSTRUCTORS \

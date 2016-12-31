@@ -5,8 +5,6 @@
 	DO NOT modify this manually! Edit the corresponding .h files instead!
 ===========================================================================*/
 
-#include "ObjectBase.h"
-
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #ifdef EXTENDEDLIBRARY_XLDecalData_generated_h
 #error "XLDecalData.generated.h already included, missing '#pragma once' in XLDecalData.h"

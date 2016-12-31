@@ -8,16 +8,35 @@ public class ExtendedLibrary : ModuleRules
 		
 		PublicIncludePaths.AddRange(new[] { "ExtendedLibrary/Public" });
 
+        PublicDependencyModuleNames.AddRange(
+            new[]
+            {
+                "Core",
+                "CoreUObject",
+                "Engine",
+                "InputCore",
+                "HTTP",
+                "OnlineSubsystem",
+            }
+        );
+
         PrivateDependencyModuleNames.AddRange(
             new[]
             {
-                "Engine",
-                "InputCore",
+                "AIModule",
                 "Core",
-                "Slate",
-                "SlateCore",
-                "EditorStyle",
-                "CoreUObject"
+                "CoreUObject",
+                "Engine",
+                "GameplayTasks",
+                "InputCore",
+                "HTTP",
+                "OnlineSubsystem",
+                "OnlineSubsystemNull",
+                "OnlineSubsystemUtils",
+                "Sockets",
+                "Networking",
+                "AssetRegistry",
+                "UMG",
             }
         );
     }

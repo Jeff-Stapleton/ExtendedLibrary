@@ -5,8 +5,6 @@
 	DO NOT modify this manually! Edit the corresponding .h files instead!
 ===========================================================================*/
 
-#include "ObjectBase.h"
-
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #ifdef EXTENDEDLIBRARY_XLCharacter_generated_h
 #error "XLCharacter.generated.h already included, missing '#pragma once' in XLCharacter.h"
@@ -61,10 +59,12 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AXLCharacter); \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AXLCharacter)
 
 
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Characters_XLCharacter_h_13_PRIVATE_PROPERTY_OFFSET
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Characters_XLCharacter_h_10_PROLOG
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Characters_XLCharacter_h_13_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Characters_XLCharacter_h_13_PRIVATE_PROPERTY_OFFSET \
 	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Characters_XLCharacter_h_13_RPC_WRAPPERS \
 	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Characters_XLCharacter_h_13_INCLASS \
 	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Characters_XLCharacter_h_13_STANDARD_CONSTRUCTORS \
@@ -75,6 +75,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Characters_XLCharacter_h_13_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Characters_XLCharacter_h_13_PRIVATE_PROPERTY_OFFSET \
 	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Characters_XLCharacter_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
 	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Characters_XLCharacter_h_13_INCLASS_NO_PURE_DECLS \
 	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Characters_XLCharacter_h_13_ENHANCED_CONSTRUCTORS \

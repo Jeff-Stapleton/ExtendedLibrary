@@ -5,8 +5,6 @@
 	DO NOT modify this manually! Edit the corresponding .h files instead!
 ===========================================================================*/
 
-#include "ObjectBase.h"
-
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #ifdef EXTENDEDLIBRARY_XLImpactEffect_generated_h
 #error "XLImpactEffect.generated.h already included, missing '#pragma once' in XLImpactEffect.h"
@@ -61,10 +59,12 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AXLImpactEffect); \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AXLImpactEffect)
 
 
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Effects_XLImpactEffect_h_10_PRIVATE_PROPERTY_OFFSET
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Effects_XLImpactEffect_h_7_PROLOG
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Effects_XLImpactEffect_h_10_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Effects_XLImpactEffect_h_10_PRIVATE_PROPERTY_OFFSET \
 	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Effects_XLImpactEffect_h_10_RPC_WRAPPERS \
 	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Effects_XLImpactEffect_h_10_INCLASS \
 	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Effects_XLImpactEffect_h_10_STANDARD_CONSTRUCTORS \
@@ -75,6 +75,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Effects_XLImpactEffect_h_10_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Effects_XLImpactEffect_h_10_PRIVATE_PROPERTY_OFFSET \
 	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Effects_XLImpactEffect_h_10_RPC_WRAPPERS_NO_PURE_DECLS \
 	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Effects_XLImpactEffect_h_10_INCLASS_NO_PURE_DECLS \
 	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Effects_XLImpactEffect_h_10_ENHANCED_CONSTRUCTORS \

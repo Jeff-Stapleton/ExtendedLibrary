@@ -6,13 +6,16 @@
 ===========================================================================*/
 
 #include "Public/ExtendedLibraryPCH.h"
+#include "GeneratedCppIncludes.h"
 #include "ExtendedLibrary.generated.dep.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCode1ExtendedLibrary() {}
+FName EXTENDEDLIBRARY_OnPickedUpEvent = FName(TEXT("OnPickedUpEvent"));
+FName EXTENDEDLIBRARY_OnRespawnEvent = FName(TEXT("OnRespawnEvent"));
 	void UXLAbilityManager::StaticRegisterNativesUXLAbilityManager()
 	{
 	}
-	IMPLEMENT_CLASS(UXLAbilityManager, 971471910);
+	IMPLEMENT_CLASS(UXLAbilityManager, 2226756156);
 static class UEnum* EHealthState_StaticEnum()
 {
 	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -52,7 +55,7 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 	void AXLCharacter::StaticRegisterNativesAXLCharacter()
 	{
 	}
-	IMPLEMENT_CLASS(AXLCharacter, 376188786);
+	IMPLEMENT_CLASS(AXLCharacter, 3255645240);
 	void UXLCharacterResources::StaticRegisterNativesUXLCharacterResources()
 	{
 		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "CooldownTimer",(Native)&UXLCharacterResources::execCooldownTimer);
@@ -61,15 +64,15 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "RegenerateShield",(Native)&UXLCharacterResources::execRegenerateShield);
 		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "RegenerateStamina",(Native)&UXLCharacterResources::execRegenerateStamina);
 	}
-	IMPLEMENT_CLASS(UXLCharacterResources, 3774559643);
+	IMPLEMENT_CLASS(UXLCharacterResources, 4216659802);
 	void UXLCharacterStats::StaticRegisterNativesUXLCharacterStats()
 	{
 	}
-	IMPLEMENT_CLASS(UXLCharacterStats, 1023988016);
+	IMPLEMENT_CLASS(UXLCharacterStats, 2374726307);
 	void UXLCoverComponent::StaticRegisterNativesUXLCoverComponent()
 	{
 	}
-	IMPLEMENT_CLASS(UXLCoverComponent, 136658281);
+	IMPLEMENT_CLASS(UXLCoverComponent, 2007236210);
 class UScriptStruct* FDecalData::StaticStruct()
 {
 	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -93,31 +96,52 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFDecalData
 	void AXLImpactEffect::StaticRegisterNativesAXLImpactEffect()
 	{
 	}
-	IMPLEMENT_CLASS(AXLImpactEffect, 676621481);
+	IMPLEMENT_CLASS(AXLImpactEffect, 515835133);
 	void UXLMovementComponent::StaticRegisterNativesUXLMovementComponent()
 	{
 	}
-	IMPLEMENT_CLASS(UXLMovementComponent, 1241303497);
+	IMPLEMENT_CLASS(UXLMovementComponent, 1083805540);
+	void AXLPickup::OnPickedUpEvent()
+	{
+		ProcessEvent(FindFunctionChecked(EXTENDEDLIBRARY_OnPickedUpEvent),NULL);
+	}
+	void AXLPickup::OnRespawnEvent()
+	{
+		ProcessEvent(FindFunctionChecked(EXTENDEDLIBRARY_OnRespawnEvent),NULL);
+	}
+	void AXLPickup::StaticRegisterNativesAXLPickup()
+	{
+		FNativeFunctionRegistrar::RegisterFunction(AXLPickup::StaticClass(), "OnRep_IsActive",(Native)&AXLPickup::execOnRep_IsActive);
+	}
+	IMPLEMENT_CLASS(AXLPickup, 1165043912);
+	void UXLPickupEffectManager::StaticRegisterNativesUXLPickupEffectManager()
+	{
+	}
+	IMPLEMENT_CLASS(UXLPickupEffectManager, 924311282);
+	void UXLPickupSoundManager::StaticRegisterNativesUXLPickupSoundManager()
+	{
+	}
+	IMPLEMENT_CLASS(UXLPickupSoundManager, 2986559511);
 	void UXLPlayerAnimationManager::StaticRegisterNativesUXLPlayerAnimationManager()
 	{
 	}
-	IMPLEMENT_CLASS(UXLPlayerAnimationManager, 3788153921);
+	IMPLEMENT_CLASS(UXLPlayerAnimationManager, 1463672328);
 	void AXLPlayerController::StaticRegisterNativesAXLPlayerController()
 	{
 	}
-	IMPLEMENT_CLASS(AXLPlayerController, 2519319151);
+	IMPLEMENT_CLASS(AXLPlayerController, 1596186881);
 	void UXLPlayerEffectManager::StaticRegisterNativesUXLPlayerEffectManager()
 	{
 	}
-	IMPLEMENT_CLASS(UXLPlayerEffectManager, 4086652077);
+	IMPLEMENT_CLASS(UXLPlayerEffectManager, 2722168607);
 	void UXLPlayerSoundManager::StaticRegisterNativesUXLPlayerSoundManager()
 	{
 	}
-	IMPLEMENT_CLASS(UXLPlayerSoundManager, 2044852930);
+	IMPLEMENT_CLASS(UXLPlayerSoundManager, 1354152002);
 	void AXLProjectile::StaticRegisterNativesAXLProjectile()
 	{
 	}
-	IMPLEMENT_CLASS(AXLProjectile, 1302812797);
+	IMPLEMENT_CLASS(AXLProjectile, 1558129695);
 static class UEnum* EWeaponState_StaticEnum()
 {
 	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -133,31 +157,31 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EWeaponState(EWeaponStat
 	void AXLWeapon::StaticRegisterNativesAXLWeapon()
 	{
 	}
-	IMPLEMENT_CLASS(AXLWeapon, 3830704064);
+	IMPLEMENT_CLASS(AXLWeapon, 196504927);
 	void AXLMeleeWeapon::StaticRegisterNativesAXLMeleeWeapon()
 	{
 	}
-	IMPLEMENT_CLASS(AXLMeleeWeapon, 2535715106);
+	IMPLEMENT_CLASS(AXLMeleeWeapon, 3472837688);
 	void AXLRangedWeapon::StaticRegisterNativesAXLRangedWeapon()
 	{
 	}
-	IMPLEMENT_CLASS(AXLRangedWeapon, 1204880803);
+	IMPLEMENT_CLASS(AXLRangedWeapon, 3158120836);
 	void UXLWeaponAnimationManager::StaticRegisterNativesUXLWeaponAnimationManager()
 	{
 	}
-	IMPLEMENT_CLASS(UXLWeaponAnimationManager, 1632396061);
+	IMPLEMENT_CLASS(UXLWeaponAnimationManager, 1853508640);
 	void UXLWeaponEffectManager::StaticRegisterNativesUXLWeaponEffectManager()
 	{
 	}
-	IMPLEMENT_CLASS(UXLWeaponEffectManager, 862043445);
+	IMPLEMENT_CLASS(UXLWeaponEffectManager, 2473582283);
 	void UXLWeaponManager::StaticRegisterNativesUXLWeaponManager()
 	{
 	}
-	IMPLEMENT_CLASS(UXLWeaponManager, 3993750127);
+	IMPLEMENT_CLASS(UXLWeaponManager, 566661105);
 	void UXLWeaponSoundManager::StaticRegisterNativesUXLWeaponSoundManager()
 	{
 	}
-	IMPLEMENT_CLASS(UXLWeaponSoundManager, 4094684704);
+	IMPLEMENT_CLASS(UXLWeaponSoundManager, 2316626088);
 class UScriptStruct* FTakeHitInfo::StaticStruct()
 {
 	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -189,11 +213,12 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	ENGINE_API class UClass* Z_Construct_UClass_UParticleSystem_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_UPointLightComponent_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_UCharacterMovementComponent();
+	ENGINE_API class UClass* Z_Construct_UClass_UParticleSystemComponent_NoRegister();
+	ENGINE_API class UClass* Z_Construct_UClass_USoundCue_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_UAnimMontage_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_APlayerController();
 	ENGINE_API class UClass* Z_Construct_UClass_USkeletalMeshComponent_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_UCameraShake_NoRegister();
-	ENGINE_API class UClass* Z_Construct_UClass_UParticleSystemComponent_NoRegister();
 	ENGINE_API class UScriptStruct* Z_Construct_UScriptStruct_FRadialDamageEvent();
 	ENGINE_API class UScriptStruct* Z_Construct_UScriptStruct_FPointDamageEvent();
 	ENGINE_API class UScriptStruct* Z_Construct_UScriptStruct_FDamageEvent();
@@ -223,6 +248,15 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLImpactEffect();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLMovementComponent_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLMovementComponent();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLPickup_OnPickedUpEvent();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLPickup_OnRep_IsActive();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLPickup_OnRespawnEvent();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPickup_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPickup();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPickupEffectManager_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPickupEffectManager();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPickupSoundManager_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPickupSoundManager();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPlayerAnimationManager_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPlayerAnimationManager();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPlayerController_NoRegister();
@@ -273,7 +307,6 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
 				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
 				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLAbilityManager.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLAbilityManager.h"));
 #endif
@@ -583,7 +616,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
 				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
 				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Data/XLCharacterResources.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterResources.h"));
 				MetaData->SetValue(NewProp_MaxUltimate, TEXT("Category"), TEXT("Resources"));
@@ -656,7 +688,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
 				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
 				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Data/XLCharacterStats.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Data/XLCharacterStats.h"));
 				MetaData->SetValue(NewProp_EnergyDefense, TEXT("Category"), TEXT("Stats"));
@@ -720,7 +751,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
 				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
 				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Components/XLCoverComponent.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLCoverComponent.h"));
 #endif
@@ -926,7 +956,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->StaticLink();
 #if WITH_METADATA
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Components/XLMovementComponent.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
 				MetaData->SetValue(NewProp_TargetingMovementSpeed, TEXT("Category"), TEXT("Movement"));
@@ -960,6 +989,207 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLMovementComponent(Z_Construct_UClass_UXLMovementComponent, &UXLMovementComponent::StaticClass, TEXT("UXLMovementComponent"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLMovementComponent);
+	UFunction* Z_Construct_UFunction_AXLPickup_OnPickedUpEvent()
+	{
+		UObject* Outer=Z_Construct_UClass_AXLPickup();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("OnPickedUpEvent"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x08080800, 65535);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Pickups/XLPickup.h"));
+			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("blueprint event: pickup disappears"));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UFunction* Z_Construct_UFunction_AXLPickup_OnRep_IsActive()
+	{
+		UObject* Outer=Z_Construct_UClass_AXLPickup();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("OnRep_IsActive"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x00080401, 65535);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Pickups/XLPickup.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UFunction* Z_Construct_UFunction_AXLPickup_OnRespawnEvent()
+	{
+		UObject* Outer=Z_Construct_UClass_AXLPickup();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("OnRespawnEvent"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x08080800, 65535);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Pickups/XLPickup.h"));
+			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("blueprint event: pickup appears"));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UClass* Z_Construct_UClass_AXLPickup_NoRegister()
+	{
+		return AXLPickup::StaticClass();
+	}
+	UClass* Z_Construct_UClass_AXLPickup()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_AActor();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = AXLPickup::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20800081;
+
+				OuterClass->LinkChild(Z_Construct_UFunction_AXLPickup_OnPickedUpEvent());
+				OuterClass->LinkChild(Z_Construct_UFunction_AXLPickup_OnRep_IsActive());
+				OuterClass->LinkChild(Z_Construct_UFunction_AXLPickup_OnRespawnEvent());
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_PickupPSC = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PickupPSC"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(PickupPSC, AXLPickup), 0x00400000000b0009, Z_Construct_UClass_UParticleSystemComponent_NoRegister());
+				UProperty* NewProp_PickedUpBy = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PickedUpBy"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(PickedUpBy, AXLPickup), 0x0020080000002020, Z_Construct_UClass_AXLCharacter_NoRegister());
+				UProperty* NewProp_RespawnTime = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("RespawnTime"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(RespawnTime, AXLPickup), 0x0020080000010001);
+				CPP_BOOL_PROPERTY_BITMASK_STRUCT(bIsActive, AXLPickup, uint8);
+				UProperty* NewProp_bIsActive = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("bIsActive"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(bIsActive, AXLPickup), 0x0010000100002020, CPP_BOOL_PROPERTY_BITMASK(bIsActive, AXLPickup), sizeof(uint8), false);
+				NewProp_bIsActive->RepNotifyFunc = FName(TEXT("OnRep_IsActive"));
+				UProperty* NewProp_PickupSounds = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PickupSounds"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(PickupSounds, AXLPickup), 0x001000000008000d, Z_Construct_UClass_UXLPickupSoundManager_NoRegister());
+				UProperty* NewProp_PickupEffects = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PickupEffects"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(PickupEffects, AXLPickup), 0x001000000008000d, Z_Construct_UClass_UXLPickupEffectManager_NoRegister());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLPickup_OnPickedUpEvent(), "OnPickedUpEvent"); // 273519095
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLPickup_OnRep_IsActive(), "OnRep_IsActive"); // 1493405099
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLPickup_OnRespawnEvent(), "OnRespawnEvent"); // 1638082675
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Pickups/XLPickup.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Pickups/XLPickup.h"));
+				MetaData->SetValue(OuterClass, TEXT("ToolTip"), TEXT("Base class for pickup objects that can be placed in the world"));
+				MetaData->SetValue(NewProp_PickupPSC, TEXT("Category"), TEXT("Effects"));
+				MetaData->SetValue(NewProp_PickupPSC, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_PickupPSC, TEXT("ModuleRelativePath"), TEXT("Public/Pickups/XLPickup.h"));
+				MetaData->SetValue(NewProp_PickupPSC, TEXT("ToolTip"), TEXT("FX component"));
+				MetaData->SetValue(NewProp_PickedUpBy, TEXT("ModuleRelativePath"), TEXT("Public/Pickups/XLPickup.h"));
+				MetaData->SetValue(NewProp_PickedUpBy, TEXT("ToolTip"), TEXT("The character who has picked up this pickup"));
+				MetaData->SetValue(NewProp_RespawnTime, TEXT("Category"), TEXT("Pickup"));
+				MetaData->SetValue(NewProp_RespawnTime, TEXT("ModuleRelativePath"), TEXT("Public/Pickups/XLPickup.h"));
+				MetaData->SetValue(NewProp_RespawnTime, TEXT("ToolTip"), TEXT("how long it takes to respawn?"));
+				MetaData->SetValue(NewProp_bIsActive, TEXT("ModuleRelativePath"), TEXT("Public/Pickups/XLPickup.h"));
+				MetaData->SetValue(NewProp_bIsActive, TEXT("ToolTip"), TEXT("is it ready for interactions?"));
+				MetaData->SetValue(NewProp_PickupSounds, TEXT("Category"), TEXT("Sounds"));
+				MetaData->SetValue(NewProp_PickupSounds, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_PickupSounds, TEXT("ModuleRelativePath"), TEXT("Public/Pickups/XLPickup.h"));
+				MetaData->SetValue(NewProp_PickupEffects, TEXT("Category"), TEXT("Effects"));
+				MetaData->SetValue(NewProp_PickupEffects, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_PickupEffects, TEXT("ModuleRelativePath"), TEXT("Public/Pickups/XLPickup.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLPickup(Z_Construct_UClass_AXLPickup, &AXLPickup::StaticClass, TEXT("AXLPickup"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLPickup);
+	UClass* Z_Construct_UClass_UXLPickupEffectManager_NoRegister()
+	{
+		return UXLPickupEffectManager::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLPickupEffectManager()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLPickupEffectManager::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_RespawningFX = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("RespawningFX"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(RespawningFX, UXLPickupEffectManager), 0x0010000000010001, Z_Construct_UClass_UParticleSystem_NoRegister());
+				UProperty* NewProp_ActiveFX = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("ActiveFX"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(ActiveFX, UXLPickupEffectManager), 0x0010000000010001, Z_Construct_UClass_UParticleSystem_NoRegister());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
+				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLPickupEffectManager.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLPickupEffectManager.h"));
+				MetaData->SetValue(NewProp_RespawningFX, TEXT("Category"), TEXT("Effects"));
+				MetaData->SetValue(NewProp_RespawningFX, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLPickupEffectManager.h"));
+				MetaData->SetValue(NewProp_RespawningFX, TEXT("ToolTip"), TEXT("FX of pickup on respawn timer"));
+				MetaData->SetValue(NewProp_ActiveFX, TEXT("Category"), TEXT("Effects"));
+				MetaData->SetValue(NewProp_ActiveFX, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLPickupEffectManager.h"));
+				MetaData->SetValue(NewProp_ActiveFX, TEXT("ToolTip"), TEXT("FX of active pickup"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLPickupEffectManager(Z_Construct_UClass_UXLPickupEffectManager, &UXLPickupEffectManager::StaticClass, TEXT("UXLPickupEffectManager"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLPickupEffectManager);
+	UClass* Z_Construct_UClass_UXLPickupSoundManager_NoRegister()
+	{
+		return UXLPickupSoundManager::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLPickupSoundManager()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLPickupSoundManager::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_RespawnSound = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("RespawnSound"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(RespawnSound, UXLPickupSoundManager), 0x0010000000010001, Z_Construct_UClass_USoundCue_NoRegister());
+				UProperty* NewProp_PickupSound = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PickupSound"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(PickupSound, UXLPickupSoundManager), 0x0010000000010001, Z_Construct_UClass_USoundCue_NoRegister());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
+				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLPickupSoundManager.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLPickupSoundManager.h"));
+				MetaData->SetValue(NewProp_RespawnSound, TEXT("Category"), TEXT("Effects"));
+				MetaData->SetValue(NewProp_RespawnSound, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLPickupSoundManager.h"));
+				MetaData->SetValue(NewProp_RespawnSound, TEXT("ToolTip"), TEXT("sound played on respawn"));
+				MetaData->SetValue(NewProp_PickupSound, TEXT("Category"), TEXT("Effects"));
+				MetaData->SetValue(NewProp_PickupSound, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLPickupSoundManager.h"));
+				MetaData->SetValue(NewProp_PickupSound, TEXT("ToolTip"), TEXT("sound played when player picks it up"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLPickupSoundManager(Z_Construct_UClass_UXLPickupSoundManager, &UXLPickupSoundManager::StaticClass, TEXT("UXLPickupSoundManager"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLPickupSoundManager);
 	UClass* Z_Construct_UClass_UXLPlayerAnimationManager_NoRegister()
 	{
 		return UXLPlayerAnimationManager::StaticClass();
@@ -986,7 +1216,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
 				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
 				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLPlayerAnimationManager.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLPlayerAnimationManager.h"));
 				MetaData->SetValue(NewProp_DeathAnim, TEXT("Category"), TEXT("Animation"));
@@ -1059,7 +1288,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
 				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
 				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLPlayerEffectManager.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLPlayerEffectManager.h"));
 #endif
@@ -1093,7 +1321,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
 				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
 				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLPlayerSoundManager.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLPlayerSoundManager.h"));
 #endif
@@ -1299,7 +1526,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
 				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
 				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLWeaponAnimationManager.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponAnimationManager.h"));
 				MetaData->SetValue(NewProp_ReloadAnim, TEXT("Category"), TEXT("Animation"));
@@ -1355,7 +1581,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
 				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
 				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLWeaponEffectManager.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponEffectManager.h"));
 				MetaData->SetValue(NewProp_FireCameraShake, TEXT("Category"), TEXT("CameraShake"));
@@ -1407,7 +1632,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
 				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
 				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLWeaponManager.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponManager.h"));
 				MetaData->SetValue(NewProp_DefaultInventory, TEXT("Category"), TEXT("Inventory"));
@@ -1449,7 +1673,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
 				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
 				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("ComponentReplication"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLWeaponSoundManager.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLWeaponSoundManager.h"));
 				MetaData->SetValue(NewProp_ReloadAnim, TEXT("Category"), TEXT("Animation"));
@@ -1526,10 +1749,10 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 		if (!ReturnPackage)
 		{
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/ExtendedLibrary")), false, false));
-			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000040);
+			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
 			FGuid Guid;
-			Guid.A = 0xB5810B07;
-			Guid.B = 0x543882E4;
+			Guid.A = 0xF053EF77;
+			Guid.B = 0x6C040126;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

@@ -5,8 +5,6 @@
 	DO NOT modify this manually! Edit the corresponding .h files instead!
 ===========================================================================*/
 
-#include "ObjectBase.h"
-
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #ifdef EXTENDEDLIBRARY_XLHitInfo_generated_h
 #error "XLHitInfo.generated.h already included, missing '#pragma once' in XLHitInfo.h"
@@ -15,7 +13,11 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Structs_XLHitInfo_h_8_GENERATED_BODY \
 	friend EXTENDEDLIBRARY_API class UScriptStruct* Z_Construct_UScriptStruct_FTakeHitInfo(); \
-	EXTENDEDLIBRARY_API static class UScriptStruct* StaticStruct();
+	EXTENDEDLIBRARY_API static class UScriptStruct* StaticStruct(); \
+	FORCEINLINE static uint32 __PPO__EnsureReplicationByte() { return STRUCT_OFFSET(FTakeHitInfo, EnsureReplicationByte); } \
+	FORCEINLINE static uint32 __PPO__GeneralDamageEvent() { return STRUCT_OFFSET(FTakeHitInfo, GeneralDamageEvent); } \
+	FORCEINLINE static uint32 __PPO__PointDamageEvent() { return STRUCT_OFFSET(FTakeHitInfo, PointDamageEvent); } \
+	FORCEINLINE static uint32 __PPO__RadialDamageEvent() { return STRUCT_OFFSET(FTakeHitInfo, RadialDamageEvent); }
 
 
 #undef CURRENT_FILE_ID

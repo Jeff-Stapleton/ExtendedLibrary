@@ -38,6 +38,15 @@
 #ifndef EXTENDEDLIBRARY_XLMovementComponent_generated_h
 	#include "Public/Components/XLMovementComponent.h"
 #endif
+#ifndef EXTENDEDLIBRARY_XLPickup_generated_h
+	#include "Public/Pickups/XLPickup.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLPickupEffectManager_generated_h
+	#include "Public/Managers/XLPickupEffectManager.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLPickupSoundManager_generated_h
+	#include "Public/Managers/XLPickupSoundManager.h"
+#endif
 #ifndef EXTENDEDLIBRARY_XLPlayerAnimationManager_generated_h
 	#include "Public/Managers/XLPlayerAnimationManager.h"
 #endif
