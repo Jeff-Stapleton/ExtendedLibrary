@@ -84,7 +84,7 @@ void AXLPlayerController::Look(float Direction)
 {
 	if (XLControllerCan::Look(this))
 	{
-		(Cast<AXLCharacter>(GetPawn()))->Look(Direction);
+		(Cast<AXLCharacter>(GetPawn()))->Look(-Direction);
 	}
 }
 

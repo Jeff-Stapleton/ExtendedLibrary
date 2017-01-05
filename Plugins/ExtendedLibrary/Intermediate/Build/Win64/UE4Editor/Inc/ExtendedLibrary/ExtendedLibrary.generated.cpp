@@ -16,18 +16,18 @@ FName EXTENDEDLIBRARY_OnRespawnEvent = FName(TEXT("OnRespawnEvent"));
 	{
 	}
 	IMPLEMENT_CLASS(UXLAbilityManager, 2226756156);
-static class UEnum* EHealthState_StaticEnum()
+static class UEnum* EActionState_StaticEnum()
 {
 	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
 	static class UEnum* Singleton = NULL;
 	if (!Singleton)
 	{
-		extern EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EHealthState();
-		Singleton = GetStaticEnum(Z_Construct_UEnum_ExtendedLibrary_EHealthState, Z_Construct_UPackage__Script_ExtendedLibrary(), TEXT("EHealthState"));
+		extern EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EActionState();
+		Singleton = GetStaticEnum(Z_Construct_UEnum_ExtendedLibrary_EActionState, Z_Construct_UPackage__Script_ExtendedLibrary(), TEXT("EActionState"));
 	}
 	return Singleton;
 }
-static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EHealthState(EHealthState_StaticEnum, TEXT("/Script/ExtendedLibrary"), TEXT("EHealthState"), false, nullptr, nullptr);
+static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EActionState(EActionState_StaticEnum, TEXT("/Script/ExtendedLibrary"), TEXT("EActionState"), false, nullptr, nullptr);
 static class UEnum* ECombatState_StaticEnum()
 {
 	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -40,6 +40,18 @@ static class UEnum* ECombatState_StaticEnum()
 	return Singleton;
 }
 static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_ECombatState(ECombatState_StaticEnum, TEXT("/Script/ExtendedLibrary"), TEXT("ECombatState"), false, nullptr, nullptr);
+static class UEnum* EHealthState_StaticEnum()
+{
+	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
+	static class UEnum* Singleton = NULL;
+	if (!Singleton)
+	{
+		extern EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EHealthState();
+		Singleton = GetStaticEnum(Z_Construct_UEnum_ExtendedLibrary_EHealthState, Z_Construct_UPackage__Script_ExtendedLibrary(), TEXT("EHealthState"));
+	}
+	return Singleton;
+}
+static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EHealthState(EHealthState_StaticEnum, TEXT("/Script/ExtendedLibrary"), TEXT("EHealthState"), false, nullptr, nullptr);
 static class UEnum* EMovementState_StaticEnum()
 {
 	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -52,10 +64,26 @@ static class UEnum* EMovementState_StaticEnum()
 	return Singleton;
 }
 static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovementState_StaticEnum, TEXT("/Script/ExtendedLibrary"), TEXT("EMovementState"), false, nullptr, nullptr);
+static class UEnum* EPostureState_StaticEnum()
+{
+	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
+	static class UEnum* Singleton = NULL;
+	if (!Singleton)
+	{
+		extern EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EPostureState();
+		Singleton = GetStaticEnum(Z_Construct_UEnum_ExtendedLibrary_EPostureState, Z_Construct_UPackage__Script_ExtendedLibrary(), TEXT("EPostureState"));
+	}
+	return Singleton;
+}
+static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EPostureState(EPostureState_StaticEnum, TEXT("/Script/ExtendedLibrary"), TEXT("EPostureState"), false, nullptr, nullptr);
 	void AXLCharacter::StaticRegisterNativesAXLCharacter()
 	{
 	}
-	IMPLEMENT_CLASS(AXLCharacter, 3255645240);
+	IMPLEMENT_CLASS(AXLCharacter, 2383136397);
+	void AXLActionCharacter::StaticRegisterNativesAXLActionCharacter()
+	{
+	}
+	IMPLEMENT_CLASS(AXLActionCharacter, 3951241415);
 	void UXLCharacterResources::StaticRegisterNativesUXLCharacterResources()
 	{
 		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "CooldownTimer",(Native)&UXLCharacterResources::execCooldownTimer);
@@ -73,6 +101,14 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EMovementState(EMovement
 	{
 	}
 	IMPLEMENT_CLASS(UXLCoverComponent, 2007236210);
+	void UXLGameInstance::StaticRegisterNativesUXLGameInstance()
+	{
+	}
+	IMPLEMENT_CLASS(UXLGameInstance, 3566863388);
+	void AXLGameMode::StaticRegisterNativesAXLGameMode()
+	{
+	}
+	IMPLEMENT_CLASS(AXLGameMode, 2664965929);
 class UScriptStruct* FDecalData::StaticStruct()
 {
 	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -206,6 +242,10 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 // Cross Module References
 	ENGINE_API class UClass* Z_Construct_UClass_UActorComponent();
 	ENGINE_API class UClass* Z_Construct_UClass_ACharacter();
+	ENGINE_API class UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
+	ENGINE_API class UClass* Z_Construct_UClass_USpringArmComponent_NoRegister();
+	ENGINE_API class UClass* Z_Construct_UClass_UGameInstance();
+	ENGINE_API class UClass* Z_Construct_UClass_AGameMode();
 	ENGINE_API class UClass* Z_Construct_UClass_UMaterial_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_AActor();
 	ENGINE_API class UScriptStruct* Z_Construct_UScriptStruct_FHitResult();
@@ -227,11 +267,15 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbilityManager_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbilityManager();
-	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EHealthState();
+	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EActionState();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_ECombatState();
+	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EHealthState();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EMovementState();
+	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EPostureState();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLCharacter_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLCharacter();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLActionCharacter_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLActionCharacter();
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLCharacterResources_CooldownTimer();
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateEnergy();
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateHealth();
@@ -243,6 +287,10 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterStats();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCoverComponent_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCoverComponent();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLGameInstance_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLGameInstance();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLGameMode_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLGameMode();
 	EXTENDEDLIBRARY_API class UScriptStruct* Z_Construct_UScriptStruct_FDecalData();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLImpactEffect_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLImpactEffect();
@@ -317,6 +365,57 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLAbilityManager(Z_Construct_UClass_UXLAbilityManager, &UXLAbilityManager::StaticClass, TEXT("UXLAbilityManager"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLAbilityManager);
+	UEnum* Z_Construct_UEnum_ExtendedLibrary_EActionState()
+	{
+		UPackage* Outer=Z_Construct_UPackage__Script_ExtendedLibrary();
+		extern uint32 Get_Z_Construct_UEnum_ExtendedLibrary_EActionState_CRC();
+		static UEnum* ReturnEnum = FindExistingEnumIfHotReloadOrDynamic(Outer, TEXT("EActionState"), 0, Get_Z_Construct_UEnum_ExtendedLibrary_EActionState_CRC(), false);
+		if (!ReturnEnum)
+		{
+			ReturnEnum = new(EC_InternalUseOnlyConstructor, Outer, TEXT("EActionState"), RF_Public|RF_Transient|RF_MarkAsNative) UEnum(FObjectInitializer());
+			TArray<TPair<FName, uint8>> EnumNames;
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EActionState::Climbing")), 0));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EActionState::Dodging")), 1));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EActionState::Jumping")), 2));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EActionState::None")), 3));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EActionState::Sprinting")), 4));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EActionState::EActionState_MAX")), 5));
+			ReturnEnum->SetEnums(EnumNames, UEnum::ECppForm::Namespaced);
+			ReturnEnum->CppType = TEXT("EActionState::Type");
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnEnum->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnEnum, TEXT("BlueprintType"), TEXT("true"));
+			MetaData->SetValue(ReturnEnum, TEXT("Category"), TEXT("Character"));
+			MetaData->SetValue(ReturnEnum, TEXT("ModuleRelativePath"), TEXT("Public/Enums/XLActionState.h"));
+#endif
+		}
+		return ReturnEnum;
+	}
+	uint32 Get_Z_Construct_UEnum_ExtendedLibrary_EActionState_CRC() { return 3488178307U; }
+	UEnum* Z_Construct_UEnum_ExtendedLibrary_ECombatState()
+	{
+		UPackage* Outer=Z_Construct_UPackage__Script_ExtendedLibrary();
+		extern uint32 Get_Z_Construct_UEnum_ExtendedLibrary_ECombatState_CRC();
+		static UEnum* ReturnEnum = FindExistingEnumIfHotReloadOrDynamic(Outer, TEXT("ECombatState"), 0, Get_Z_Construct_UEnum_ExtendedLibrary_ECombatState_CRC(), false);
+		if (!ReturnEnum)
+		{
+			ReturnEnum = new(EC_InternalUseOnlyConstructor, Outer, TEXT("ECombatState"), RF_Public|RF_Transient|RF_MarkAsNative) UEnum(FObjectInitializer());
+			TArray<TPair<FName, uint8>> EnumNames;
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("ECombatState::Passive")), 0));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("ECombatState::Aggressive")), 1));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("ECombatState::ECombatState_MAX")), 2));
+			ReturnEnum->SetEnums(EnumNames, UEnum::ECppForm::Namespaced);
+			ReturnEnum->CppType = TEXT("ECombatState::Type");
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnEnum->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnEnum, TEXT("BlueprintType"), TEXT("true"));
+			MetaData->SetValue(ReturnEnum, TEXT("Category"), TEXT("Character"));
+			MetaData->SetValue(ReturnEnum, TEXT("ModuleRelativePath"), TEXT("Public/Enums/XLCombatState.h"));
+#endif
+		}
+		return ReturnEnum;
+	}
+	uint32 Get_Z_Construct_UEnum_ExtendedLibrary_ECombatState_CRC() { return 2348786571U; }
 	UEnum* Z_Construct_UEnum_ExtendedLibrary_EHealthState()
 	{
 		UPackage* Outer=Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -342,30 +441,6 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 		return ReturnEnum;
 	}
 	uint32 Get_Z_Construct_UEnum_ExtendedLibrary_EHealthState_CRC() { return 336115640U; }
-	UEnum* Z_Construct_UEnum_ExtendedLibrary_ECombatState()
-	{
-		UPackage* Outer=Z_Construct_UPackage__Script_ExtendedLibrary();
-		extern uint32 Get_Z_Construct_UEnum_ExtendedLibrary_ECombatState_CRC();
-		static UEnum* ReturnEnum = FindExistingEnumIfHotReloadOrDynamic(Outer, TEXT("ECombatState"), 0, Get_Z_Construct_UEnum_ExtendedLibrary_ECombatState_CRC(), false);
-		if (!ReturnEnum)
-		{
-			ReturnEnum = new(EC_InternalUseOnlyConstructor, Outer, TEXT("ECombatState"), RF_Public|RF_Transient|RF_MarkAsNative) UEnum(FObjectInitializer());
-			TArray<TPair<FName, uint8>> EnumNames;
-			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("ECombatState::Passive")), 0));
-			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("ECombatState::Aggressive")), 1));
-			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("ECombatState::ECombatState_MAX")), 2));
-			ReturnEnum->SetEnums(EnumNames, UEnum::ECppForm::Namespaced);
-			ReturnEnum->CppType = TEXT("ECombatState::Type");
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnEnum->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnEnum, TEXT("BlueprintType"), TEXT("true"));
-			MetaData->SetValue(ReturnEnum, TEXT("Category"), TEXT("Character"));
-			MetaData->SetValue(ReturnEnum, TEXT("ModuleRelativePath"), TEXT("Public/Enums/XLCombatState.h"));
-#endif
-		}
-		return ReturnEnum;
-	}
-	uint32 Get_Z_Construct_UEnum_ExtendedLibrary_ECombatState_CRC() { return 2348786571U; }
 	UEnum* Z_Construct_UEnum_ExtendedLibrary_EMovementState()
 	{
 		UPackage* Outer=Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -375,15 +450,10 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 		{
 			ReturnEnum = new(EC_InternalUseOnlyConstructor, Outer, TEXT("EMovementState"), RF_Public|RF_Transient|RF_MarkAsNative) UEnum(FObjectInitializer());
 			TArray<TPair<FName, uint8>> EnumNames;
-			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::Idle")), 0));
-			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::Moving")), 1));
-			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::Sprinting")), 2));
-			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::Jumping")), 3));
-			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::Crouching")), 4));
-			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::Prone")), 5));
-			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::Dodging")), 6));
-			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::Climbing")), 7));
-			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::EMovementState_MAX")), 8));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::AFK")), 0));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::Idle")), 1));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::Moving")), 2));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EMovementState::EMovementState_MAX")), 3));
 			ReturnEnum->SetEnums(EnumNames, UEnum::ECppForm::Namespaced);
 			ReturnEnum->CppType = TEXT("EMovementState::Type");
 #if WITH_METADATA
@@ -395,7 +465,32 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 		}
 		return ReturnEnum;
 	}
-	uint32 Get_Z_Construct_UEnum_ExtendedLibrary_EMovementState_CRC() { return 1125351979U; }
+	uint32 Get_Z_Construct_UEnum_ExtendedLibrary_EMovementState_CRC() { return 4284991178U; }
+	UEnum* Z_Construct_UEnum_ExtendedLibrary_EPostureState()
+	{
+		UPackage* Outer=Z_Construct_UPackage__Script_ExtendedLibrary();
+		extern uint32 Get_Z_Construct_UEnum_ExtendedLibrary_EPostureState_CRC();
+		static UEnum* ReturnEnum = FindExistingEnumIfHotReloadOrDynamic(Outer, TEXT("EPostureState"), 0, Get_Z_Construct_UEnum_ExtendedLibrary_EPostureState_CRC(), false);
+		if (!ReturnEnum)
+		{
+			ReturnEnum = new(EC_InternalUseOnlyConstructor, Outer, TEXT("EPostureState"), RF_Public|RF_Transient|RF_MarkAsNative) UEnum(FObjectInitializer());
+			TArray<TPair<FName, uint8>> EnumNames;
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EPostureState::Crouching")), 0));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EPostureState::Prone")), 1));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EPostureState::Standing")), 2));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EPostureState::EPostureState_MAX")), 3));
+			ReturnEnum->SetEnums(EnumNames, UEnum::ECppForm::Namespaced);
+			ReturnEnum->CppType = TEXT("EPostureState::Type");
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnEnum->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnEnum, TEXT("BlueprintType"), TEXT("true"));
+			MetaData->SetValue(ReturnEnum, TEXT("Category"), TEXT("Character"));
+			MetaData->SetValue(ReturnEnum, TEXT("ModuleRelativePath"), TEXT("Public/Enums/XLPostureState.h"));
+#endif
+		}
+		return ReturnEnum;
+	}
+	uint32 Get_Z_Construct_UEnum_ExtendedLibrary_EPostureState_CRC() { return 1623191575U; }
 	UClass* Z_Construct_UClass_AXLCharacter_NoRegister()
 	{
 		return AXLCharacter::StaticClass();
@@ -423,6 +518,11 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_CharacterWeapons = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterWeapons"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterWeapons, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLWeaponManager_NoRegister());
 				UProperty* NewProp_CharacterStats = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterStats"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterStats, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLCharacterStats_NoRegister());
 				UProperty* NewProp_CharacterResources = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterResources"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterResources, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLCharacterResources_NoRegister());
+				UProperty* NewProp_PostureState = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PostureState"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(PostureState, AXLCharacter), 0x0010000000000005, Z_Construct_UEnum_ExtendedLibrary_EPostureState());
+				UProperty* NewProp_ActionState = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("ActionState"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(ActionState, AXLCharacter), 0x0010000000000005, Z_Construct_UEnum_ExtendedLibrary_EActionState());
+				UProperty* NewProp_MovementState = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MovementState"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(MovementState, AXLCharacter), 0x0010000000000005, Z_Construct_UEnum_ExtendedLibrary_EMovementState());
+				UProperty* NewProp_CombatState = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CombatState"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(CombatState, AXLCharacter), 0x0010000000000005, Z_Construct_UEnum_ExtendedLibrary_ECombatState());
+				UProperty* NewProp_HealthState = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("HealthState"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(HealthState, AXLCharacter), 0x0010000000000005, Z_Construct_UEnum_ExtendedLibrary_EHealthState());
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->StaticLink();
 #if WITH_METADATA
@@ -454,6 +554,16 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(NewProp_CharacterResources, TEXT("Category"), TEXT("Resources"));
 				MetaData->SetValue(NewProp_CharacterResources, TEXT("EditInline"), TEXT("true"));
 				MetaData->SetValue(NewProp_CharacterResources, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+				MetaData->SetValue(NewProp_PostureState, TEXT("Category"), TEXT("State"));
+				MetaData->SetValue(NewProp_PostureState, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+				MetaData->SetValue(NewProp_ActionState, TEXT("Category"), TEXT("State"));
+				MetaData->SetValue(NewProp_ActionState, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+				MetaData->SetValue(NewProp_MovementState, TEXT("Category"), TEXT("State"));
+				MetaData->SetValue(NewProp_MovementState, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+				MetaData->SetValue(NewProp_CombatState, TEXT("Category"), TEXT("State"));
+				MetaData->SetValue(NewProp_CombatState, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+				MetaData->SetValue(NewProp_HealthState, TEXT("Category"), TEXT("State"));
+				MetaData->SetValue(NewProp_HealthState, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
 #endif
 			}
 		}
@@ -462,6 +572,53 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLCharacter(Z_Construct_UClass_AXLCharacter, &AXLCharacter::StaticClass, TEXT("AXLCharacter"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLCharacter);
+	UClass* Z_Construct_UClass_AXLActionCharacter_NoRegister()
+	{
+		return AXLActionCharacter::StaticClass();
+	}
+	UClass* Z_Construct_UClass_AXLActionCharacter()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_AXLCharacter();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = AXLActionCharacter::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20800080;
+
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_PerspectiveCamera = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PerspectiveCamera"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(PerspectiveCamera, AXLActionCharacter), 0x0010000000080008, Z_Construct_UClass_UCameraComponent_NoRegister());
+				UProperty* NewProp_FollowCamera = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("FollowCamera"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(FollowCamera, AXLActionCharacter), 0x00100000000a001d, Z_Construct_UClass_UCameraComponent_NoRegister());
+				UProperty* NewProp_CameraBoom = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CameraBoom"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CameraBoom, AXLActionCharacter), 0x00100000000a001d, Z_Construct_UClass_USpringArmComponent_NoRegister());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Navigation"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Characters/XLActionCharacter.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLActionCharacter.h"));
+				MetaData->SetValue(NewProp_PerspectiveCamera, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_PerspectiveCamera, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLActionCharacter.h"));
+				MetaData->SetValue(NewProp_FollowCamera, TEXT("AllowPrivateAccess"), TEXT("true"));
+				MetaData->SetValue(NewProp_FollowCamera, TEXT("Category"), TEXT("Camera"));
+				MetaData->SetValue(NewProp_FollowCamera, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_FollowCamera, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLActionCharacter.h"));
+				MetaData->SetValue(NewProp_CameraBoom, TEXT("AllowPrivateAccess"), TEXT("true"));
+				MetaData->SetValue(NewProp_CameraBoom, TEXT("Category"), TEXT("Camera"));
+				MetaData->SetValue(NewProp_CameraBoom, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_CameraBoom, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLActionCharacter.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLActionCharacter(Z_Construct_UClass_AXLActionCharacter, &AXLActionCharacter::StaticClass, TEXT("AXLActionCharacter"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLActionCharacter);
 	UFunction* Z_Construct_UFunction_UXLCharacterResources_CooldownTimer()
 	{
 		struct XLCharacterResources_eventCooldownTimer_Parms
@@ -761,6 +918,72 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLCoverComponent(Z_Construct_UClass_UXLCoverComponent, &UXLCoverComponent::StaticClass, TEXT("UXLCoverComponent"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLCoverComponent);
+	UClass* Z_Construct_UClass_UXLGameInstance_NoRegister()
+	{
+		return UXLGameInstance::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLGameInstance()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UGameInstance();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLGameInstance::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20000088;
+
+
+				OuterClass->ClassConfigName = FName(TEXT("Game"));
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Game/XLGameInstance.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameInstance.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLGameInstance(Z_Construct_UClass_UXLGameInstance, &UXLGameInstance::StaticClass, TEXT("UXLGameInstance"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLGameInstance);
+	UClass* Z_Construct_UClass_AXLGameMode_NoRegister()
+	{
+		return AXLGameMode::StaticClass();
+	}
+	UClass* Z_Construct_UClass_AXLGameMode()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_AGameMode();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = AXLGameMode::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x2088028C;
+
+
+				OuterClass->ClassConfigName = FName(TEXT("Game"));
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Info Rendering MovementReplication Replication Actor Input Movement Collision Rendering Utilities|Transformation"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Game/XLGameMode.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameMode.h"));
+				MetaData->SetValue(OuterClass, TEXT("ShowCategories"), TEXT("Input|MouseInput Input|TouchInput"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLGameMode(Z_Construct_UClass_AXLGameMode, &AXLGameMode::StaticClass, TEXT("AXLGameMode"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLGameMode);
 	UScriptStruct* Z_Construct_UScriptStruct_FDecalData()
 	{
 		UPackage* Outer = Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -1751,8 +1974,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/ExtendedLibrary")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
 			FGuid Guid;
-			Guid.A = 0xF053EF77;
-			Guid.B = 0x6C040126;
+			Guid.A = 0xF9D6EED4;
+			Guid.B = 0x84E6336D;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

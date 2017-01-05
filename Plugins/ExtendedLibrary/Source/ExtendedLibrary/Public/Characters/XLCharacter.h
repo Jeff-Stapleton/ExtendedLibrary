@@ -1,10 +1,12 @@
-
 #pragma once
 
-#include "GameFramework/Character.h"
-#include "Enums/XLHealthState.h"
+#include "Enums/XLActionState.h"
 #include "Enums/XLCombatState.h"
+#include "Enums/XLHealthState.h"
 #include "Enums/XLMovementState.h"
+#include "Enums/XLPostureState.h"
+#include "GameFramework/Character.h"
+
 #include "XLCharacter.generated.h"
 
 UCLASS()
@@ -14,9 +16,20 @@ class AXLCharacter : public ACharacter
 
 public: 
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = State)
 	TEnumAsByte<EHealthState::Type> HealthState;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = State)
 	TEnumAsByte<ECombatState::Type> CombatState;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = State)
 	TEnumAsByte<EMovementState::Type> MovementState;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = State)
+	TEnumAsByte<EActionState::Type> ActionState;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = State)
+	TEnumAsByte<EPostureState::Type> PostureState;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
 	class UXLCharacterResources* CharacterResources;
@@ -56,6 +69,10 @@ public:
 
 	void Turn(float Direction);
 	void Look(float Direction);
+
+	void Jump() override;
+
+	void Landed(const FHitResult& Hit) override;
 
 	void StartSprint();
 	void StopSprint();

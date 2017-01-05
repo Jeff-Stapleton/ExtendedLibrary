@@ -5,13 +5,8 @@ namespace EMovementState
 {
 	enum Type
 	{
+		AFK,
 		Idle,
 		Moving,
-		Sprinting,
-		Jumping,
-		Crouching,
-		Prone,
-		Dodging,
-		Climbing
 	};
 }

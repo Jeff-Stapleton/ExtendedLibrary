@@ -28,9 +28,11 @@ AXLCharacter::AXLCharacter()
 
 	PrimaryActorTick.bCanEverTick = true;
 
+	ActionState = EActionState::None;
+	CombatState = ECombatState::Passive;
 	HealthState = EHealthState::Alive;
 	MovementState = EMovementState::Idle;
-	CombatState = ECombatState::Passive;
+	PostureState = EPostureState::Standing;
 }
 
 void AXLCharacter::BeginPlay()
@@ -95,11 +97,25 @@ void AXLCharacter::Look(float Direction)
 	}
 }
 
+void AXLCharacter::Jump()
+{
+	if (XLCharacterCan::Jump(this))
+	{
+		ActionState = EActionState::Jumping;
+		Super::Jump();
+	}
+}
+void AXLCharacter::Landed(const FHitResult& Hit)
+{
+	ActionState = EActionState::None;
+	Super::Landed(Hit);
+}
+
 void AXLCharacter::StartSprint()
 {
 	if (XLCharacterCan::StartSprint(this))
 	{
-		MovementState = EMovementState::Sprinting;
+		ActionState = EActionState::Sprinting;
 		GetCharacterMovement()->MaxWalkSpeed = GetCharacterMovement()->MaxWalkSpeed * 2;
 	}
 }
@@ -107,7 +123,7 @@ void AXLCharacter::StopSprint()
 {
 	if (XLCharacterCan::StopSprint(this))
 	{
-		MovementState = EMovementState::Idle;
+		ActionState = EActionState::None;
 		GetCharacterMovement()->MaxWalkSpeed = GetCharacterMovement()->MaxWalkSpeed / 2;
 	}
 }

@@ -16,12 +16,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 
 #define FOREACH_ENUM_EMOVEMENTSTATE(op) \
+	op(EMovementState::AFK) \
 	op(EMovementState::Idle) \
-	op(EMovementState::Moving) \
-	op(EMovementState::Sprinting) \
-	op(EMovementState::Jumping) \
-	op(EMovementState::Crouching) \
-	op(EMovementState::Prone) \
-	op(EMovementState::Dodging) \
-	op(EMovementState::Climbing) 
+	op(EMovementState::Moving) 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

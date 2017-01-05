@@ -8,17 +8,26 @@
 #ifndef EXTENDEDLIBRARY_XLAbilityManager_generated_h
 	#include "Public/Managers/XLAbilityManager.h"
 #endif
-#ifndef EXTENDEDLIBRARY_XLHealthState_generated_h
-	#include "Public/Enums/XLHealthState.h"
+#ifndef EXTENDEDLIBRARY_XLActionState_generated_h
+	#include "Public/Enums/XLActionState.h"
 #endif
 #ifndef EXTENDEDLIBRARY_XLCombatState_generated_h
 	#include "Public/Enums/XLCombatState.h"
 #endif
+#ifndef EXTENDEDLIBRARY_XLHealthState_generated_h
+	#include "Public/Enums/XLHealthState.h"
+#endif
 #ifndef EXTENDEDLIBRARY_XLMovementState_generated_h
 	#include "Public/Enums/XLMovementState.h"
 #endif
+#ifndef EXTENDEDLIBRARY_XLPostureState_generated_h
+	#include "Public/Enums/XLPostureState.h"
+#endif
 #ifndef EXTENDEDLIBRARY_XLCharacter_generated_h
 	#include "Public/Characters/XLCharacter.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLActionCharacter_generated_h
+	#include "Public/Characters/XLActionCharacter.h"
 #endif
 #ifndef EXTENDEDLIBRARY_XLCharacterResources_generated_h
 	#include "Public/Data/XLCharacterResources.h"
@@ -28,6 +37,12 @@
 #endif
 #ifndef EXTENDEDLIBRARY_XLCoverComponent_generated_h
 	#include "Public/Components/XLCoverComponent.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLGameInstance_generated_h
+	#include "Public/Game/XLGameInstance.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLGameMode_generated_h
+	#include "Public/Game/XLGameMode.h"
 #endif
 #ifndef EXTENDEDLIBRARY_XLDecalData_generated_h
 	#include "Public/Structs/XLDecalData.h"
