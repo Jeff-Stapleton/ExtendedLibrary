@@ -1,9 +1,11 @@
+
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
 #include "XLCharacter.h"
 
-AXLCharacter::AXLCharacter()
+AXLCharacter::AXLCharacter(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer.SetDefaultSubobjectClass<UXLMovementComponent>(ACharacter::CharacterMovementComponentName))
 {
 	CharacterResources = CreateDefaultSubobject<UXLCharacterResources>(TEXT("CharacterResources"));
 	CharacterStats = CreateDefaultSubobject<UXLCharacterStats>(TEXT("CharacterStats"));
@@ -19,12 +21,6 @@ AXLCharacter::AXLCharacter()
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = true;
 	bUseControllerRotationRoll = false;
-
-	//MovementComponent->bOrientRotationToMovement = true;
-	//MovementComponent->RotationRate = FRotator(0.0f, 540.0f, 0.0f);
-	//MovementComponent->JumpZVelocity = 400.f;
-	//MovementComponent->MaxWalkSpeed = 400.f;
-	//MovementComponent->AirControl = 0.2f;
 
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -43,6 +39,8 @@ void AXLCharacter::BeginPlay()
 void AXLCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+
+	MovementComponent->UpdateMovementSpeed();
 }
 
 
@@ -84,7 +82,7 @@ void AXLCharacter::Turn(float Direction)
 	AXLPlayerController* MyPC = Cast<AXLPlayerController>(Controller);
 	if (XLCharacterCan::Turn(this))
 	{
-		AddControllerYawInput(Direction * 45.0f/*turn rate*/ * GetWorld()->GetDeltaSeconds());
+		AddControllerYawInput(Direction * MovementComponent->BaseTurnRate * GetWorld()->GetDeltaSeconds());
 	}
 }
 
@@ -93,7 +91,7 @@ void AXLCharacter::Look(float Direction)
 	AXLPlayerController* MyPC = Cast<AXLPlayerController>(Controller);
 	if (XLCharacterCan::LookUp(this))
 	{
-		AddControllerPitchInput(Direction * 45.0f/*turn rate*/ * GetWorld()->GetDeltaSeconds());
+		AddControllerPitchInput(Direction * MovementComponent->BaseLookRate * GetWorld()->GetDeltaSeconds());
 	}
 }
 
@@ -101,7 +99,7 @@ void AXLCharacter::Jump()
 {
 	if (XLCharacterCan::Jump(this))
 	{
-		ActionState = EActionState::Jumping;
+		SetActionState(EActionState::Jumping);
 		Super::Jump();
 	}
 }
@@ -145,6 +143,15 @@ void AXLCharacter::Reload()
 void AXLCharacter::Melee()
 {
 	//CharacterWeapon->Melee();
+}
+
+void AXLCharacter::StartAbility(int32 Ability)
+{
+	CharacterAbilities->ActivateAbility(Ability);
+}
+void AXLCharacter::StopAbility(int32 Ability)
+{
+	CharacterAbilities->DeactivateAbility(Ability);
 }
 
 
@@ -283,5 +290,113 @@ void AXLCharacter::StopAllAnimMontages()
 	if (UseMesh && UseMesh->AnimScriptInstance)
 	{
 		UseMesh->AnimScriptInstance->Montage_Stop(0.0f);
+	}
+}
+
+
+void AXLCharacter::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(AXLCharacter, ActionState);
+}
+
+bool AXLCharacter::ServerSetActionState_Validate(EActionState::Type State)
+{
+	return true;
+}
+void AXLCharacter::ServerSetActionState_Implementation(EActionState::Type State)
+{
+	SetActionState(State);
+}
+void AXLCharacter::SetActionState(EActionState::Type State)
+{
+	if (Role < ROLE_Authority)
+	{
+		ServerSetActionState(State);
+	}
+	else
+	{
+		ActionState = State;
+	}
+}
+
+bool AXLCharacter::ServerSetCombatState_Validate(ECombatState::Type State)
+{
+	return true;
+}
+void AXLCharacter::ServerSetCombatState_Implementation(ECombatState::Type State)
+{
+	SetCombatState(State);
+}
+void AXLCharacter::SetCombatState(ECombatState::Type State)
+{
+	if (Role < ROLE_Authority)
+	{
+		ServerSetCombatState(State);
+	}
+	else
+	{
+		CombatState = State;
+	}
+}
+
+bool AXLCharacter::ServerSetHealthState_Validate(EHealthState::Type State)
+{
+	return true;
+}
+void AXLCharacter::ServerSetHealthState_Implementation(EHealthState::Type State)
+{
+	SetHealthState(State);
+}
+void AXLCharacter::SetHealthState(EHealthState::Type State)
+{
+	if (Role < ROLE_Authority)
+	{
+		ServerSetHealthState(State);
+	}
+	else
+	{
+		HealthState = State;
+	}
+}
+
+bool AXLCharacter::ServerSetMovementState_Validate(EMovementState::Type State)
+{
+	return true;
+}
+void AXLCharacter::ServerSetMovementState_Implementation(EMovementState::Type State)
+{
+	SetMovementState(State);
+}
+void AXLCharacter::SetMovementState(EMovementState::Type State)
+{
+	if (Role < ROLE_Authority)
+	{
+		ServerSetMovementState(State);
+	}
+	else
+	{
+		MovementState = State;
+	}
+}
+
+bool AXLCharacter::ServerSetPostureState_Validate(EPostureState::Type State)
+{
+	return true;
+}
+void AXLCharacter::ServerSetPostureState_Implementation(EPostureState::Type State)
+{
+	SetPostureState(State);
+}
+void AXLCharacter::SetPostureState(EPostureState::Type State)
+{
+	if (Role < ROLE_Authority)
+	{
+		ServerSetPostureState(State);
+	}
+	else
+	{
+		PostureState = State;
 	}
 }

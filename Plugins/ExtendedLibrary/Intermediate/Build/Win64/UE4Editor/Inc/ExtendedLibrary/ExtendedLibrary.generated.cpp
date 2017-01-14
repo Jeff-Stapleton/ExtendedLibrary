@@ -12,10 +12,15 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCode1ExtendedLibrary() {}
 FName EXTENDEDLIBRARY_OnPickedUpEvent = FName(TEXT("OnPickedUpEvent"));
 FName EXTENDEDLIBRARY_OnRespawnEvent = FName(TEXT("OnRespawnEvent"));
-	void UXLAbilityManager::StaticRegisterNativesUXLAbilityManager()
+FName EXTENDEDLIBRARY_ServerSetActionState = FName(TEXT("ServerSetActionState"));
+FName EXTENDEDLIBRARY_ServerSetCombatState = FName(TEXT("ServerSetCombatState"));
+FName EXTENDEDLIBRARY_ServerSetHealthState = FName(TEXT("ServerSetHealthState"));
+FName EXTENDEDLIBRARY_ServerSetMovementState = FName(TEXT("ServerSetMovementState"));
+FName EXTENDEDLIBRARY_ServerSetPostureState = FName(TEXT("ServerSetPostureState"));
+	void UXLMovementComponent::StaticRegisterNativesUXLMovementComponent()
 	{
 	}
-	IMPLEMENT_CLASS(UXLAbilityManager, 2226756156);
+	IMPLEMENT_CLASS(UXLMovementComponent, 1325647508);
 static class UEnum* EActionState_StaticEnum()
 {
 	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -76,14 +81,51 @@ static class UEnum* EPostureState_StaticEnum()
 	return Singleton;
 }
 static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EPostureState(EPostureState_StaticEnum, TEXT("/Script/ExtendedLibrary"), TEXT("EPostureState"), false, nullptr, nullptr);
+	void UXLAbilityManager::StaticRegisterNativesUXLAbilityManager()
+	{
+		FNativeFunctionRegistrar::RegisterFunction(UXLAbilityManager::StaticClass(), "ActivateAbility",(Native)&UXLAbilityManager::execActivateAbility);
+		FNativeFunctionRegistrar::RegisterFunction(UXLAbilityManager::StaticClass(), "DeactivateAbility",(Native)&UXLAbilityManager::execDeactivateAbility);
+	}
+	IMPLEMENT_CLASS(UXLAbilityManager, 2713932665);
+	void AXLCharacter::ServerSetActionState(EActionState::Type State)
+	{
+		XLCharacter_eventServerSetActionState_Parms Parms;
+		Parms.State=State;
+		ProcessEvent(FindFunctionChecked(EXTENDEDLIBRARY_ServerSetActionState),&Parms);
+	}
+	void AXLCharacter::ServerSetCombatState(ECombatState::Type State)
+	{
+		XLCharacter_eventServerSetCombatState_Parms Parms;
+		Parms.State=State;
+		ProcessEvent(FindFunctionChecked(EXTENDEDLIBRARY_ServerSetCombatState),&Parms);
+	}
+	void AXLCharacter::ServerSetHealthState(EHealthState::Type State)
+	{
+		XLCharacter_eventServerSetHealthState_Parms Parms;
+		Parms.State=State;
+		ProcessEvent(FindFunctionChecked(EXTENDEDLIBRARY_ServerSetHealthState),&Parms);
+	}
+	void AXLCharacter::ServerSetMovementState(EMovementState::Type State)
+	{
+		XLCharacter_eventServerSetMovementState_Parms Parms;
+		Parms.State=State;
+		ProcessEvent(FindFunctionChecked(EXTENDEDLIBRARY_ServerSetMovementState),&Parms);
+	}
+	void AXLCharacter::ServerSetPostureState(EPostureState::Type State)
+	{
+		XLCharacter_eventServerSetPostureState_Parms Parms;
+		Parms.State=State;
+		ProcessEvent(FindFunctionChecked(EXTENDEDLIBRARY_ServerSetPostureState),&Parms);
+	}
 	void AXLCharacter::StaticRegisterNativesAXLCharacter()
 	{
+		FNativeFunctionRegistrar::RegisterFunction(AXLCharacter::StaticClass(), "ServerSetActionState",(Native)&AXLCharacter::execServerSetActionState);
+		FNativeFunctionRegistrar::RegisterFunction(AXLCharacter::StaticClass(), "ServerSetCombatState",(Native)&AXLCharacter::execServerSetCombatState);
+		FNativeFunctionRegistrar::RegisterFunction(AXLCharacter::StaticClass(), "ServerSetHealthState",(Native)&AXLCharacter::execServerSetHealthState);
+		FNativeFunctionRegistrar::RegisterFunction(AXLCharacter::StaticClass(), "ServerSetMovementState",(Native)&AXLCharacter::execServerSetMovementState);
+		FNativeFunctionRegistrar::RegisterFunction(AXLCharacter::StaticClass(), "ServerSetPostureState",(Native)&AXLCharacter::execServerSetPostureState);
 	}
-	IMPLEMENT_CLASS(AXLCharacter, 2383136397);
-	void AXLActionCharacter::StaticRegisterNativesAXLActionCharacter()
-	{
-	}
-	IMPLEMENT_CLASS(AXLActionCharacter, 3951241415);
+	IMPLEMENT_CLASS(AXLCharacter, 3971130018);
 	void UXLCharacterResources::StaticRegisterNativesUXLCharacterResources()
 	{
 		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "CooldownTimer",(Native)&UXLCharacterResources::execCooldownTimer);
@@ -93,6 +135,33 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EPostureState(EPostureSt
 		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "RegenerateStamina",(Native)&UXLCharacterResources::execRegenerateStamina);
 	}
 	IMPLEMENT_CLASS(UXLCharacterResources, 4216659802);
+	void UXLAbility::StaticRegisterNativesUXLAbility()
+	{
+		FNativeFunctionRegistrar::RegisterFunction(UXLAbility::StaticClass(), "ConsumeMana",(Native)&UXLAbility::execConsumeMana);
+		FNativeFunctionRegistrar::RegisterFunction(UXLAbility::StaticClass(), "PlayUtilityAnimation",(Native)&UXLAbility::execPlayUtilityAnimation);
+		FNativeFunctionRegistrar::RegisterFunction(UXLAbility::StaticClass(), "SetMyPawn",(Native)&UXLAbility::execSetMyPawn);
+	}
+	IMPLEMENT_CLASS(UXLAbility, 716209819);
+	void UXLSelfAbility::StaticRegisterNativesUXLSelfAbility()
+	{
+	}
+	IMPLEMENT_CLASS(UXLSelfAbility, 3064014457);
+	void UXLAbilityEffect::StaticRegisterNativesUXLAbilityEffect()
+	{
+	}
+	IMPLEMENT_CLASS(UXLAbilityEffect, 291619780);
+	void UXLHoverEffect::StaticRegisterNativesUXLHoverEffect()
+	{
+	}
+	IMPLEMENT_CLASS(UXLHoverEffect, 2598771658);
+	void UXLJumpEffect::StaticRegisterNativesUXLJumpEffect()
+	{
+	}
+	IMPLEMENT_CLASS(UXLJumpEffect, 3914429877);
+	void AXLActionCharacter::StaticRegisterNativesAXLActionCharacter()
+	{
+	}
+	IMPLEMENT_CLASS(AXLActionCharacter, 2304442351);
 	void UXLCharacterStats::StaticRegisterNativesUXLCharacterStats()
 	{
 	}
@@ -133,10 +202,6 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFDecalData
 	{
 	}
 	IMPLEMENT_CLASS(AXLImpactEffect, 515835133);
-	void UXLMovementComponent::StaticRegisterNativesUXLMovementComponent()
-	{
-	}
-	IMPLEMENT_CLASS(UXLMovementComponent, 1083805540);
 	void AXLPickup::OnPickedUpEvent()
 	{
 		ProcessEvent(FindFunctionChecked(EXTENDEDLIBRARY_OnPickedUpEvent),NULL);
@@ -240,8 +305,10 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 } ScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo;
 #if USE_COMPILED_IN_NATIVES
 // Cross Module References
+	ENGINE_API class UClass* Z_Construct_UClass_UCharacterMovementComponent();
 	ENGINE_API class UClass* Z_Construct_UClass_UActorComponent();
 	ENGINE_API class UClass* Z_Construct_UClass_ACharacter();
+	ENGINE_API class UClass* Z_Construct_UClass_UAnimMontage_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_USpringArmComponent_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_UGameInstance();
@@ -252,10 +319,8 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	ENGINE_API class UClass* Z_Construct_UClass_USoundBase_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_UParticleSystem_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_UPointLightComponent_NoRegister();
-	ENGINE_API class UClass* Z_Construct_UClass_UCharacterMovementComponent();
 	ENGINE_API class UClass* Z_Construct_UClass_UParticleSystemComponent_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_USoundCue_NoRegister();
-	ENGINE_API class UClass* Z_Construct_UClass_UAnimMontage_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_APlayerController();
 	ENGINE_API class UClass* Z_Construct_UClass_USkeletalMeshComponent_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_UCameraShake_NoRegister();
@@ -265,17 +330,24 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	ENGINE_API class UClass* Z_Construct_UClass_AActor_NoRegister();
 	COREUOBJECT_API class UClass* Z_Construct_UClass_UObject_NoRegister();
 
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbilityManager_NoRegister();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbilityManager();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLMovementComponent_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLMovementComponent();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EActionState();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_ECombatState();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EHealthState();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EMovementState();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EPostureState();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLAbilityManager_ActivateAbility();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLAbilityManager_DeactivateAbility();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbilityManager_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbilityManager();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLCharacter_ServerSetActionState();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLCharacter_ServerSetCombatState();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLCharacter_ServerSetHealthState();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLCharacter_ServerSetMovementState();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLCharacter_ServerSetPostureState();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLCharacter_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLCharacter();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLActionCharacter_NoRegister();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLActionCharacter();
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLCharacterResources_CooldownTimer();
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateEnergy();
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateHealth();
@@ -283,6 +355,21 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateStamina();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterResources_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterResources();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLAbility_ConsumeMana();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLAbility_PlayUtilityAnimation();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLAbility_SetMyPawn();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbility_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbility();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLSelfAbility_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLSelfAbility();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbilityEffect_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbilityEffect();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLHoverEffect_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLHoverEffect();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLJumpEffect_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLJumpEffect();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLActionCharacter_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLActionCharacter();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterStats_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterStats();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCoverComponent_NoRegister();
@@ -294,8 +381,6 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	EXTENDEDLIBRARY_API class UScriptStruct* Z_Construct_UScriptStruct_FDecalData();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLImpactEffect_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLImpactEffect();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLMovementComponent_NoRegister();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLMovementComponent();
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLPickup_OnPickedUpEvent();
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLPickup_OnRep_IsActive();
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_AXLPickup_OnRespawnEvent();
@@ -332,39 +417,88 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLWeaponSoundManager();
 	EXTENDEDLIBRARY_API class UScriptStruct* Z_Construct_UScriptStruct_FTakeHitInfo();
 	EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
-	UClass* Z_Construct_UClass_UXLAbilityManager_NoRegister()
+	UClass* Z_Construct_UClass_UXLMovementComponent_NoRegister()
 	{
-		return UXLAbilityManager::StaticClass();
+		return UXLMovementComponent::StaticClass();
 	}
-	UClass* Z_Construct_UClass_UXLAbilityManager()
+	UClass* Z_Construct_UClass_UXLMovementComponent()
 	{
 		static UClass* OuterClass = NULL;
 		if (!OuterClass)
 		{
-			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UClass_UCharacterMovementComponent();
 			Z_Construct_UPackage__Script_ExtendedLibrary();
-			OuterClass = UXLAbilityManager::StaticClass();
+			OuterClass = UXLMovementComponent::StaticClass();
 			if (!(OuterClass->ClassFlags & CLASS_Constructed))
 			{
 				UObjectForceRegistration(OuterClass);
-				OuterClass->ClassFlags |= 0x20A00080;
+				OuterClass->ClassFlags |= 0x20A00084;
 
 
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_JumpVelocity = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("JumpVelocity"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(JumpVelocity, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_JumpVelocityModifier = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("JumpVelocityModifier"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(JumpVelocityModifier, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_TargetingMovementSpeed = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("TargetingMovementSpeed"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(TargetingMovementSpeed, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_PronedMovementSpeed = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PronedMovementSpeed"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(PronedMovementSpeed, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_CrouchedMovementSpeed = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CrouchedMovementSpeed"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(CrouchedMovementSpeed, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_RunningMovementSpeed = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("RunningMovementSpeed"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(RunningMovementSpeed, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_BaseMovementSpeed = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BaseMovementSpeed"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(BaseMovementSpeed, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_MovementSpeedModifier = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MovementSpeedModifier"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(MovementSpeedModifier, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_BaseLookRate = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BaseLookRate"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(BaseLookRate, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_BaseTurnRate = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BaseTurnRate"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(BaseTurnRate, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_DodgeCost = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("DodgeCost"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(DodgeCost, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_ClimbCost = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("ClimbCost"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(ClimbCost, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_VaultCost = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("VaultCost"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(VaultCost, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_JumpCost = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("JumpCost"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(JumpCost, UXLMovementComponent), 0x0010000000010001);
+				UProperty* NewProp_SprintCost = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("SprintCost"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(SprintCost, UXLMovementComponent), 0x0010000000010001);
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->ClassConfigName = FName(TEXT("Engine"));
 				OuterClass->StaticLink();
 #if WITH_METADATA
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
-				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
-				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
-				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLAbilityManager.h"));
-				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLAbilityManager.h"));
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("CharacterMovement:Walking"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Components/XLMovementComponent.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_JumpVelocity, TEXT("Category"), TEXT("Jumping"));
+				MetaData->SetValue(NewProp_JumpVelocity, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_JumpVelocityModifier, TEXT("Category"), TEXT("Jumping"));
+				MetaData->SetValue(NewProp_JumpVelocityModifier, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_JumpVelocityModifier, TEXT("ToolTip"), TEXT("Movement Speed"));
+				MetaData->SetValue(NewProp_TargetingMovementSpeed, TEXT("Category"), TEXT("Movement"));
+				MetaData->SetValue(NewProp_TargetingMovementSpeed, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_PronedMovementSpeed, TEXT("Category"), TEXT("Movement"));
+				MetaData->SetValue(NewProp_PronedMovementSpeed, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_CrouchedMovementSpeed, TEXT("Category"), TEXT("Movement"));
+				MetaData->SetValue(NewProp_CrouchedMovementSpeed, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_RunningMovementSpeed, TEXT("Category"), TEXT("Movement"));
+				MetaData->SetValue(NewProp_RunningMovementSpeed, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_BaseMovementSpeed, TEXT("Category"), TEXT("Movement"));
+				MetaData->SetValue(NewProp_BaseMovementSpeed, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_MovementSpeedModifier, TEXT("Category"), TEXT("Movement"));
+				MetaData->SetValue(NewProp_MovementSpeedModifier, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_MovementSpeedModifier, TEXT("ToolTip"), TEXT("Movement Speed"));
+				MetaData->SetValue(NewProp_BaseLookRate, TEXT("Category"), TEXT("Looking"));
+				MetaData->SetValue(NewProp_BaseLookRate, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_BaseTurnRate, TEXT("Category"), TEXT("Looking"));
+				MetaData->SetValue(NewProp_BaseTurnRate, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_DodgeCost, TEXT("Category"), TEXT("Config"));
+				MetaData->SetValue(NewProp_DodgeCost, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_ClimbCost, TEXT("Category"), TEXT("Config"));
+				MetaData->SetValue(NewProp_ClimbCost, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_VaultCost, TEXT("Category"), TEXT("Config"));
+				MetaData->SetValue(NewProp_VaultCost, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_JumpCost, TEXT("Category"), TEXT("Config"));
+				MetaData->SetValue(NewProp_JumpCost, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
+				MetaData->SetValue(NewProp_SprintCost, TEXT("Category"), TEXT("Config"));
+				MetaData->SetValue(NewProp_SprintCost, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
 #endif
 			}
 		}
 		check(OuterClass->GetClass());
 		return OuterClass;
 	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLAbilityManager(Z_Construct_UClass_UXLAbilityManager, &UXLAbilityManager::StaticClass, TEXT("UXLAbilityManager"), false, nullptr, nullptr, nullptr);
-	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLAbilityManager);
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLMovementComponent(Z_Construct_UClass_UXLMovementComponent, &UXLMovementComponent::StaticClass, TEXT("UXLMovementComponent"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLMovementComponent);
 	UEnum* Z_Construct_UEnum_ExtendedLibrary_EActionState()
 	{
 		UPackage* Outer=Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -491,6 +625,177 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 		return ReturnEnum;
 	}
 	uint32 Get_Z_Construct_UEnum_ExtendedLibrary_EPostureState_CRC() { return 1623191575U; }
+	UFunction* Z_Construct_UFunction_UXLAbilityManager_ActivateAbility()
+	{
+		struct XLAbilityManager_eventActivateAbility_Parms
+		{
+			int32 Ability;
+		};
+		UObject* Outer=Z_Construct_UClass_UXLAbilityManager();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("ActivateAbility"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x00020401, 65535, sizeof(XLAbilityManager_eventActivateAbility_Parms));
+			UProperty* NewProp_Ability = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("Ability"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(Ability, XLAbilityManager_eventActivateAbility_Parms), 0x0010000000000080);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLAbilityManager.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UFunction* Z_Construct_UFunction_UXLAbilityManager_DeactivateAbility()
+	{
+		struct XLAbilityManager_eventDeactivateAbility_Parms
+		{
+			int32 Ability;
+		};
+		UObject* Outer=Z_Construct_UClass_UXLAbilityManager();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("DeactivateAbility"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x00020401, 65535, sizeof(XLAbilityManager_eventDeactivateAbility_Parms));
+			UProperty* NewProp_Ability = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("Ability"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(Ability, XLAbilityManager_eventDeactivateAbility_Parms), 0x0010000000000080);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLAbilityManager.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UClass* Z_Construct_UClass_UXLAbilityManager_NoRegister()
+	{
+		return UXLAbilityManager::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLAbilityManager()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLAbilityManager::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+				OuterClass->LinkChild(Z_Construct_UFunction_UXLAbilityManager_ActivateAbility());
+				OuterClass->LinkChild(Z_Construct_UFunction_UXLAbilityManager_DeactivateAbility());
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_AbilitiesBP = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("AbilitiesBP"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(AbilitiesBP, UXLAbilityManager), 0x0024080000000001);
+				UProperty* NewProp_AbilitiesBP_Inner = new(EC_InternalUseOnlyConstructor, NewProp_AbilitiesBP, TEXT("AbilitiesBP"), RF_Public|RF_Transient|RF_MarkAsNative) UClassProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0004000000000000, Z_Construct_UClass_UXLAbility_NoRegister(), UClass::StaticClass());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLAbilityManager_ActivateAbility(), "ActivateAbility"); // 3035564364
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLAbilityManager_DeactivateAbility(), "DeactivateAbility"); // 2510816805
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("BlueprintSpawnableComponent"), TEXT(""));
+				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Managers/XLAbilityManager.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLAbilityManager.h"));
+				MetaData->SetValue(NewProp_AbilitiesBP, TEXT("Category"), TEXT("Ability"));
+				MetaData->SetValue(NewProp_AbilitiesBP, TEXT("ModuleRelativePath"), TEXT("Public/Managers/XLAbilityManager.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLAbilityManager(Z_Construct_UClass_UXLAbilityManager, &UXLAbilityManager::StaticClass, TEXT("UXLAbilityManager"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLAbilityManager);
+	UFunction* Z_Construct_UFunction_AXLCharacter_ServerSetActionState()
+	{
+		UObject* Outer=Z_Construct_UClass_AXLCharacter();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("ServerSetActionState"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x80220CC0, 65535, sizeof(XLCharacter_eventServerSetActionState_Parms));
+			UProperty* NewProp_State = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("State"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(State, XLCharacter_eventServerSetActionState_Parms), 0x0010000000000080, Z_Construct_UEnum_ExtendedLibrary_EActionState());
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("REPLICATION"));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UFunction* Z_Construct_UFunction_AXLCharacter_ServerSetCombatState()
+	{
+		UObject* Outer=Z_Construct_UClass_AXLCharacter();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("ServerSetCombatState"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x80220CC0, 65535, sizeof(XLCharacter_eventServerSetCombatState_Parms));
+			UProperty* NewProp_State = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("State"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(State, XLCharacter_eventServerSetCombatState_Parms), 0x0010000000000080, Z_Construct_UEnum_ExtendedLibrary_ECombatState());
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UFunction* Z_Construct_UFunction_AXLCharacter_ServerSetHealthState()
+	{
+		UObject* Outer=Z_Construct_UClass_AXLCharacter();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("ServerSetHealthState"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x80220CC0, 65535, sizeof(XLCharacter_eventServerSetHealthState_Parms));
+			UProperty* NewProp_State = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("State"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(State, XLCharacter_eventServerSetHealthState_Parms), 0x0010000000000080, Z_Construct_UEnum_ExtendedLibrary_EHealthState());
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UFunction* Z_Construct_UFunction_AXLCharacter_ServerSetMovementState()
+	{
+		UObject* Outer=Z_Construct_UClass_AXLCharacter();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("ServerSetMovementState"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x80220CC0, 65535, sizeof(XLCharacter_eventServerSetMovementState_Parms));
+			UProperty* NewProp_State = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("State"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(State, XLCharacter_eventServerSetMovementState_Parms), 0x0010000000000080, Z_Construct_UEnum_ExtendedLibrary_EMovementState());
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UFunction* Z_Construct_UFunction_AXLCharacter_ServerSetPostureState()
+	{
+		UObject* Outer=Z_Construct_UClass_AXLCharacter();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("ServerSetPostureState"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x80220CC0, 65535, sizeof(XLCharacter_eventServerSetPostureState_Parms));
+			UProperty* NewProp_State = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("State"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(State, XLCharacter_eventServerSetPostureState_Parms), 0x0010000000000080, Z_Construct_UEnum_ExtendedLibrary_EPostureState());
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
 	UClass* Z_Construct_UClass_AXLCharacter_NoRegister()
 	{
 		return AXLCharacter::StaticClass();
@@ -508,6 +813,11 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 				UObjectForceRegistration(OuterClass);
 				OuterClass->ClassFlags |= 0x20800080;
 
+				OuterClass->LinkChild(Z_Construct_UFunction_AXLCharacter_ServerSetActionState());
+				OuterClass->LinkChild(Z_Construct_UFunction_AXLCharacter_ServerSetCombatState());
+				OuterClass->LinkChild(Z_Construct_UFunction_AXLCharacter_ServerSetHealthState());
+				OuterClass->LinkChild(Z_Construct_UFunction_AXLCharacter_ServerSetMovementState());
+				OuterClass->LinkChild(Z_Construct_UFunction_AXLCharacter_ServerSetPostureState());
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_MovementComponent = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MovementComponent"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(MovementComponent, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLMovementComponent_NoRegister());
@@ -519,17 +829,23 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_CharacterStats = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterStats"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterStats, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLCharacterStats_NoRegister());
 				UProperty* NewProp_CharacterResources = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CharacterResources"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CharacterResources, AXLCharacter), 0x001000000008000d, Z_Construct_UClass_UXLCharacterResources_NoRegister());
 				UProperty* NewProp_PostureState = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PostureState"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(PostureState, AXLCharacter), 0x0010000000000005, Z_Construct_UEnum_ExtendedLibrary_EPostureState());
-				UProperty* NewProp_ActionState = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("ActionState"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(ActionState, AXLCharacter), 0x0010000000000005, Z_Construct_UEnum_ExtendedLibrary_EActionState());
 				UProperty* NewProp_MovementState = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MovementState"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(MovementState, AXLCharacter), 0x0010000000000005, Z_Construct_UEnum_ExtendedLibrary_EMovementState());
-				UProperty* NewProp_CombatState = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CombatState"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(CombatState, AXLCharacter), 0x0010000000000005, Z_Construct_UEnum_ExtendedLibrary_ECombatState());
 				UProperty* NewProp_HealthState = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("HealthState"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(HealthState, AXLCharacter), 0x0010000000000005, Z_Construct_UEnum_ExtendedLibrary_EHealthState());
+				UProperty* NewProp_CombatState = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CombatState"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(CombatState, AXLCharacter), 0x0010000000000005, Z_Construct_UEnum_ExtendedLibrary_ECombatState());
+				UProperty* NewProp_ActionState = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("ActionState"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(ActionState, AXLCharacter), 0x0010000000000025, Z_Construct_UEnum_ExtendedLibrary_EActionState());
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLCharacter_ServerSetActionState(), "ServerSetActionState"); // 2879279903
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLCharacter_ServerSetCombatState(), "ServerSetCombatState"); // 2306466354
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLCharacter_ServerSetHealthState(), "ServerSetHealthState"); // 1906338536
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLCharacter_ServerSetMovementState(), "ServerSetMovementState"); // 3490676883
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AXLCharacter_ServerSetPostureState(), "ServerSetPostureState"); // 1978783543
 				OuterClass->StaticLink();
 #if WITH_METADATA
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
 				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Navigation"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Characters/XLCharacter.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+				MetaData->SetValue(OuterClass, TEXT("ObjectInitializerConstructorDeclared"), TEXT(""));
 				MetaData->SetValue(NewProp_MovementComponent, TEXT("Category"), TEXT("Movement"));
 				MetaData->SetValue(NewProp_MovementComponent, TEXT("EditInline"), TEXT("true"));
 				MetaData->SetValue(NewProp_MovementComponent, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
@@ -554,16 +870,18 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(NewProp_CharacterResources, TEXT("Category"), TEXT("Resources"));
 				MetaData->SetValue(NewProp_CharacterResources, TEXT("EditInline"), TEXT("true"));
 				MetaData->SetValue(NewProp_CharacterResources, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+				MetaData->SetValue(NewProp_CharacterResources, TEXT("ToolTip"), TEXT("COMPONENTS"));
 				MetaData->SetValue(NewProp_PostureState, TEXT("Category"), TEXT("State"));
 				MetaData->SetValue(NewProp_PostureState, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
-				MetaData->SetValue(NewProp_ActionState, TEXT("Category"), TEXT("State"));
-				MetaData->SetValue(NewProp_ActionState, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
 				MetaData->SetValue(NewProp_MovementState, TEXT("Category"), TEXT("State"));
 				MetaData->SetValue(NewProp_MovementState, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
-				MetaData->SetValue(NewProp_CombatState, TEXT("Category"), TEXT("State"));
-				MetaData->SetValue(NewProp_CombatState, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
 				MetaData->SetValue(NewProp_HealthState, TEXT("Category"), TEXT("State"));
 				MetaData->SetValue(NewProp_HealthState, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+				MetaData->SetValue(NewProp_CombatState, TEXT("Category"), TEXT("State"));
+				MetaData->SetValue(NewProp_CombatState, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+				MetaData->SetValue(NewProp_ActionState, TEXT("Category"), TEXT("State"));
+				MetaData->SetValue(NewProp_ActionState, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLCharacter.h"));
+				MetaData->SetValue(NewProp_ActionState, TEXT("ToolTip"), TEXT("STATES"));
 #endif
 			}
 		}
@@ -572,53 +890,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLCharacter(Z_Construct_UClass_AXLCharacter, &AXLCharacter::StaticClass, TEXT("AXLCharacter"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLCharacter);
-	UClass* Z_Construct_UClass_AXLActionCharacter_NoRegister()
-	{
-		return AXLActionCharacter::StaticClass();
-	}
-	UClass* Z_Construct_UClass_AXLActionCharacter()
-	{
-		static UClass* OuterClass = NULL;
-		if (!OuterClass)
-		{
-			Z_Construct_UClass_AXLCharacter();
-			Z_Construct_UPackage__Script_ExtendedLibrary();
-			OuterClass = AXLActionCharacter::StaticClass();
-			if (!(OuterClass->ClassFlags & CLASS_Constructed))
-			{
-				UObjectForceRegistration(OuterClass);
-				OuterClass->ClassFlags |= 0x20800080;
-
-
-PRAGMA_DISABLE_DEPRECATION_WARNINGS
-				UProperty* NewProp_PerspectiveCamera = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PerspectiveCamera"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(PerspectiveCamera, AXLActionCharacter), 0x0010000000080008, Z_Construct_UClass_UCameraComponent_NoRegister());
-				UProperty* NewProp_FollowCamera = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("FollowCamera"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(FollowCamera, AXLActionCharacter), 0x00100000000a001d, Z_Construct_UClass_UCameraComponent_NoRegister());
-				UProperty* NewProp_CameraBoom = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CameraBoom"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CameraBoom, AXLActionCharacter), 0x00100000000a001d, Z_Construct_UClass_USpringArmComponent_NoRegister());
-PRAGMA_ENABLE_DEPRECATION_WARNINGS
-				OuterClass->StaticLink();
-#if WITH_METADATA
-				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Navigation"));
-				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Characters/XLActionCharacter.h"));
-				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLActionCharacter.h"));
-				MetaData->SetValue(NewProp_PerspectiveCamera, TEXT("EditInline"), TEXT("true"));
-				MetaData->SetValue(NewProp_PerspectiveCamera, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLActionCharacter.h"));
-				MetaData->SetValue(NewProp_FollowCamera, TEXT("AllowPrivateAccess"), TEXT("true"));
-				MetaData->SetValue(NewProp_FollowCamera, TEXT("Category"), TEXT("Camera"));
-				MetaData->SetValue(NewProp_FollowCamera, TEXT("EditInline"), TEXT("true"));
-				MetaData->SetValue(NewProp_FollowCamera, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLActionCharacter.h"));
-				MetaData->SetValue(NewProp_CameraBoom, TEXT("AllowPrivateAccess"), TEXT("true"));
-				MetaData->SetValue(NewProp_CameraBoom, TEXT("Category"), TEXT("Camera"));
-				MetaData->SetValue(NewProp_CameraBoom, TEXT("EditInline"), TEXT("true"));
-				MetaData->SetValue(NewProp_CameraBoom, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLActionCharacter.h"));
-#endif
-			}
-		}
-		check(OuterClass->GetClass());
-		return OuterClass;
-	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLActionCharacter(Z_Construct_UClass_AXLActionCharacter, &AXLActionCharacter::StaticClass, TEXT("AXLActionCharacter"), false, nullptr, nullptr, nullptr);
-	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLActionCharacter);
 	UFunction* Z_Construct_UFunction_UXLCharacterResources_CooldownTimer()
 	{
 		struct XLCharacterResources_eventCooldownTimer_Parms
@@ -810,6 +1081,310 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLCharacterResources(Z_Construct_UClass_UXLCharacterResources, &UXLCharacterResources::StaticClass, TEXT("UXLCharacterResources"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLCharacterResources);
+	UFunction* Z_Construct_UFunction_UXLAbility_ConsumeMana()
+	{
+		struct XLAbility_eventConsumeMana_Parms
+		{
+			float Cost;
+			float DeltaSeconds;
+		};
+		UObject* Outer=Z_Construct_UClass_UXLAbility();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("ConsumeMana"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(XLAbility_eventConsumeMana_Parms));
+			UProperty* NewProp_DeltaSeconds = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("DeltaSeconds"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(DeltaSeconds, XLAbility_eventConsumeMana_Parms), 0x0010000000000080);
+			UProperty* NewProp_Cost = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("Cost"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(Cost, XLAbility_eventConsumeMana_Parms), 0x0010000000000080);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("Defaults"));
+			MetaData->SetValue(ReturnFunction, TEXT("CPP_Default_DeltaSeconds"), TEXT("1.000000"));
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UFunction* Z_Construct_UFunction_UXLAbility_PlayUtilityAnimation()
+	{
+		UObject* Outer=Z_Construct_UClass_UXLAbility();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("PlayUtilityAnimation"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x00020401, 65535);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UFunction* Z_Construct_UFunction_UXLAbility_SetMyPawn()
+	{
+		struct XLAbility_eventSetMyPawn_Parms
+		{
+			AXLCharacter* Owner;
+		};
+		UObject* Outer=Z_Construct_UClass_UXLAbility();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("SetMyPawn"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x00020401, 65535, sizeof(XLAbility_eventSetMyPawn_Parms));
+			UProperty* NewProp_Owner = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("Owner"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(Owner, XLAbility_eventSetMyPawn_Parms), 0x0010000000000080, Z_Construct_UClass_AXLCharacter_NoRegister());
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UClass* Z_Construct_UClass_UXLAbility_NoRegister()
+	{
+		return UXLAbility::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLAbility()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLAbility::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+				OuterClass->LinkChild(Z_Construct_UFunction_UXLAbility_ConsumeMana());
+				OuterClass->LinkChild(Z_Construct_UFunction_UXLAbility_PlayUtilityAnimation());
+				OuterClass->LinkChild(Z_Construct_UFunction_UXLAbility_SetMyPawn());
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_Targets = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("Targets"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(Targets, UXLAbility), 0x0020080000010001);
+				UProperty* NewProp_Targets_Inner = new(EC_InternalUseOnlyConstructor, NewProp_Targets, TEXT("Targets"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0000000000000000, Z_Construct_UClass_AXLCharacter_NoRegister());
+				UProperty* NewProp_UtilityAnim = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("UtilityAnim"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(UtilityAnim, UXLAbility), 0x0020080000010001, Z_Construct_UClass_UAnimMontage_NoRegister());
+				UProperty* NewProp_AbilityEffects = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("AbilityEffects"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(AbilityEffects, UXLAbility), 0x0024080000010001);
+				UProperty* NewProp_AbilityEffects_Inner = new(EC_InternalUseOnlyConstructor, NewProp_AbilityEffects, TEXT("AbilityEffects"), RF_Public|RF_Transient|RF_MarkAsNative) UClassProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0004000000000000, Z_Construct_UClass_UXLAbilityEffect_NoRegister(), UClass::StaticClass());
+				UProperty* NewProp_UtilityDescription = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("UtilityDescription"), RF_Public|RF_Transient|RF_MarkAsNative) UStrProperty(CPP_PROPERTY_BASE(UtilityDescription, UXLAbility), 0x0020080000010001);
+				UProperty* NewProp_UtilityName = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("UtilityName"), RF_Public|RF_Transient|RF_MarkAsNative) UNameProperty(CPP_PROPERTY_BASE(UtilityName, UXLAbility), 0x0020080000010001);
+				UProperty* NewProp_MyPawn = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MyPawn"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(MyPawn, UXLAbility), 0x0020080000000014, Z_Construct_UClass_AXLCharacter_NoRegister());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLAbility_ConsumeMana(), "ConsumeMana"); // 1216189361
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLAbility_PlayUtilityAnimation(), "PlayUtilityAnimation"); // 1642845573
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLAbility_SetMyPawn(), "SetMyPawn"); // 1599331149
+				OuterClass->ClassConfigName = FName(TEXT("Engine"));
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("BlueprintType"), TEXT("true"));
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("UObject Length"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Ability/XLAbility.h"));
+				MetaData->SetValue(OuterClass, TEXT("IsBlueprintBase"), TEXT("true"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
+				MetaData->SetValue(NewProp_Targets, TEXT("Category"), TEXT("Implementation"));
+				MetaData->SetValue(NewProp_Targets, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
+				MetaData->SetValue(NewProp_UtilityAnim, TEXT("Category"), TEXT("Animation"));
+				MetaData->SetValue(NewProp_UtilityAnim, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
+				MetaData->SetValue(NewProp_AbilityEffects, TEXT("Category"), TEXT("Config"));
+				MetaData->SetValue(NewProp_AbilityEffects, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
+				MetaData->SetValue(NewProp_UtilityDescription, TEXT("Category"), TEXT("Config"));
+				MetaData->SetValue(NewProp_UtilityDescription, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
+				MetaData->SetValue(NewProp_UtilityName, TEXT("Category"), TEXT("Config"));
+				MetaData->SetValue(NewProp_UtilityName, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
+				MetaData->SetValue(NewProp_MyPawn, TEXT("Category"), TEXT("Defaults"));
+				MetaData->SetValue(NewProp_MyPawn, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLAbility(Z_Construct_UClass_UXLAbility, &UXLAbility::StaticClass, TEXT("UXLAbility"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLAbility);
+	UClass* Z_Construct_UClass_UXLSelfAbility_NoRegister()
+	{
+		return UXLSelfAbility::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLSelfAbility()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UXLAbility();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLSelfAbility::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("UObject Length"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Ability/XLSelfAbility.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLSelfAbility.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLSelfAbility(Z_Construct_UClass_UXLSelfAbility, &UXLSelfAbility::StaticClass, TEXT("UXLSelfAbility"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLSelfAbility);
+	UClass* Z_Construct_UClass_UXLAbilityEffect_NoRegister()
+	{
+		return UXLAbilityEffect::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLAbilityEffect()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UActorComponent();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLAbilityEffect::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+				OuterClass->ClassConfigName = FName(TEXT("Engine"));
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("BlueprintType"), TEXT("true"));
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("UObject Length"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Ability/AbilityEffects/XLAbilityEffect.h"));
+				MetaData->SetValue(OuterClass, TEXT("IsBlueprintBase"), TEXT("true"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Ability/AbilityEffects/XLAbilityEffect.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLAbilityEffect(Z_Construct_UClass_UXLAbilityEffect, &UXLAbilityEffect::StaticClass, TEXT("UXLAbilityEffect"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLAbilityEffect);
+	UClass* Z_Construct_UClass_UXLHoverEffect_NoRegister()
+	{
+		return UXLHoverEffect::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLHoverEffect()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UXLAbilityEffect();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLHoverEffect::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("UObject Length"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Ability/AbilityEffects/XLHoverEffect.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Ability/AbilityEffects/XLHoverEffect.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLHoverEffect(Z_Construct_UClass_UXLHoverEffect, &UXLHoverEffect::StaticClass, TEXT("UXLHoverEffect"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLHoverEffect);
+	UClass* Z_Construct_UClass_UXLJumpEffect_NoRegister()
+	{
+		return UXLJumpEffect::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLJumpEffect()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UXLAbilityEffect();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLJumpEffect::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("UObject Length"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Ability/AbilityEffects/XLJumpEffect.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Ability/AbilityEffects/XLJumpEffect.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLJumpEffect(Z_Construct_UClass_UXLJumpEffect, &UXLJumpEffect::StaticClass, TEXT("UXLJumpEffect"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLJumpEffect);
+	UClass* Z_Construct_UClass_AXLActionCharacter_NoRegister()
+	{
+		return AXLActionCharacter::StaticClass();
+	}
+	UClass* Z_Construct_UClass_AXLActionCharacter()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_AXLCharacter();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = AXLActionCharacter::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20800080;
+
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_PerspectiveCamera = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PerspectiveCamera"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(PerspectiveCamera, AXLActionCharacter), 0x0010000000080008, Z_Construct_UClass_UCameraComponent_NoRegister());
+				UProperty* NewProp_FollowCamera = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("FollowCamera"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(FollowCamera, AXLActionCharacter), 0x00100000000a001d, Z_Construct_UClass_UCameraComponent_NoRegister());
+				UProperty* NewProp_CameraBoom = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CameraBoom"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(CameraBoom, AXLActionCharacter), 0x00100000000a001d, Z_Construct_UClass_USpringArmComponent_NoRegister());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Navigation"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Characters/XLActionCharacter.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLActionCharacter.h"));
+				MetaData->SetValue(OuterClass, TEXT("ObjectInitializerConstructorDeclared"), TEXT(""));
+				MetaData->SetValue(NewProp_PerspectiveCamera, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_PerspectiveCamera, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLActionCharacter.h"));
+				MetaData->SetValue(NewProp_FollowCamera, TEXT("AllowPrivateAccess"), TEXT("true"));
+				MetaData->SetValue(NewProp_FollowCamera, TEXT("Category"), TEXT("Camera"));
+				MetaData->SetValue(NewProp_FollowCamera, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_FollowCamera, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLActionCharacter.h"));
+				MetaData->SetValue(NewProp_CameraBoom, TEXT("AllowPrivateAccess"), TEXT("true"));
+				MetaData->SetValue(NewProp_CameraBoom, TEXT("Category"), TEXT("Camera"));
+				MetaData->SetValue(NewProp_CameraBoom, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_CameraBoom, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLActionCharacter.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLActionCharacter(Z_Construct_UClass_AXLActionCharacter, &AXLActionCharacter::StaticClass, TEXT("AXLActionCharacter"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLActionCharacter);
 	UClass* Z_Construct_UClass_UXLCharacterStats_NoRegister()
 	{
 		return UXLCharacterStats::StaticClass();
@@ -1143,75 +1718,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLImpactEffect(Z_Construct_UClass_AXLImpactEffect, &AXLImpactEffect::StaticClass, TEXT("AXLImpactEffect"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLImpactEffect);
-	UClass* Z_Construct_UClass_UXLMovementComponent_NoRegister()
-	{
-		return UXLMovementComponent::StaticClass();
-	}
-	UClass* Z_Construct_UClass_UXLMovementComponent()
-	{
-		static UClass* OuterClass = NULL;
-		if (!OuterClass)
-		{
-			Z_Construct_UClass_UCharacterMovementComponent();
-			Z_Construct_UPackage__Script_ExtendedLibrary();
-			OuterClass = UXLMovementComponent::StaticClass();
-			if (!(OuterClass->ClassFlags & CLASS_Constructed))
-			{
-				UObjectForceRegistration(OuterClass);
-				OuterClass->ClassFlags |= 0x20A00084;
-
-
-PRAGMA_DISABLE_DEPRECATION_WARNINGS
-				UProperty* NewProp_TargetingMovementSpeed = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("TargetingMovementSpeed"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(TargetingMovementSpeed, UXLMovementComponent), 0x0010000000010001);
-				UProperty* NewProp_CrouchedMovementSpeed = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CrouchedMovementSpeed"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(CrouchedMovementSpeed, UXLMovementComponent), 0x0010000000010001);
-				UProperty* NewProp_RunningMovementSpeed = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("RunningMovementSpeed"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(RunningMovementSpeed, UXLMovementComponent), 0x0010000000010001);
-				UProperty* NewProp_BaseMovementSpeed = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BaseMovementSpeed"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(BaseMovementSpeed, UXLMovementComponent), 0x0010000000010001);
-				UProperty* NewProp_MovementSpeedModifier = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MovementSpeedModifier"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(MovementSpeedModifier, UXLMovementComponent), 0x0010000000010001);
-				UProperty* NewProp_BaseLookUpRate = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BaseLookUpRate"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(BaseLookUpRate, UXLMovementComponent), 0x0010000000000000);
-				UProperty* NewProp_BaseTurnRate = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BaseTurnRate"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(BaseTurnRate, UXLMovementComponent), 0x0010000000000000);
-				UProperty* NewProp_DodgeCost = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("DodgeCost"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(DodgeCost, UXLMovementComponent), 0x0010000000010001);
-				UProperty* NewProp_ClimbCost = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("ClimbCost"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(ClimbCost, UXLMovementComponent), 0x0010000000010001);
-				UProperty* NewProp_VaultCost = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("VaultCost"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(VaultCost, UXLMovementComponent), 0x0010000000010001);
-				UProperty* NewProp_JumpCost = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("JumpCost"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(JumpCost, UXLMovementComponent), 0x0010000000010001);
-				UProperty* NewProp_SprintCost = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("SprintCost"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(SprintCost, UXLMovementComponent), 0x0010000000010001);
-PRAGMA_ENABLE_DEPRECATION_WARNINGS
-				OuterClass->ClassConfigName = FName(TEXT("Engine"));
-				OuterClass->StaticLink();
-#if WITH_METADATA
-				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
-				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Components/XLMovementComponent.h"));
-				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
-				MetaData->SetValue(NewProp_TargetingMovementSpeed, TEXT("Category"), TEXT("Movement"));
-				MetaData->SetValue(NewProp_TargetingMovementSpeed, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
-				MetaData->SetValue(NewProp_CrouchedMovementSpeed, TEXT("Category"), TEXT("Movement"));
-				MetaData->SetValue(NewProp_CrouchedMovementSpeed, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
-				MetaData->SetValue(NewProp_RunningMovementSpeed, TEXT("Category"), TEXT("Movement"));
-				MetaData->SetValue(NewProp_RunningMovementSpeed, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
-				MetaData->SetValue(NewProp_BaseMovementSpeed, TEXT("Category"), TEXT("Movement"));
-				MetaData->SetValue(NewProp_BaseMovementSpeed, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
-				MetaData->SetValue(NewProp_MovementSpeedModifier, TEXT("Category"), TEXT("Movement"));
-				MetaData->SetValue(NewProp_MovementSpeedModifier, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
-				MetaData->SetValue(NewProp_MovementSpeedModifier, TEXT("ToolTip"), TEXT("Movement Speed"));
-				MetaData->SetValue(NewProp_BaseLookUpRate, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
-				MetaData->SetValue(NewProp_BaseTurnRate, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
-				MetaData->SetValue(NewProp_DodgeCost, TEXT("Category"), TEXT("Config"));
-				MetaData->SetValue(NewProp_DodgeCost, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
-				MetaData->SetValue(NewProp_ClimbCost, TEXT("Category"), TEXT("Config"));
-				MetaData->SetValue(NewProp_ClimbCost, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
-				MetaData->SetValue(NewProp_VaultCost, TEXT("Category"), TEXT("Config"));
-				MetaData->SetValue(NewProp_VaultCost, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
-				MetaData->SetValue(NewProp_JumpCost, TEXT("Category"), TEXT("Config"));
-				MetaData->SetValue(NewProp_JumpCost, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
-				MetaData->SetValue(NewProp_SprintCost, TEXT("Category"), TEXT("Config"));
-				MetaData->SetValue(NewProp_SprintCost, TEXT("ModuleRelativePath"), TEXT("Public/Components/XLMovementComponent.h"));
-#endif
-			}
-		}
-		check(OuterClass->GetClass());
-		return OuterClass;
-	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLMovementComponent(Z_Construct_UClass_UXLMovementComponent, &UXLMovementComponent::StaticClass, TEXT("UXLMovementComponent"), false, nullptr, nullptr, nullptr);
-	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLMovementComponent);
 	UFunction* Z_Construct_UFunction_AXLPickup_OnPickedUpEvent()
 	{
 		UObject* Outer=Z_Construct_UClass_AXLPickup();
@@ -1974,8 +2480,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/ExtendedLibrary")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
 			FGuid Guid;
-			Guid.A = 0xF9D6EED4;
-			Guid.B = 0x84E6336D;
+			Guid.A = 0x3951BC21;
+			Guid.B = 0xFDE137CC;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

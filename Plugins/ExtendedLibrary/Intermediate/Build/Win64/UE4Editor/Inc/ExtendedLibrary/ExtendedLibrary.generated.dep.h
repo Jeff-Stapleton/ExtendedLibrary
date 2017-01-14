@@ -5,8 +5,8 @@
 	DO NOT modify this manually! Edit the corresponding .h files instead!
 ===========================================================================*/
 
-#ifndef EXTENDEDLIBRARY_XLAbilityManager_generated_h
-	#include "Public/Managers/XLAbilityManager.h"
+#ifndef EXTENDEDLIBRARY_XLMovementComponent_generated_h
+	#include "Public/Components/XLMovementComponent.h"
 #endif
 #ifndef EXTENDEDLIBRARY_XLActionState_generated_h
 	#include "Public/Enums/XLActionState.h"
@@ -23,14 +23,32 @@
 #ifndef EXTENDEDLIBRARY_XLPostureState_generated_h
 	#include "Public/Enums/XLPostureState.h"
 #endif
+#ifndef EXTENDEDLIBRARY_XLAbilityManager_generated_h
+	#include "Public/Managers/XLAbilityManager.h"
+#endif
 #ifndef EXTENDEDLIBRARY_XLCharacter_generated_h
 	#include "Public/Characters/XLCharacter.h"
 #endif
-#ifndef EXTENDEDLIBRARY_XLActionCharacter_generated_h
-	#include "Public/Characters/XLActionCharacter.h"
-#endif
 #ifndef EXTENDEDLIBRARY_XLCharacterResources_generated_h
 	#include "Public/Data/XLCharacterResources.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLAbility_generated_h
+	#include "Public/Ability/XLAbility.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLSelfAbility_generated_h
+	#include "Public/Ability/XLSelfAbility.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLAbilityEffect_generated_h
+	#include "Public/Ability/AbilityEffects/XLAbilityEffect.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLHoverEffect_generated_h
+	#include "Public/Ability/AbilityEffects/XLHoverEffect.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLJumpEffect_generated_h
+	#include "Public/Ability/AbilityEffects/XLJumpEffect.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLActionCharacter_generated_h
+	#include "Public/Characters/XLActionCharacter.h"
 #endif
 #ifndef EXTENDEDLIBRARY_XLCharacterStats_generated_h
 	#include "Public/Data/XLCharacterStats.h"
@@ -49,9 +67,6 @@
 #endif
 #ifndef EXTENDEDLIBRARY_XLImpactEffect_generated_h
 	#include "Public/Effects/XLImpactEffect.h"
-#endif
-#ifndef EXTENDEDLIBRARY_XLMovementComponent_generated_h
-	#include "Public/Components/XLMovementComponent.h"
 #endif
 #ifndef EXTENDEDLIBRARY_XLPickup_generated_h
 	#include "Public/Pickups/XLPickup.h"

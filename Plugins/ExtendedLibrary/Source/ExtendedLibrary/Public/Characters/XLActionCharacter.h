@@ -18,7 +18,7 @@ public:
 	UPROPERTY()
 	class UCameraComponent* PerspectiveCamera;
 
-	AXLActionCharacter();
+	AXLActionCharacter(const FObjectInitializer& ObjectInitializer);
 
 	virtual void BeginPlay() override;
 

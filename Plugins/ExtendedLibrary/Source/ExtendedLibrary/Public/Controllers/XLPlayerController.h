@@ -39,6 +39,9 @@ protected:
 
 	virtual void Melee();
 
+	virtual void StartAbility();
+	virtual void StopAbility();
+
 	virtual void UnFreeze() override;
 
 	void Reset() override;

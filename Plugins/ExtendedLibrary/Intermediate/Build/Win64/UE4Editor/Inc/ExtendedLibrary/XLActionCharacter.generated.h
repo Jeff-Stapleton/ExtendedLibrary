@@ -37,7 +37,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Characters_XLActionCharacter_h_8_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
-	NO_API AXLActionCharacter(const FObjectInitializer& ObjectInitializer); \
+	NO_API AXLActionCharacter(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AXLActionCharacter) \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, AXLActionCharacter); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AXLActionCharacter); \
@@ -56,7 +56,7 @@ private: \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, AXLActionCharacter); \
 DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AXLActionCharacter); \
-	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AXLActionCharacter)
+	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AXLActionCharacter)
 
 
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Characters_XLActionCharacter_h_8_PRIVATE_PROPERTY_OFFSET

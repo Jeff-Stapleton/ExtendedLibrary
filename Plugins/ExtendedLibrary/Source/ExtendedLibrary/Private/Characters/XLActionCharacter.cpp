@@ -3,7 +3,9 @@
 #include "ExtendedLibraryPCH.h"
 #include "XLActionCharacter.h"
 
-AXLActionCharacter::AXLActionCharacter()
+AXLActionCharacter::AXLActionCharacter(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer.SetDefaultSubobjectClass<UXLMovementComponent>(ACharacter::CharacterMovementComponentName))
+
 {
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(RootComponent);

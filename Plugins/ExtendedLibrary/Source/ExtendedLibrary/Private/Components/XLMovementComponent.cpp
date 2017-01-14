@@ -5,12 +5,36 @@
 
 UXLMovementComponent::UXLMovementComponent()
 {
-	BaseTurnRate = 25.f;
-	BaseLookUpRate = 25.f;
 
-	MovementSpeedModifier = 1.0f;
-	BaseMovementSpeed = 400.0f;
-	RunningMovementSpeed = 650.0f;
-	CrouchedMovementSpeed = 300.0f;
-	TargetingMovementSpeed = 200.0f;
+
+
+	JumpZVelocity = JumpVelocity * JumpVelocityModifier;
+	MaxWalkSpeed = BaseMovementSpeed * MovementSpeedModifier;
+}
+
+void UXLMovementComponent::UpdateMovementSpeed()
+{
+	AXLCharacter* Pawn = Cast<AXLCharacter>(GetOwner());
+	if (Pawn->ActionState == EActionState::Sprinting)
+	{
+		MaxWalkSpeed = RunningMovementSpeed * MovementSpeedModifier;
+	}
+	else if (Pawn->PostureState == EPostureState::Crouching)
+	{
+		MaxWalkSpeed = CrouchedMovementSpeed * MovementSpeedModifier;
+	}
+	else if (Pawn->PostureState == EPostureState::Prone)
+	{
+		MaxWalkSpeed = PronedMovementSpeed * MovementSpeedModifier;
+	}
+	else
+	{
+		MaxWalkSpeed = BaseMovementSpeed * MovementSpeedModifier;
+	}
+}
+
+void UXLMovementComponent::ModifyJumpHeight(float NewModifier)
+{
+	JumpVelocityModifier = NewModifier;
+	JumpZVelocity = JumpVelocity * JumpVelocityModifier;
 }

@@ -11,8 +11,48 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define EXTENDEDLIBRARY_XLAbilityManager_generated_h
 
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLAbilityManager_h_9_RPC_WRAPPERS
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLAbilityManager_h_9_RPC_WRAPPERS_NO_PURE_DECLS
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLAbilityManager_h_9_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execDeactivateAbility) \
+	{ \
+		P_GET_PROPERTY(UIntProperty,Z_Param_Ability); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->DeactivateAbility(Z_Param_Ability); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execActivateAbility) \
+	{ \
+		P_GET_PROPERTY(UIntProperty,Z_Param_Ability); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->ActivateAbility(Z_Param_Ability); \
+		P_NATIVE_END; \
+	}
+
+
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLAbilityManager_h_9_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execDeactivateAbility) \
+	{ \
+		P_GET_PROPERTY(UIntProperty,Z_Param_Ability); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->DeactivateAbility(Z_Param_Ability); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execActivateAbility) \
+	{ \
+		P_GET_PROPERTY(UIntProperty,Z_Param_Ability); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->ActivateAbility(Z_Param_Ability); \
+		P_NATIVE_END; \
+	}
+
+
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLAbilityManager_h_9_INCLASS_NO_PURE_DECLS \
 	private: \
 	static void StaticRegisterNativesUXLAbilityManager(); \
@@ -59,7 +99,10 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UXLAbilityManager); \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(UXLAbilityManager)
 
 
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLAbilityManager_h_9_PRIVATE_PROPERTY_OFFSET
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLAbilityManager_h_9_PRIVATE_PROPERTY_OFFSET \
+	FORCEINLINE static uint32 __PPO__AbilitiesBP() { return STRUCT_OFFSET(UXLAbilityManager, AbilitiesBP); }
+
+
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLAbilityManager_h_6_PROLOG
 #define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Managers_XLAbilityManager_h_9_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \

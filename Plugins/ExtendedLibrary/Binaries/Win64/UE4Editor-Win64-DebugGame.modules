@@ -1,7 +1,7 @@
 {
 	"Changelist" : 3224400,
 	"CompatibleChangelist" : 3195953,
-	"BuildId" : "1f24f397-c484-46b8-bf4e-a1e21f440e52",
+	"BuildId" : "37f2d943-b607-4f8f-8165-561dfcf0876f",
 	"Modules" : 
 	{
 		"ExtendedLibrary" : "UE4Editor-ExtendedLibrary-Win64-DebugGame.dll"

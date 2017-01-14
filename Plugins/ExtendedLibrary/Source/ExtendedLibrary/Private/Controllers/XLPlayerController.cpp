@@ -54,6 +54,9 @@ void AXLPlayerController::SetupInputComponent()
 	InputComponent->BindAction("Reload", IE_Pressed, this, &AXLPlayerController::Reload);
 
 	InputComponent->BindAction("Melee", IE_Pressed, this, &AXLPlayerController::Melee);
+
+	InputComponent->BindAction("Ability", IE_Pressed, this, &AXLPlayerController::StartAbility);
+	InputComponent->BindAction("Ability", IE_Released, this, &AXLPlayerController::StopAbility);
 }
 
 void AXLPlayerController::Move(float Direction)
@@ -147,6 +150,16 @@ void AXLPlayerController::Melee()
 	{
 		(Cast<AXLCharacter>(GetPawn()))->Melee();
 	}
+}
+
+void AXLPlayerController::StartAbility()
+{
+	(Cast<AXLCharacter>(GetPawn()))->StartAbility(0);
+}
+
+void AXLPlayerController::StopAbility()
+{
+	(Cast<AXLCharacter>(GetPawn()))->StopAbility(0);
 }
 
 void AXLPlayerController::UnFreeze()

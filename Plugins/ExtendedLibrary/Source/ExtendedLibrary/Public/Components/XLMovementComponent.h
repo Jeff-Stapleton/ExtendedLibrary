@@ -2,12 +2,18 @@
 
 #include "XLMovementComponent.generated.h"
 
-UCLASS()
+UCLASS(hidecategories=("CharacterMovement:Walking"))
 class UXLMovementComponent : public UCharacterMovementComponent
 {
 	GENERATED_BODY()
 
 	UXLMovementComponent();
+
+public:
+
+	void UpdateMovementSpeed();
+
+	void ModifyJumpHeight(float NewModifier);
 
 public:
 
@@ -26,25 +32,37 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = Config)
 	float DodgeCost;
 
-	UPROPERTY()
-	float BaseTurnRate;
-	UPROPERTY()
-	float BaseLookUpRate;
+	UPROPERTY(EditDefaultsOnly, Category = Looking)
+	float BaseTurnRate = 45.0f;
+	UPROPERTY(EditDefaultsOnly, Category = Looking)
+	float BaseLookRate = 45.0f;
 
 /////////////////////////////////////////////// Movement Speed ///////////////////////////////////////////////
 
 	UPROPERTY(EditDefaultsOnly, Category = Movement)
-	float MovementSpeedModifier;
+	float MovementSpeedModifier = 1.0f;
 
 	UPROPERTY(EditDefaultsOnly, Category = Movement)
-	float BaseMovementSpeed;
+	float BaseMovementSpeed = 300.0f;
 
 	UPROPERTY(EditDefaultsOnly, Category = Movement)
-	float RunningMovementSpeed;
+	float RunningMovementSpeed = 450.0f;
 
 	UPROPERTY(EditDefaultsOnly, Category = Movement)
-	float CrouchedMovementSpeed;
+	float CrouchedMovementSpeed = 200.0f;
 
 	UPROPERTY(EditDefaultsOnly, Category = Movement)
-	float TargetingMovementSpeed;
+	float PronedMovementSpeed = 100.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = Movement)
+	float TargetingMovementSpeed = 200.0f;
+
+	/////////////////////////////////////////////// Movement Speed ///////////////////////////////////////////////
+
+	UPROPERTY(EditDefaultsOnly, Category = Jumping)
+	float JumpVelocityModifier = 1.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = Jumping)
+	float JumpVelocity = 420.0f;
+
 };
