@@ -3,6 +3,7 @@
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Ability\AbilityEffects\XLAbilityEffect.cpp"
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Ability\AbilityEffects\XLHoverEffect.cpp"
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Ability\AbilityEffects\XLJumpEffect.cpp"
+#include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Ability\AbilityEffects\XLPhaseEffect.cpp"
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Ability\XLAbility.cpp"
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Ability\XLSelfAbility.cpp"
 #include "C:\Users\jeffd_000\Documents\UE4ExtendedLibrary\Plugins\ExtendedLibrary\Source\ExtendedLibrary\Private\Cans\XLCharacterCan.cpp"

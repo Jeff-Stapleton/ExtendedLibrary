@@ -47,6 +47,9 @@
 #ifndef EXTENDEDLIBRARY_XLJumpEffect_generated_h
 	#include "Public/Ability/AbilityEffects/XLJumpEffect.h"
 #endif
+#ifndef EXTENDEDLIBRARY_XLPhaseEffect_generated_h
+	#include "Public/Ability/AbilityEffects/XLPhaseEffect.h"
+#endif
 #ifndef EXTENDEDLIBRARY_XLActionCharacter_generated_h
 	#include "Public/Characters/XLActionCharacter.h"
 #endif

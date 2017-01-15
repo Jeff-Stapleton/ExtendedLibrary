@@ -5,9 +5,6 @@
 
 UXLMovementComponent::UXLMovementComponent()
 {
-
-
-
 	JumpZVelocity = JumpVelocity * JumpVelocityModifier;
 	MaxWalkSpeed = BaseMovementSpeed * MovementSpeedModifier;
 }

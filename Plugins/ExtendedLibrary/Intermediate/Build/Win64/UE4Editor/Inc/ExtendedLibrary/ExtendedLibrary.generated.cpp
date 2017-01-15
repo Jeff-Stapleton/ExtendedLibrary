@@ -158,6 +158,10 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EPostureState(EPostureSt
 	{
 	}
 	IMPLEMENT_CLASS(UXLJumpEffect, 3914429877);
+	void UXLPhaseEffect::StaticRegisterNativesUXLPhaseEffect()
+	{
+	}
+	IMPLEMENT_CLASS(UXLPhaseEffect, 2709299859);
 	void AXLActionCharacter::StaticRegisterNativesAXLActionCharacter()
 	{
 	}
@@ -368,6 +372,8 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLHoverEffect();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLJumpEffect_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLJumpEffect();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPhaseEffect_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPhaseEffect();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLActionCharacter_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLActionCharacter();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterStats_NoRegister();
@@ -1337,6 +1343,38 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLJumpEffect(Z_Construct_UClass_UXLJumpEffect, &UXLJumpEffect::StaticClass, TEXT("UXLJumpEffect"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLJumpEffect);
+	UClass* Z_Construct_UClass_UXLPhaseEffect_NoRegister()
+	{
+		return UXLPhaseEffect::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLPhaseEffect()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UXLAbilityEffect();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLPhaseEffect::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20A00080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("UObject Length"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Ability/AbilityEffects/XLPhaseEffect.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Ability/AbilityEffects/XLPhaseEffect.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLPhaseEffect(Z_Construct_UClass_UXLPhaseEffect, &UXLPhaseEffect::StaticClass, TEXT("UXLPhaseEffect"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLPhaseEffect);
 	UClass* Z_Construct_UClass_AXLActionCharacter_NoRegister()
 	{
 		return AXLActionCharacter::StaticClass();
@@ -2480,8 +2518,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/ExtendedLibrary")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
 			FGuid Guid;
-			Guid.A = 0x3951BC21;
-			Guid.B = 0xFDE137CC;
+			Guid.A = 0xC50CE0F6;
+			Guid.B = 0x2D394957;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);
