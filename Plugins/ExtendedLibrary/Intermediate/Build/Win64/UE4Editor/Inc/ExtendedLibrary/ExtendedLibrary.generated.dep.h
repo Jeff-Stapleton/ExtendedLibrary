@@ -5,6 +5,9 @@
 	DO NOT modify this manually! Edit the corresponding .h files instead!
 ===========================================================================*/
 
+#ifndef EXTENDEDLIBRARY_HasLineOfSight_generated_h
+	#include "Public/AI/Decorators/HasLineOfSight.h"
+#endif
 #ifndef EXTENDEDLIBRARY_XLMovementComponent_generated_h
 	#include "Public/Components/XLMovementComponent.h"
 #endif
@@ -32,6 +35,9 @@
 #ifndef EXTENDEDLIBRARY_XLCharacterResources_generated_h
 	#include "Public/Data/XLCharacterResources.h"
 #endif
+#ifndef EXTENDEDLIBRARY_XLAbilityType_generated_h
+	#include "Public/Enums/XLAbilityType.h"
+#endif
 #ifndef EXTENDEDLIBRARY_XLAbility_generated_h
 	#include "Public/Ability/XLAbility.h"
 #endif
@@ -50,8 +56,14 @@
 #ifndef EXTENDEDLIBRARY_XLPhaseEffect_generated_h
 	#include "Public/Ability/AbilityEffects/XLPhaseEffect.h"
 #endif
+#ifndef EXTENDEDLIBRARY_XLAIController_generated_h
+	#include "Public/Controllers/XLAIController.h"
+#endif
 #ifndef EXTENDEDLIBRARY_XLActionCharacter_generated_h
 	#include "Public/Characters/XLActionCharacter.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLAICharacter_generated_h
+	#include "Public/Characters/XLAICharacter.h"
 #endif
 #ifndef EXTENDEDLIBRARY_XLCharacterStats_generated_h
 	#include "Public/Data/XLCharacterStats.h"
@@ -59,11 +71,20 @@
 #ifndef EXTENDEDLIBRARY_XLCoverComponent_generated_h
 	#include "Public/Components/XLCoverComponent.h"
 #endif
-#ifndef EXTENDEDLIBRARY_XLGameInstance_generated_h
-	#include "Public/Game/XLGameInstance.h"
+#ifndef EXTENDEDLIBRARY_XLFindClosestEnemyWithLOS_generated_h
+	#include "Public/AI/Services/XLFindClosestEnemyWithLOS.h"
 #endif
 #ifndef EXTENDEDLIBRARY_XLGameMode_generated_h
 	#include "Public/Game/XLGameMode.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLFindPickup_generated_h
+	#include "Public/AI/Tasks/XLFindPickup.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLFindPointNearEnemy_generated_h
+	#include "Public/AI/Tasks/XLFindPointNearEnemy.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLGameInstance_generated_h
+	#include "Public/Game/XLGameInstance.h"
 #endif
 #ifndef EXTENDEDLIBRARY_XLDecalData_generated_h
 	#include "Public/Structs/XLDecalData.h"
@@ -92,8 +113,14 @@
 #ifndef EXTENDEDLIBRARY_XLPlayerSoundManager_generated_h
 	#include "Public/Managers/XLPlayerSoundManager.h"
 #endif
+#ifndef EXTENDEDLIBRARY_XLPlayerState_generated_h
+	#include "Public/Online/XLPlayerState.h"
+#endif
 #ifndef EXTENDEDLIBRARY_XLProjectile_generated_h
 	#include "Public/Projectiles/XLProjectile.h"
+#endif
+#ifndef EXTENDEDLIBRARY_XLSelectNextPatrolPoint_generated_h
+	#include "Public/AI/Tasks/XLSelectNextPatrolPoint.h"
 #endif
 #ifndef EXTENDEDLIBRARY_XLWeaponState_generated_h
 	#include "Public/Enums/XLWeaponState.h"

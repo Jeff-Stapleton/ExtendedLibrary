@@ -48,8 +48,6 @@ void AXLCharacter::Move(float Value)
 {
 	if (XLCharacterCan::Move(this))
 	{
-		//Velocity = Value;
-
 		// find out which way is forward
 		const FRotator Rotation = Controller->GetControlRotation();
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
@@ -64,8 +62,6 @@ void AXLCharacter::Strafe(float Value)
 {
 	if (XLCharacterCan::Strafe(this))
 	{
-		//Direction = Value;
-
 		// find out which way is right
 		const FRotator Rotation = Controller->GetControlRotation();
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
@@ -79,7 +75,6 @@ void AXLCharacter::Strafe(float Value)
 
 void AXLCharacter::Turn(float Direction)
 {
-	AXLPlayerController* MyPC = Cast<AXLPlayerController>(Controller);
 	if (XLCharacterCan::Turn(this))
 	{
 		AddControllerYawInput(Direction * MovementComponent->BaseTurnRate * GetWorld()->GetDeltaSeconds());
@@ -88,7 +83,6 @@ void AXLCharacter::Turn(float Direction)
 
 void AXLCharacter::Look(float Direction)
 {
-	AXLPlayerController* MyPC = Cast<AXLPlayerController>(Controller);
 	if (XLCharacterCan::LookUp(this))
 	{
 		AddControllerPitchInput(Direction * MovementComponent->BaseLookRate * GetWorld()->GetDeltaSeconds());
@@ -147,11 +141,17 @@ void AXLCharacter::Melee()
 
 void AXLCharacter::StartAbility(int32 Ability)
 {
-	CharacterAbilities->ActivateAbility(Ability);
+	if (XLCharacterCan::StartAbility(this))
+	{
+		CharacterAbilities->ActivateAbility(Ability);
+	}
 }
 void AXLCharacter::StopAbility(int32 Ability)
 {
-	CharacterAbilities->DeactivateAbility(Ability);
+	if (XLCharacterCan::StopAbility(this))
+	{
+		CharacterAbilities->DeactivateAbility(Ability);
+	}
 }
 
 

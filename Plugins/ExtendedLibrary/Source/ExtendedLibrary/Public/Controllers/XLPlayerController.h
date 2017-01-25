@@ -39,8 +39,14 @@ protected:
 
 	virtual void Melee();
 
-	virtual void StartAbility();
-	virtual void StopAbility();
+	virtual void StartAbility1();
+	virtual void StopAbility1();
+
+	virtual void StartAbility2();
+	virtual void StopAbility2();
+
+	virtual void StartAbility3();
+	virtual void StopAbility3();
 
 	virtual void UnFreeze() override;
 

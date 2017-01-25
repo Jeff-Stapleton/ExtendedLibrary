@@ -24,9 +24,7 @@
 #define XL_SURFACE_Flesh			SurfaceType8
 #define XL_SURFACE_Energy			SurfaceType9
 
-#define COLLISION_PHYSICAL_STATIC	ECC_GameTraceChannel1
-#define COLLISION_PHYSICAL_DYNAMIC	ECC_GameTraceChannel2
-#define COLLISION_PHASE_STATIC		ECC_GameTraceChannel3
-#define COLLISION_PHASE_DYNAMIC		ECC_GameTraceChannel4
-#define COLLISION_PROJECTILE		ECC_GameTraceChannel5
-#define COLLISION_PICKUP			ECC_GameTraceChannel6
+#define COLLISION_PHYSICAL_OBJECT	ECC_GameTraceChannel1
+#define COLLISION_PHASE_OBJECT		ECC_GameTraceChannel2
+#define COLLISION_PROJECTILE		ECC_GameTraceChannel3
+#define COLLISION_PICKUP			ECC_GameTraceChannel4

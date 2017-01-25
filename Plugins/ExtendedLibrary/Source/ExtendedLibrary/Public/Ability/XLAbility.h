@@ -3,7 +3,8 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "Data/XLCharacterResources.h"
+#include "XLCharacterResources.h"
+#include "XLAbilityType.h"
 #include "XLAbility.generated.h"
 
 UCLASS(config = Engine, hidecategories = (UObject, Length), Blueprintable, BlueprintType)
@@ -32,10 +33,24 @@ public:
 	UFUNCTION()
 	void PlayUtilityAnimation();
 
+	UFUNCTION()
+	void StartAbility();
+
+	UFUNCTION()
+	void StopAbility();
+
+	void ActivateAbility();
+	void StartChannelAbility();
+	void StopChannelAbility();
+	void ToggleAbility();
+
 protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = Defaults)
 	class AXLCharacter* MyPawn;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
+	TEnumAsByte<EAbilityType::Type> AbilityType;
 
 	UPROPERTY(EditDefaultsOnly, Category = Config)
 	FName UtilityName;
@@ -45,6 +60,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = Config)
 	TArray<TSubclassOf<class UXLAbilityEffect>> AbilityEffects;
+
+	UPROPERTY(EditDefaultsOnly, Category = Implementation)
+	bool IsActivated;
 
 	UPROPERTY(EditDefaultsOnly, Category = Animation)
 	UAnimMontage* UtilityAnim;

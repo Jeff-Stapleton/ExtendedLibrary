@@ -12,7 +12,23 @@ class AXLCharacter;
 #endif
 #define EXTENDEDLIBRARY_XLAbility_generated_h
 
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_12_RPC_WRAPPERS \
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_13_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execStopAbility) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->StopAbility(); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execStartAbility) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->StartAbility(); \
+		P_NATIVE_END; \
+	} \
  \
 	DECLARE_FUNCTION(execPlayUtilityAnimation) \
 	{ \
@@ -42,7 +58,23 @@ class AXLCharacter;
 	}
 
 
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execStopAbility) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->StopAbility(); \
+		P_NATIVE_END; \
+	} \
+ \
+	DECLARE_FUNCTION(execStartAbility) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->StartAbility(); \
+		P_NATIVE_END; \
+	} \
  \
 	DECLARE_FUNCTION(execPlayUtilityAnimation) \
 	{ \
@@ -72,7 +104,7 @@ class AXLCharacter;
 	}
 
 
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_12_INCLASS_NO_PURE_DECLS \
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_13_INCLASS_NO_PURE_DECLS \
 	private: \
 	static void StaticRegisterNativesUXLAbility(); \
 	friend EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbility(); \
@@ -85,7 +117,7 @@ class AXLCharacter;
 
 
 
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_12_INCLASS \
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_13_INCLASS \
 	private: \
 	static void StaticRegisterNativesUXLAbility(); \
 	friend EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbility(); \
@@ -98,7 +130,7 @@ class AXLCharacter;
 
 
 
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_12_STANDARD_CONSTRUCTORS \
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_13_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UXLAbility(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UXLAbility) \
@@ -111,7 +143,7 @@ private: \
 public:
 
 
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_12_ENHANCED_CONSTRUCTORS \
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_13_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API UXLAbility(UXLAbility&&); \
@@ -122,34 +154,36 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UXLAbility); \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(UXLAbility)
 
 
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_12_PRIVATE_PROPERTY_OFFSET \
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_13_PRIVATE_PROPERTY_OFFSET \
 	FORCEINLINE static uint32 __PPO__MyPawn() { return STRUCT_OFFSET(UXLAbility, MyPawn); } \
+	FORCEINLINE static uint32 __PPO__AbilityType() { return STRUCT_OFFSET(UXLAbility, AbilityType); } \
 	FORCEINLINE static uint32 __PPO__UtilityName() { return STRUCT_OFFSET(UXLAbility, UtilityName); } \
 	FORCEINLINE static uint32 __PPO__UtilityDescription() { return STRUCT_OFFSET(UXLAbility, UtilityDescription); } \
 	FORCEINLINE static uint32 __PPO__AbilityEffects() { return STRUCT_OFFSET(UXLAbility, AbilityEffects); } \
+	FORCEINLINE static uint32 __PPO__IsActivated() { return STRUCT_OFFSET(UXLAbility, IsActivated); } \
 	FORCEINLINE static uint32 __PPO__UtilityAnim() { return STRUCT_OFFSET(UXLAbility, UtilityAnim); } \
 	FORCEINLINE static uint32 __PPO__Targets() { return STRUCT_OFFSET(UXLAbility, Targets); }
 
 
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_9_PROLOG
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_12_GENERATED_BODY_LEGACY \
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_10_PROLOG
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_13_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_12_PRIVATE_PROPERTY_OFFSET \
-	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_12_RPC_WRAPPERS \
-	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_12_INCLASS \
-	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_12_STANDARD_CONSTRUCTORS \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_13_PRIVATE_PROPERTY_OFFSET \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_13_RPC_WRAPPERS \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_13_INCLASS \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_13_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_12_GENERATED_BODY \
+#define UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_13_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_12_PRIVATE_PROPERTY_OFFSET \
-	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
-	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_12_INCLASS_NO_PURE_DECLS \
-	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_12_ENHANCED_CONSTRUCTORS \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_13_PRIVATE_PROPERTY_OFFSET \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_13_INCLASS_NO_PURE_DECLS \
+	UE4ExtendedLibrary_Plugins_ExtendedLibrary_Source_ExtendedLibrary_Public_Ability_XLAbility_h_13_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

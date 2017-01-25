@@ -17,6 +17,10 @@ FName EXTENDEDLIBRARY_ServerSetCombatState = FName(TEXT("ServerSetCombatState"))
 FName EXTENDEDLIBRARY_ServerSetHealthState = FName(TEXT("ServerSetHealthState"));
 FName EXTENDEDLIBRARY_ServerSetMovementState = FName(TEXT("ServerSetMovementState"));
 FName EXTENDEDLIBRARY_ServerSetPostureState = FName(TEXT("ServerSetPostureState"));
+	void UHasLineOfSight::StaticRegisterNativesUHasLineOfSight()
+	{
+	}
+	IMPLEMENT_CLASS(UHasLineOfSight, 1445666737);
 	void UXLMovementComponent::StaticRegisterNativesUXLMovementComponent()
 	{
 	}
@@ -135,17 +139,31 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EPostureState(EPostureSt
 		FNativeFunctionRegistrar::RegisterFunction(UXLCharacterResources::StaticClass(), "RegenerateStamina",(Native)&UXLCharacterResources::execRegenerateStamina);
 	}
 	IMPLEMENT_CLASS(UXLCharacterResources, 4216659802);
+static class UEnum* EAbilityType_StaticEnum()
+{
+	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
+	static class UEnum* Singleton = NULL;
+	if (!Singleton)
+	{
+		extern EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EAbilityType();
+		Singleton = GetStaticEnum(Z_Construct_UEnum_ExtendedLibrary_EAbilityType, Z_Construct_UPackage__Script_ExtendedLibrary(), TEXT("EAbilityType"));
+	}
+	return Singleton;
+}
+static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EAbilityType(EAbilityType_StaticEnum, TEXT("/Script/ExtendedLibrary"), TEXT("EAbilityType"), false, nullptr, nullptr);
 	void UXLAbility::StaticRegisterNativesUXLAbility()
 	{
 		FNativeFunctionRegistrar::RegisterFunction(UXLAbility::StaticClass(), "ConsumeMana",(Native)&UXLAbility::execConsumeMana);
 		FNativeFunctionRegistrar::RegisterFunction(UXLAbility::StaticClass(), "PlayUtilityAnimation",(Native)&UXLAbility::execPlayUtilityAnimation);
 		FNativeFunctionRegistrar::RegisterFunction(UXLAbility::StaticClass(), "SetMyPawn",(Native)&UXLAbility::execSetMyPawn);
+		FNativeFunctionRegistrar::RegisterFunction(UXLAbility::StaticClass(), "StartAbility",(Native)&UXLAbility::execStartAbility);
+		FNativeFunctionRegistrar::RegisterFunction(UXLAbility::StaticClass(), "StopAbility",(Native)&UXLAbility::execStopAbility);
 	}
-	IMPLEMENT_CLASS(UXLAbility, 716209819);
+	IMPLEMENT_CLASS(UXLAbility, 2404500217);
 	void UXLSelfAbility::StaticRegisterNativesUXLSelfAbility()
 	{
 	}
-	IMPLEMENT_CLASS(UXLSelfAbility, 3064014457);
+	IMPLEMENT_CLASS(UXLSelfAbility, 1822959023);
 	void UXLAbilityEffect::StaticRegisterNativesUXLAbilityEffect()
 	{
 	}
@@ -162,10 +180,18 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EPostureState(EPostureSt
 	{
 	}
 	IMPLEMENT_CLASS(UXLPhaseEffect, 2709299859);
+	void AXLAIController::StaticRegisterNativesAXLAIController()
+	{
+	}
+	IMPLEMENT_CLASS(AXLAIController, 1617696276);
 	void AXLActionCharacter::StaticRegisterNativesAXLActionCharacter()
 	{
 	}
 	IMPLEMENT_CLASS(AXLActionCharacter, 2304442351);
+	void AXLAICharacter::StaticRegisterNativesAXLAICharacter()
+	{
+	}
+	IMPLEMENT_CLASS(AXLAICharacter, 2306920439);
 	void UXLCharacterStats::StaticRegisterNativesUXLCharacterStats()
 	{
 	}
@@ -174,14 +200,26 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EPostureState(EPostureSt
 	{
 	}
 	IMPLEMENT_CLASS(UXLCoverComponent, 2007236210);
+	void UXLFindClosestEnemyWithLOS::StaticRegisterNativesUXLFindClosestEnemyWithLOS()
+	{
+	}
+	IMPLEMENT_CLASS(UXLFindClosestEnemyWithLOS, 199882303);
+	void AXLGameMode::StaticRegisterNativesAXLGameMode()
+	{
+	}
+	IMPLEMENT_CLASS(AXLGameMode, 1624657315);
+	void UXLFindPickup::StaticRegisterNativesUXLFindPickup()
+	{
+	}
+	IMPLEMENT_CLASS(UXLFindPickup, 4242815328);
+	void UXLFindPointNearEnemy::StaticRegisterNativesUXLFindPointNearEnemy()
+	{
+	}
+	IMPLEMENT_CLASS(UXLFindPointNearEnemy, 4293869580);
 	void UXLGameInstance::StaticRegisterNativesUXLGameInstance()
 	{
 	}
 	IMPLEMENT_CLASS(UXLGameInstance, 3566863388);
-	void AXLGameMode::StaticRegisterNativesAXLGameMode()
-	{
-	}
-	IMPLEMENT_CLASS(AXLGameMode, 2664965929);
 class UScriptStruct* FDecalData::StaticStruct()
 {
 	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -243,10 +281,18 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFDecalData
 	{
 	}
 	IMPLEMENT_CLASS(UXLPlayerSoundManager, 1354152002);
+	void AXLPlayerState::StaticRegisterNativesAXLPlayerState()
+	{
+	}
+	IMPLEMENT_CLASS(AXLPlayerState, 2333753789);
 	void AXLProjectile::StaticRegisterNativesAXLProjectile()
 	{
 	}
 	IMPLEMENT_CLASS(AXLProjectile, 1558129695);
+	void UXLSelectNextPatrolPoint::StaticRegisterNativesUXLSelectNextPatrolPoint()
+	{
+	}
+	IMPLEMENT_CLASS(UXLSelectNextPatrolPoint, 2293061562);
 static class UEnum* EWeaponState_StaticEnum()
 {
 	extern EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -309,14 +355,24 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 } ScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo;
 #if USE_COMPILED_IN_NATIVES
 // Cross Module References
+	AIMODULE_API class UClass* Z_Construct_UClass_UBTDecorator();
+	AIMODULE_API class UScriptStruct* Z_Construct_UScriptStruct_FBlackboardKeySelector();
 	ENGINE_API class UClass* Z_Construct_UClass_UCharacterMovementComponent();
 	ENGINE_API class UClass* Z_Construct_UClass_UActorComponent();
 	ENGINE_API class UClass* Z_Construct_UClass_ACharacter();
 	ENGINE_API class UClass* Z_Construct_UClass_UAnimMontage_NoRegister();
+	AIMODULE_API class UClass* Z_Construct_UClass_AAIController();
+	AIMODULE_API class UClass* Z_Construct_UClass_UBehaviorTreeComponent_NoRegister();
+	AIMODULE_API class UClass* Z_Construct_UClass_UBlackboardComponent_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_USpringArmComponent_NoRegister();
-	ENGINE_API class UClass* Z_Construct_UClass_UGameInstance();
+	ENGINE_API class UClass* Z_Construct_UClass_ATargetPoint_NoRegister();
+	AIMODULE_API class UClass* Z_Construct_UClass_UBehaviorTree_NoRegister();
+	AIMODULE_API class UClass* Z_Construct_UClass_UBTService_BlackboardBase();
 	ENGINE_API class UClass* Z_Construct_UClass_AGameMode();
+	ENGINE_API class UClass* Z_Construct_UClass_APawn_NoRegister();
+	AIMODULE_API class UClass* Z_Construct_UClass_UBTTask_BlackboardBase();
+	ENGINE_API class UClass* Z_Construct_UClass_UGameInstance();
 	ENGINE_API class UClass* Z_Construct_UClass_UMaterial_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_AActor();
 	ENGINE_API class UScriptStruct* Z_Construct_UScriptStruct_FHitResult();
@@ -326,6 +382,7 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	ENGINE_API class UClass* Z_Construct_UClass_UParticleSystemComponent_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_USoundCue_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_APlayerController();
+	ENGINE_API class UClass* Z_Construct_UClass_APlayerState();
 	ENGINE_API class UClass* Z_Construct_UClass_USkeletalMeshComponent_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_UCameraShake_NoRegister();
 	ENGINE_API class UScriptStruct* Z_Construct_UScriptStruct_FRadialDamageEvent();
@@ -334,6 +391,8 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	ENGINE_API class UClass* Z_Construct_UClass_AActor_NoRegister();
 	COREUOBJECT_API class UClass* Z_Construct_UClass_UObject_NoRegister();
 
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UHasLineOfSight_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UHasLineOfSight();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLMovementComponent_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLMovementComponent();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EActionState();
@@ -359,9 +418,12 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLCharacterResources_RegenerateStamina();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterResources_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterResources();
+	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EAbilityType();
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLAbility_ConsumeMana();
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLAbility_PlayUtilityAnimation();
 	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLAbility_SetMyPawn();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLAbility_StartAbility();
+	EXTENDEDLIBRARY_API class UFunction* Z_Construct_UFunction_UXLAbility_StopAbility();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbility_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLAbility();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLSelfAbility_NoRegister();
@@ -374,16 +436,26 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLJumpEffect();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPhaseEffect_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPhaseEffect();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLAIController_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLAIController();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLActionCharacter_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLActionCharacter();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLAICharacter_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLAICharacter();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterStats_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCharacterStats();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCoverComponent_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLCoverComponent();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLGameInstance_NoRegister();
-	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLGameInstance();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLFindClosestEnemyWithLOS_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLFindClosestEnemyWithLOS();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLGameMode_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLGameMode();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLFindPickup_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLFindPickup();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLFindPointNearEnemy_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLFindPointNearEnemy();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLGameInstance_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLGameInstance();
 	EXTENDEDLIBRARY_API class UScriptStruct* Z_Construct_UScriptStruct_FDecalData();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLImpactEffect_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLImpactEffect();
@@ -404,8 +476,12 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPlayerEffectManager();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPlayerSoundManager_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLPlayerSoundManager();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPlayerState_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLPlayerState();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLProjectile_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLProjectile();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLSelectNextPatrolPoint_NoRegister();
+	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLSelectNextPatrolPoint();
 	EXTENDEDLIBRARY_API class UEnum* Z_Construct_UEnum_ExtendedLibrary_EWeaponState();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLWeapon_NoRegister();
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_AXLWeapon();
@@ -423,6 +499,43 @@ static struct FScriptStruct_ExtendedLibrary_StaticRegisterNativesFTakeHitInfo
 	EXTENDEDLIBRARY_API class UClass* Z_Construct_UClass_UXLWeaponSoundManager();
 	EXTENDEDLIBRARY_API class UScriptStruct* Z_Construct_UScriptStruct_FTakeHitInfo();
 	EXTENDEDLIBRARY_API class UPackage* Z_Construct_UPackage__Script_ExtendedLibrary();
+	UClass* Z_Construct_UClass_UHasLineOfSight_NoRegister()
+	{
+		return UHasLineOfSight::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UHasLineOfSight()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UBTDecorator();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UHasLineOfSight::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20000080;
+
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_EnemyKey = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("EnemyKey"), RF_Public|RF_Transient|RF_MarkAsNative) UStructProperty(CPP_PROPERTY_BASE(EnemyKey, UHasLineOfSight), 0x0020080000000001, Z_Construct_UScriptStruct_FBlackboardKeySelector());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("AI/Decorators/HasLineOfSight.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/AI/Decorators/HasLineOfSight.h"));
+				MetaData->SetValue(OuterClass, TEXT("ToolTip"), TEXT("Checks if the AI pawn has Line of sight to the specified Actor or Location(Vector)."));
+				MetaData->SetValue(NewProp_EnemyKey, TEXT("Category"), TEXT("Condition"));
+				MetaData->SetValue(NewProp_EnemyKey, TEXT("ModuleRelativePath"), TEXT("Public/AI/Decorators/HasLineOfSight.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UHasLineOfSight(Z_Construct_UClass_UHasLineOfSight, &UHasLineOfSight::StaticClass, TEXT("UHasLineOfSight"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UHasLineOfSight);
 	UClass* Z_Construct_UClass_UXLMovementComponent_NoRegister()
 	{
 		return UXLMovementComponent::StaticClass();
@@ -1087,6 +1200,31 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLCharacterResources(Z_Construct_UClass_UXLCharacterResources, &UXLCharacterResources::StaticClass, TEXT("UXLCharacterResources"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLCharacterResources);
+	UEnum* Z_Construct_UEnum_ExtendedLibrary_EAbilityType()
+	{
+		UPackage* Outer=Z_Construct_UPackage__Script_ExtendedLibrary();
+		extern uint32 Get_Z_Construct_UEnum_ExtendedLibrary_EAbilityType_CRC();
+		static UEnum* ReturnEnum = FindExistingEnumIfHotReloadOrDynamic(Outer, TEXT("EAbilityType"), 0, Get_Z_Construct_UEnum_ExtendedLibrary_EAbilityType_CRC(), false);
+		if (!ReturnEnum)
+		{
+			ReturnEnum = new(EC_InternalUseOnlyConstructor, Outer, TEXT("EAbilityType"), RF_Public|RF_Transient|RF_MarkAsNative) UEnum(FObjectInitializer());
+			TArray<TPair<FName, uint8>> EnumNames;
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EAbilityType::Activate")), 0));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EAbilityType::Channel")), 1));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EAbilityType::Toggle")), 2));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EAbilityType::EAbilityType_MAX")), 3));
+			ReturnEnum->SetEnums(EnumNames, UEnum::ECppForm::Namespaced);
+			ReturnEnum->CppType = TEXT("EAbilityType::Type");
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnEnum->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnEnum, TEXT("BlueprintType"), TEXT("true"));
+			MetaData->SetValue(ReturnEnum, TEXT("Category"), TEXT("Ability"));
+			MetaData->SetValue(ReturnEnum, TEXT("ModuleRelativePath"), TEXT("Public/Enums/XLAbilityType.h"));
+#endif
+		}
+		return ReturnEnum;
+	}
+	uint32 Get_Z_Construct_UEnum_ExtendedLibrary_EAbilityType_CRC() { return 1821652502U; }
 	UFunction* Z_Construct_UFunction_UXLAbility_ConsumeMana()
 	{
 		struct XLAbility_eventConsumeMana_Parms
@@ -1149,6 +1287,38 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 		}
 		return ReturnFunction;
 	}
+	UFunction* Z_Construct_UFunction_UXLAbility_StartAbility()
+	{
+		UObject* Outer=Z_Construct_UClass_UXLAbility();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("StartAbility"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x00020401, 65535);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
+	UFunction* Z_Construct_UFunction_UXLAbility_StopAbility()
+	{
+		UObject* Outer=Z_Construct_UClass_UXLAbility();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("StopAbility"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x00020401, 65535);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
 	UClass* Z_Construct_UClass_UXLAbility_NoRegister()
 	{
 		return UXLAbility::StaticClass();
@@ -1169,20 +1339,27 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->LinkChild(Z_Construct_UFunction_UXLAbility_ConsumeMana());
 				OuterClass->LinkChild(Z_Construct_UFunction_UXLAbility_PlayUtilityAnimation());
 				OuterClass->LinkChild(Z_Construct_UFunction_UXLAbility_SetMyPawn());
+				OuterClass->LinkChild(Z_Construct_UFunction_UXLAbility_StartAbility());
+				OuterClass->LinkChild(Z_Construct_UFunction_UXLAbility_StopAbility());
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_Targets = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("Targets"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(Targets, UXLAbility), 0x0020080000010001);
 				UProperty* NewProp_Targets_Inner = new(EC_InternalUseOnlyConstructor, NewProp_Targets, TEXT("Targets"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0000000000000000, Z_Construct_UClass_AXLCharacter_NoRegister());
 				UProperty* NewProp_UtilityAnim = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("UtilityAnim"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(UtilityAnim, UXLAbility), 0x0020080000010001, Z_Construct_UClass_UAnimMontage_NoRegister());
+				CPP_BOOL_PROPERTY_BITMASK_STRUCT(IsActivated, UXLAbility, bool);
+				UProperty* NewProp_IsActivated = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("IsActivated"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(IsActivated, UXLAbility), 0x0020080000010001, CPP_BOOL_PROPERTY_BITMASK(IsActivated, UXLAbility), sizeof(bool), true);
 				UProperty* NewProp_AbilityEffects = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("AbilityEffects"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(AbilityEffects, UXLAbility), 0x0024080000010001);
 				UProperty* NewProp_AbilityEffects_Inner = new(EC_InternalUseOnlyConstructor, NewProp_AbilityEffects, TEXT("AbilityEffects"), RF_Public|RF_Transient|RF_MarkAsNative) UClassProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0004000000000000, Z_Construct_UClass_UXLAbilityEffect_NoRegister(), UClass::StaticClass());
 				UProperty* NewProp_UtilityDescription = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("UtilityDescription"), RF_Public|RF_Transient|RF_MarkAsNative) UStrProperty(CPP_PROPERTY_BASE(UtilityDescription, UXLAbility), 0x0020080000010001);
 				UProperty* NewProp_UtilityName = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("UtilityName"), RF_Public|RF_Transient|RF_MarkAsNative) UNameProperty(CPP_PROPERTY_BASE(UtilityName, UXLAbility), 0x0020080000010001);
+				UProperty* NewProp_AbilityType = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("AbilityType"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(AbilityType, UXLAbility), 0x0020080000000005, Z_Construct_UEnum_ExtendedLibrary_EAbilityType());
 				UProperty* NewProp_MyPawn = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("MyPawn"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(MyPawn, UXLAbility), 0x0020080000000014, Z_Construct_UClass_AXLCharacter_NoRegister());
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLAbility_ConsumeMana(), "ConsumeMana"); // 1216189361
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLAbility_PlayUtilityAnimation(), "PlayUtilityAnimation"); // 1642845573
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLAbility_SetMyPawn(), "SetMyPawn"); // 1599331149
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLAbility_StartAbility(), "StartAbility"); // 3681945311
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_UXLAbility_StopAbility(), "StopAbility"); // 1052403860
 				OuterClass->ClassConfigName = FName(TEXT("Engine"));
 				OuterClass->StaticLink();
 #if WITH_METADATA
@@ -1196,12 +1373,16 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(NewProp_Targets, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
 				MetaData->SetValue(NewProp_UtilityAnim, TEXT("Category"), TEXT("Animation"));
 				MetaData->SetValue(NewProp_UtilityAnim, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
+				MetaData->SetValue(NewProp_IsActivated, TEXT("Category"), TEXT("Implementation"));
+				MetaData->SetValue(NewProp_IsActivated, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
 				MetaData->SetValue(NewProp_AbilityEffects, TEXT("Category"), TEXT("Config"));
 				MetaData->SetValue(NewProp_AbilityEffects, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
 				MetaData->SetValue(NewProp_UtilityDescription, TEXT("Category"), TEXT("Config"));
 				MetaData->SetValue(NewProp_UtilityDescription, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
 				MetaData->SetValue(NewProp_UtilityName, TEXT("Category"), TEXT("Config"));
 				MetaData->SetValue(NewProp_UtilityName, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
+				MetaData->SetValue(NewProp_AbilityType, TEXT("Category"), TEXT("Config"));
+				MetaData->SetValue(NewProp_AbilityType, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
 				MetaData->SetValue(NewProp_MyPawn, TEXT("Category"), TEXT("Defaults"));
 				MetaData->SetValue(NewProp_MyPawn, TEXT("ModuleRelativePath"), TEXT("Public/Ability/XLAbility.h"));
 #endif
@@ -1375,6 +1556,50 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLPhaseEffect(Z_Construct_UClass_UXLPhaseEffect, &UXLPhaseEffect::StaticClass, TEXT("UXLPhaseEffect"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLPhaseEffect);
+	UClass* Z_Construct_UClass_AXLAIController_NoRegister()
+	{
+		return AXLAIController::StaticClass();
+	}
+	UClass* Z_Construct_UClass_AXLAIController()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_AAIController();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = AXLAIController::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20800280;
+
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_AgroDistance = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("AgroDistance"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(AgroDistance, AXLAIController), 0x0010000000000005);
+				UProperty* NewProp_BehaviorComp = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BehaviorComp"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(BehaviorComp, AXLAIController), 0x0010000000082008, Z_Construct_UClass_UBehaviorTreeComponent_NoRegister());
+				UProperty* NewProp_BlackboardComp = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BlackboardComp"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(BlackboardComp, AXLAIController), 0x0010000000082008, Z_Construct_UClass_UBlackboardComponent_NoRegister());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->ClassConfigName = FName(TEXT("Game"));
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Collision Rendering Utilities|Transformation"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Controllers/XLAIController.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Controllers/XLAIController.h"));
+				MetaData->SetValue(NewProp_AgroDistance, TEXT("Category"), TEXT("Agro"));
+				MetaData->SetValue(NewProp_AgroDistance, TEXT("ModuleRelativePath"), TEXT("Public/Controllers/XLAIController.h"));
+				MetaData->SetValue(NewProp_BehaviorComp, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_BehaviorComp, TEXT("ModuleRelativePath"), TEXT("Public/Controllers/XLAIController.h"));
+				MetaData->SetValue(NewProp_BlackboardComp, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_BlackboardComp, TEXT("ModuleRelativePath"), TEXT("Public/Controllers/XLAIController.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLAIController(Z_Construct_UClass_AXLAIController, &AXLAIController::StaticClass, TEXT("AXLAIController"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLAIController);
 	UClass* Z_Construct_UClass_AXLActionCharacter_NoRegister()
 	{
 		return AXLActionCharacter::StaticClass();
@@ -1423,6 +1648,47 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLActionCharacter(Z_Construct_UClass_AXLActionCharacter, &AXLActionCharacter::StaticClass, TEXT("AXLActionCharacter"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLActionCharacter);
+	UClass* Z_Construct_UClass_AXLAICharacter_NoRegister()
+	{
+		return AXLAICharacter::StaticClass();
+	}
+	UClass* Z_Construct_UClass_AXLAICharacter()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_AXLCharacter();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = AXLAICharacter::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20800080;
+
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_Nodes = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("Nodes"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(Nodes, AXLAICharacter), 0x0010000000000001);
+				UProperty* NewProp_Nodes_Inner = new(EC_InternalUseOnlyConstructor, NewProp_Nodes, TEXT("Nodes"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0000000000000000, Z_Construct_UClass_ATargetPoint_NoRegister());
+				UProperty* NewProp_BotBehavior = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BotBehavior"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(BotBehavior, AXLAICharacter), 0x0010000000000001, Z_Construct_UClass_UBehaviorTree_NoRegister());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Navigation"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Characters/XLAICharacter.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLAICharacter.h"));
+				MetaData->SetValue(NewProp_Nodes, TEXT("Category"), TEXT("Config"));
+				MetaData->SetValue(NewProp_Nodes, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLAICharacter.h"));
+				MetaData->SetValue(NewProp_BotBehavior, TEXT("Category"), TEXT("Behavior"));
+				MetaData->SetValue(NewProp_BotBehavior, TEXT("ModuleRelativePath"), TEXT("Public/Characters/XLAICharacter.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLAICharacter(Z_Construct_UClass_AXLAICharacter, &AXLAICharacter::StaticClass, TEXT("AXLAICharacter"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLAICharacter);
 	UClass* Z_Construct_UClass_UXLCharacterStats_NoRegister()
 	{
 		return UXLCharacterStats::StaticClass();
@@ -1531,6 +1797,140 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLCoverComponent(Z_Construct_UClass_UXLCoverComponent, &UXLCoverComponent::StaticClass, TEXT("UXLCoverComponent"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLCoverComponent);
+	UClass* Z_Construct_UClass_UXLFindClosestEnemyWithLOS_NoRegister()
+	{
+		return UXLFindClosestEnemyWithLOS::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLFindClosestEnemyWithLOS()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UBTService_BlackboardBase();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLFindClosestEnemyWithLOS::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20000080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("AI/Services/XLFindClosestEnemyWithLOS.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/AI/Services/XLFindClosestEnemyWithLOS.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLFindClosestEnemyWithLOS(Z_Construct_UClass_UXLFindClosestEnemyWithLOS, &UXLFindClosestEnemyWithLOS::StaticClass, TEXT("UXLFindClosestEnemyWithLOS"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLFindClosestEnemyWithLOS);
+	UClass* Z_Construct_UClass_AXLGameMode_NoRegister()
+	{
+		return AXLGameMode::StaticClass();
+	}
+	UClass* Z_Construct_UClass_AXLGameMode()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_AGameMode();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = AXLGameMode::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x2088028C;
+
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_BotPawnClass = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BotPawnClass"), RF_Public|RF_Transient|RF_MarkAsNative) UClassProperty(CPP_PROPERTY_BASE(BotPawnClass, AXLGameMode), 0x0014000000000005, Z_Construct_UClass_APawn_NoRegister(), UClass::StaticClass());
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->ClassConfigName = FName(TEXT("Game"));
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Info Rendering MovementReplication Replication Actor Input Movement Collision Rendering Utilities|Transformation"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Game/XLGameMode.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameMode.h"));
+				MetaData->SetValue(OuterClass, TEXT("ShowCategories"), TEXT("Input|MouseInput Input|TouchInput"));
+				MetaData->SetValue(NewProp_BotPawnClass, TEXT("Category"), TEXT("GameMode"));
+				MetaData->SetValue(NewProp_BotPawnClass, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameMode.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLGameMode(Z_Construct_UClass_AXLGameMode, &AXLGameMode::StaticClass, TEXT("AXLGameMode"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLGameMode);
+	UClass* Z_Construct_UClass_UXLFindPickup_NoRegister()
+	{
+		return UXLFindPickup::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLFindPickup()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UBTTask_BlackboardBase();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLFindPickup::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20000080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("AI/Tasks/XLFindPickup.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/AI/Tasks/XLFindPickup.h"));
+				MetaData->SetValue(OuterClass, TEXT("ToolTip"), TEXT("Bot AI Task that attempts to locate a pickup"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLFindPickup(Z_Construct_UClass_UXLFindPickup, &UXLFindPickup::StaticClass, TEXT("UXLFindPickup"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLFindPickup);
+	UClass* Z_Construct_UClass_UXLFindPointNearEnemy_NoRegister()
+	{
+		return UXLFindPointNearEnemy::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLFindPointNearEnemy()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UBTTask_BlackboardBase();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLFindPointNearEnemy::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20000080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("AI/Tasks/XLFindPointNearEnemy.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/AI/Tasks/XLFindPointNearEnemy.h"));
+				MetaData->SetValue(OuterClass, TEXT("ToolTip"), TEXT("Bot AI task that tries to find a location near the current enemy"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLFindPointNearEnemy(Z_Construct_UClass_UXLFindPointNearEnemy, &UXLFindPointNearEnemy::StaticClass, TEXT("UXLFindPointNearEnemy"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLFindPointNearEnemy);
 	UClass* Z_Construct_UClass_UXLGameInstance_NoRegister()
 	{
 		return UXLGameInstance::StaticClass();
@@ -1563,40 +1963,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLGameInstance(Z_Construct_UClass_UXLGameInstance, &UXLGameInstance::StaticClass, TEXT("UXLGameInstance"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLGameInstance);
-	UClass* Z_Construct_UClass_AXLGameMode_NoRegister()
-	{
-		return AXLGameMode::StaticClass();
-	}
-	UClass* Z_Construct_UClass_AXLGameMode()
-	{
-		static UClass* OuterClass = NULL;
-		if (!OuterClass)
-		{
-			Z_Construct_UClass_AGameMode();
-			Z_Construct_UPackage__Script_ExtendedLibrary();
-			OuterClass = AXLGameMode::StaticClass();
-			if (!(OuterClass->ClassFlags & CLASS_Constructed))
-			{
-				UObjectForceRegistration(OuterClass);
-				OuterClass->ClassFlags |= 0x2088028C;
-
-
-				OuterClass->ClassConfigName = FName(TEXT("Game"));
-				OuterClass->StaticLink();
-#if WITH_METADATA
-				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
-				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Info Rendering MovementReplication Replication Actor Input Movement Collision Rendering Utilities|Transformation"));
-				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Game/XLGameMode.h"));
-				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Game/XLGameMode.h"));
-				MetaData->SetValue(OuterClass, TEXT("ShowCategories"), TEXT("Input|MouseInput Input|TouchInput"));
-#endif
-			}
-		}
-		check(OuterClass->GetClass());
-		return OuterClass;
-	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLGameMode(Z_Construct_UClass_AXLGameMode, &AXLGameMode::StaticClass, TEXT("AXLGameMode"), false, nullptr, nullptr, nullptr);
-	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLGameMode);
 	UScriptStruct* Z_Construct_UScriptStruct_FDecalData()
 	{
 		UPackage* Outer = Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -2098,6 +2464,43 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLPlayerSoundManager(Z_Construct_UClass_UXLPlayerSoundManager, &UXLPlayerSoundManager::StaticClass, TEXT("UXLPlayerSoundManager"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLPlayerSoundManager);
+	UClass* Z_Construct_UClass_AXLPlayerState_NoRegister()
+	{
+		return AXLPlayerState::StaticClass();
+	}
+	UClass* Z_Construct_UClass_AXLPlayerState()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_APlayerState();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = AXLPlayerState::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20800280;
+
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_TeamNumber = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("TeamNumber"), RF_Public|RF_Transient|RF_MarkAsNative) UIntProperty(CPP_PROPERTY_BASE(TeamNumber, AXLPlayerState), 0x0010000000000000);
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Input Movement Collision Rendering Utilities|Transformation"));
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("Online/XLPlayerState.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/Online/XLPlayerState.h"));
+				MetaData->SetValue(OuterClass, TEXT("ShowCategories"), TEXT("Input|MouseInput Input|TouchInput"));
+				MetaData->SetValue(NewProp_TeamNumber, TEXT("ModuleRelativePath"), TEXT("Public/Online/XLPlayerState.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLPlayerState(Z_Construct_UClass_AXLPlayerState, &AXLPlayerState::StaticClass, TEXT("AXLPlayerState"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLPlayerState);
 	UClass* Z_Construct_UClass_AXLProjectile_NoRegister()
 	{
 		return AXLProjectile::StaticClass();
@@ -2129,6 +2532,38 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AXLProjectile(Z_Construct_UClass_AXLProjectile, &AXLProjectile::StaticClass, TEXT("AXLProjectile"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AXLProjectile);
+	UClass* Z_Construct_UClass_UXLSelectNextPatrolPoint_NoRegister()
+	{
+		return UXLSelectNextPatrolPoint::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UXLSelectNextPatrolPoint()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UBTTask_BlackboardBase();
+			Z_Construct_UPackage__Script_ExtendedLibrary();
+			OuterClass = UXLSelectNextPatrolPoint::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20000080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("AI/Tasks/XLSelectNextPatrolPoint.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/AI/Tasks/XLSelectNextPatrolPoint.h"));
+				MetaData->SetValue(OuterClass, TEXT("ToolTip"), TEXT("Bot AI task that tries to find a location near the current enemy"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UXLSelectNextPatrolPoint(Z_Construct_UClass_UXLSelectNextPatrolPoint, &UXLSelectNextPatrolPoint::StaticClass, TEXT("UXLSelectNextPatrolPoint"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UXLSelectNextPatrolPoint);
 	UEnum* Z_Construct_UEnum_ExtendedLibrary_EWeaponState()
 	{
 		UPackage* Outer=Z_Construct_UPackage__Script_ExtendedLibrary();
@@ -2518,8 +2953,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/ExtendedLibrary")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
 			FGuid Guid;
-			Guid.A = 0xC50CE0F6;
-			Guid.B = 0x2D394957;
+			Guid.A = 0x7ADD6F5E;
+			Guid.B = 0xBF8DB9BC;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

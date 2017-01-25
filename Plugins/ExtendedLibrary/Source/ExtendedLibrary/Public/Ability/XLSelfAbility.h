@@ -1,13 +1,8 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
-#include "Ability/XLAbility.h"
+#include "XLAbility.h"
 #include "XLSelfAbility.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class UXLSelfAbility : public UXLAbility
 {

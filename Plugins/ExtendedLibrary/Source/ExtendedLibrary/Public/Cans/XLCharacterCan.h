@@ -16,5 +16,8 @@ public:
 	static bool StartSprint(AXLCharacter* Character);
 	static bool StopSprint(AXLCharacter* Character);
 
+	static bool StartAbility(AXLCharacter* Character);
+	static bool StopAbility(AXLCharacter* Character);
+
 	static bool Die(AXLCharacter* Character);
 };

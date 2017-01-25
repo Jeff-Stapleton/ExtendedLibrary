@@ -55,8 +55,14 @@ void AXLPlayerController::SetupInputComponent()
 
 	InputComponent->BindAction("Melee", IE_Pressed, this, &AXLPlayerController::Melee);
 
-	InputComponent->BindAction("Ability", IE_Pressed, this, &AXLPlayerController::StartAbility);
-	InputComponent->BindAction("Ability", IE_Released, this, &AXLPlayerController::StopAbility);
+	InputComponent->BindAction("Ability1", IE_Pressed, this, &AXLPlayerController::StartAbility1);
+	InputComponent->BindAction("Ability1", IE_Released, this, &AXLPlayerController::StopAbility1);
+
+	InputComponent->BindAction("Ability2", IE_Pressed, this, &AXLPlayerController::StartAbility2);
+	InputComponent->BindAction("Ability2", IE_Released, this, &AXLPlayerController::StopAbility2);
+
+	InputComponent->BindAction("Ability3", IE_Pressed, this, &AXLPlayerController::StartAbility3);
+	InputComponent->BindAction("Ability3", IE_Released, this, &AXLPlayerController::StopAbility3);
 }
 
 void AXLPlayerController::Move(float Direction)
@@ -152,14 +158,34 @@ void AXLPlayerController::Melee()
 	}
 }
 
-void AXLPlayerController::StartAbility()
+void AXLPlayerController::StartAbility1()
 {
 	(Cast<AXLCharacter>(GetPawn()))->StartAbility(0);
 }
 
-void AXLPlayerController::StopAbility()
+void AXLPlayerController::StopAbility1()
 {
 	(Cast<AXLCharacter>(GetPawn()))->StopAbility(0);
+}
+
+void AXLPlayerController::StartAbility2()
+{
+	(Cast<AXLCharacter>(GetPawn()))->StartAbility(1);
+}
+
+void AXLPlayerController::StopAbility2()
+{
+	(Cast<AXLCharacter>(GetPawn()))->StopAbility(1);
+}
+
+void AXLPlayerController::StartAbility3()
+{
+	(Cast<AXLCharacter>(GetPawn()))->StartAbility(2);
+}
+
+void AXLPlayerController::StopAbility3()
+{
+	(Cast<AXLCharacter>(GetPawn()))->StopAbility(2);
 }
 
 void AXLPlayerController::UnFreeze()

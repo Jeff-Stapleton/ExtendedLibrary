@@ -11,8 +11,8 @@ class AXLGameMode : public AGameMode
 public:
 	AXLGameMode();
 
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = GameMode)
-	//TSubclassOf<APawn> BotPawnClass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = GameMode)
+	TSubclassOf<APawn> BotPawnClass;
 
 	virtual void InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage) override;
 		

@@ -4,6 +4,7 @@
 #include "XLGameMode.h"
 #include "Characters/XLCharacter.h"
 #include "Controllers/XLPlayerController.h"
+#include "XLPlayerState.h"
 
 AXLGameMode::AXLGameMode()
 {
@@ -18,14 +19,14 @@ AXLGameMode::AXLGameMode()
 		DefaultPawnClass = AXLCharacter::StaticClass();
 	}
 
-	/*static ConstructorHelpers::FClassFinder<APawn> BotPawnBPClass(TEXT("/Game/Character/Enemies/Orbitar/Blueprint/Orbitar"));
+	static ConstructorHelpers::FClassFinder<APawn> BotPawnBPClass(TEXT("/ExtendedLibrary/Characters/Humanoid/Blueprints/AI"));
 	if (BotPawnBPClass.Class != NULL)
 	{
 		BotPawnClass = BotPawnBPClass.Class;
-	}*/
+	}
 
 	PlayerControllerClass = AXLPlayerController::StaticClass();
-	//PlayerStateClass = AXLPlayerState::StaticClass();
+	PlayerStateClass = AXLPlayerState::StaticClass();
 	//GameStateClass = AXLGameState::StaticClass();
 
 	bUseSeamlessTravel = true;

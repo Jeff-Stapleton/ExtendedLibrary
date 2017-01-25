@@ -5,7 +5,7 @@
 
 bool XLCharacterCan::Jump(AXLCharacter* Character)
 {
-	if (Character->Controller)
+	if (Character && Character->Controller)
 	{
 		return true;
 	}
@@ -17,7 +17,7 @@ bool XLCharacterCan::Jump(AXLCharacter* Character)
 
 bool XLCharacterCan::Move(AXLCharacter* Character)
 {
-	if (Character->Controller)
+	if (Character && Character->Controller)
 	{
 		return true;
 	}
@@ -29,7 +29,7 @@ bool XLCharacterCan::Move(AXLCharacter* Character)
 
 bool XLCharacterCan::Strafe(AXLCharacter* Character)
 {
-	if (Character->Controller)
+	if (Character && Character->Controller)
 	{
 		return true;
 	}
@@ -41,7 +41,7 @@ bool XLCharacterCan::Strafe(AXLCharacter* Character)
 
 bool XLCharacterCan::Turn(AXLCharacter* Character)
 {
-	if (Character->Controller)
+	if (Character && Character->Controller)
 	{
 		return true;
 	}
@@ -53,7 +53,7 @@ bool XLCharacterCan::Turn(AXLCharacter* Character)
 
 bool XLCharacterCan::LookUp(AXLCharacter* Character)
 {
-	if (Character->Controller)
+	if (Character && Character->Controller)
 	{
 		return true;
 	}
@@ -65,7 +65,7 @@ bool XLCharacterCan::LookUp(AXLCharacter* Character)
 
 bool XLCharacterCan::StartSprint(AXLCharacter* Character)
 {
-	if (Character->Controller)
+	if (Character && Character->Controller)
 	{
 		return true;
 	}
@@ -77,7 +77,32 @@ bool XLCharacterCan::StartSprint(AXLCharacter* Character)
 
 bool XLCharacterCan::StopSprint(AXLCharacter* Character)
 {
-	if (Character->Controller)
+	if (Character && Character->Controller)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
+bool XLCharacterCan::StartAbility(AXLCharacter* Character)
+{
+	if (Character && Character->Controller)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool XLCharacterCan::StopAbility(AXLCharacter* Character)
+{
+	if (Character && Character->Controller)
 	{
 		return true;
 	}
@@ -89,7 +114,7 @@ bool XLCharacterCan::StopSprint(AXLCharacter* Character)
 
 bool XLCharacterCan::Die(AXLCharacter * Character)
 {
-	if (Character->Controller)
+	if (Character && Character->Controller)
 	{
 		return true;
 	}

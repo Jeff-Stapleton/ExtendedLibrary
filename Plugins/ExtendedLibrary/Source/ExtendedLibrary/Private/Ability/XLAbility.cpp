@@ -48,3 +48,64 @@ void UXLAbility::PlayUtilityAnimation()
 		MyPawn->PlayAnimMontage(UtilityAnim);
 	}
 }
+
+void UXLAbility::StartAbility()
+{
+	switch (AbilityType)
+	{
+		case EAbilityType::Activate :
+			ActivateAbility();
+			break;
+		case EAbilityType::Channel :
+			StartChannelAbility();
+			break;
+		case EAbilityType::Toggle :
+			ToggleAbility();
+			break;
+	}
+}
+
+void UXLAbility::StopAbility()
+{
+	switch (AbilityType)
+	{
+		case EAbilityType::Activate :
+			break;
+		case EAbilityType::Channel :
+			StopChannelAbility();
+			break;
+		case EAbilityType::Toggle :
+			break;
+	}
+}
+
+void UXLAbility::ActivateAbility()
+{
+	Activate();
+	Deactivate();
+}
+
+void UXLAbility::StartChannelAbility()
+{
+	Activate();
+}
+
+void UXLAbility::StopChannelAbility()
+{
+	Deactivate();
+}
+
+void UXLAbility::ToggleAbility()
+{
+	if (IsActivated)
+	{
+		IsActivated = false;
+		Deactivate();
+	}
+	else
+	{
+		IsActivated = true;
+		Activate();
+	}
+}
+

@@ -1,6 +1,7 @@
 {
-	"Changelist" : 3142249,
-	"BuildId" : "08401c2e-85f0-46f4-baf4-802a3405abac",
+	"Changelist" : 3224400,
+	"CompatibleChangelist" : 3195953,
+	"BuildId" : "e830ec4a-e43d-4146-b5b1-67327edf94b0",
 	"Modules" : 
 	{
 		"ExtendedLibrary" : "UE4Editor-ExtendedLibrary.dll"

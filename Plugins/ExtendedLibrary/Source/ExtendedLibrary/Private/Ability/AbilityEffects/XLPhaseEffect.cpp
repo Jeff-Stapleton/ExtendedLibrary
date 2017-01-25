@@ -11,13 +11,8 @@ void UXLPhaseEffect::Activate(AXLCharacter* Instigator, AXLCharacter* Target, fl
 {
 	if (Instigator && Target)
 	{
-		Responses.SetResponse(ECollisionChannel::ECC_GameTraceChannel1, ECollisionResponse::ECR_Ignore);
-		Responses.SetResponse(ECollisionChannel::ECC_GameTraceChannel2, ECollisionResponse::ECR_Ignore);
-		Responses.SetResponse(ECollisionChannel::ECC_GameTraceChannel3, ECollisionResponse::ECR_Block);
-		Responses.SetResponse(ECollisionChannel::ECC_GameTraceChannel4, ECollisionResponse::ECR_Block);
-
-		Target->GetCapsuleComponent()->SetCollisionResponseToChannels(Responses);
-		Target->GetMesh()->SetCollisionResponseToChannels(Responses);
+		Target->GetCapsuleComponent()->SetCollisionObjectType(ECollisionChannel::ECC_GameTraceChannel2);
+		Target->GetMesh()->SetCollisionObjectType(ECollisionChannel::ECC_GameTraceChannel2);
 	}
 }
 
@@ -25,12 +20,7 @@ void UXLPhaseEffect::Deactivate(AXLCharacter* Instigator, AXLCharacter* Target, 
 {
 	if (Instigator && Target)
 	{
-		Responses.SetResponse(ECollisionChannel::ECC_GameTraceChannel1, ECollisionResponse::ECR_Block);
-		Responses.SetResponse(ECollisionChannel::ECC_GameTraceChannel2, ECollisionResponse::ECR_Block);
-		Responses.SetResponse(ECollisionChannel::ECC_GameTraceChannel3, ECollisionResponse::ECR_Ignore);
-		Responses.SetResponse(ECollisionChannel::ECC_GameTraceChannel4, ECollisionResponse::ECR_Ignore);
-
-		Target->GetCapsuleComponent()->SetCollisionResponseToChannels(Responses);
-		Target->GetMesh()->SetCollisionResponseToChannels(Responses);
+		Target->GetCapsuleComponent()->SetCollisionObjectType(ECollisionChannel::ECC_Pawn);
+		Target->GetMesh()->SetCollisionObjectType(ECollisionChannel::ECC_Pawn);
 	}
 }

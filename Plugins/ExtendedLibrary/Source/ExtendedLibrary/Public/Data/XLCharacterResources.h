@@ -20,7 +20,7 @@ public:
 
 	/** The amount of health the Pawn has */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
-	float MaxHealth;
+	float MaxHealth = 100.0f;
 	float CurrentHealth;
 
 	/** The amount of time before health starts regenerating */
@@ -30,7 +30,7 @@ public:
 
 	/** The amount of energy the Pawn has */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
-	float MaxEnergy;
+	float MaxEnergy = 100.0f;
 	float CurrentEnergy;
 
 	/** The amount of time before energy starts regenerating */
@@ -40,7 +40,7 @@ public:
 
 	/** The amount of stamina the Pawn has */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
-	float MaxStamina;
+	float MaxStamina = 100.0f;
 	float CurrentStamina;
 
 	/** The amount of time before stamina starts regenerating */

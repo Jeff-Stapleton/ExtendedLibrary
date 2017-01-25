@@ -39,11 +39,11 @@ void UXLAbilityManager::InitializeAbilities()
 
 void UXLAbilityManager::ActivateAbility(int32 Ability)
 {
-	Abilities[Ability]->Activate();
+	Abilities[Ability]->StartAbility();
 }
 void UXLAbilityManager::DeactivateAbility(int32 Ability)
 {
-	Abilities[Ability]->Deactivate();
+	Abilities[Ability]->StopAbility();
 }
 
 

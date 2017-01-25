@@ -11,8 +11,8 @@ void UXLJumpEffect::Activate(AXLCharacter* Instigator, AXLCharacter* Target, flo
 {
 	if (Instigator && Target)
 	{
-		Target->MovementComponent->ModifyJumpHeight(3.0f);
-		Target->Jump();
+		FVector Launch = FVector(0, 0, 1000);
+		Target->LaunchCharacter(Launch, true, true);
 	}
 }
 
