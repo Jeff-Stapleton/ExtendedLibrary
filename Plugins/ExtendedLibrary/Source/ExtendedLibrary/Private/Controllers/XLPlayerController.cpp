@@ -55,42 +55,54 @@ void AXLPlayerController::SetupInputComponent()
 
 	InputComponent->BindAction("Melee", IE_Pressed, this, &AXLPlayerController::Melee);
 
-	InputComponent->BindAction("Special", IE_Pressed, this, &AXLPlayerController::StartSpecial);
-	InputComponent->BindAction("Special", IE_Released, this, &AXLPlayerController::StopSpecial);
+	InputComponent->BindAction("Ability1", IE_Pressed, this, &AXLPlayerController::StartAbility1);
+	InputComponent->BindAction("Ability1", IE_Released, this, &AXLPlayerController::StopAbility1);
 
-	InputComponent->BindAction("Primary Ability", IE_Pressed, this, &AXLPlayerController::StartPrimaryAbility);
-	InputComponent->BindAction("Primary Ability", IE_Released, this, &AXLPlayerController::StopPrimaryAbility);
+	InputComponent->BindAction("Ability2", IE_Pressed, this, &AXLPlayerController::StartAbility2);
+	InputComponent->BindAction("Ability2", IE_Released, this, &AXLPlayerController::StopAbility2);
 
-	InputComponent->BindAction("Secondary Ability", IE_Pressed, this, &AXLPlayerController::StartSecondaryAbility);
-	InputComponent->BindAction("Secondary Ability", IE_Released, this, &AXLPlayerController::StopSecondaryAbility);
-
-	InputComponent->BindAction("Ultimate", IE_Pressed, this, &AXLPlayerController::StartUltimate);
-	InputComponent->BindAction("Ultimate", IE_Released, this, &AXLPlayerController::StartUltimate);
+	InputComponent->BindAction("Ability3", IE_Pressed, this, &AXLPlayerController::StartAbility3);
+	InputComponent->BindAction("Ability3", IE_Released, this, &AXLPlayerController::StopAbility3);
 }
 
 void AXLPlayerController::Move(float Direction)
 {
-	
+	if (XLControllerCan::Move(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->Move(Direction);
+	}
 }
 
 void AXLPlayerController::Strafe(float Direction)
 {
-
+	if (XLControllerCan::Strafe(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->Strafe(Direction);
+	}
 }
 
 void AXLPlayerController::Turn(float Direction)
 {
-	
+	if (XLControllerCan::Turn(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->Turn(Direction);
+	}
 }
 
 void AXLPlayerController::Look(float Direction)
 {
-
+	if (XLControllerCan::Look(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->Look(-Direction);
+	}
 }
 
 void AXLPlayerController::Jump()
 {
-	
+	if (XLControllerCan::Jump(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->Jump();
+	}
 }
 
 void AXLPlayerController::Dodge()
@@ -100,72 +112,80 @@ void AXLPlayerController::Dodge()
 
 void AXLPlayerController::StartSprint()
 {
-	
+	if (XLControllerCan::StartSprint(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->StartSprint();
+	}
 }
 
 void AXLPlayerController::StopSprint()
 {
-	
+	if (XLControllerCan::StopSprint(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->StopSprint();
+	}
 }
 
 void AXLPlayerController::StartAttack()
 {
-	
+	if (XLControllerCan::StartAttack(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->StartAttack();
+	}
 }
 
 void AXLPlayerController::StopAttack()
 {
-	
+	if (XLControllerCan::StopAttack(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->StopAttack();
+	}
 }
 
 void AXLPlayerController::Reload()
 {
-	
+	if (XLControllerCan::Reload(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->Reload();
+	}
 }
 
 void AXLPlayerController::Melee()
 {
-	
+	if (XLControllerCan::Melee(this))
+	{
+		(Cast<AXLCharacter>(GetPawn()))->Melee();
+	}
 }
 
-void AXLPlayerController::StartSpecial()
+void AXLPlayerController::StartAbility1()
 {
-	
+	(Cast<AXLCharacter>(GetPawn()))->StartAbility(0);
 }
 
-void AXLPlayerController::StopSpecial()
+void AXLPlayerController::StopAbility1()
 {
-	
+	(Cast<AXLCharacter>(GetPawn()))->StopAbility(0);
 }
 
-void AXLPlayerController::StartPrimaryAbility()
+void AXLPlayerController::StartAbility2()
 {
-	
+	(Cast<AXLCharacter>(GetPawn()))->StartAbility(1);
 }
 
-void AXLPlayerController::StopPrimaryAbility()
+void AXLPlayerController::StopAbility2()
 {
-	
+	(Cast<AXLCharacter>(GetPawn()))->StopAbility(1);
 }
 
-void AXLPlayerController::StartSecondaryAbility()
+void AXLPlayerController::StartAbility3()
 {
-	
+	(Cast<AXLCharacter>(GetPawn()))->StartAbility(2);
 }
 
-void AXLPlayerController::StopSecondaryAbility()
+void AXLPlayerController::StopAbility3()
 {
-	
-}
-
-void AXLPlayerController::StartUltimate()
-{
-	
-}
-
-void AXLPlayerController::StopUltimate()
-{
-	
+	(Cast<AXLCharacter>(GetPawn()))->StopAbility(2);
 }
 
 void AXLPlayerController::UnFreeze()

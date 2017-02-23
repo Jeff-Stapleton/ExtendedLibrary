@@ -18,12 +18,12 @@ ExtendedLibraryModule::ExtendedLibraryModule()
 
 void ExtendedLibraryModule::StartupModule()
 {
-// Startup LOG MSG
+	// Startup LOG MSG
 	UE_LOG(ModuleLog, Warning, TEXT("ExtendedLibrary: Log Started"));
 }
 
 void ExtendedLibraryModule::ShutdownModule()
 {
-// Shutdown LOG MSG
+	// Shutdown LOG MSG
 	UE_LOG(ModuleLog, Warning, TEXT("ExtendedLibrary: Log Ended"));
 }

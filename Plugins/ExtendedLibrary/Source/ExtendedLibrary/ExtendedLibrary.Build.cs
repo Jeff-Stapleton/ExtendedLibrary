@@ -2,23 +2,42 @@ using UnrealBuildTool;
 
 public class ExtendedLibrary : ModuleRules
 {
-    public ExtendedLibrary(TargetInfo target)
-    {
-        PrivateIncludePaths.AddRange(new[] { "ExtendedLibrary/Private" });
+	public ExtendedLibrary(TargetInfo target)
+	{
+		PrivateIncludePaths.AddRange(new[] { "ExtendedLibrary/Private" });
 		
 		PublicIncludePaths.AddRange(new[] { "ExtendedLibrary/Public" });
 
-        PrivateDependencyModuleNames.AddRange(
-            new[]
-            {
-                "Engine",
-                "InputCore",
-                "Core",
-                "Slate",
-                "SlateCore",
-                "EditorStyle",
-                "CoreUObject"
-            }
-        );
-    }
+		PublicDependencyModuleNames.AddRange(
+			new[]
+			{
+				"Core",
+				"CoreUObject",
+				"Engine",
+				"InputCore",
+				"HTTP",
+				"OnlineSubsystem",
+			}
+		);
+
+		PrivateDependencyModuleNames.AddRange(
+			new[]
+			{
+				"AIModule",
+				"Core",
+				"CoreUObject",
+				"Engine",
+				"GameplayTasks",
+				"InputCore",
+				"HTTP",
+				"OnlineSubsystem",
+				"OnlineSubsystemNull",
+				"OnlineSubsystemUtils",
+				"Sockets",
+				"Networking",
+				"AssetRegistry",
+				"UMG",
+			}
+		);
+	}
 }

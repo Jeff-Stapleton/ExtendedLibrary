@@ -39,17 +39,14 @@ protected:
 
 	virtual void Melee();
 
-	virtual void StartSpecial();
-	virtual void StopSpecial();
+	virtual void StartAbility1();
+	virtual void StopAbility1();
 
-	virtual void StartPrimaryAbility();
-	virtual void StopPrimaryAbility();
+	virtual void StartAbility2();
+	virtual void StopAbility2();
 
-	virtual void StartSecondaryAbility();
-	virtual void StopSecondaryAbility();
-
-	virtual void StartUltimate();
-	virtual void StopUltimate();
+	virtual void StartAbility3();
+	virtual void StopAbility3();
 
 	virtual void UnFreeze() override;
 
@@ -57,7 +54,7 @@ protected:
 
 private:
 
-	//UPROPERTY()
-	//ASSPlayerCharacter* MyCharacter;
+	UPROPERTY()
+	AXLCharacter* MyCharacter;
 
 };
