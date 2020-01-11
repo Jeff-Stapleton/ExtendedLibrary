@@ -1,0 +1,42 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.0.0",
+  "FriendlyName": "UE4 Extended Library",
+  "Description": "XL extends the basic UE4 API providing common functionality.",
+  "Category": "",
+  "CreatedBy": "Jeff Stapleton",
+  "CreatedByURL": "",
+  "DocsURL": "",
+  "MarketplaceURL": "",
+  "SupportURL": "",
+  "EnabledByDefault": true,
+  "CanContainContent": true,
+  "IsBetaVersion": false,
+  "Installed": true,
+  "Modules": [
+    {
+      "Name": "ExtendedLibrary",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    }
+  ],
+  "Plugins": [
+    {
+      "Name": "OnlineSubsystem",
+      "Enabled": true
+    },
+    {
+      "Name": "OnlineSubsystemNull",
+      "Enabled": true
+    },
+    {
+      "Name": "OnlineSubsystemUtils",
+      "Enabled": true
+    },
+    {
+      "Name": "PhysXVehicles",
+      "Enabled": true
+    }
+  ]
+}
