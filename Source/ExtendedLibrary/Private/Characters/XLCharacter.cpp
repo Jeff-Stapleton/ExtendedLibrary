@@ -2,8 +2,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLCharacter.h"
 #include "XLCharacterCan.h"
+#include "XLCharacter.h"
 
 AXLCharacter::AXLCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer.SetDefaultSubobjectClass<UXLMovementComponent>(ACharacter::CharacterMovementComponentName))

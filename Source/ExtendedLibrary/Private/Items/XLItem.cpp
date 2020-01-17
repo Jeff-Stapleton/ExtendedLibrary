@@ -143,9 +143,9 @@ void AXLItem::DetachMeshFromPawn()
 	Mesh1P->DetachFromComponent(FDetachmentTransformRules::KeepRelativeTransform);
 }
 
-float AXLItem::StartEquip(FName AttachPoint)
+float AXLItem::StartEquip(FName attachPoint)
 {
-	this->AttachPoint = AttachPoint;
+	AttachPoint = attachPoint;
 
 	float Duration = PlayAnimation(ItemAnimations->EquipAnim);
 

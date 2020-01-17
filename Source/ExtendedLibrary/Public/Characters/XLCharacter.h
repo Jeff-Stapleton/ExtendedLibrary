@@ -1,7 +1,5 @@
 #pragma once
 
-#include "ExtendedLibraryPCH.h"
-
 #include "Components/Character/XLMovementComponent.h"
 #include "Components/Character/XLInteractionComponent.h"
 

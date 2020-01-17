@@ -3,7 +3,6 @@
 #include "ExtendedLibraryPCH.h"
 #include "XLAIController.h"
 #include "XLAICharacter.h"
-#include "XLActionCharacter.h"
 #include "XLHealthState.h"
 #include "Online/XLPlayerState.h"
 #include "BehaviorTree/BehaviorTree.h"

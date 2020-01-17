@@ -2,7 +2,6 @@
 
 #include "ExtendedLibraryPCH.h"
 #include "XLAIController.h"
-#include "XLActionCharacter.h"
 #include "XLFindClosestEnemyWithLOS.h"
 
 UXLFindClosestEnemyWithLOS::UXLFindClosestEnemyWithLOS()

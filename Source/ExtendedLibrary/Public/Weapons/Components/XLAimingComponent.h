@@ -1,8 +1,8 @@
 #pragma once
 
+#include "ExtendedLibraryPCH.h"
 #include "XLRangedWeapon.h"
-#include "XLCharacter.h"
-#include "XLPlayerController.h"
+#include "XLCamera.h"
 #include "XLAIController.h"
 #include "XLAimingComponent.generated.h"
 

@@ -1,6 +1,8 @@
+#pragma once
+
 #include "XLHitInfo.generated.h"
 
-#pragma once
+
 /** replicated information on a hit we've taken */
 USTRUCT()
 struct FXLHitInfo

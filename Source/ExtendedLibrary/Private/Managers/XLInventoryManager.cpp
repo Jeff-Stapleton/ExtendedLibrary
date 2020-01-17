@@ -57,7 +57,7 @@ void UXLInventoryManager::AddItem(TSubclassOf<class AXLItem> item, AActor* owner
 	}
 	else
 	{
-		UE_LOG(XLLog, Log, TEXT("Unable to equip item"));
+		//UE_LOG(XLLog, Log, TEXT("Unable to equip item"));
 	}
 }
 

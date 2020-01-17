@@ -4,7 +4,6 @@
 #include "XLProjectile.h"
 #include "XLProjectileData.h"
 #include "XLProjectileComponent.h"
-#include "XLRangedWeapon.h"
 #include "XLSingleProjectileComponent.generated.h"
 
 UCLASS(Blueprintable)

@@ -5,10 +5,25 @@
 #include "Animation/AnimInstance.h"
 #include "Animation/AnimMontage.h"
 
+#include "XLReloadComponent.h"
+#include "XLRecoilComponent.h"
+#include "XLProjectileComponent.h"
+#include "XLAimingComponent.h"
+#include "XLCharacterResources.h"
+
+#include "XLPlayerEffectManager.h"
+#include "XLCoverComponent.h"
+
 #include "Net/UnrealNetwork.h"
 
 #include "XLAirVehicle.h"
 #include "XLCharacter.h"
+#include "XLActionCharacter.h"
+
+#include "XLPlayerController.h"
+
+#include "XLPickupEffectManager.h"
+
 #include "XLCharacterStats.h"
 #include "XLItem.h"
 

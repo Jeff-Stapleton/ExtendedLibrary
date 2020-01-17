@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLActionCharacter.h"
 #include "XLInteractionComponent.h"
 
 void UXLInteractionComponent::Inspect()
