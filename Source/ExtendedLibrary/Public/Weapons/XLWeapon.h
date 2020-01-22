@@ -44,8 +44,6 @@ public:
 	void PlayWeaponSound();
 	void StopWeaponSound();
 
-	virtual void PlayFX() override;
-	virtual void StopFX() override;
 
 	virtual FHitResult WeaponTrace(const FVector& TraceFrom, const FVector& TraceTo);
 

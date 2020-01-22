@@ -16,7 +16,7 @@ void UXLSprayProjectileComponent::InitializeComponent()
 
 void UXLSprayProjectileComponent::Fire()
 {
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < NumberOfProjectiles; i++)
 	{
 		const FVector Start = GetWeapon()->GetMuzzleLocation();
 		const FVector End = GetWeapon()->AimingComponent->GetAdjustedAim();

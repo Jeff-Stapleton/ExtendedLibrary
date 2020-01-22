@@ -2,8 +2,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLCharacterCan.h"
 #include "XLCharacter.h"
+#include "XLCharacterCan.h"
 
 AXLCharacter::AXLCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer.SetDefaultSubobjectClass<UXLMovementComponent>(ACharacter::CharacterMovementComponentName))
@@ -47,6 +47,9 @@ void AXLCharacter::BeginPlay()
 void AXLCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+
+	//const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("EMovementState"), true);
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, EnumPtr->GetDisplayNameText(MovementState).ToString());
 
 	if (Role == ROLE_Authority)
 	{
@@ -134,9 +137,15 @@ void AXLCharacter::Jump()
 		Super::Jump();
 	}
 }
+void AXLCharacter::Falling()
+{
+	PostureState = EPostureState::Airborne;
+	Super::Falling();
+}
 void AXLCharacter::Landed(const FHitResult& Hit)
 {
 	ActionState = EActionState::None;
+	PostureState = EPostureState::Standing;
 	Super::Landed(Hit);
 }
 
@@ -304,7 +313,7 @@ void AXLCharacter::EquipItem(int32 Item)
 void AXLCharacter::HandleEquipItem(int32 Item)
 {
 	CurrentItem = Item; //this should be in the weapon
-	CharacterInventory->GetItem(Item)->StartEquip("RightHand");
+	CharacterInventory->GetItem(Item)->StartEquip("Hand_R");
 }
 bool AXLCharacter::ServerEquipItem_Validate(int32 Item)
 {
@@ -438,14 +447,14 @@ void AXLCharacter::StartAttack()
 {
 	if (XLCharacterCan::StartAttack(this))
 	{
-		Cast<AXLWeapon>(CharacterInventory->GetItem(CurrentItem))->StartAttack();
+		Cast<AXLRangedWeapon>(CharacterInventory->GetItem(CurrentItem))->StartAttack();
 	}
 }
 void AXLCharacter::StopAttack()
 {
 	if (XLCharacterCan::StopAttack(this))
 	{
-		Cast<AXLWeapon>(CharacterInventory->GetItem(CurrentItem))->StopAttack();
+		Cast<AXLRangedWeapon>(CharacterInventory->GetItem(CurrentItem))->StopAttack();
 	}
 }
 
@@ -561,7 +570,7 @@ void AXLCharacter::OnDeath(float KillingDamage, struct FDamageEvent const& Damag
 	// remove all weapons
 	CharacterInventory->DestroyInventory();
 	DetachFromControllerPendingDestroy();
-	StopAllAnimMontages();
+	StopAllAnimations();
 	// StopAllSounds();
 
 	SetRagdollPhysics();
@@ -633,7 +642,7 @@ void AXLCharacter::SpawnInventory()
 			{
 				FActorSpawnParameters SpawnInfo;
 				SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-				AXLWeapon* NewWeapon = GetWorld()->SpawnActor<AXLWeapon>(CharacterInventory->DefaultInventory[i], SpawnInfo);
+				AXLItem* NewWeapon = GetWorld()->SpawnActor<AXLItem>(CharacterInventory->DefaultInventory[i], SpawnInfo);
 
 				NewWeapon->SetOwner(this);
 				CharacterInventory->Inventory.Add(NewWeapon);
@@ -693,33 +702,40 @@ void AXLCharacter::SetRagdollPhysics()
 	}
 }
 
-float AXLCharacter::PlayAnimMontage(class UAnimMontage* AnimMontage, float InPlayRate, FName StartSectionName)
+void AXLCharacter::PlayAnimation_Implementation(class UAnimMontage* AnimMontage, float InPlayRate, FName StartSectionName)
 {
-	USkeletalMeshComponent* UseMesh = GetMesh();
-	if (AnimMontage && UseMesh && UseMesh->AnimScriptInstance)
+	if (GetNetMode() != NM_DedicatedServer)
 	{
-		return UseMesh->AnimScriptInstance->Montage_Play(AnimMontage, InPlayRate);
-	}
-
-	return 0.0f;
-}
-
-void AXLCharacter::StopAnimMontage(class UAnimMontage* AnimMontage)
-{
-	USkeletalMeshComponent* UseMesh = GetMesh();
-	if (AnimMontage && UseMesh && UseMesh->AnimScriptInstance &&
-		UseMesh->AnimScriptInstance->Montage_IsPlaying(AnimMontage))
-	{
-		UseMesh->AnimScriptInstance->Montage_Stop(AnimMontage->BlendOut.GetBlendTime());
+		USkeletalMeshComponent* UseMesh = GetMesh();
+		if (AnimMontage && UseMesh && UseMesh->AnimScriptInstance)
+		{
+			UseMesh->AnimScriptInstance->Montage_Play(AnimMontage, InPlayRate);
+		}
 	}
 }
 
-void AXLCharacter::StopAllAnimMontages()
+void AXLCharacter::StopAnimation_Implementation(class UAnimMontage* AnimMontage)
 {
-	USkeletalMeshComponent* UseMesh = GetMesh();
-	if (UseMesh && UseMesh->AnimScriptInstance)
+	if (GetNetMode() != NM_DedicatedServer)
 	{
-		UseMesh->AnimScriptInstance->Montage_Stop(0.0f);
+		USkeletalMeshComponent* UseMesh = GetMesh();
+		if (AnimMontage && UseMesh && UseMesh->AnimScriptInstance &&
+			UseMesh->AnimScriptInstance->Montage_IsPlaying(AnimMontage))
+		{
+			UseMesh->AnimScriptInstance->Montage_Stop(AnimMontage->BlendOut.GetBlendTime());
+		}
+	}
+}
+
+void AXLCharacter::StopAllAnimations_Implementation()
+{
+	if (GetNetMode() != NM_DedicatedServer)
+	{
+		USkeletalMeshComponent* UseMesh = GetMesh();
+		if (UseMesh && UseMesh->AnimScriptInstance)
+		{
+			UseMesh->AnimScriptInstance->Montage_Stop(0.0f);
+		}
 	}
 }
 

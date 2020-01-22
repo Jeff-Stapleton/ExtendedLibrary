@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ExtendedLibraryPCH.h"
+
 #include "Components/Character/XLMovementComponent.h"
 #include "Components/Character/XLInteractionComponent.h"
 
@@ -124,6 +126,7 @@ public:
 	void Look(float Direction);
 
 	void Jump() override;
+	void Falling() override;
 	void Landed(const FHitResult& Hit) override;
 
 	UFUNCTION(BlueprintCallable, Category = Actions)
@@ -230,11 +233,14 @@ public:
 
 	/////////////////////////////////////////// ANIMATION ///////////////////////////////////////////
 
-	virtual float PlayAnimMontage(class UAnimMontage* AnimMontage, float InPlayRate = 1.f, FName StartSectionName = NAME_None) override;
+	UFUNCTION(Reliable, NetMulticast)
+	void PlayAnimation(class UAnimMontage* AnimMontage, float InPlayRate = 1.f, FName StartSectionName = NAME_None);
 
-	virtual void StopAnimMontage(class UAnimMontage* AnimMontage) override;
+	UFUNCTION(Reliable, NetMulticast)
+	void StopAnimation(class UAnimMontage* AnimMontage);
 
-	void StopAllAnimMontages();
+	UFUNCTION(Reliable, NetMulticast)
+	void StopAllAnimations();
 
 	////////////////////////////////////////// REPLICATION //////////////////////////////////////////
 

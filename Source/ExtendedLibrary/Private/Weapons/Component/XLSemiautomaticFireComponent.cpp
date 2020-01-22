@@ -19,6 +19,8 @@ void UXLSemiautomaticFireComponent::DetermineAction()
 {
 	if (GetWeapon()->WeaponState == EWeaponState::Firing)
 	{
+		GetWeapon()->PlayFX(MuzzleFX, MuzzleFXPoint);
+		GetWeapon()->PlaySound(FireLoopSound);
 		StartAttack();
 	}
 	else

@@ -35,7 +35,6 @@ AXLItem::AXLItem()
 	PrimaryActorTick.TickGroup = TG_PrePhysics;
 }
 
-
 void AXLItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -69,48 +68,73 @@ void AXLItem::TogglePerspective()
 	}
 }
 
-UAudioComponent* AXLItem::PlaySound(USoundCue* Sound)
+void AXLItem::PlayFX_Implementation(UParticleSystem* FX, FName AttachPoint)
 {
-	UAudioComponent* AC = NULL;
-	if (Sound && Character)
+	if (GetNetMode() != NM_DedicatedServer)
 	{
-		AC = UGameplayStatics::SpawnSoundAttached(Sound, Character->GetRootComponent());
-	}
-	return AC;
-}
-
-float AXLItem::PlayAnimation(class UAnimMontage* Animation, float InPlayRate)
-{
-	float Duration = 0.5f;
-	if (Character)
-	{
-		UAnimMontage* UseAnim = Animation;
-		if (UseAnim)
+		FXComponent = NULL;
+		if (FX)
 		{
-			Duration = Character->PlayAnimMontage(UseAnim, InPlayRate);
+			FXComponent = UGameplayStatics::SpawnEmitterAttached(FX, Mesh3P, AttachPoint);
 		}
 	}
-	return Duration;
 }
-void AXLItem::StopAnimation(class UAnimMontage* Animation)
+void AXLItem::StopFX_Implementation()
 {
-	if (Character)
+	if (GetNetMode() != NM_DedicatedServer)
 	{
-		UAnimMontage* UseAnim = Animation;
-		if (UseAnim)
+		if (FXComponent)
 		{
-			Character->StopAnimMontage(UseAnim);
+			FXComponent->DeactivateSystem();
+			FXComponent = NULL;
 		}
 	}
 }
 
-void AXLItem::PlayFX()
+void AXLItem::PlaySound_Implementation(USoundCue* Sound)
 {
-
+	if (GetNetMode() != NM_DedicatedServer)
+	{
+		AudioComponent = NULL;
+		if (Sound && Character)
+		{
+			AudioComponent = UGameplayStatics::SpawnSoundAttached(Sound, Character->GetRootComponent());
+		}
+	}
 }
-void AXLItem::StopFX()
+void AXLItem::StopSound_Implementation()
 {
+	if (GetNetMode() != NM_DedicatedServer)
+	{
+		if (AudioComponent)
+		{
+			AudioComponent->FadeOut(0.1f, 0.0f);
+			AudioComponent = NULL;
+		}
+	}
+}
 
+void AXLItem::PlayAnimation_Implementation(class UAnimMontage* Animation, float InPlayRate)
+{
+	if (GetNetMode() != NM_DedicatedServer)
+	{
+		//USkeletalMeshComponent* UseMesh = GetMesh();
+		if (Animation && Mesh3P && Mesh3P->AnimScriptInstance)
+		{
+			Mesh3P->AnimScriptInstance->Montage_Play(Animation, InPlayRate);
+		}
+	}
+}
+void AXLItem::StopAnimation_Implementation(class UAnimMontage* Animation)
+{
+	if (GetNetMode() != NM_DedicatedServer)
+	{
+		//USkeletalMeshComponent* UseMesh = GetMesh();
+		if (Animation && Mesh3P && Mesh3P->AnimScriptInstance && Mesh3P->AnimScriptInstance->Montage_IsPlaying(Animation))
+		{
+			Mesh3P->AnimScriptInstance->Montage_Stop(Animation->BlendOut.GetBlendTime());
+		}
+	}
 }
 
 void AXLItem::AttachMeshToPawn()
@@ -143,38 +167,48 @@ void AXLItem::DetachMeshFromPawn()
 	Mesh1P->DetachFromComponent(FDetachmentTransformRules::KeepRelativeTransform);
 }
 
-float AXLItem::StartEquip(FName attachPoint)
+float AXLItem::StartEquip(FName AttachPoint)
 {
-	AttachPoint = attachPoint;
+	Character->GetMesh()->SetAnimInstanceClass(AnimClass);
+	this->AttachPoint = AttachPoint;
 
-	float Duration = PlayAnimation(ItemAnimations->EquipAnim);
+	float OriginalDuration = ItemAnimations->EquipAnim ? ItemAnimations->EquipAnim->CalculateSequenceLength() : 0.0f;
+	float Rate = OriginalDuration / EquipDuration;
+	if (ItemAnimations->EquipAnim)
+	{
+		Character->PlayAnimMontage(ItemAnimations->EquipAnim, Rate);
+	}
 
-	GetWorldTimerManager().SetTimer(TimerHandle_Equip, this, &AXLItem::StopEquip, Duration, false);
+	GetWorldTimerManager().SetTimer(TimerHandle_Equip, this, &AXLItem::StopEquip, EquipDuration, false);
 
 	if (Character && Character->IsLocallyControlled())
 	{
 		PlaySound(ItemSounds->EquipCue);
 	}
-	return Duration;
+	return EquipDuration;
 }
 void AXLItem::StopEquip()
 {
 	DetachMeshFromPawn();
 	AttachMeshToPawn();
-	Character->GetMesh()->SetAnimInstanceClass(AnimClass);
 }
 
 float AXLItem::StartUnequip()
 {
-	float Duration = PlayAnimation(ItemAnimations->UnequipAnim);
+	// Set animclass back to default
 
-	GetWorldTimerManager().SetTimer(TimerHandle_Unequip, this, &AXLItem::StopUnequip, Duration, false);
+	float OriginalDuration = ItemAnimations->UnequipAnim->CalculateSequenceLength();
+	float Rate = OriginalDuration / UnequipDuration;
+
+	Character->PlayAnimMontage(ItemAnimations->UnequipAnim, Rate);
+
+	GetWorldTimerManager().SetTimer(TimerHandle_Unequip, this, &AXLItem::StopUnequip, UnequipDuration, false);
 
 	if (Character && Character->IsLocallyControlled())
 	{
 		PlaySound(ItemSounds->UnequipCue);
 	}
-	return Duration;
+	return UnequipDuration;
 }
 void AXLItem::StopUnequip()
 {
@@ -184,4 +218,13 @@ void AXLItem::StopUnequip()
 void AXLItem::Drop()
 {
 	this->Destroy();
+}
+
+void AXLItem::Activate() 
+{
+	// not implemented
+}
+void AXLItem::Deactivate()
+{
+	// not implemented
 }

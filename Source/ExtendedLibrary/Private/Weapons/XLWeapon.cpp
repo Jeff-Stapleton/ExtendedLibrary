@@ -160,40 +160,6 @@ void AXLWeapon::StopWeaponSound()
 	//}
 }
 
-void AXLWeapon::PlayFX()
-{
-	/*if (WeaponEffects->MuzzleFX && (!WeaponEffects->bLoopedMuzzleFX || WeaponEffects->MuzzlePSC1P == NULL || WeaponEffects->MuzzlePSC3P == NULL))
-	{
-		if (Character && Character->IsLocallyControlled())
-		{
-			WeaponEffects->MuzzlePSC3P = UGameplayStatics::SpawnEmitterAttached(WeaponEffects->MuzzleFX, Mesh3P, WeaponEffects->MuzzleFXPoint);
-			WeaponEffects->MuzzlePSC1P = UGameplayStatics::SpawnEmitterAttached(WeaponEffects->MuzzleFX, Mesh1P, WeaponEffects->MuzzleFXPoint);
-
-			TogglePerspective();
-		}
-		else
-		{
-			WeaponEffects->MuzzlePSC3P = UGameplayStatics::SpawnEmitterAttached(WeaponEffects->MuzzleFX, Mesh3P, WeaponEffects->MuzzleFXPoint);
-		}
-	}*/
-}
-void AXLWeapon::StopFX()
-{
-	/*if (WeaponEffects->bLoopedMuzzleFX)
-	{
-		if (WeaponEffects->MuzzlePSC1P)
-		{
-			WeaponEffects->MuzzlePSC1P->DeactivateSystem();
-			WeaponEffects->MuzzlePSC1P = NULL;
-		}
-		if (WeaponEffects->MuzzlePSC3P)
-		{
-			WeaponEffects->MuzzlePSC3P->DeactivateSystem();
-			WeaponEffects->MuzzlePSC3P = NULL;
-		}
-	}*/
-}
-
 //////////////////////////////////////////UTILITIES///////////////////////////////////////////
 
 FHitResult AXLWeapon::WeaponTrace(const FVector& Start, const FVector& End)

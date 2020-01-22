@@ -5,7 +5,6 @@
 #include "XLWeaponSoundManager.h"
 #include "XLRangedWeaponCan.h"
 #include "XLRecoilData.h"
-
 #include "XLRangedWeapon.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponStateDelegate);
@@ -14,12 +13,10 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFireEventDelegate);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FReloadEventDelegate);
 
 UCLASS()
-class EXTENDEDLIBRARY_API AXLRangedWeapon : public AXLWeapon
+class EXTENDEDLIBRARY_API AXLRangedWeapon : public AXLItem
 {
 	GENERATED_BODY()
 
-	virtual void SetOwner(AActor * NewOwner) override;
-	
 public:
 	UPROPERTY(BlueprintAssignable)
 	FWeaponStateDelegate WeaponStateDelegate;
@@ -40,7 +37,7 @@ public:
 	TSubclassOf<class UXLProjectileComponent> ProjectileComponentBP;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Components)
-	TSubclassOf<class UXLReloadComponent> ReloadComponentBP;
+	TSubclassOf<class UXLAmmoComponent> ReloadComponentBP;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Components)
 	TSubclassOf<class UXLRecoilComponent> RecoilComponentBP;
@@ -58,25 +55,13 @@ public:
 	class UXLProjectileComponent* ProjectileComponent;
 
 	UPROPERTY(BlueprintReadWrite, Category = Ammo)
-	class UXLReloadComponent* ReloadComponent;
+	class UXLAmmoComponent* ReloadComponent;
 
 	UPROPERTY(BlueprintReadWrite, Category = Firing)
 	class UXLRecoilComponent* RecoilComponent;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Data)
-	class UXLWeaponStats* WeaponStats;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sound)
-	class UXLWeaponSoundManager* WeaponSounds;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animations)
-	class UXLWeaponAnimationManager* WeaponAnimations;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Effects)
-	class UXLWeaponEffectManager* WeaponEffects;
-
 	UPROPERTY(BlueprintReadWrite, Replicated)
-	TEnumAsByte<EWeaponState::Type> WeaponState;;
+	TEnumAsByte<EWeaponState::Type> WeaponState;
 
 	float CurrentWeaponSpread;
 
@@ -85,6 +70,8 @@ public:
 	virtual void Destroyed() override;
 
 	virtual void BeginPlay() override;
+
+	virtual void SetOwner(AActor * NewOwner) override;
 
 ////////////////////////////////////////// Input handlers //////////////////////////////////////////
 

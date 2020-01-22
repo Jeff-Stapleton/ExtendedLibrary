@@ -67,15 +67,15 @@ void UXLRecoilComponent::QueueRecoil()
 {
 	if (Owner->Character->TargetingState == ETargetingState::ADS)
 	{
-		FRecoilData ModifiedRecoil = Owner->WeaponStats->RecoilPattern[RecoilIndex];
-		ModifiedRecoil.VerticalRecoil *= Owner->WeaponStats->RecoilModifier;
-		ModifiedRecoil.HorizontalRecoil *= Owner->WeaponStats->RecoilModifier;
+		FRecoilData ModifiedRecoil = RecoilPattern[RecoilIndex];
+		ModifiedRecoil.VerticalRecoil *= RecoilModifier;
+		ModifiedRecoil.HorizontalRecoil *= RecoilModifier;
 
 		PendingRecoil.Add(ModifiedRecoil);
 	}
 	else
 	{
-		PendingRecoil.Add(Owner->WeaponStats->RecoilPattern[RecoilIndex]);
+		PendingRecoil.Add(RecoilPattern[RecoilIndex]);
 	}
 }
 
@@ -83,16 +83,16 @@ void UXLRecoilComponent::QueueSettling()
 {
 	if (Owner->Character->TargetingState == ETargetingState::ADS)
 	{
-		FRecoilData ModifiedRecoil = Owner->WeaponStats->RecoilPattern[RecoilIndex];
-		ModifiedRecoil.VerticalRecoil *= Owner->WeaponStats->RecoilModifier * -1;
-		ModifiedRecoil.HorizontalRecoil *= Owner->WeaponStats->RecoilModifier * -1;
+		FRecoilData ModifiedRecoil = RecoilPattern[RecoilIndex];
+		ModifiedRecoil.VerticalRecoil *= RecoilModifier * -1;
+		ModifiedRecoil.HorizontalRecoil *= RecoilModifier * -1;
 
 		PendingSettling.VerticalRecoil += ModifiedRecoil.VerticalRecoil;
 		PendingSettling.HorizontalRecoil += ModifiedRecoil.HorizontalRecoil;
 	}
 	else
 	{
-		FRecoilData ModifiedRecoil = Owner->WeaponStats->RecoilPattern[RecoilIndex];
+		FRecoilData ModifiedRecoil = RecoilPattern[RecoilIndex];
 		ModifiedRecoil.VerticalRecoil *= -1;
 		ModifiedRecoil.HorizontalRecoil *= -1;
 
@@ -104,7 +104,7 @@ void UXLRecoilComponent::QueueSettling()
 void UXLRecoilComponent::IncrementRecoilIndex()
 {
 	// If for any reason there are more rounds that recoil patterns, loop back to 0
-	if (Owner->WeaponStats->RecoilPattern.IsValidIndex(RecoilIndex + 1))
+	if (RecoilPattern.IsValidIndex(RecoilIndex + 1))
 	{
 		RecoilIndex++;
 	}
@@ -123,8 +123,8 @@ void UXLRecoilComponent::ApplyRecoil_Implementation(float DeltaSeconds)
 		float VerticalRecoil = CurrentRecoil.VerticalRecoil;
 		float HorizontalRecoil = CurrentRecoil.HorizontalRecoil;
 
-		CurrentRecoil.VerticalRecoil = FMath::FInterpTo(CurrentRecoil.VerticalRecoil, PendingRecoil[0].VerticalRecoil, DeltaSeconds, Owner->WeaponStats->RecoilSpeed);
-		CurrentRecoil.HorizontalRecoil = FMath::FInterpTo(CurrentRecoil.HorizontalRecoil, PendingRecoil[0].HorizontalRecoil, DeltaSeconds, Owner->WeaponStats->RecoilSpeed);
+		CurrentRecoil.VerticalRecoil = FMath::FInterpTo(CurrentRecoil.VerticalRecoil, PendingRecoil[0].VerticalRecoil, DeltaSeconds, RecoilSpeed);
+		CurrentRecoil.HorizontalRecoil = FMath::FInterpTo(CurrentRecoil.HorizontalRecoil, PendingRecoil[0].HorizontalRecoil, DeltaSeconds, RecoilSpeed);
 
 		Owner->Character->AddControllerPitchInput(CurrentRecoil.VerticalRecoil - VerticalRecoil);
 		Owner->Character->AddControllerYawInput(CurrentRecoil.HorizontalRecoil - HorizontalRecoil);
@@ -142,8 +142,8 @@ void UXLRecoilComponent::ApplySettling_Implementation(float DeltaSeconds)
 	float VerticalSettling = CurrentSettling.VerticalRecoil;
 	float HorizontalSettling = CurrentSettling.HorizontalRecoil;
 
-	CurrentSettling.VerticalRecoil = FMath::FInterpTo(CurrentSettling.VerticalRecoil, PendingSettling.VerticalRecoil, DeltaSeconds, Owner->WeaponStats->SettlingSpeed);
-	CurrentSettling.HorizontalRecoil = FMath::FInterpTo(CurrentSettling.HorizontalRecoil, PendingSettling.HorizontalRecoil, DeltaSeconds, Owner->WeaponStats->SettlingSpeed);
+	CurrentSettling.VerticalRecoil = FMath::FInterpTo(CurrentSettling.VerticalRecoil, PendingSettling.VerticalRecoil, DeltaSeconds, SettlingSpeed);
+	CurrentSettling.HorizontalRecoil = FMath::FInterpTo(CurrentSettling.HorizontalRecoil, PendingSettling.HorizontalRecoil, DeltaSeconds, SettlingSpeed);
 
 	Owner->Character->AddControllerPitchInput(CurrentSettling.VerticalRecoil - VerticalSettling);
 	Owner->Character->AddControllerYawInput(CurrentSettling.HorizontalRecoil - HorizontalSettling);

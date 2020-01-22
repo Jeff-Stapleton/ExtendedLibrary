@@ -2,17 +2,14 @@
 
 #include "XLAmmoComponent.h"
 #include "Components/ActorComponent.h"
-#include "Sound/SoundCue.h"
-#include "XLReloadComponent.generated.h"
+#include "XLShellAmmoComponent.generated.h"
 
 UCLASS(Blueprintable)
-class EXTENDEDLIBRARY_API UXLReloadComponent : public UXLAmmoComponent
+class EXTENDEDLIBRARY_API UXLShellAmmoComponent : public UXLAmmoComponent
 {
 	GENERATED_BODY()
 
-public: 
-    class AXLRangedWeapon* Owner;
-
+public:
 	/** If true the weapon can always be reloaded to full clip */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
 	bool InfiniteAmmo = false;
@@ -36,8 +33,11 @@ public:
 
 	FTimerHandle ReloadTimer;
 
-public:
-	UXLReloadComponent();
+private:
+	float AnimationRate = 1.0f;
+
+public: 
+	UXLShellAmmoComponent();
 
     void InitializeComponent() override;
 
@@ -49,5 +49,8 @@ public:
 
 	UFUNCTION()
 	void Reload();
+
+	UFUNCTION()
+	void LoadShell();
 
 };

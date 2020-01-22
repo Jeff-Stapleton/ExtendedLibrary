@@ -5,6 +5,7 @@ namespace EPostureState
 {
 	enum Type
 	{
+		Airborne,
 		Crouching,
 		Prone,
 		Standing,

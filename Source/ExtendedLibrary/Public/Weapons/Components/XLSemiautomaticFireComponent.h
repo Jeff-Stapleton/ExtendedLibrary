@@ -17,6 +17,35 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Base)
 	float TimeBetweenAttacks = 0.40f;
 
+	/** firing audio (bLoopedFireSound set) */
+	UPROPERTY(Transient)
+	UAudioComponent* FireAC;
+
+	/** single fire sound (bLoopedFireSound not set) */
+	UPROPERTY(EditDefaultsOnly, Category = Sound)
+	USoundCue* FireSound;
+
+	/** looped fire sound (bLoopedFireSound set) */
+	UPROPERTY(EditDefaultsOnly, Category = Sound)
+	USoundCue* FireLoopSound;
+
+	/** finished burst sound (bLoopedFireSound set) */
+	UPROPERTY(EditDefaultsOnly, Category = Sound)
+	USoundCue* FireFinishSound;
+
+	/** out of ammo sound */
+	UPROPERTY(EditDefaultsOnly, Category = Sound)
+	USoundCue* OutOfAmmoSound;
+
+	UPROPERTY(EditDefaultsOnly, Category = MuzzleFX)
+	FName MuzzleFXPoint;
+
+	UPROPERTY(EditDefaultsOnly, Category = MuzzleFX)
+	UParticleSystem* MuzzleFX;
+
+	UPROPERTY(Transient)
+	UParticleSystemComponent* MuzzlePSC;
+
 	float LastAttackTime = 0.0f;
 	FTimerHandle FiringTimer;
 

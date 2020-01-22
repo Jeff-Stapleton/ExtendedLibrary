@@ -11,17 +11,17 @@ class UXLWeaponManager : public UActorComponent
 public:
 
 	UPROPERTY(EditDefaultsOnly, Category = Inventory)
-	TArray<TSubclassOf<class AXLWeapon> > DefaultInventory;
+	TArray<TSubclassOf<class AXLItem> > DefaultInventory;
 
 	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = Weapons)
-	TArray<class AXLWeapon*> Inventory;
+	TArray<class AXLItem*> Inventory;
 
 	UXLWeaponManager();
 
 	void DestroyInventory();
 
 	UFUNCTION(BlueprintCallable, Category = Weapon)
-	AXLWeapon* GetWeapon(int32 Weapon);
+	AXLItem* GetWeapon(int32 Weapon);
 
 	int32 GetNextWeaponIndex(int32 Weapon);
 

@@ -22,7 +22,7 @@ void AXLPlayerCameraManager::UpdateCamera(float DeltaTime)
 		float TargetFOV = NormalFOV;
 		if (Character->TargetingState == ETargetingState::ADS && Character->CurrentItem != MAX_int32)
 		{
-			AXLWeapon* Weapon = Cast<AXLWeapon>(Character->CharacterInventory->GetItem(Character->CurrentItem));
+			AXLItem* Weapon = Cast<AXLItem>(Character->CharacterInventory->GetItem(Character->CurrentItem));
 			TargetFOV = 45.0f;//Weapon->WeaponStats->TargetingFOV;
 		}
 		

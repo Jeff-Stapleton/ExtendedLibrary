@@ -1,5 +1,6 @@
 #pragma once
 
+#include "XLCharacter.h"
 #include "XLActionCharacter.generated.h"
 
 UCLASS()

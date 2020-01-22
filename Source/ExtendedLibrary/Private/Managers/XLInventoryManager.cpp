@@ -45,7 +45,7 @@ void UXLInventoryManager::AddItem(TSubclassOf<class AXLItem> item, AActor* owner
 		{
 			FActorSpawnParameters SpawnInfo;
 			SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-			AXLWeapon* NewWeapon = GetWorld()->SpawnActor<AXLWeapon>(item, SpawnInfo);
+			AXLItem* NewWeapon = GetWorld()->SpawnActor<AXLItem>(item, SpawnInfo);
 
 			NewWeapon->SetOwner(owner);
 			Inventory.Add(NewWeapon);
@@ -57,7 +57,7 @@ void UXLInventoryManager::AddItem(TSubclassOf<class AXLItem> item, AActor* owner
 	}
 	else
 	{
-		//UE_LOG(XLLog, Log, TEXT("Unable to equip item"));
+		UE_LOG(XLLog, Log, TEXT("Unable to equip item"));
 	}
 }
 

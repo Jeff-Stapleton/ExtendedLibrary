@@ -7,6 +7,8 @@ namespace EMovementState
 	{
 		AFK,
 		Idle,
-		Moving,
+		Walking,
+		Running,
+		Sprinting,
 	};
 }

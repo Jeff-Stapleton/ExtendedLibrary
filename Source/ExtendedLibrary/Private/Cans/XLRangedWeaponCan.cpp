@@ -5,9 +5,5 @@
 
 bool XLRangedWeaponCan::Fire(AXLRangedWeapon* Weapon)
 {
-	if (Weapon->WeaponStats->CurrentClipAmmo <= 0)
-	{
-		return false;
-	}
-	return true;
+	return Weapon->WeaponState != EWeaponState::OutOfAmmo;
 }

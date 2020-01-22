@@ -18,7 +18,7 @@ void UXLWeaponManager::DestroyInventory()
 	// remove all weapons from inventory and destroy them
 	for (int32 i = Inventory.Num() - 1; i >= 0; i--)
 	{
-		AXLWeapon* Weapon = Inventory[i];
+		AXLItem* Weapon = Inventory[i];
 		if (Weapon)
 		{
 			Inventory.RemoveSingle(Weapon);
@@ -28,7 +28,7 @@ void UXLWeaponManager::DestroyInventory()
 	}
 }
 
-AXLWeapon* UXLWeaponManager::GetWeapon(int32 Weapon)
+AXLItem* UXLWeaponManager::GetWeapon(int32 Weapon)
 {
 	return Inventory[Weapon];
 }

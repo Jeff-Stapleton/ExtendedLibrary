@@ -20,16 +20,24 @@ public:
 
 	virtual void Tick(float DeltaSeconds) override;
 
-	virtual UAudioComponent* PlaySound(USoundCue* Sound);
+	UFUNCTION(Reliable, NetMulticast)
+	virtual void PlaySound(USoundCue* Sound);
+	UFUNCTION(Reliable, NetMulticast)
+	virtual void StopSound();
 
-	virtual float PlayAnimation(class UAnimMontage* Animation, float InPlayRate = 1.f);
+	UFUNCTION(Reliable, NetMulticast)
+	virtual void PlayAnimation(class UAnimMontage* Animation, float InPlayRate = 1.f);
+	UFUNCTION(Reliable, NetMulticast)
 	virtual void StopAnimation(class UAnimMontage* Animation);
-
-	virtual void PlayFX();
-	virtual void StopFX();
 
 	virtual void AttachMeshToPawn();
 	virtual void DetachMeshFromPawn();
+
+	UFUNCTION(Reliable, NetMulticast)
+	void PlayFX(UParticleSystem* FX, FName AttachPoint);
+
+	UFUNCTION(Reliable, NetMulticast)
+	void StopFX();
 
 	UFUNCTION(BlueprintCallable, Category = "Utility")
 	virtual float StartEquip(FName AttachPoint);
@@ -41,6 +49,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Utility")
 	virtual void Drop();
+
+	UFUNCTION(BlueprintCallable, Category = "Utility")
+	virtual void Activate();
+	virtual void Deactivate();
 
 	virtual void TogglePerspective();
 
@@ -65,8 +77,17 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animations)
 	class UXLItemAnimationManager* ItemAnimations;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
+	float EquipDuration = 2.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
+	float UnequipDuration = 2.0f;
+
 	UPROPERTY()
 	FName AttachPoint;
+
+	UParticleSystemComponent* FXComponent;
+	UAudioComponent* AudioComponent;
 
 	FTimerHandle TimerHandle_Equip;
 	FTimerHandle TimerHandle_Unequip;

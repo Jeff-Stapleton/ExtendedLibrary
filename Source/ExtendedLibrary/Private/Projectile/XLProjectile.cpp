@@ -116,6 +116,7 @@ void AXLProjectile::Hit(const FHitResult& HitResult)
 	PointDmg.Damage = ProjectileData.ExplosionDamage;
 
 	HitResult.GetActor()->TakeDamage(PointDmg.Damage, PointDmg, GetInstigatorController(), this);
+	ParticleComp->DeactivateSystem();
 }
 
 void AXLProjectile::DisableAndDestroy()

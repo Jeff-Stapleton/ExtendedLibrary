@@ -8,6 +8,7 @@ namespace EWeaponState
 		Idle,
 		Firing,
 		Reloading,
-		Meleeing
+		Meleeing,
+		OutOfAmmo
 	};
 }

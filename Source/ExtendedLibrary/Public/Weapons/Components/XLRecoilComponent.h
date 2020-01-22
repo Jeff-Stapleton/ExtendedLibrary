@@ -11,6 +11,30 @@ class EXTENDEDLIBRARY_API UXLRecoilComponent : public UActorComponent
 
 protected:
 
+	/** The amount the cursor moves when firing. Negative is left or up and positive is right or down */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ranged)
+	TArray<FRecoilData> RecoilPattern;
+
+	/** The amount the weapon pulls vertically when attacking, Negative for up, positive for down */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ranged)
+	float VerticalRecoil;
+
+	/** The amount the weapon pulls horizontally when attacking, Negative for left, positive for right */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ranged)
+	float HorizontalRecoil;
+
+	/** The speed at which the recoil interpolates from point A to point B */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ranged)
+	float RecoilSpeed = 50.0f;
+
+	/** Modifies the recoil by this factor when aiming down the sights */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ranged)
+	float RecoilModifier = 1.0f;
+
+	/** The speed at which the settling interpolates from point A to point B */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ranged)
+	float SettlingSpeed = 10.0f;
+
 	class AXLRangedWeapon* Owner;
 	class AXLCharacter* Character;
 

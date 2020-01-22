@@ -6,44 +6,68 @@
 UXLReloadComponent::UXLReloadComponent()
 {
     bWantsInitializeComponent = true;
+	bReplicates = true;
 }
 
 void UXLReloadComponent::InitializeComponent()
 {
     Super::InitializeComponent();
 
+	CurrentAmmo = MaxAmmo;
+	CurrentClipAmmo = MaxClipAmmo;
+
 	Owner = Cast<AXLRangedWeapon>(GetOwner());
 
+	Owner->WeaponStateDelegate.AddDynamic(this, &UXLReloadComponent::DetermineAction);
 	Owner->FireEventDelegate.AddDynamic(this, &UXLReloadComponent::ConsumeAmmo);
-	Owner->ReloadEventDelegate.AddDynamic(this, &UXLReloadComponent::Reload);
 }
 
-void UXLReloadComponent::OnRegister()
+void UXLReloadComponent::DetermineAction()
 {
-	Super::OnRegister();
+	if (Owner->WeaponState == EWeaponState::Reloading)
+	{
+		float OriginalDuration = ReloadAnim->CalculateSequenceLength();
+		float Rate = OriginalDuration / ReloadDuration;
+
+		Owner->Character->PlayAnimMontage(ReloadAnim, Rate);
+		Owner->PlaySound(ReloadSound);
+		Owner->GetWorldTimerManager().SetTimer(ReloadTimer, this, &UXLReloadComponent::Reload, ReloadDuration, false);
+	}
 }
 
 void UXLReloadComponent::ConsumeAmmo()
 {
-	if (!Owner->WeaponStats->InfiniteClip)
+	if (!InfiniteClip)
 	{
-		Owner->WeaponStats->CurrentClipAmmo--;
+		CurrentClipAmmo--;
+	}
+	if (CurrentClipAmmo <= 0)
+	{
+		Owner->WeaponState = EWeaponState::OutOfAmmo;
+		Owner->WeaponStateDelegate.Broadcast();
 	}
 }
 
 void UXLReloadComponent::Reload()
 {
-	float ClipDelta = FMath::Min(Owner->WeaponStats->MaxClipAmmo - Owner->WeaponStats->CurrentClipAmmo, Owner->WeaponStats->CurrentAmmo - Owner->WeaponStats->CurrentClipAmmo);
+	float ClipDelta = FMath::Min(MaxClipAmmo - CurrentClipAmmo, CurrentAmmo - CurrentClipAmmo);
 	if (ClipDelta > 0)
 	{
-		Owner->WeaponStats->CurrentClipAmmo += ClipDelta;
+		CurrentClipAmmo += ClipDelta;
 
-		if (!Owner->WeaponStats->InfiniteAmmo)
+		if (!InfiniteAmmo)
 		{
-			Owner->WeaponStats->CurrentAmmo -= ClipDelta;
+			CurrentAmmo -= ClipDelta;
 		}
 	}
+	Owner->WeaponState = EWeaponState::Idle;
+	Owner->WeaponStateDelegate.Broadcast();
 }
 
 
+void UXLReloadComponent::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
+	DOREPLIFETIME_CONDITION(UXLReloadComponent, MaxAmmo, COND_OwnerOnly);
+}

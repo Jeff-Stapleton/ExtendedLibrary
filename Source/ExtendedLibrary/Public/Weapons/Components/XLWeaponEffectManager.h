@@ -43,7 +43,10 @@ public:
 	void DetermineAction();
 
 protected:
+	UFUNCTION(Reliable, NetMulticast)
 	void ActivateMuzzlePSC();
+
+	UFUNCTION(Reliable, NetMulticast)
 	void DeactivateMuzzlePSC();
 
 };

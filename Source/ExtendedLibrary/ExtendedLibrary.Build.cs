@@ -4,10 +4,7 @@ public class ExtendedLibrary : ModuleRules
 {
 	public ExtendedLibrary(ReadOnlyTargetRules Target) : base(Target)
     {
-        bEnableExceptions = true;
-
-        PCHUsage = ModuleRules.PCHUsageMode.NoSharedPCHs;
-        PrivatePCHHeaderFile = "Public/ExtendedLibraryPCH.h";
+        PrivatePCHHeaderFile = "ExtendedLibraryPCH.h";
 
         PrivateIncludePaths.AddRange(new[] { "ExtendedLibrary/Private" });
 		

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ExtendedLibraryPCH.h"
 #include "XLRangedWeapon.h"
-#include "XLCamera.h"
+#include "XLCharacter.h"
+#include "XLPlayerController.h"
 #include "XLAIController.h"
 #include "XLAimingComponent.generated.h"
 
@@ -17,6 +17,13 @@ class EXTENDEDLIBRARY_API UXLAimingComponent : public UActorComponent
 
 public:
 	class AXLRangedWeapon* Owner;
+
+	/** Weapon ranges */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Base)
+	float MaxRange = 10000.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Base)
+	float Bloom = 10.0f;
 
 public:
 	FVector GetAdjustedAim();

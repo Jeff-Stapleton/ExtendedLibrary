@@ -7,14 +7,6 @@
 
 AXLRangedWeapon::AXLRangedWeapon()
 {
-	WeaponAnimations = CreateDefaultSubobject<UXLWeaponAnimationManager>(TEXT("WeaponAnimations"));
-	WeaponEffects = CreateDefaultSubobject<UXLWeaponEffectManager>(TEXT("WeaponEffects"));
-	WeaponSounds = CreateDefaultSubobject<UXLWeaponSoundManager>(TEXT("WeaponSounds"));
-	WeaponStats = CreateDefaultSubobject<UXLWeaponStats>(TEXT("WeaponStats"));
-
-	WeaponStats->CurrentAmmo = WeaponStats->MaxAmmo;
-	WeaponStats->CurrentClipAmmo = WeaponStats->MaxClipAmmo;
-
 	SetRemoteRoleForBackwardsCompat(ROLE_SimulatedProxy);
 	bReplicates = true;
 	bNetUseOwnerRelevancy = true;
@@ -27,7 +19,7 @@ void AXLRangedWeapon::BeginPlay()
 	AimingComponent = NewObject<UXLAimingComponent>(this, AimingComponentBP, FName(TEXT("AimingComponent")));
 	FiringComponent = NewObject<UXLFireComponent>(this, FiringComponentBP, FName(TEXT("FiringComponent")));
 	ProjectileComponent = NewObject<UXLProjectileComponent>(this, ProjectileComponentBP, FName(TEXT("ProjectileComponent")));
-	ReloadComponent = NewObject<UXLReloadComponent>(this, ReloadComponentBP, FName(TEXT("ReloadComponent")));
+	ReloadComponent = NewObject<UXLAmmoComponent>(this, ReloadComponentBP, FName(TEXT("AmmoComponent")));
 	RecoilComponent = NewObject<UXLRecoilComponent>(this, RecoilComponentBP, FName(TEXT("RecoilComponent")));
 
 	AimingComponent->RegisterComponent();
@@ -92,8 +84,10 @@ void AXLRangedWeapon::StopAttack()
 		ServerStopAttack();
 		return;
 	}
-
-	WeaponState = EWeaponState::Idle;
+	if (WeaponState != EWeaponState::OutOfAmmo)
+	{
+		WeaponState = EWeaponState::Idle;
+	}
 	WeaponStateDelegate.Broadcast();
 }
 bool AXLRangedWeapon::ServerStopAttack_Validate()
@@ -131,7 +125,7 @@ void AXLRangedWeapon::ApplyAttackForce(const FHitResult& Impact)
 {
 	if ((Impact.GetComponent() != nullptr) && Impact.GetComponent()->IsSimulatingPhysics())
 	{
-		Impact.GetComponent()->AddForce((WeaponStats->Force * Impact.ImpactNormal), Impact.BoneName);
+		//Impact.GetComponent()->AddForce((WeaponStats->Force * Impact.ImpactNormal), Impact.BoneName);
 	}
 }
 
@@ -152,17 +146,19 @@ FVector AXLRangedWeapon::GetMuzzleLocation()
 
 float AXLRangedWeapon::GetCurrentSpread() const
 {
-	float FinalSpread = WeaponStats->MinSpread + CurrentWeaponSpread;
-	if (Character->TargetingState == ETargetingState::ADS)
-	{
-		FinalSpread *= WeaponStats->SpreadModifier;
-	}
-	return FinalSpread;
+	//float FinalSpread = WeaponStats->MinSpread + CurrentWeaponSpread;
+	//if (Character->TargetingState == ETargetingState::ADS)
+	//{
+	//	FinalSpread *= WeaponStats->SpreadModifier;
+	//}
+	//return FinalSpread;
+	return 0.0f;
 }
 
 void AXLRangedWeapon::SetCurrentSpread()
 {
-	CurrentWeaponSpread = FMath::Min(WeaponStats->MaxSpread, CurrentWeaponSpread + WeaponStats->SpreadRate);
+	//CurrentWeaponSpread = FMath::Min(WeaponStats->MaxSpread, CurrentWeaponSpread + WeaponStats->SpreadRate);
+	CurrentWeaponSpread = 0.0f;
 }
 
 

@@ -28,7 +28,7 @@ void UXLWeaponEffectManager::DetermineAction()
 	}
 }
 
-void UXLWeaponEffectManager::ActivateMuzzlePSC()
+void UXLWeaponEffectManager::ActivateMuzzlePSC_Implementation()
 {
 	if (MuzzleFX && MuzzlePSC == NULL)
 	{
@@ -36,7 +36,7 @@ void UXLWeaponEffectManager::ActivateMuzzlePSC()
 	}
 }
 
-void UXLWeaponEffectManager::DeactivateMuzzlePSC()
+void UXLWeaponEffectManager::DeactivateMuzzlePSC_Implementation()
 {
 	if (MuzzlePSC)
 	{

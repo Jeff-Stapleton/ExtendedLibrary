@@ -19,7 +19,7 @@ FVector UXLAimingComponent::GetAdjustedAim()
 	const FVector Origin = GetAimOrigin();
 	const FVector Destination = GetAimDestination();
 
-	FVector Target = Origin + Destination * Owner->WeaponStats->MaxRange;
+	FVector Target = Origin + Destination * MaxRange;
 
 	return Trace(Origin, Target);
 }
@@ -30,7 +30,7 @@ FVector UXLAimingComponent::GetAimDestination()
 	AXLAIController* AIPC = Owner->Character ? Cast<AXLAIController>(Owner->Character->Controller) : NULL;
 
 	FRandomStream WeaponRandomStream(FMath::Rand());
-	const float ConeHalfAngle = FMath::DegreesToRadians(Owner->WeaponStats->CurrentSpread * 0.5f);
+	const float ConeHalfAngle = FMath::DegreesToRadians(Bloom * 0.5f);
 
 	FVector AimDir = FVector::ZeroVector;
 	if (PC)
@@ -65,7 +65,7 @@ FVector UXLAimingComponent::GetAimOrigin()
 FVector UXLAimingComponent::Trace(FVector Origin, FVector Target)
 {
 	static FName PreTraceTag = FName(TEXT("PreTrace"));
-	FCollisionQueryParams TraceParams(PreTraceTag, true, Owner->Character->Controller);
+	FCollisionQueryParams TraceParams(PreTraceTag, true, Owner->Character);
 	TraceParams.bTraceAsyncScene = true;
 	TraceParams.bReturnPhysicalMaterial = true;
 

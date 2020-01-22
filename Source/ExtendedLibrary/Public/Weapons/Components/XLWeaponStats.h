@@ -4,7 +4,7 @@
 #include "XLRecoilData.h"
 #include "XLWeaponStats.generated.h"
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class UXLWeaponStats : public UActorComponent
 {
 	GENERATED_BODY()
@@ -35,7 +35,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Base)
 	float TimeBetweenAttacks = 0.12f;
 
-///////////////////////////////////// AMMO /////////////////////////////////////
+	///////////////////////////////////// AMMO /////////////////////////////////////
 
 	/** If true the weapon can always be reloaded to full clip */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
@@ -57,7 +57,7 @@ public:
 	UPROPERTY(Replicated, BlueprintReadWrite, Category = Resources)
 	float CurrentClipAmmo;
 
-///////////////////////////////////// RANGED STATS /////////////////////////////////////
+	///////////////////////////////////// RANGED STATS /////////////////////////////////////
 
 	/** The number of projectiles that are fired when attacking */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ranged)
@@ -82,9 +82,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ranged)
 	float SpreadModifier = 1.0f;
 
-    /** The amount the cursor moves when firing. Negative is left or up and positive is right or down */
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ranged)
-    TArray<FRecoilData> RecoilPattern;
+	/** The amount the cursor moves when firing. Negative is left or up and positive is right or down */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ranged)
+	TArray<FRecoilData> RecoilPattern;
 
 	/** The amount the weapon pulls vertically when attacking, Negative for up, positive for down */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ranged)

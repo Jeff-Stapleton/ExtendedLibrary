@@ -5,7 +5,7 @@
 #include "XLMeleeWeapon.generated.h"
 
 UCLASS()
-class EXTENDEDLIBRARY_API AXLMeleeWeapon : public AXLWeapon
+class EXTENDEDLIBRARY_API AXLMeleeWeapon : public AXLItem
 {
 	GENERATED_BODY()
 	

@@ -10,7 +10,7 @@ AXLMeleeWeapon::AXLMeleeWeapon()
 
 void AXLMeleeWeapon::StartAttack()
 {
-	Super::StartAttack();
+	//Super::StartAttack();
 
 	//if (XLWeaponCan::Attack(this))
 	if (WeaponState == EWeaponState::Firing)
@@ -43,7 +43,7 @@ void AXLMeleeWeapon::StartAttack()
 }
 void AXLMeleeWeapon::StopAttack()
 {
-	Super::StopAttack();
+	//Super::StopAttack();
 	{
 		//GetWorldTimerManager().ClearTimer(FiringTimer);
 		WeaponState = EWeaponState::Idle;

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "GameFramework/CharacterMovementComponent.h"
 #include "XLMovementComponent.generated.h"
 
 UCLASS(hidecategories=("CharacterMovement:Walking"))
