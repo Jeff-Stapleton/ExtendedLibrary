@@ -3,7 +3,7 @@
 #pragma once
 
 #include "Components/InputComponent.h"
-#include "Controllers/XLPlayerController.h"
+#include "XLControllerCan.h"
 #include "XLCharacterInputComponent.generated.h"
 
 UCLASS()
@@ -15,8 +15,8 @@ public:
 
 	UXLCharacterInputComponent();
 
-	AXLPlayerController* Controller;
-	AXLCharacter* Pawn;
+	class AXLPlayerController* Controller;
+	class AXLCharacter* Pawn;
 
 public:
 

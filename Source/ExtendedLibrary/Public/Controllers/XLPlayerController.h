@@ -3,6 +3,7 @@
 #include "GameFramework/PlayerController.h"
 #include "Enums/XLInputMode.h"
 #include "Managers/XLPlayerCameraManager.h"
+#include "XLCharacterInputComponent.h"
 #include "XLPlayerController.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTestDelegate);

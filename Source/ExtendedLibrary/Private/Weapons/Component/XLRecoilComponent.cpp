@@ -65,7 +65,7 @@ void UXLRecoilComponent::ResetSettling_Implementation()
 
 void UXLRecoilComponent::QueueRecoil()
 {
-	if (Owner->Character->TargetingState == ETargetingState::ADS)
+	if (Owner->TargetingState == ETargetingState::ADS)
 	{
 		FRecoilData ModifiedRecoil = RecoilPattern[RecoilIndex];
 		ModifiedRecoil.VerticalRecoil *= RecoilModifier;
@@ -81,7 +81,7 @@ void UXLRecoilComponent::QueueRecoil()
 
 void UXLRecoilComponent::QueueSettling()
 {
-	if (Owner->Character->TargetingState == ETargetingState::ADS)
+	if (Owner->TargetingState == ETargetingState::ADS)
 	{
 		FRecoilData ModifiedRecoil = RecoilPattern[RecoilIndex];
 		ModifiedRecoil.VerticalRecoil *= RecoilModifier * -1;

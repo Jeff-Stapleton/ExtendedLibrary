@@ -5,6 +5,7 @@
 #include "XLWeaponSoundManager.h"
 #include "XLRangedWeaponCan.h"
 #include "XLRecoilData.h"
+#include "XLTargetingState.h"
 #include "XLRangedWeapon.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponStateDelegate);
@@ -23,6 +24,9 @@ public:
 
 	UPROPERTY(BlueprintAssignable)
 	FWeaponAimDelegate WeaponAimDelegate;
+
+	UPROPERTY(BlueprintAssignable)
+	FWeaponAimDelegate TargetingStateDelegate;
 
 	UPROPERTY(BlueprintAssignable)
 	FFireEventDelegate FireEventDelegate;
@@ -45,6 +49,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Components)
 	TSubclassOf<class UXLFireComponent> FiringComponentBP;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Components)
+	TSubclassOf<class UXLADSComponent> TargetingComponentBP;
+
 	UPROPERTY(BlueprintReadWrite, Category = Aiming)
 	class UXLAimingComponent* AimingComponent;
 
@@ -60,8 +67,14 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = Firing)
 	class UXLRecoilComponent* RecoilComponent;
 
+	UPROPERTY(BlueprintReadWrite, Category = Targeting)
+	class UXLADSComponent* TargetingComponent;
+
 	UPROPERTY(BlueprintReadWrite, Replicated)
 	TEnumAsByte<EWeaponState::Type> WeaponState;
+
+	UPROPERTY(BlueprintReadWrite, Replicated)
+	TEnumAsByte<ETargetingState::Type> TargetingState;
 
 	float CurrentWeaponSpread;
 
@@ -77,6 +90,14 @@ public:
 
 	UFUNCTION()
 	void OnAiming();
+
+	void StartAiming();
+	UFUNCTION(Reliable, Server, WithValidation)
+	virtual void ServerStartAiming();
+
+	void StopAiming();
+	UFUNCTION(Reliable, Server, WithValidation)
+	virtual void ServerStopAiming();
 
 	virtual void StartAttack();
 	UFUNCTION(Reliable, Server, WithValidation)

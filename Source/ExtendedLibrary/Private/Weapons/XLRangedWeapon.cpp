@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLRangedWeapon.h"
 #include "XLImpactEffect.h"
 #include "XLWeaponEffectManager.h"
+#include "XLRangedWeapon.h"
 
 AXLRangedWeapon::AXLRangedWeapon()
 {
@@ -21,12 +21,15 @@ void AXLRangedWeapon::BeginPlay()
 	ProjectileComponent = NewObject<UXLProjectileComponent>(this, ProjectileComponentBP, FName(TEXT("ProjectileComponent")));
 	ReloadComponent = NewObject<UXLAmmoComponent>(this, ReloadComponentBP, FName(TEXT("AmmoComponent")));
 	RecoilComponent = NewObject<UXLRecoilComponent>(this, RecoilComponentBP, FName(TEXT("RecoilComponent")));
+	TargetingComponent = NewObject<UXLADSComponent>(this, TargetingComponentBP, FName(TEXT("TargetingComponent")));
+
 
 	AimingComponent->RegisterComponent();
 	FiringComponent->RegisterComponent();
 	ProjectileComponent->RegisterComponent();
 	ReloadComponent->RegisterComponent();
 	RecoilComponent->RegisterComponent();
+	TargetingComponent->RegisterComponent();
 }
 
 void AXLRangedWeapon::Destroyed()
@@ -52,6 +55,46 @@ void AXLRangedWeapon::SetOwner(AActor* NewOwner)
 void AXLRangedWeapon::OnAiming()
 {
 	WeaponAimDelegate.Broadcast();
+}
+
+void AXLRangedWeapon::StartAiming()
+{
+	if (Role < ROLE_Authority)
+	{
+		ServerStartAiming();
+		return;
+	}
+
+	TargetingState = ETargetingState::ADS;
+	TargetingStateDelegate.Broadcast();
+}
+bool AXLRangedWeapon::ServerStartAiming_Validate()
+{
+	return true;
+}
+void AXLRangedWeapon::ServerStartAiming_Implementation()
+{
+	StartAiming();
+}
+
+void AXLRangedWeapon::StopAiming()
+{
+	if (Role < ROLE_Authority)
+	{
+		ServerStopAiming();
+		return;
+	}
+
+	TargetingState = ETargetingState::Ready;
+	TargetingStateDelegate.Broadcast();
+}
+bool AXLRangedWeapon::ServerStopAiming_Validate()
+{
+	return true;
+}
+void AXLRangedWeapon::ServerStopAiming_Implementation()
+{
+	StopAiming();
 }
 
 void AXLRangedWeapon::StartAttack()
@@ -161,7 +204,6 @@ void AXLRangedWeapon::SetCurrentSpread()
 	CurrentWeaponSpread = 0.0f;
 }
 
-
 //////////////////////////////////////////// Replication ///////////////////////////////////////////
 
 void AXLRangedWeapon::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
@@ -169,4 +211,5 @@ void AXLRangedWeapon::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & O
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(AXLRangedWeapon, WeaponState);
+	DOREPLIFETIME(AXLRangedWeapon, TargetingState);
 }

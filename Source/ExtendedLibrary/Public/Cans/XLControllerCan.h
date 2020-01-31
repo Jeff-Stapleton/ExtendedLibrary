@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Controllers/XLPlayerController.h"
+#include "XLPlayerController.h"
 
 class XLControllerCan
 {
 public:
 
-	static bool Move(AXLPlayerController* Controller);
+	static bool Move(class AXLPlayerController* Controller);
 	static bool Strafe(AXLPlayerController* Controller);
 
 	static bool Turn(AXLPlayerController* Controller);
