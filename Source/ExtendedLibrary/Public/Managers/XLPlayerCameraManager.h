@@ -16,9 +16,8 @@ public:
 	AXLPlayerCameraManager(const FObjectInitializer& ObjectInitializer);
 
 	float NormalFOV;
+	float TargetFOV;
+	float FOVSpeed;
 
-	float TargetingFOV;
-
-	virtual void UpdateCamera(float DeltaTime) override;
-	
+	virtual void UpdateCamera(float DeltaTime) override;	
 };

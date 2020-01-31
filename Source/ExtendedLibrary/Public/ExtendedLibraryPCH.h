@@ -9,9 +9,17 @@
 
 #include "XLAirVehicle.h"
 #include "XLCharacter.h"
+#include "XLPlayerController.h"
 #include "XLCharacterStats.h"
 #include "XLItem.h"
 #include "XLRangedWeapon.h"
+#include "XLAimingComponent.h"
+#include "XLCharacterResources.h"
+#include "XLProjectileComponent.h"
+#include "XLAmmoComponent.h"
+#include "XLRecoilComponent.h"
+#include "XLFireComponent.h"
+#include "XLADSComponent.h"
 
 #define XL_SURFACE_Default			SurfaceType_Default
 #define XL_SURFACE_Concrete			SurfaceType1

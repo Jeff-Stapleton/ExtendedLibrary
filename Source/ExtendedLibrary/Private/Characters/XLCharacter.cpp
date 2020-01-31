@@ -32,7 +32,6 @@ AXLCharacter::AXLCharacter(const FObjectInitializer& ObjectInitializer)
 	HealthState = EHealthState::Alive;
 	MovementState = EMovementState::Idle;
 	PostureState = EPostureState::Standing;
-	TargetingState = ETargetingState::Relaxed;
 
 	CurrentItem = UNDEFINED;
 }
@@ -430,16 +429,14 @@ void AXLCharacter::StartAim()
 {
 	if (XLCharacterCan::StartAim(this))
 	{
-		TargetingState = ETargetingState::ADS;
-		TargetingStateDelegate.Broadcast();
+		Cast<AXLRangedWeapon>(CharacterInventory->GetItem(CurrentItem))->StartAiming();
 	}
 }
 void AXLCharacter::StopAim()
 {
 	if (XLCharacterCan::StopAim(this))
 	{
-		TargetingState = ETargetingState::Ready;
-		TargetingStateDelegate.Broadcast();
+		Cast<AXLRangedWeapon>(CharacterInventory->GetItem(CurrentItem))->StopAiming();
 	}
 }
 

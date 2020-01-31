@@ -4,6 +4,7 @@
 
 #include "Components/Character/XLMovementComponent.h"
 #include "Components/Character/XLInteractionComponent.h"
+#include "XLCoverComponent.h"
 
 #include "Enums/XLActionState.h"
 #include "Enums/XLCombatState.h"
@@ -15,6 +16,7 @@
 #include "Managers/XLInventoryManager.h"
 #include "Managers/XLAbilityManager.h"
 #include "Managers/XLPlayerAnimationManager.h"
+#include "XLPlayerEffectManager.h"
 
 #include "Structs/XLHitInfo.h"
 
@@ -46,9 +48,6 @@ public:
 
 	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = State)
 	TEnumAsByte<EPostureState::Type> PostureState;
-
-	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = State)
-	TEnumAsByte<ETargetingState::Type> TargetingState;
 
 	////////////////////////////////////////////// DATA //////////////////////////////////////////////
 
@@ -97,7 +96,6 @@ public:
 
 	//const int32 UNDEFINED = MAX_int32;
 
-	FTargetingStateDelegate TargetingStateDelegate;
 	FLookingDelegate LookingDelegate;
 
 	FTimerDelegate TimerDelegate_SwitchWeapon;

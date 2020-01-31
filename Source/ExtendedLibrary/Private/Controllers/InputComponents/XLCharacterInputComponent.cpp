@@ -307,7 +307,8 @@ void UXLCharacterInputComponent::SixthWeapon()
 			Character->SwitchItem(5);
 		}
 	}
-}void UXLCharacterInputComponent::SeventhWeapon()
+}
+void UXLCharacterInputComponent::SeventhWeapon()
 {
 	if (XLControllerCan::Jump(Controller))
 	{
@@ -322,6 +323,7 @@ void UXLCharacterInputComponent::SixthWeapon()
 		}
 	}
 }
+
 void UXLCharacterInputComponent::StartAim()
 {
 	if (XLControllerCan::StartAttack(Controller))
