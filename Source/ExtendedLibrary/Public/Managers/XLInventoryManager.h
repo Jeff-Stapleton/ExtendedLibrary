@@ -3,6 +3,9 @@
 #include "Components/ActorComponent.h"
 #include "XLInventoryManager.generated.h"
 
+class AXLItem;
+class AXLCharacter;
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class UXLInventoryManager : public UActorComponent
 {
@@ -10,10 +13,10 @@ class UXLInventoryManager : public UActorComponent
 
 public:
 	UPROPERTY(EditDefaultsOnly, Category = Inventory)
-	TArray<TSubclassOf<class AXLItem> > DefaultInventory;
+	TArray<TSubclassOf<AXLItem> > DefaultInventory;
 
 	UPROPERTY(Replicated, BlueprintReadWrite, Category = Inventory)
-	TArray<class AXLItem*> Inventory;
+	TArray<AXLItem*> Inventory;
 
 	UPROPERTY(EditDefaultsOnly, Category = Inventory)
 	int32 InventorySize;
@@ -23,11 +26,16 @@ public:
 	void DestroyInventory();
 
 	UFUNCTION(BlueprintCallable, Category = Inventory)
-	AXLItem* GetItem(int32 item);
+	AXLItem* GetItem(int32 index);
 
 	UFUNCTION(BlueprintCallable, Category = Inventory)
-	void AddItem(TSubclassOf<class AXLItem> item, AActor* owner);
+	void AddItem(TSubclassOf<AXLItem> item, AXLCharacter* owner);
 	UFUNCTION(Reliable, Server, WithValidation)
-	void ServerAddItem(TSubclassOf<class AXLItem> item, AActor* owner);
+	void ServerAddItem(TSubclassOf<AXLItem> item, AXLCharacter* owner);
+
+	UFUNCTION(BlueprintCallable, Category = Inventory)
+	void RemoveItem(int32 index, AXLCharacter* owner);
+	UFUNCTION(Reliable, Server, WithValidation)
+	void ServerRemoveItem(int32 index, AXLCharacter* owner);
 
 };

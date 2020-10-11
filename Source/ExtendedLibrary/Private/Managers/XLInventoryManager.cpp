@@ -1,11 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLInventoryManager.h"
+#include "Items/XLItem.h"
+#include "Managers/XLInventoryManager.h"
 
 UXLInventoryManager::UXLInventoryManager()
 {
-	bReplicates = true;
+	SetIsReplicatedByDefault(true);
 }
 
 void UXLInventoryManager::DestroyInventory()
@@ -28,16 +29,16 @@ void UXLInventoryManager::DestroyInventory()
 	}
 }
 
-AXLItem* UXLInventoryManager::GetItem(int32 item)
+AXLItem* UXLInventoryManager::GetItem(int32 index)
 {
-	if (item < Inventory.Num())
+	if (index < Inventory.Num())
 	{
-		return Inventory[item];
+		return Inventory[index];
 	}
 	return NULL;
 }
 
-void UXLInventoryManager::AddItem(TSubclassOf<class AXLItem> item, AActor* owner)
+void UXLInventoryManager::AddItem(TSubclassOf<class AXLItem> item, AXLCharacter* owner)
 {
 	if (item && owner && Inventory.Num() < InventorySize)
 	{
@@ -47,7 +48,7 @@ void UXLInventoryManager::AddItem(TSubclassOf<class AXLItem> item, AActor* owner
 			SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 			AXLItem* NewWeapon = GetWorld()->SpawnActor<AXLItem>(item, SpawnInfo);
 
-			NewWeapon->SetOwner(owner);
+			NewWeapon->SetOwningPawn(owner);
 			Inventory.Add(NewWeapon);
 		}
 		else
@@ -57,17 +58,49 @@ void UXLInventoryManager::AddItem(TSubclassOf<class AXLItem> item, AActor* owner
 	}
 	else
 	{
-		UE_LOG(XLLog, Log, TEXT("Unable to equip item"));
+		//UE_LOG(XLLog, Log, TEXT("Unable to equip item"));
 	}
 }
 
-bool UXLInventoryManager::ServerAddItem_Validate(TSubclassOf<class AXLItem> item, AActor* owner)
+bool UXLInventoryManager::ServerAddItem_Validate(TSubclassOf<class AXLItem> item, AXLCharacter* owner)
 {
 	return true;
 }
-void UXLInventoryManager::ServerAddItem_Implementation(TSubclassOf<class AXLItem> item, AActor* owner)
+void UXLInventoryManager::ServerAddItem_Implementation(TSubclassOf<class AXLItem> item, AXLCharacter* owner)
 {
 	AddItem(item, owner);
+}
+
+void UXLInventoryManager::RemoveItem(int32 index, AXLCharacter* owner)
+{
+	if (index < Inventory.Num())
+	{
+		if (GetOwnerRole() == ROLE_Authority)
+		{
+			AXLCharacter* character = Cast<AXLCharacter>(owner);
+			if (character->CurrentItem != Inventory[index])
+			{
+				Inventory.RemoveAt(index);
+			}
+		}
+		else
+		{
+			ServerRemoveItem(index, owner);
+		}
+	}
+	else
+	{
+		//UE_LOG(XLLog, Log, TEXT("Unable to remove item"));
+	}
+}
+
+bool UXLInventoryManager::ServerRemoveItem_Validate(int32 index, AXLCharacter* owner)
+{
+	return true;
+}
+void UXLInventoryManager::ServerRemoveItem_Implementation(int32 index, AXLCharacter* owner)
+{
+	RemoveItem(index, owner);
 }
 
 

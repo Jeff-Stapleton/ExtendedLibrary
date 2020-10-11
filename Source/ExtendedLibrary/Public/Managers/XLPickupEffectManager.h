@@ -3,6 +3,8 @@
 #include "Components/ActorComponent.h"
 #include "XLPickupEffectManager.generated.h"
 
+class UParticleSystem;
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class UXLPickupEffectManager : public UActorComponent
 {

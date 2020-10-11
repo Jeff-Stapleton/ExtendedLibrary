@@ -9,6 +9,7 @@ namespace EWeaponState
 		Firing,
 		Reloading,
 		Meleeing,
-		OutOfAmmo
+		OutOfAmmo,
+		NotReady
 	};
 }

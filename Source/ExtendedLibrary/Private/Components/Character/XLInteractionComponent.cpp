@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLActionCharacter.h"
-#include "XLInteractionComponent.h"
+#include "Characters/XLPlayerCharacter.h"
+#include "Components/Character/XLInteractionComponent.h"
 
 void UXLInteractionComponent::Inspect()
 {
@@ -33,14 +33,13 @@ void UXLInteractionComponent::Interact()
 
 bool UXLInteractionComponent::InteractTrace(FHitResult* RV_Hit, FCollisionQueryParams* RV_TraceParams)
 {
-	AXLActionCharacter* Owner = Cast<AXLActionCharacter>(GetOwner());
+	AXLPlayerCharacter* Owner = Cast<AXLPlayerCharacter>(GetOwner());
 	if (Owner && Owner->Camera)
 	{
 		FVector Start = Owner->Camera->GetComponentLocation();
 		FVector End = Owner->Camera->GetComponentLocation() + (Owner->Camera->GetForwardVector() * InteractDistance);
 
 		RV_TraceParams->bTraceComplex = true;
-		RV_TraceParams->bTraceAsyncScene = true;
 		RV_TraceParams->bReturnPhysicalMaterial = true;
 		RV_TraceParams->AddIgnoredActor(GetOwner());
 

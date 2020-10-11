@@ -1,23 +1,27 @@
 #pragma once
 
+#include "GameFramework/CharacterMovementComponent.h"
 #include "XLMovementComponent.generated.h"
 
+class AXLCharacter;
+
 UCLASS(hidecategories=("CharacterMovement:Walking"))
-class UXLMovementComponent : public UCharacterMovementComponent
+class EXTENDEDLIBRARY_API UXLMovementComponent : public UCharacterMovementComponent
 {
 	GENERATED_BODY()
 
-	UXLMovementComponent();
-
 public:
+
+	UXLMovementComponent();
 
 	void UpdateMovementSpeed();
 
-	void ModifyJumpHeight(float NewModifier);
+	void ModifyJumpHeight(float HeightModifier);
+	void ModifyMovementSpeed(float SpeedModifier);
 
 public:
 
-	class AXLCharacter* Character;
+	AXLCharacter* Character;
 
 	UPROPERTY(EditDefaultsOnly, Category = Config)
 	float SprintCost;

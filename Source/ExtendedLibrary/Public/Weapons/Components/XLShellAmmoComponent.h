@@ -1,8 +1,9 @@
 #pragma once
 
-#include "XLAmmoComponent.h"
-#include "Components/ActorComponent.h"
+#include "Weapons/Components/Interfaces/XLAmmoComponent.h"
 #include "XLShellAmmoComponent.generated.h"
+
+class USoundCue;
 
 UCLASS(Blueprintable)
 class EXTENDEDLIBRARY_API UXLShellAmmoComponent : public UXLAmmoComponent
@@ -41,14 +42,11 @@ public:
 
     void InitializeComponent() override;
 
-	UFUNCTION()
 	void DetermineAction();
 
-	UFUNCTION()
-	void ConsumeAmmo();
+	void ConsumeAmmo() override;
 
-	UFUNCTION()
-	void Reload();
+	void Reload() override;
 
 	UFUNCTION()
 	void LoadShell();

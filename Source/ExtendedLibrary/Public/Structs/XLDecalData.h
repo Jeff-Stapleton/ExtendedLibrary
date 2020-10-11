@@ -1,6 +1,8 @@
+#pragma once
+
 #include "XLDecalData.generated.h"
 
-#pragma once
+class UMaterial;
 
 USTRUCT()
 struct FDecalData

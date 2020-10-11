@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLProjectile.h"
+#include "Projectiles/XLImpactFX.h"
+#include "Projectiles/XLProjectile.h"
 
 AXLProjectile::AXLProjectile(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -10,6 +11,7 @@ AXLProjectile::AXLProjectile(const FObjectInitializer& ObjectInitializer) : Supe
 	CollisionComp->AlwaysLoadOnClient = true;
 	CollisionComp->AlwaysLoadOnServer = true;
 	CollisionComp->bTraceComplexOnMove = true;
+	CollisionComp->bReturnMaterialOnMove = true;
 	CollisionComp->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	CollisionComp->SetCollisionObjectType(COLLISION_PROJECTILE);
 	CollisionComp->SetCollisionResponseToAllChannels(ECR_Ignore);
@@ -18,39 +20,41 @@ AXLProjectile::AXLProjectile(const FObjectInitializer& ObjectInitializer) : Supe
 	CollisionComp->SetCollisionResponseToChannel(ECC_Pawn, ECR_Block);
 	RootComponent = CollisionComp;
 
-	ParticleComp = ObjectInitializer.CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("ParticleComp"));
-	ParticleComp->bAutoActivate = false;
-	ParticleComp->bAutoDestroy = false;
-	ParticleComp->SetupAttachment(RootComponent);
-
 	MovementComp = ObjectInitializer.CreateDefaultSubobject<UProjectileMovementComponent>(this, TEXT("ProjectileComp"));
 	MovementComp->UpdatedComponent = CollisionComp;
-	MovementComp->InitialSpeed = 2000.0f;
+	MovementComp->InitialSpeed = 18750.0f;
 	MovementComp->MaxSpeed = 200000.0f;
 	MovementComp->bRotationFollowsVelocity = true;
-	MovementComp->ProjectileGravityScale = 0.f;
+	MovementComp->ProjectileGravityScale = 1.0f;
+
+	AudioComp = ObjectInitializer.CreateDefaultSubobject<UAudioComponent>(this, TEXT("AudioComp"));
+	AudioComp->SetupAttachment(RootComponent);
+
+	TrailFX = ObjectInitializer.CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("TrailFX"));
+	TrailFX->SetupAttachment(RootComponent);
 
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.TickGroup = TG_PrePhysics;
 	SetRemoteRoleForBackwardsCompat(ROLE_SimulatedProxy);
 	bReplicates = true;
-	bReplicateMovement = true;
+	SetReplicatingMovement(true);
 }
 
 void AXLProjectile::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 
-	MovementComp->OnProjectileStop.AddDynamic(this, &AXLProjectile::OnImpact);
-	CollisionComp->MoveIgnoreActors.Add(Instigator);
+	if (IsTactical)
+	{
+		GetWorldTimerManager().SetTimer(DetonationTimer, this, &AXLProjectile::Explode, DetonationTime, false);
+	}
+	else
+	{
+		MovementComp->OnProjectileStop.AddDynamic(this, &AXLProjectile::OnImpact);
+	}
 
-	//AShooterWeapon_Projectile* OwnerWeapon = Cast<AShooterWeapon_Projectile>(GetOwner());
-	//if (OwnerWeapon)
-	//{
-	//	OwnerWeapon->ApplyWeaponConfig(WeaponConfig);
-	//}
-
-	SetLifeSpan(1.0f/*WeaponConfig.ProjectileLife*/);
+	CollisionComp->MoveIgnoreActors.Add(GetInstigator());
+	SetLifeSpan(ProjectileData.ProjectileLife);
 	//MyController = GetInstigatorController();
 }
 
@@ -64,47 +68,29 @@ void AXLProjectile::InitVelocity(FVector& ShootDirection)
 
 void AXLProjectile::OnImpact(const FHitResult& HitResult)
 {
-	if (Role == ROLE_Authority)
+	if (GetLocalRole() == ROLE_Authority)
 	{
 		if (ProjectileData.ExplosionRadius > 0)
 		{
-			Explode(HitResult);
+			Explode();
 		}
 		else
 		{
 			Hit(HitResult);
 		}
-		DisableAndDestroy();
 	}
 }
 
-void AXLProjectile::Explode(const FHitResult& HitResult)
+void AXLProjectile::Explode()
 {
-	//if (ParticleComp)
-	//{
-	//	ParticleComp->Deactivate();
-	//}
-
-	// effects and damage origin shouldn't be placed inside mesh at impact point
-	const FVector NudgedImpactLocation = HitResult.ImpactPoint + HitResult.ImpactNormal * 10.0f;
+	const FVector NudgedImpactLocation = GetActorLocation() + GetActorRotation().Vector() * 10.0f;
 
 	if (ProjectileData.ExplosionDamage > 0 && ProjectileData.DamageType)
 	{
 		UGameplayStatics::ApplyRadialDamage(this, ProjectileData.ExplosionDamage, NudgedImpactLocation, ProjectileData.ExplosionRadius, ProjectileData.DamageType, TArray<AActor*>(), this, GetInstigatorController());
 	}
-
-	//if (ExplosionTemplate)
-	//{
-	//	FTransform const SpawnTransform(Impact.ImpactNormal.Rotation(), NudgedImpactLocation);
-	//	AShooterExplosionEffect* const EffectActor = GetWorld()->SpawnActorDeferred<AShooterExplosionEffect>(ExplosionTemplate, SpawnTransform);
-	//	if (EffectActor)
-	//	{
-	//		EffectActor->SurfaceHit = Impact;
-	//		UGameplayStatics::FinishSpawningActor(EffectActor, SpawnTransform);
-	//	}
-	//}
-
-	//bExploded = true;
+	Explosion();
+	bImpact = true;
 }
 
 void AXLProjectile::Hit(const FHitResult& HitResult)
@@ -113,14 +99,79 @@ void AXLProjectile::Hit(const FHitResult& HitResult)
 	PointDmg.DamageTypeClass = ProjectileData.DamageType;
 	PointDmg.HitInfo = HitResult;
 	PointDmg.ShotDirection = HitResult.ImpactPoint;
-	PointDmg.Damage = ProjectileData.ExplosionDamage;
 
-	HitResult.GetActor()->TakeDamage(PointDmg.Damage, PointDmg, GetInstigatorController(), this);
-	ParticleComp->DeactivateSystem();
+	if (HitResult.BoneName == "head")
+	{
+		PointDmg.Damage = ProjectileData.ExplosionDamage * 2;
+	}
+	else
+	{
+		PointDmg.Damage = ProjectileData.ExplosionDamage;
+	}
+	if (HitResult.GetActor())
+	{
+		HitResult.GetActor()->TakeDamage(PointDmg.Damage, PointDmg, GetInstigatorController(), this);
+	}
+
+	Impact(HitResult);
+	bImpact = true;
+	DisableAndDestroy();
+}
+
+void AXLProjectile::Impact(const FHitResult& HitResult)
+{
+	if (ImpactFX && HitResult.bBlockingHit)
+	{
+		FHitResult UseImpact = HitResult;
+
+		FRotator MyRotator = FRotationMatrix::MakeFromZ(HitResult.ImpactNormal).Rotator();
+		FTransform const SpawnTransform(MyRotator, HitResult.ImpactPoint);
+		AXLImpactFX* const FXActor = GetWorld()->SpawnActorDeferred<AXLImpactFX>(ImpactFX, SpawnTransform);
+		if (FXActor)
+		{
+			FXActor->SurfaceHit = UseImpact;
+			UGameplayStatics::FinishSpawningActor(FXActor, SpawnTransform);
+		}
+
+	}
+}
+
+void AXLProjectile::Explosion()
+{
+	if (ImpactFX)
+	{
+		FTransform const SpawnTransform(GetActorRotation(), GetActorLocation());
+		AXLImpactFX* const FXActor = GetWorld()->SpawnActorDeferred<AXLImpactFX>(ImpactFX, SpawnTransform);
+		if (FXActor)
+		{
+			UGameplayStatics::FinishSpawningActor(FXActor, SpawnTransform);
+		}
+	}
+	DisableAndDestroy();
+}
+
+void AXLProjectile::OnRep_Impact()
+{
+	FVector ProjDirection = GetActorForwardVector();
+
+	const FVector StartTrace = GetActorLocation() - ProjDirection * 200;
+	const FVector EndTrace = GetActorLocation() + ProjDirection * 150;
+
+	FCollisionQueryParams TraceParams(SCENE_QUERY_STAT(WeaponTrace), true, this);
+	TraceParams.bReturnPhysicalMaterial = true;
+
+	FHitResult Hit(ForceInit);
+	GetWorld()->LineTraceSingleByChannel(Hit, StartTrace, EndTrace, COLLISION_PROJECTILE, TraceParams);
+
+	Impact(Hit);
 }
 
 void AXLProjectile::DisableAndDestroy()
 {
+	if (TrailFX)
+	{
+		TrailFX->Deactivate();
+	}
 	//UAudioComponent* ProjAudioComp = FindComponentByClass<UAudioComponent>();
 	//if (ProjAudioComp && ProjAudioComp->IsPlaying())
 	//{
@@ -130,5 +181,12 @@ void AXLProjectile::DisableAndDestroy()
 	MovementComp->StopMovementImmediately();
 
 	// give clients some time to show explosion
-	SetLifeSpan(2.0f);
+	SetLifeSpan(0.1);
+}
+
+void AXLProjectile::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(AXLProjectile, bImpact);
 }

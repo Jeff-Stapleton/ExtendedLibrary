@@ -1,17 +1,95 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "Pickups/XLPickup.h"
-#include "XLItemSoundManager.h"
-#include "XLItemAnimationManager.h"
+#include "Enums/XLItemPrimaryState.h"
+#include "Enums/XLItemSecondaryState.h"
+#include "Structs/XLItemSounds.h"
+#include "Structs/XLItemAnimations.h"
 #include "XLItem.generated.h"
+
+class AXLPickup;
+class AXLAction;
+class AXLCharacter;
+class USoundCue;
+class UParticleSystem;
+class UAnimMontage;
+class UAnimInstance;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FItemPrimaryStateDelegate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FItemSecondaryStateDelegate);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCharacterDeathDelegate);
 
 UCLASS()
 class EXTENDEDLIBRARY_API AXLItem : public AActor
 {
 	GENERATED_BODY()
+
+public:
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "XL|Item")
+	FName Identifier;
+
+	UPROPERTY(BlueprintReadWrite, Category = "XL|Item")
+	TArray<TSubclassOf<AXLAction>> ActionBPs;
+	UPROPERTY(BlueprintReadWrite, Category = "XL|Item")
+	TArray<AXLAction*> Actions;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "XL|Item")
+	USkeletalMeshComponent* Mesh3P;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "XL|Item")
+	USkeletalMeshComponent* Mesh1P;
+
+	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "IO|Equipment")
+	FName Socket;
+
+	UPROPERTY(Replicated, BlueprintReadWrite, Category = "IO|Equipment")
+	USkeletalMeshComponent* StowedMesh3P;
+	UPROPERTY(Replicated, BlueprintReadWrite, Category = "IO|Equipment")
+	USkeletalMeshComponent* StowedMesh1P;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XL|Item")
+	TSubclassOf<UAnimInstance> AnimClass;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "XL|Item")
+	int32 MaxCount;
+	UPROPERTY(BlueprintReadWrite, Category = "XL|Item")
+	int32 Count;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "XL|Item")
+	float EquipDuration = 2.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "XL|Item")
+	float UnequipDuration = 2.0f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "XL|Item")
+	bool IsToggleActivated;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "XL|Item")
+	FItemSounds ItemSounds;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "XL|Item")
+	FItemAnimations ItemAnimations;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "XL|Item")
+	TSubclassOf<AXLPickup> Item_PU;
+
+	UPROPERTY(Transient, ReplicatedUsing = OnRep_MyPawn, BlueprintReadWrite, Category = "XL|Item")
+	AXLCharacter* Character;
+
+	UPROPERTY(BlueprintReadWrite, Category = "XL|Item")
+	TEnumAsByte<EItemPrimaryState::Type> PrimaryState;
+
+	UPROPERTY(BlueprintReadWrite, Category = "XL|Item")
+	TEnumAsByte<EItemSecondaryState::Type> SecondaryState;
+
+	FItemPrimaryStateDelegate ItemPrimaryStateDelegate;
+	FItemSecondaryStateDelegate ItemSecondaryStateDelegate;
+	FCharacterDeathDelegate CharacterDeathDelegate;
+	FTimerHandle TimerHandle_Equip;
+	FTimerHandle TimerHandle_Unequip;
 	
 public:
+
 	AXLItem();
 
 	void PostInitializeComponents() override;
@@ -20,76 +98,62 @@ public:
 
 	virtual void Tick(float DeltaSeconds) override;
 
-	UFUNCTION(Reliable, NetMulticast)
+	void SetOwningPawn(AXLCharacter* Character);
+
+	UFUNCTION()
+	void OnRep_MyPawn();
+
+	UFUNCTION()
+	void OnCharacterDeath();
+
+	virtual void Remove();
+
+	UFUNCTION(Unreliable, Server, WithValidation)
+	virtual void PlayFX(UParticleSystem* FX, FName AttachPoint);
+
+	UFUNCTION(Unreliable, Server, WithValidation)
 	virtual void PlaySound(USoundCue* Sound);
-	UFUNCTION(Reliable, NetMulticast)
-	virtual void StopSound();
 
-	UFUNCTION(Reliable, NetMulticast)
-	virtual void PlayAnimation(class UAnimMontage* Animation, float InPlayRate = 1.f);
-	UFUNCTION(Reliable, NetMulticast)
-	virtual void StopAnimation(class UAnimMontage* Animation);
+	UFUNCTION(Unreliable, Server, WithValidation)
+	virtual void PlayAnimation(UAnimMontage* Animation, float InPlayRate = 1.f);
 
-	virtual void AttachMeshToPawn();
-	virtual void DetachMeshFromPawn();
+	virtual FVector GetSocketLocation(FName SocketName);
 
-	UFUNCTION(Reliable, NetMulticast)
-	void PlayFX(UParticleSystem* FX, FName AttachPoint);
+	UFUNCTION(BlueprintCallable, Category = "XL|Item")
+	virtual void Equip(USkeletalMeshComponent* AttachMesh3P, FName AttachPoint);
 
-	UFUNCTION(Reliable, NetMulticast)
-	void StopFX();
+	UFUNCTION(BlueprintCallable, Category = "XL|Item")
+	virtual void Unequip();
 
-	UFUNCTION(BlueprintCallable, Category = "Utility")
-	virtual float StartEquip(FName AttachPoint);
-	virtual void StopEquip();
-
-	UFUNCTION(BlueprintCallable, Category = "Utility")
-	virtual float StartUnequip();
-	virtual void StopUnequip();
-
-	UFUNCTION(BlueprintCallable, Category = "Utility")
+	UFUNCTION(BlueprintCallable, Category = "XL|Item")
 	virtual void Drop();
 
-	UFUNCTION(BlueprintCallable, Category = "Utility")
-	virtual void Activate();
-	virtual void Deactivate();
+	UFUNCTION(BlueprintCallable, Category = "XL|Item")
+	virtual void PrimaryActivate();
+	UFUNCTION(BlueprintCallable, Category = "XL|Item")
+	virtual void PrimaryDeactivate();
+
+	UFUNCTION(BlueprintCallable, Category = "XL|Item")
+	virtual void SecondaryActivate();
+	UFUNCTION(BlueprintCallable, Category = "XL|Item")
+	virtual void SecondaryDeactivate();
+
+	UFUNCTION(BlueprintCallable, Category = "XL|Item")
+	virtual void TertiaryActivate();
+	UFUNCTION(BlueprintCallable, Category = "XL|Item")
+	virtual void TertiaryDeactivate();
 
 	virtual void TogglePerspective();
 
-	UPROPERTY()
-	class AXLCharacter* Character;
+protected:
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Config)
-	TSubclassOf<class AXLPickup> Item_PU;
+	UFUNCTION(Unreliable, NetMulticast)
+	virtual void HandlePlayFX(UParticleSystem* FX, FName AttachPoint);
 
-	/* The AnimBlueprint class to use. Use 'SetAnimInstanceClass' to change at runtime. */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Animation)
-	class TSubclassOf<UAnimInstance> AnimClass;
+	UFUNCTION(Unreliable, NetMulticast)
+	virtual void HandlePlaySound(USoundCue* Sound);
 
-	UPROPERTY(EditDefaultsOnly, Category = Mesh)
-	USkeletalMeshComponent* Mesh3P;
-	UPROPERTY(EditDefaultsOnly, Category = Mesh)
-	USkeletalMeshComponent* Mesh1P;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Sound)
-	class UXLItemSoundManager* ItemSounds;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animations)
-	class UXLItemAnimationManager* ItemAnimations;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
-	float EquipDuration = 2.0f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
-	float UnequipDuration = 2.0f;
-
-	UPROPERTY()
-	FName AttachPoint;
-
-	UParticleSystemComponent* FXComponent;
-	UAudioComponent* AudioComponent;
-
-	FTimerHandle TimerHandle_Equip;
-	FTimerHandle TimerHandle_Unequip;
+	UFUNCTION(Unreliable, NetMulticast)
+	virtual void HandlePlayAnimation(UAnimMontage* Animation, float InPlayRate = 1.f);
 
 };

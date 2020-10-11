@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLAIController.h"
-#include "XLActionCharacter.h"
-#include "XLFindClosestEnemyWithLOS.h"
+#include "Controllers/XLAIController.h"
+#include "Characters/XLPlayerCharacter.h"
+#include "AI/Services/XLFindClosestEnemyWithLOS.h"
 
 UXLFindClosestEnemyWithLOS::UXLFindClosestEnemyWithLOS()
 {
@@ -23,9 +23,9 @@ void UXLFindClosestEnemyWithLOS::TickNode(UBehaviorTreeComponent& OwnerComp, uin
 		float BestDistSq = 10000000.0f;//AgroDistance;
 		AXLCharacter* BestPawn = NULL;
 
-		for (FConstPawnIterator It = GetWorld()->GetPawnIterator(); It; ++It)
+		for (TActorIterator<AXLPlayerCharacter> It = TActorIterator<AXLPlayerCharacter>(GetWorld()); It; ++It)
 		{
-			AXLActionCharacter* TestPawn = Cast<AXLActionCharacter>(*It);
+			AXLPlayerCharacter* TestPawn = Cast<AXLPlayerCharacter>(*It);
 			if (TestPawn /*&& TestPawn != ExcludeEnemy*/ && TestPawn->HealthState == EHealthState::Alive /*&& TestPawn->IsEnemyFor(this)*/)
 			{
 				const float DistSq = (TestPawn->GetActorLocation() - MyLoc).SizeSquared();

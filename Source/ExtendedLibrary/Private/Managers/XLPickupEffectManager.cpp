@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLPickupEffectManager.h"
+#include "Managers/XLPickupEffectManager.h"
 
 UXLPickupEffectManager::UXLPickupEffectManager()
 {

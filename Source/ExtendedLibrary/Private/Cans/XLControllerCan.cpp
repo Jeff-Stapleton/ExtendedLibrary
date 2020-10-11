@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLControllerCan.h"
+#include "Cans/XLControllerCan.h"
 
 bool XLControllerCan::Move(AXLPlayerController* Controller)
 {

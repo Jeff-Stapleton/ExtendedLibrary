@@ -1,6 +1,6 @@
 #pragma once
 
-#include "XLPlayerController.h"
+#include "Controllers/XLPlayerController.h"
 
 class XLControllerCan
 {

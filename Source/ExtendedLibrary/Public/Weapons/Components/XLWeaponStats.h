@@ -1,7 +1,6 @@
 #pragma once
 
-#include "XLAutomaticFireComponent.h"
-#include "XLRecoilData.h"
+#include "Structs/XLRecoilData.h"
 #include "XLWeaponStats.generated.h"
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))

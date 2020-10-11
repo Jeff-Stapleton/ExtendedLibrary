@@ -1,9 +1,15 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLImpactEffect.h"
-#include "XLWeaponEffectManager.h"
-#include "XLRangedWeapon.h"
+#include "Effects/XLImpactEffect.h"
+#include "Weapons/Components/XLWeaponEffectManager.h"
+#include "Weapons/Components/XLAimingComponent.h"
+#include "Weapons/Components/Interfaces/XLAmmoComponent.h"
+#include "Weapons/Components/Interfaces/XLFireComponent.h"
+#include "Weapons/Components/Interfaces/XLProjectileComponent.h"
+#include "Weapons/Components/XLRecoilComponent.h"
+#include "Weapons/Components/Interfaces/XLTargetingComponent.h"
+#include "Weapons/XLRangedWeapon.h"
 
 AXLRangedWeapon::AXLRangedWeapon()
 {
@@ -15,19 +21,19 @@ AXLRangedWeapon::AXLRangedWeapon()
 void AXLRangedWeapon::BeginPlay()
 {
 	Super::BeginPlay();
+
 	//Some of these components reference each other. could run into some async issues
+	ReloadComponent = NewObject<UXLAmmoComponent>(this, ReloadComponentBP, FName(TEXT("AmmoComponent")));
 	AimingComponent = NewObject<UXLAimingComponent>(this, AimingComponentBP, FName(TEXT("AimingComponent")));
 	FiringComponent = NewObject<UXLFireComponent>(this, FiringComponentBP, FName(TEXT("FiringComponent")));
 	ProjectileComponent = NewObject<UXLProjectileComponent>(this, ProjectileComponentBP, FName(TEXT("ProjectileComponent")));
-	ReloadComponent = NewObject<UXLAmmoComponent>(this, ReloadComponentBP, FName(TEXT("AmmoComponent")));
 	RecoilComponent = NewObject<UXLRecoilComponent>(this, RecoilComponentBP, FName(TEXT("RecoilComponent")));
-	TargetingComponent = NewObject<UXLADSComponent>(this, TargetingComponentBP, FName(TEXT("TargetingComponent")));
+	TargetingComponent = NewObject<UXLTargetingComponent>(this, TargetingComponentBP, FName(TEXT("TargetingComponent")));
 
-
+	ReloadComponent->RegisterComponent();
 	AimingComponent->RegisterComponent();
 	FiringComponent->RegisterComponent();
 	ProjectileComponent->RegisterComponent();
-	ReloadComponent->RegisterComponent();
 	RecoilComponent->RegisterComponent();
 	TargetingComponent->RegisterComponent();
 }
@@ -36,7 +42,7 @@ void AXLRangedWeapon::Destroyed()
 {
 	Super::Destroyed();
 
-	StopFX();
+	//StopFX();
 }
 
 void AXLRangedWeapon::SetOwner(AActor* NewOwner)
@@ -59,7 +65,7 @@ void AXLRangedWeapon::OnAiming()
 
 void AXLRangedWeapon::StartAiming()
 {
-	if (Role < ROLE_Authority)
+	if (GetLocalRole() < ROLE_Authority)
 	{
 		ServerStartAiming();
 		return;
@@ -79,7 +85,7 @@ void AXLRangedWeapon::ServerStartAiming_Implementation()
 
 void AXLRangedWeapon::StopAiming()
 {
-	if (Role < ROLE_Authority)
+	if (GetLocalRole() < ROLE_Authority)
 	{
 		ServerStopAiming();
 		return;
@@ -101,7 +107,7 @@ void AXLRangedWeapon::StartAttack()
 {
 	if (XLRangedWeaponCan::Fire(this))
 	{
-		if (Role < ROLE_Authority)
+		if (GetLocalRole() < ROLE_Authority)
 		{
 			ServerStartAttack();
 			return;
@@ -122,7 +128,7 @@ void AXLRangedWeapon::ServerStartAttack_Implementation()
 
 void AXLRangedWeapon::StopAttack()
 {
-	if (Role < ROLE_Authority)
+	if (GetLocalRole() < ROLE_Authority)
 	{
 		ServerStopAttack();
 		return;
@@ -144,7 +150,7 @@ void AXLRangedWeapon::ServerStopAttack_Implementation()
 
 void AXLRangedWeapon::Reload()
 {
-	if (Role < ROLE_Authority)
+	if (GetLocalRole() < ROLE_Authority)
 	{
 		ServerReload();
 		return;

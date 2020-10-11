@@ -2,7 +2,9 @@
 
 #include "ExtendedLibraryPCH.h"
 #include "Engine/InputDelegateBinding.h"
-#include "XLPlayerController.h"
+#include "Managers/XLPlayerCameraManager.h"
+#include "Controllers/InputComponents/XLCharacterInputComponent.h"
+#include "Controllers/XLPlayerController.h"
 
 AXLPlayerController::AXLPlayerController()
 {
@@ -29,8 +31,8 @@ void AXLPlayerController::SetPlayer(UPlayer* InPlayer)
 {
 	Super::SetPlayer(InPlayer);
 
-	FInputModeGameOnly InputMode;
-	SetInputMode(InputMode);
+	FInputModeGameOnly inputMode;
+	SetInputMode(inputMode);
 }
 
 void AXLPlayerController::TogglePerspective()
@@ -57,13 +59,9 @@ void AXLPlayerController::SetupInputComponent()
 	CharacterInputComponent = NewObject<UXLCharacterInputComponent>(this);
 	CharacterInputComponent->Init(this);
 
-	AirVehicleInputComponent = NewObject<UXLAirVehicleInputComponent>(this);
-	AirVehicleInputComponent->Init(this);
-
 	if (UInputDelegateBinding::SupportsInputDelegate(GetClass()))
 	{
 		UInputDelegateBinding::BindInputDelegates(GetClass(), CharacterInputComponent);
-		UInputDelegateBinding::BindInputDelegates(GetClass(), AirVehicleInputComponent);
 	}
 
 	SetControllerInputMode(InputMode);
@@ -74,9 +72,6 @@ void AXLPlayerController::SetControllerInputMode(TEnumAsByte<EInputMode::Type> M
 	ResetInputMode();
 	switch (Mode) 
 	{
-		case EInputMode::AirVehicle:
-			PushInputComponent(AirVehicleInputComponent);
-			break;
 		case EInputMode::Character:
 			PushInputComponent(CharacterInputComponent);
 			break;
@@ -90,7 +85,6 @@ void AXLPlayerController::ResetInputMode()
 {
 	PopInputComponent(InputComponent);
 	PopInputComponent(CharacterInputComponent);
-	PopInputComponent(AirVehicleInputComponent);
 }
 
 void AXLPlayerController::UnFreeze()

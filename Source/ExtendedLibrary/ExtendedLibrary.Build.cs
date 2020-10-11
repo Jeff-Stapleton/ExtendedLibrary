@@ -5,6 +5,7 @@ public class ExtendedLibrary : ModuleRules
 	public ExtendedLibrary(ReadOnlyTargetRules Target) : base(Target)
     {
         PrivatePCHHeaderFile = "ExtendedLibraryPCH.h";
+        bLegacyPublicIncludePaths = false;
 
         PrivateIncludePaths.AddRange(new[] { "ExtendedLibrary/Private" });
 		

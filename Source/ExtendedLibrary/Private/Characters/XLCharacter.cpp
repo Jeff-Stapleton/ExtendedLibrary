@@ -2,8 +2,21 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLCharacter.h"
-#include "XLCharacterCan.h"
+#include "Characters/XLCharacter.h"
+#include "Cans/XLCharacterCan.h"
+#include "Components/Character/XLMovementComponent.h"
+#include "Components/Character/XLInteractionComponent.h"
+#include "Managers/XLInventoryManager.h"
+#include "Items/XLItem.h"
+#include "Weapons/XLRangedWeapon.h"
+#include "Data/Character/XLCharacterResources.h"
+#include "Data/Character/XLCharacterStats.h"
+#include "Managers/XLPlayerAnimationManager.h"
+#include "Managers/XLPlayerEffectManager.h"
+#include "Components/Character/XLCoverComponent.h"
+
+
+///////////////////////////////////////// INITIALIZATION //////////////////////////////////////////
 
 AXLCharacter::AXLCharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer.SetDefaultSubobjectClass<UXLMovementComponent>(ACharacter::CharacterMovementComponentName))
@@ -11,12 +24,13 @@ AXLCharacter::AXLCharacter(const FObjectInitializer& ObjectInitializer)
 	CharacterResources = CreateDefaultSubobject<UXLCharacterResources>(TEXT("CharacterResources"));
 	CharacterStats = CreateDefaultSubobject<UXLCharacterStats>(TEXT("CharacterStats"));
 	CharacterInventory = CreateDefaultSubobject<UXLInventoryManager>(TEXT("CharacterInventory"));
-	CharacterAbilities = CreateDefaultSubobject<UXLAbilityManager>(TEXT("CharacterAbilities"));
 	CharacterAnimations = CreateDefaultSubobject<UXLPlayerAnimationManager>(TEXT("CharacterAnimations"));
 	CharacterEffects = CreateDefaultSubobject<UXLPlayerEffectManager>(TEXT("CharacterEffects"));
 	CoverComponent = CreateDefaultSubobject<UXLCoverComponent>(TEXT("CoverComponent"));
 	InteractionComponent = CreateDefaultSubobject<UXLInteractionComponent>(TEXT("InteractionComponent"));
 	MovementComponent = Cast<UXLMovementComponent>(GetMovementComponent());
+
+	//GetMesh()->SetAnimInstanceClass(DefaultAnimClass);
 
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
@@ -33,7 +47,9 @@ AXLCharacter::AXLCharacter(const FObjectInitializer& ObjectInitializer)
 	MovementState = EMovementState::Idle;
 	PostureState = EPostureState::Standing;
 
-	CurrentItem = UNDEFINED;
+	CurrentItem = NULL;
+
+	NetCullDistanceSquared = 225000000.0;
 }
 
 void AXLCharacter::BeginPlay()
@@ -47,10 +63,10 @@ void AXLCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	//const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("EMovementState"), true);
-	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, EnumPtr->GetDisplayNameText(MovementState).ToString());
+	//const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("EActionState"), true);
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, EnumPtr->GetDisplayNameText(ActionState).ToString());
 
-	if (Role == ROLE_Authority)
+	if (GetLocalRole() == ROLE_Authority)
 	{
 		//CharacterResources->Regenerate(DeltaSeconds);
 	}
@@ -75,6 +91,31 @@ void AXLCharacter::OnCameraUpdate(const FVector& CameraLocation, const FRotator&
 	//const FMatrix PitchedMesh = MeshRelativeToCamera * PitchedCameraLS;
 
 	//PerspectiveMesh->SetRelativeLocationAndRotation(PitchedMesh.GetOrigin(), PitchedMesh.Rotator());
+}
+
+void AXLCharacter::SpawnInventory()
+{
+	if (GetLocalRole() == ROLE_Authority)
+	{
+		int32 NumWeaponClasses = CharacterInventory->DefaultInventory.Num();
+		for (int32 i = 0; i < NumWeaponClasses; i++)
+		{
+			if (CharacterInventory->DefaultInventory[i])
+			{
+				FActorSpawnParameters SpawnInfo;
+				SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+				AXLItem* NewWeapon = GetWorld()->SpawnActor<AXLItem>(CharacterInventory->DefaultInventory[i], SpawnInfo);
+
+				NewWeapon->SetOwningPawn(this);
+				CharacterInventory->Inventory.Add(NewWeapon);
+			}
+		}
+	}
+}
+
+void AXLCharacter::Setup()
+{
+
 }
 
 //////////////////////////////////////////////////// ACTIONS ////////////////////////////////////////////////////
@@ -134,6 +175,7 @@ void AXLCharacter::Jump()
 	{
 		ActionState = EActionState::Jumping;
 		Super::Jump();
+		MovementComponent->UpdateMovementSpeed();
 	}
 }
 void AXLCharacter::Falling()
@@ -169,7 +211,7 @@ void AXLCharacter::StartCrouch()
 {
 	if (XLCharacterCan::StartCrouch(this))
 	{
-		if (Role < ROLE_Authority)
+		if (GetLocalRole() < ROLE_Authority)
 		{
 			ServerStartCrouch();
 		}
@@ -192,7 +234,7 @@ void AXLCharacter::StopCrouch()
 {
 	if (XLCharacterCan::StopCrouch(this))
 	{
-		if (Role < ROLE_Authority)
+		if (GetLocalRole() < ROLE_Authority)
 		{
 			ServerStopCrouch();
 		}
@@ -215,7 +257,7 @@ void AXLCharacter::StartProne()
 {
 	if (XLCharacterCan::StartProne(this))
 	{
-		if (Role < ROLE_Authority)
+		if (GetLocalRole() < ROLE_Authority)
 		{
 			ServerStartProne();
 		}
@@ -236,7 +278,7 @@ void AXLCharacter::StopProne()
 {
 	if (XLCharacterCan::StopProne(this))
 	{
-		if (Role < ROLE_Authority)
+		if (GetLocalRole() < ROLE_Authority)
 		{
 			ServerStopProne();
 		}
@@ -257,7 +299,7 @@ void AXLCharacter::StartSprint()
 {
 	if (XLCharacterCan::StartSprint(this))
 	{
-		if (Role < ROLE_Authority)
+		if (GetLocalRole() < ROLE_Authority)
 		{
 			ServerStartSprint();
 		}
@@ -278,7 +320,7 @@ void AXLCharacter::StopSprint()
 {
 	if (XLCharacterCan::StopSprint(this))
 	{
-		if (Role < ROLE_Authority)
+		if (GetLocalRole() < ROLE_Authority)
 		{
 			ServerStopSprint();
 		}
@@ -295,73 +337,80 @@ void AXLCharacter::ServerStopSprint_Implementation()
 	StopSprint();
 }
 
-void AXLCharacter::EquipItem(int32 Item)
+void AXLCharacter::EquipItem(AXLItem* Item, FName Socket)
 {
 	if (XLCharacterCan::StartEquip(this, Item))
 	{
-		if (Role == ROLE_Authority)
+		if (GetLocalRole() == ROLE_Authority)
 		{
-			HandleEquipItem(Item);
+			HandleEquipItem(Item, Socket);
 		}
 		else
 		{
-			ServerEquipItem(Item);
+			ServerEquipItem(Item, Socket);
 		}
 	}
 }
-void AXLCharacter::HandleEquipItem(int32 Item)
+void AXLCharacter::HandleEquipItem(AXLItem* Item, FName Socket)
 {
-	CurrentItem = Item; //this should be in the weapon
-	CharacterInventory->GetItem(Item)->StartEquip("Hand_R");
+	CurrentItem = Item;
+	if (CurrentItem)
+	{
+		CurrentItem->Equip(Head, "Hand_R");
+
+		CharacterAnimations->SetAnimClass(CurrentItem->AnimClass);
+	}
 }
-bool AXLCharacter::ServerEquipItem_Validate(int32 Item)
+bool AXLCharacter::ServerEquipItem_Validate(AXLItem* Item, FName Socket)
 {
 	return true;
 }
-void AXLCharacter::ServerEquipItem_Implementation(int32 Item)
+void AXLCharacter::ServerEquipItem_Implementation(AXLItem* Item, FName Socket)
 {
-	EquipItem(Item);
+	EquipItem(Item, Socket);
 }
 
-float AXLCharacter::StowItem(int32 Item)
+void AXLCharacter::StowItem(AXLItem* Item, USkeletalMeshComponent* AttachedMesh3P, USkeletalMeshComponent* AttachedMesh1P, FName Socket)
 {
-	float Duration = 0.0;
 	if (XLCharacterCan::StopEquip(this))
 	{
-		if (Role == ROLE_Authority)
+		if (GetLocalRole() == ROLE_Authority)
 		{
-			Duration = HandleStowItem(Item);
+			HandleStowItem(Item, AttachedMesh3P, AttachedMesh1P, Socket);
 		}
 		else
 		{
-			ServerStowItem(Item);
-			Duration = HandleStowItem(Item);
+			ServerStowItem(Item, AttachedMesh3P, AttachedMesh1P, Socket);
 		}
 	}
-	return Duration;
 }
-float AXLCharacter::HandleStowItem(int32 Item)
+void AXLCharacter::HandleStowItem_Implementation(AXLItem* Item, USkeletalMeshComponent* AttachedMesh3P, USkeletalMeshComponent* AttachedMesh1P, FName Socket)
 {
-	float Duration = CharacterInventory->GetItem(Item)->StartUnequip();
-	CurrentItem = UNDEFINED; //this should be in the weapon
-	return Duration;
+	if (CurrentItem)
+	{
+		CurrentItem->Equip(AttachedMesh3P, Socket);
+
+		CharacterAnimations->SetAnimClass(CharacterAnimations->DefaultAnimClass);
+	}
+	CurrentItem = NULL;
 }
-bool AXLCharacter::ServerStowItem_Validate(int32 Item)
+bool AXLCharacter::ServerStowItem_Validate(AXLItem* Item, USkeletalMeshComponent* AttachedMesh3P, USkeletalMeshComponent* AttachedMesh1P, FName Socket)
 {
 	return true;
 }
-void AXLCharacter::ServerStowItem_Implementation(int32 Item)
+void AXLCharacter::ServerStowItem_Implementation(AXLItem* Item, USkeletalMeshComponent* AttachedMesh3P, USkeletalMeshComponent* AttachedMesh1P, FName Socket)
 {
-	StowItem(Item);
+	StowItem(Item, AttachedMesh3P, AttachedMesh1P, Socket);
 }
 
-void AXLCharacter::SwitchItem(int32 NextItem)
+void AXLCharacter::SwitchItem(AXLItem* NextItem)
 {
 	if (XLCharacterCan::StartEquip(this, NextItem))
 	{
-		if (Role == ROLE_Authority)
+		if (GetLocalRole() == ROLE_Authority)
 		{
-			float Duration = StowItem(CurrentItem);
+			float Duration = CurrentItem->UnequipDuration;
+			//StowItem(CurrentItem, "");
 
 			TimerDelegate_SwitchWeapon.BindUFunction(this, FName("EquipItem"), NextItem);
 			GetWorldTimerManager().SetTimer(TimerHandle_SwitchWeapon, TimerDelegate_SwitchWeapon, Duration, false);
@@ -372,56 +421,53 @@ void AXLCharacter::SwitchItem(int32 NextItem)
 		}
 	}
 }
-bool AXLCharacter::ServerSwitchItem_Validate(int32 NextItem)
+bool AXLCharacter::ServerSwitchItem_Validate(AXLItem* NextItem)
 {
 	return true;
 }
-void AXLCharacter::ServerSwitchItem_Implementation(int32 NextItem)
+void AXLCharacter::ServerSwitchItem_Implementation(AXLItem* NextItem)
 {
 	SwitchItem(NextItem);
 }
 
-void AXLCharacter::DropItem(int32 Item)
+void AXLCharacter::DropItem(AXLItem* Item)
 {
 	if (XLCharacterCan::StopEquip(this))
 	{
-		if (Role == ROLE_Authority)
+		if (GetLocalRole() == ROLE_Authority)
 		{
 			HandleDropItem(Item);
 		}
 		else
 		{
 			ServerDropItem(Item);
-			HandleDropItem(Item);
+			//HandleDropItem(Item);
 		}
 	}
 }
-void AXLCharacter::HandleDropItem(int32 Item)
+void AXLCharacter::HandleDropItem(AXLItem* Item)
 {
-	CharacterInventory->GetItem(Item)->Drop();
+	// Possible a blueprint event hear to handle dropping specifics
+	Item->Drop();
 	if (Item == CurrentItem)
 	{
-		CurrentItem = UNDEFINED; // this should be in the weapon
+		CurrentItem = NULL;
 	}
 }
-bool AXLCharacter::ServerDropItem_Validate(int32 Item)
+bool AXLCharacter::ServerDropItem_Validate(AXLItem* Item)
 {
 	return true;
 }
-void AXLCharacter::ServerDropItem_Implementation(int32 Item)
+void AXLCharacter::ServerDropItem_Implementation(AXLItem* Item)
 {
 	DropItem(Item);
 }
 
-void AXLCharacter::OnRep_CurrentWeapon(int32 PreviousWeapon)
+void AXLCharacter::OnRep_CurrentWeapon(AXLItem* PreviousWeapon)
 {
-	if (CurrentItem != UNDEFINED)
+	if (CurrentItem)
 	{
-		HandleEquipItem(CurrentItem);
-	}
-	else
-	{
-		HandleStowItem(PreviousWeapon);
+		HandleEquipItem(CurrentItem, "Hand_R");
 	}
 }
 
@@ -429,14 +475,22 @@ void AXLCharacter::StartAim()
 {
 	if (XLCharacterCan::StartAim(this))
 	{
-		Cast<AXLRangedWeapon>(CharacterInventory->GetItem(CurrentItem))->StartAiming();
+		AXLRangedWeapon* Weapon = Cast<AXLRangedWeapon>(CurrentItem);
+		if (Weapon)
+		{
+			Weapon->StartAiming();
+		}
 	}
 }
 void AXLCharacter::StopAim()
 {
 	if (XLCharacterCan::StopAim(this))
 	{
-		Cast<AXLRangedWeapon>(CharacterInventory->GetItem(CurrentItem))->StopAiming();
+		AXLRangedWeapon* Weapon = Cast<AXLRangedWeapon>(CurrentItem);
+		if (Weapon)
+		{
+			Weapon->StopAiming();
+		}
 	}
 }
 
@@ -444,14 +498,89 @@ void AXLCharacter::StartAttack()
 {
 	if (XLCharacterCan::StartAttack(this))
 	{
-		Cast<AXLRangedWeapon>(CharacterInventory->GetItem(CurrentItem))->StartAttack();
+		AXLRangedWeapon* Weapon = Cast<AXLRangedWeapon>(CurrentItem);
+		if (Weapon)
+		{
+			Weapon->StartAttack();
+		}
 	}
 }
 void AXLCharacter::StopAttack()
 {
 	if (XLCharacterCan::StopAttack(this))
 	{
-		Cast<AXLRangedWeapon>(CharacterInventory->GetItem(CurrentItem))->StopAttack();
+		AXLRangedWeapon* Weapon = Cast<AXLRangedWeapon>(CurrentItem);
+		if (Weapon)
+		{
+			Weapon->StopAttack();
+		}
+	}
+}
+
+void AXLCharacter::StartItemPrimaryActivate()
+{
+	//TODO: Update can method with item equivalent
+	if (XLCharacterCan::StartAttack(this))
+	{
+		if (CurrentItem)
+		{
+			CurrentItem->PrimaryActivate();
+		}
+	}
+}
+void AXLCharacter::StopItemPrimaryActivate()
+{
+	//TODO: Update can method with item equivalent
+	if (XLCharacterCan::StopAttack(this))
+	{
+		if (CurrentItem)
+		{
+			CurrentItem->PrimaryDeactivate();
+		}
+	}
+}
+
+void AXLCharacter::StartItemSecondaryActivate()
+{
+	//TODO: Update can method with item equivalent
+	if (XLCharacterCan::StartAttack(this))
+	{
+		if (CurrentItem)
+		{
+			CurrentItem->SecondaryActivate();
+		}
+	}
+}
+void AXLCharacter::StopItemSecondaryActivate()
+{
+	//TODO: Update can method with item equivalent
+	if (XLCharacterCan::StopAttack(this))
+	{
+		if (CurrentItem)
+		{
+			CurrentItem->SecondaryDeactivate();
+		}
+	}
+}
+
+void AXLCharacter::StartItemTertiaryActivate()
+{
+	if (XLCharacterCan::StartAttack(this))
+	{
+		if (CurrentItem)
+		{
+			CurrentItem->TertiaryActivate();
+		}
+	}
+}
+void AXLCharacter::StopItemTertiaryActivate()
+{
+	if (XLCharacterCan::StartAttack(this))
+	{
+		if (CurrentItem)
+		{
+			CurrentItem->TertiaryActivate();
+		}
 	}
 }
 
@@ -459,7 +588,11 @@ void AXLCharacter::Reload()
 {
 	if (XLCharacterCan::StartReload(this))
 	{
-		Cast<AXLRangedWeapon>(CharacterInventory->GetItem(CurrentItem))->Reload();
+		AXLRangedWeapon* Weapon = Cast<AXLRangedWeapon>(CurrentItem);
+		if (Weapon)
+		{
+			Weapon->Reload();
+		}
 	}
 }
 
@@ -473,14 +606,14 @@ void AXLCharacter::StartAbility(int32 Ability)
 {
 	if (XLCharacterCan::StartAbility(this))
 	{
-		CharacterAbilities->ActivateAbility(Ability);
+		//CharacterAbilities->ActivateAbility(Ability);
 	}
 }
 void AXLCharacter::StopAbility(int32 Ability)
 {
 	if (XLCharacterCan::StopAbility(this))
 	{
-		CharacterAbilities->DeactivateAbility(Ability);
+		//CharacterAbilities->DeactivateAbility(Ability);
 	}
 }
 
@@ -528,6 +661,7 @@ bool AXLCharacter::Die(float KillingDamage, FDamageEvent const& DamageEvent, ACo
 		return false;
 	}
 
+	DeathDelegate.Broadcast();
 	CharacterResources->CurrentHealth = FMath::Min(0.0f, CharacterResources->CurrentHealth);
 
 	// if this is an environmental death then refer to the previous killer so that they receive credit (knocked into lava pits, etc)
@@ -550,10 +684,9 @@ void AXLCharacter::OnDeath(float KillingDamage, struct FDamageEvent const& Damag
 	{
 		return;
 	}
-
 	HealthState = EHealthState::Dying;
 
-	if (Role == ROLE_Authority)
+	if (GetLocalRole() == ROLE_Authority)
 	{
 		ReplicateHit(KillingDamage, DamageEvent, PawnInstigator, DamageCauser, true);
 	}
@@ -573,6 +706,7 @@ void AXLCharacter::OnDeath(float KillingDamage, struct FDamageEvent const& Damag
 	SetRagdollPhysics();
 	const FPointDamageEvent* Temp = (const FPointDamageEvent*)&DamageEvent;
 
+	OnDeathEvent();
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetCapsuleComponent()->SetCollisionResponseToAllChannels(ECR_Ignore);
 	SetLifeSpan(5.0f);
@@ -592,7 +726,7 @@ void AXLCharacter::OnRep_LastTakeHitInfo()
 
 void AXLCharacter::PlayHit(float DamageTaken, struct FDamageEvent const& DamageEvent, class APawn* PawnInstigator, class AActor* DamageCauser)
 {
-	if (Role == ROLE_Authority)
+	if (GetLocalRole() == ROLE_Authority)
 	{
 		ReplicateHit(DamageTaken, DamageEvent, PawnInstigator, DamageCauser, false);
 	}
@@ -628,26 +762,6 @@ void AXLCharacter::ReplicateHit(float Damage, struct FDamageEvent const& DamageE
 
 //////////////////////////////////////////////////// HELPERS ////////////////////////////////////////////////////
 
-void AXLCharacter::SpawnInventory()
-{
-	if (Role == ROLE_Authority)
-	{
-		int32 NumWeaponClasses = CharacterInventory->DefaultInventory.Num();
-		for (int32 i = 0; i < NumWeaponClasses; i++)
-		{
-			if (CharacterInventory->DefaultInventory[i])
-			{
-				FActorSpawnParameters SpawnInfo;
-				SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-				AXLItem* NewWeapon = GetWorld()->SpawnActor<AXLItem>(CharacterInventory->DefaultInventory[i], SpawnInfo);
-
-				NewWeapon->SetOwner(this);
-				CharacterInventory->Inventory.Add(NewWeapon);
-			}
-		}
-	}
-}
-
 FRotator AXLCharacter::AimOffset() const
 {
 	const FVector AimDirWS = GetBaseAimRotation().Vector();
@@ -665,22 +779,38 @@ void AXLCharacter::SetRagdollPhysics()
 	{
 		bInRagdoll = false;
 	}*/
-	if (!GetMesh() || !GetMesh()->GetPhysicsAsset())
+	if (!Head || !Head->GetPhysicsAsset())
 	{
-		bInRagdoll = false;
+		//bInRagdoll = false;
 	}
 	else
 	{
-		GetMesh()->SetSimulatePhysics(true);
-		GetMesh()->WakeAllRigidBodies();
-		GetMesh()->bBlendPhysics = true;
+		Head->SetSimulatePhysics(true);
+		Head->WakeAllRigidBodies();
+		Head->bBlendPhysics = true;
+
+		UpperBody->SetSimulatePhysics(true);
+		UpperBody->WakeAllRigidBodies();
+		UpperBody->bBlendPhysics = true;
+
+		LowerBody->SetSimulatePhysics(true);
+		LowerBody->WakeAllRigidBodies();
+		LowerBody->bBlendPhysics = true;
+
+		Hands->SetSimulatePhysics(true);
+		Hands->WakeAllRigidBodies();
+		Hands->bBlendPhysics = true;
+
+		Feet->SetSimulatePhysics(true);
+		Feet->WakeAllRigidBodies();
+		Feet->bBlendPhysics = true;
 
 		bInRagdoll = true;
 	}
 
 	//if ((Impact.GetComponent() != nullptr) && Impact.GetComponent()->IsSimulatingPhysics())
 	//{
-		//Impact.GetComponent()->AddForce((WeaponStats->Force * ShootDir.Normalize), Impact.BoneName);
+	//	Impact.GetComponent()->AddForce((WeaponStats->Force * ShootDir.Normalize), Impact.BoneName);
 	//}
 
 	MovementComponent->StopMovementImmediately();
@@ -751,7 +881,7 @@ void AXLCharacter::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutL
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(AXLCharacter, CurrentItem);
-	// DOREPLIFETIME(AXLCharacter, HealthState);
+	//DOREPLIFETIME(AXLCharacter, HealthState);
 
 	DOREPLIFETIME_CONDITION(AXLCharacter, ActionState, COND_SkipOwner);
 	DOREPLIFETIME_CONDITION(AXLCharacter, CombatState, COND_SkipOwner);

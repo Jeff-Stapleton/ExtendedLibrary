@@ -2,9 +2,10 @@
 
 #include "GameFramework/PlayerController.h"
 #include "Enums/XLInputMode.h"
-#include "Managers/XLPlayerCameraManager.h"
-#include "XLCharacterInputComponent.h"
 #include "XLPlayerController.generated.h"
+
+class UXLCharacterInputComponent;
+class AXLCharacter;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTestDelegate);
 
@@ -16,16 +17,13 @@ class EXTENDEDLIBRARY_API AXLPlayerController : public APlayerController
 public:
 
 	UPROPERTY()
-	class UXLCharacterInputComponent* CharacterInputComponent;
-
-	UPROPERTY()
-	class UXLAirVehicleInputComponent* AirVehicleInputComponent;
+	UXLCharacterInputComponent* CharacterInputComponent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Input)
 	TEnumAsByte<EInputMode::Type> InputMode;
 
 	UPROPERTY()
-	class AXLCharacter* MyCharacter;
+	AXLCharacter* MyCharacter;
 
 	UPROPERTY()
 	bool IsFirstPerson;

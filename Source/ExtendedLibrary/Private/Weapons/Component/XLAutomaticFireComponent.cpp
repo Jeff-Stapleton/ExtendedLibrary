@@ -1,33 +1,30 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLAutomaticFireComponent.h"
+#include "Controllers/XLAIController.h"
+#include "Camera/XLCamera.h"
+#include "Characters/XLPlayerCharacter.h"
+#include "Weapons/Components/XLAimingComponent.h"
+#include "Weapons/Components/Interfaces/XLAmmoComponent.h"
+#include "Weapons/Components/XLAutomaticFireComponent.h"
 
 UXLAutomaticFireComponent::UXLAutomaticFireComponent()
 {
 	bWantsInitializeComponent = true;
 }
 
-void UXLAutomaticFireComponent::InitializeComponent()
-{
-	Super::InitializeComponent();
-
-	GetWeapon()->WeaponStateDelegate.AddDynamic(this, &UXLAutomaticFireComponent::DetermineAction);
-}
-
 void UXLAutomaticFireComponent::DetermineAction()
 {
-	if (GetWeapon()->WeaponState == EWeaponState::Firing)
+	if (GetWeapon()->PrimaryState == EItemPrimaryState::Activated)
 	{
-		GetWeapon()->PlayFX(MuzzleFX, MuzzleFXPoint);
-		GetWeapon()->PlaySound(FireLoopSound);
 		StartAttack();
+	}
+	else if (GetWeapon()->PrimaryState == EItemPrimaryState::Reloading)
+	{
+		AmmoComponent->Reload();
 	}
 	else
 	{
-		GetWeapon()->StopFX();
-		GetWeapon()->StopSound();
-		GetWeapon()->PlaySound(FireFinishSound);
 		StopAttack();
 	}
 }
@@ -48,16 +45,30 @@ void UXLAutomaticFireComponent::StartAttack()
 
 void UXLAutomaticFireComponent::FireWeapon()
 {
-	Fire();
-	GetWeapon()->GetWorldTimerManager().SetTimer(FiringTimer, this, &UXLAutomaticFireComponent::Fire, TimeBetweenAttacks, true);
+	if (AmmoComponent->AmmoComponentState != EAmmoComponentState::EmptyMagazine && AmmoComponent->AmmoComponentState != EAmmoComponentState::OutOfAmmo)
+	{
+		Fire();
+		GetWeapon()->GetWorldTimerManager().SetTimer(FiringTimer, this, &UXLAutomaticFireComponent::Fire, TimeBetweenAttacks, true);
+	}
+	else
+	{
+
+	}
 }
 
 void UXLAutomaticFireComponent::Fire()
 {
-	if (XLRangedWeaponCan::Fire(GetWeapon()))
+	if (AmmoComponent->AmmoComponentState != EAmmoComponentState::EmptyMagazine && AmmoComponent->AmmoComponentState != EAmmoComponentState::OutOfAmmo)
 	{
-		GetWeapon()->FireEventDelegate.Broadcast();
+		const FVector Start = GetWeapon()->GetSocketLocation("Muzzle");
+		const FVector End = AimingComponent->GetAdjustedAim();
+
+		ServerFireProjectile(Start, End);
+		AmmoComponent->ConsumeAmmo(); //SECURITY VULNERABILITY: Handling ammo client side, potential for hackers to manipulate this value
+
 		LastAttackTime = GetWorld()->GetTimeSeconds();
+		GetWeapon()->PlayFX(MuzzleFX, MuzzleFXPoint);
+		GetWeapon()->PlaySound(FireSound);
 	}
 }
 
@@ -66,3 +77,23 @@ void UXLAutomaticFireComponent::StopAttack()
 	GetWeapon()->GetWorldTimerManager().ClearTimer(FiringTimer);
 }
 
+bool UXLAutomaticFireComponent::ServerFireProjectile_Validate(FVector Origin, FVector ShootDir)
+{
+	return true;
+}
+
+void UXLAutomaticFireComponent::ServerFireProjectile_Implementation(FVector Origin, FVector ShootDir)
+{
+	FTransform SpawnTM(FVector::ZeroVector.Rotation(), Origin);
+	AXLProjectile* jeff = Cast<AXLProjectile>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, AmmoComponent->Projectile, SpawnTM));
+	if (jeff)
+	{
+		//Projectile->Instigator = Instigator;
+		jeff->SetOwner(GetWeapon());
+		//AppyProjectileData(jeff); // Thinking about making projectiles completely independent
+		FVector test = (ShootDir - Origin).GetSafeNormal();
+		jeff->InitVelocity(test);
+
+		UGameplayStatics::FinishSpawningActor(jeff, SpawnTM);
+	}
+}

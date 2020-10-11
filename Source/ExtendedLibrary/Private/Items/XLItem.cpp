@@ -2,14 +2,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLItem.h"
+#include "Structs/XLItemAnimations.h"
+#include "Structs/XLItemSounds.h"
+#include "Items/XLItem.h"
 
 AXLItem::AXLItem()
 {
-	//WeaponState = CreateDefaultSubobject<USSWeaponState>(TEXT("WeaponState"));
-	ItemSounds = CreateDefaultSubobject<UXLItemSoundManager>(TEXT("ItemSounds"));
-	ItemAnimations = CreateDefaultSubobject<UXLItemAnimationManager>(TEXT("ItemAnimations"));
-
 	Mesh1P = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh1P"));
 	Mesh1P->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::OnlyTickPoseWhenRendered;
 	Mesh1P->SetOnlyOwnerSee(true);
@@ -31,6 +29,11 @@ AXLItem::AXLItem()
 	Mesh3P->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
 	//Mesh3P->SetCollisionResponseToChannel(COLLISION_PROJECTILE, ECR_Block);
 
+	//NetCullDistanceSquared = 255000000.0;
+	//bNetUseOwnerRelevancy = false;
+
+	bReplicates = true;
+
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.TickGroup = TG_PrePhysics;
 }
@@ -43,13 +46,50 @@ void AXLItem::Tick(float DeltaTime)
 void AXLItem::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-
-	DetachMeshFromPawn();
 }
 
 void AXLItem::Destroyed()
 {
 	Super::Destroyed();
+}
+
+void AXLItem::SetOwningPawn(AXLCharacter* NewOwner)
+{
+	if (Character != NewOwner)
+	{
+		SetInstigator(NewOwner);
+		Character = NewOwner;
+		Character->DeathDelegate.AddDynamic(this, &AXLItem::OnCharacterDeath);
+		// net owner for RPC calls
+		SetOwner(NewOwner);
+	}
+}
+
+void AXLItem::OnRep_MyPawn()
+{
+	if (Character)
+	{
+		SetOwningPawn(Character);
+	}
+	else
+	{
+		Remove();
+	}
+}
+
+void AXLItem::Remove()
+{
+	Unequip();
+
+	if (GetLocalRole() == ROLE_Authority)
+	{
+		SetOwningPawn(NULL);
+	}
+}
+
+void AXLItem::OnCharacterDeath()
+{
+ 	CharacterDeathDelegate.Broadcast();
 }
 
 void AXLItem::TogglePerspective()
@@ -68,53 +108,47 @@ void AXLItem::TogglePerspective()
 	}
 }
 
-void AXLItem::PlayFX_Implementation(UParticleSystem* FX, FName AttachPoint)
+void AXLItem::HandlePlayFX_Implementation(UParticleSystem* FX, FName AttachPoint)
 {
 	if (GetNetMode() != NM_DedicatedServer)
 	{
-		FXComponent = NULL;
+		UParticleSystemComponent* FXComponent = NULL;
 		if (FX)
 		{
 			FXComponent = UGameplayStatics::SpawnEmitterAttached(FX, Mesh3P, AttachPoint);
 		}
 	}
 }
-void AXLItem::StopFX_Implementation()
+bool AXLItem::PlayFX_Validate(UParticleSystem* FX, FName AttachPoint)
 {
-	if (GetNetMode() != NM_DedicatedServer)
-	{
-		if (FXComponent)
-		{
-			FXComponent->DeactivateSystem();
-			FXComponent = NULL;
-		}
-	}
+	return true;
+}
+void AXLItem::PlayFX_Implementation(UParticleSystem* FX, FName AttachPoint)
+{
+	HandlePlayFX(FX, AttachPoint);
 }
 
-void AXLItem::PlaySound_Implementation(USoundCue* Sound)
+void AXLItem::HandlePlaySound_Implementation(USoundCue* Sound)
 {
 	if (GetNetMode() != NM_DedicatedServer)
 	{
-		AudioComponent = NULL;
+		UAudioComponent* AC = NULL;
 		if (Sound && Character)
 		{
-			AudioComponent = UGameplayStatics::SpawnSoundAttached(Sound, Character->GetRootComponent());
+			AC = UGameplayStatics::SpawnSoundAttached(Sound, Character->GetRootComponent());
 		}
 	}
 }
-void AXLItem::StopSound_Implementation()
+bool AXLItem::PlaySound_Validate(USoundCue* Sound)
 {
-	if (GetNetMode() != NM_DedicatedServer)
-	{
-		if (AudioComponent)
-		{
-			AudioComponent->FadeOut(0.1f, 0.0f);
-			AudioComponent = NULL;
-		}
-	}
+	return true;
+}
+void AXLItem::PlaySound_Implementation(USoundCue* Sound)
+{
+	HandlePlaySound(Sound);
 }
 
-void AXLItem::PlayAnimation_Implementation(class UAnimMontage* Animation, float InPlayRate)
+void AXLItem::HandlePlayAnimation_Implementation(class UAnimMontage* Animation, float InPlayRate)
 {
 	if (GetNetMode() != NM_DedicatedServer)
 	{
@@ -125,94 +159,69 @@ void AXLItem::PlayAnimation_Implementation(class UAnimMontage* Animation, float 
 		}
 	}
 }
-void AXLItem::StopAnimation_Implementation(class UAnimMontage* Animation)
+bool AXLItem::PlayAnimation_Validate(class UAnimMontage* Animation, float InPlayRate)
 {
-	if (GetNetMode() != NM_DedicatedServer)
-	{
-		//USkeletalMeshComponent* UseMesh = GetMesh();
-		if (Animation && Mesh3P && Mesh3P->AnimScriptInstance && Mesh3P->AnimScriptInstance->Montage_IsPlaying(Animation))
-		{
-			Mesh3P->AnimScriptInstance->Montage_Stop(Animation->BlendOut.GetBlendTime());
-		}
-	}
+	return true;
+}
+void AXLItem::PlayAnimation_Implementation(class UAnimMontage* Animation, float InPlayRate)
+{
+	HandlePlayAnimation(Animation, InPlayRate);
 }
 
-void AXLItem::AttachMeshToPawn()
+FVector AXLItem::GetSocketLocation(FName SocketName)
 {
-	if (Character)
+	if (Character && Character->IsLocallyControlled())
 	{
-		DetachMeshFromPawn();
+		class AXLPlayerController* MyPC = Cast<AXLPlayerController>(Character->Controller);
+		if (MyPC && MyPC->IsFirstPerson)
+		{
+			if (Mesh1P->DoesSocketExist(SocketName))
+			{
+				return Mesh1P->GetSocketLocation(SocketName);
+			}
+			if (Character->GetMesh()->DoesSocketExist(SocketName))
+			{
+				return Character->GetMesh()->GetSocketLocation(SocketName);
+			}
+		}
+		else
+		{
+			if (Mesh3P->DoesSocketExist(SocketName))
+			{
+				return Mesh3P->GetSocketLocation(SocketName);
+			}
+			if (Character->GetMesh()->DoesSocketExist(SocketName))
+			{
+				return Character->GetMesh()->GetSocketLocation(SocketName);
+			}
+		}
+	}
+	return FVector::ZeroVector;
+}
 
+void AXLItem::Equip(USkeletalMeshComponent* AttachMesh3P, FName AttachPoint)
+{
+	if (Tags.Contains("equipable") && Character)
+	{
+		Unequip();
 		if (Character->IsLocallyControlled())
 		{
-			USkeletalMeshComponent* PawnMesh3p = Character->GetMesh();
-			USkeletalMeshComponent* PawnMesh1p = Character->PerspectiveMesh;
-
-			Mesh1P->AttachToComponent(PawnMesh1p, FAttachmentTransformRules::KeepRelativeTransform, AttachPoint);
-			Mesh3P->AttachToComponent(PawnMesh3p, FAttachmentTransformRules::KeepRelativeTransform, AttachPoint);
+			//Mesh1P->AttachToComponent(AttachMesh1P, FAttachmentTransformRules::KeepRelativeTransform, AttachPoint);
+			Mesh3P->AttachToComponent(AttachMesh3P, FAttachmentTransformRules::KeepRelativeTransform, AttachPoint);
 
 			TogglePerspective();
 		}
 		else
 		{
-			USkeletalMeshComponent* PawnMesh3p = Character->GetMesh();
-
-			Mesh3P->AttachToComponent(PawnMesh3p, FAttachmentTransformRules::KeepRelativeTransform, AttachPoint);
+			Mesh3P->AttachToComponent(AttachMesh3P, FAttachmentTransformRules::KeepRelativeTransform, AttachPoint);
 		}
 	}
 }
-void AXLItem::DetachMeshFromPawn()
+
+void AXLItem::Unequip()
 {
 	Mesh3P->DetachFromComponent(FDetachmentTransformRules::KeepRelativeTransform);
 	Mesh1P->DetachFromComponent(FDetachmentTransformRules::KeepRelativeTransform);
-}
-
-float AXLItem::StartEquip(FName AttachPoint)
-{
-	Character->GetMesh()->SetAnimInstanceClass(AnimClass);
-	this->AttachPoint = AttachPoint;
-
-	float OriginalDuration = ItemAnimations->EquipAnim ? ItemAnimations->EquipAnim->CalculateSequenceLength() : 0.0f;
-	float Rate = OriginalDuration / EquipDuration;
-	if (ItemAnimations->EquipAnim)
-	{
-		Character->PlayAnimMontage(ItemAnimations->EquipAnim, Rate);
-	}
-
-	GetWorldTimerManager().SetTimer(TimerHandle_Equip, this, &AXLItem::StopEquip, EquipDuration, false);
-
-	if (Character && Character->IsLocallyControlled())
-	{
-		PlaySound(ItemSounds->EquipCue);
-	}
-	return EquipDuration;
-}
-void AXLItem::StopEquip()
-{
-	DetachMeshFromPawn();
-	AttachMeshToPawn();
-}
-
-float AXLItem::StartUnequip()
-{
-	// Set animclass back to default
-
-	float OriginalDuration = ItemAnimations->UnequipAnim->CalculateSequenceLength();
-	float Rate = OriginalDuration / UnequipDuration;
-
-	Character->PlayAnimMontage(ItemAnimations->UnequipAnim, Rate);
-
-	GetWorldTimerManager().SetTimer(TimerHandle_Unequip, this, &AXLItem::StopUnequip, UnequipDuration, false);
-
-	if (Character && Character->IsLocallyControlled())
-	{
-		PlaySound(ItemSounds->UnequipCue);
-	}
-	return UnequipDuration;
-}
-void AXLItem::StopUnequip()
-{
-	DetachMeshFromPawn();
 }
 
 void AXLItem::Drop()
@@ -220,11 +229,39 @@ void AXLItem::Drop()
 	this->Destroy();
 }
 
-void AXLItem::Activate() 
+void AXLItem::PrimaryActivate() 
 {
-	// not implemented
+	// Not Implemented
 }
-void AXLItem::Deactivate()
+void AXLItem::PrimaryDeactivate()
 {
-	// not implemented
+	// Not Implemented
+}
+
+void AXLItem::SecondaryActivate()
+{
+	// Not Implemented
+}
+void AXLItem::SecondaryDeactivate()
+{
+	// Not Implemented
+}
+
+void AXLItem::TertiaryActivate()
+{
+	// Not Implemented
+}
+void AXLItem::TertiaryDeactivate()
+{
+	// Not Implemented
+}
+
+void AXLItem::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(AXLItem, Character);
+	DOREPLIFETIME(AXLItem, Socket);
+	DOREPLIFETIME(AXLItem, StowedMesh3P);
+	DOREPLIFETIME(AXLItem, StowedMesh1P);
 }

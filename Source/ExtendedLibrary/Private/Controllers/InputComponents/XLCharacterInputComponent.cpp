@@ -1,19 +1,22 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLCharacterInputComponent.h"
+#include "Managers/XLInventoryManager.h"
+#include "Items/XLItem.h"
+#include "Controllers/XLPlayerController.h"
+#include "Controllers/InputComponents/XLCharacterInputComponent.h"
 
 UXLCharacterInputComponent::UXLCharacterInputComponent()
 {
 }
 
-void UXLCharacterInputComponent::Init(AXLPlayerController* NewController)
+void UXLCharacterInputComponent::Init(APlayerController* NewController)
 {
 	RegisterComponent();
 	bBlockInput = false;
 	Priority = 0;
 
-	Controller = NewController;
+	Controller = Cast<AXLPlayerController>(NewController);
 
 	BindAction("ToggleCamera", IE_Pressed, this, &UXLCharacterInputComponent::ToggleCamera);
 
@@ -51,14 +54,16 @@ void UXLCharacterInputComponent::Init(AXLPlayerController* NewController)
 	BindAction("FifthWeapon", IE_Released, this, &UXLCharacterInputComponent::FifthWeapon);
 	BindAction("SixthWeapon", IE_Released, this, &UXLCharacterInputComponent::SixthWeapon);
 	BindAction("SeventhWeapon", IE_Released, this, &UXLCharacterInputComponent::SeventhWeapon);
+	BindAction("EighthWeapon", IE_Released, this, &UXLCharacterInputComponent::EighthWeapon);
 
-	BindAction("Aim", IE_Pressed, this, &UXLCharacterInputComponent::StartAim);
-	BindAction("Aim", IE_Released, this, &UXLCharacterInputComponent::StopAim);
+	BindAction("PrimaryAction", IE_Pressed, this, &UXLCharacterInputComponent::ActivatePrimary);
+	BindAction("PrimaryAction", IE_Released, this, &UXLCharacterInputComponent::DeactivatePrimary);
 
-	BindAction("Attack", IE_Pressed, this, &UXLCharacterInputComponent::StartAttack);
-	BindAction("Attack", IE_Released, this, &UXLCharacterInputComponent::StopAttack);
+	BindAction("SecondaryAction", IE_Pressed, this, &UXLCharacterInputComponent::ActivateSecondary);
+	BindAction("SecondaryAction", IE_Released, this, &UXLCharacterInputComponent::DeactivatedSecondary);
 
-	BindAction("Reload", IE_Pressed, this, &UXLCharacterInputComponent::Reload);
+	BindAction("TertiaryAction", IE_Pressed, this, &UXLCharacterInputComponent::ActivateTertiary);
+	BindAction("TertiaryAction", IE_Released, this, &UXLCharacterInputComponent::DeactivateTertiary);
 
 	BindAction("Melee", IE_Pressed, this, &UXLCharacterInputComponent::Melee);
 
@@ -183,7 +188,15 @@ void UXLCharacterInputComponent::EquipItem()
 {
 	if (XLControllerCan::Jump(Controller))
 	{
-		(Cast<AXLCharacter>(Controller->GetPawn()))->EquipItem(0);
+		AXLCharacter* Character = Cast<AXLCharacter>(Controller->GetPawn());
+		if (Character && Character->CurrentItem)
+		{
+			AXLItem* Item = Character->CharacterInventory->GetItem(0);
+			if (Item)
+			{
+				Character->EquipItem(Item, "Hand_R");
+			}
+		}
 	}
 }
 void UXLCharacterInputComponent::StowItem()
@@ -191,7 +204,10 @@ void UXLCharacterInputComponent::StowItem()
 	if (XLControllerCan::Jump(Controller))
 	{
 		AXLCharacter* Character = Cast<AXLCharacter>(Controller->GetPawn());
-		Character->StowItem(Character->CurrentItem);
+		if (Character && Character->CurrentItem)
+		{
+			Character->StowItem(Character->CurrentItem, Character->CurrentItem->StowedMesh3P, Character->CurrentItem->StowedMesh1P, Character->CurrentItem->Socket);
+		}
 	}
 }
 
@@ -223,13 +239,14 @@ void UXLCharacterInputComponent::FirstWeapon()
 	if (XLControllerCan::Jump(Controller))
 	{
 		AXLCharacter* Character = Cast<AXLCharacter>(Controller->GetPawn());
-		if (Character->CurrentItem == UNDEFINED)
+		AXLItem* Item = Character->CharacterInventory->GetItem(0);
+		if (Character->CurrentItem)
 		{
-			Character->EquipItem(0);
+			Character->SwitchItem(Item);
 		}
-		else if (Character->CurrentItem != 0)
+		else
 		{
-			Character->SwitchItem(0);
+    Character->EquipItem(Item, "Hand_R");
 		}
 	}
 }
@@ -238,13 +255,14 @@ void UXLCharacterInputComponent::SecondWeapon()
 	if (XLControllerCan::Jump(Controller))
 	{
 		AXLCharacter* Character = Cast<AXLCharacter>(Controller->GetPawn());
-		if (Character->CurrentItem == UNDEFINED)
+		AXLItem* Item = Character->CharacterInventory->GetItem(1);
+		if (Character->CurrentItem)
 		{
-			Character->EquipItem(1);
+			Character->SwitchItem(Item);
 		}
-		else if (Character->CurrentItem != 1)
+		else
 		{
-			Character->SwitchItem(1);
+    Character->EquipItem(Item, "Hand_R");
 		}
 	}
 }
@@ -253,13 +271,14 @@ void UXLCharacterInputComponent::ThirdWeapon()
 	if (XLControllerCan::Jump(Controller))
 	{
 		AXLCharacter* Character = Cast<AXLCharacter>(Controller->GetPawn());
-		if (Character->CurrentItem == UNDEFINED)
+		AXLItem* Item = Character->CharacterInventory->GetItem(2);
+		if (Character->CurrentItem)
 		{
-			Character->EquipItem(2);
+			Character->SwitchItem(Item);
 		}
-		else if (Character->CurrentItem != 2)
+		else
 		{
-			Character->SwitchItem(2);
+    Character->EquipItem(Item, "Hand_R");
 		}
 	}
 }
@@ -268,13 +287,14 @@ void UXLCharacterInputComponent::FourthWeapon()
 	if (XLControllerCan::Jump(Controller))
 	{
 		AXLCharacter* Character = Cast<AXLCharacter>(Controller->GetPawn());
-		if (Character->CurrentItem == UNDEFINED)
+		AXLItem* Item = Character->CharacterInventory->GetItem(3);
+		if (Character->CurrentItem)
 		{
-			Character->EquipItem(3);
+			Character->SwitchItem(Item);
 		}
-		else if (Character->CurrentItem != 3)
+		else
 		{
-			Character->SwitchItem(3);
+    Character->EquipItem(Item, "Hand_R");
 		}
 	}
 }
@@ -283,13 +303,14 @@ void UXLCharacterInputComponent::FifthWeapon()
 	if (XLControllerCan::Jump(Controller))
 	{
 		AXLCharacter* Character = Cast<AXLCharacter>(Controller->GetPawn());
-		if (Character->CurrentItem == UNDEFINED)
+		AXLItem* Item = Character->CharacterInventory->GetItem(4);
+		if (Character->CurrentItem)
 		{
-			Character->EquipItem(4);
+			Character->SwitchItem(Item);
 		}
-		else if (Character->CurrentItem != 4)
+		else
 		{
-			Character->SwitchItem(4);
+    Character->EquipItem(Item, "Hand_R");
 		}
 	}
 }
@@ -298,13 +319,14 @@ void UXLCharacterInputComponent::SixthWeapon()
 	if (XLControllerCan::Jump(Controller))
 	{
 		AXLCharacter* Character = Cast<AXLCharacter>(Controller->GetPawn());
-		if (Character->CurrentItem == UNDEFINED)
+		AXLItem* Item = Character->CharacterInventory->GetItem(5);
+		if (Character->CurrentItem)
 		{
-			Character->EquipItem(5);
+			Character->SwitchItem(Item);
 		}
-		else if (Character->CurrentItem != 5)
+		else
 		{
-			Character->SwitchItem(5);
+    Character->EquipItem(Item, "Hand_R");
 		}
 	}
 }
@@ -313,52 +335,76 @@ void UXLCharacterInputComponent::SeventhWeapon()
 	if (XLControllerCan::Jump(Controller))
 	{
 		AXLCharacter* Character = Cast<AXLCharacter>(Controller->GetPawn());
-		if (Character->CurrentItem == UNDEFINED)
+		AXLItem* Item = Character->CharacterInventory->GetItem(6);
+		if (Character->CurrentItem)
 		{
-			Character->EquipItem(6);
+			Character->SwitchItem(Item);
 		}
-		else if (Character->CurrentItem != 6)
+		else
 		{
-			Character->SwitchItem(6);
+    Character->EquipItem(Item, "Hand_R");
+		}
+	}
+}
+void UXLCharacterInputComponent::EighthWeapon()
+{
+	if (XLControllerCan::Jump(Controller))
+	{
+		AXLCharacter* Character = Cast<AXLCharacter>(Controller->GetPawn());
+		AXLItem* Item = Character->CharacterInventory->GetItem(7);
+		if (Character->CurrentItem)
+		{
+			Character->SwitchItem(Item);
+		}
+		else
+		{
+			Character->EquipItem(Item, "Hand_R");
 		}
 	}
 }
 
-void UXLCharacterInputComponent::StartAim()
+void UXLCharacterInputComponent::ActivatePrimary()
 {
 	if (XLControllerCan::StartAttack(Controller))
 	{
-		(Cast<AXLCharacter>(Controller->GetPawn()))->StartAim();
+		(Cast<AXLCharacter>(Controller->GetPawn()))->StartItemPrimaryActivate();
 	}
 }
-void UXLCharacterInputComponent::StopAim()
+void UXLCharacterInputComponent::DeactivatePrimary()
 {
 	if (XLControllerCan::StopAttack(Controller))
 	{
-		(Cast<AXLCharacter>(Controller->GetPawn()))->StopAim();
+		(Cast<AXLCharacter>(Controller->GetPawn()))->StopItemPrimaryActivate();
 	}
 }
 
-void UXLCharacterInputComponent::StartAttack()
+void UXLCharacterInputComponent::ActivateSecondary()
 {
 	if (XLControllerCan::StartAttack(Controller))
 	{
-		(Cast<AXLCharacter>(Controller->GetPawn()))->StartAttack();
+		(Cast<AXLCharacter>(Controller->GetPawn()))->StartItemSecondaryActivate();
 	}
 }
-void UXLCharacterInputComponent::StopAttack()
+void UXLCharacterInputComponent::DeactivatedSecondary()
 {
 	if (XLControllerCan::StopAttack(Controller))
 	{
-		(Cast<AXLCharacter>(Controller->GetPawn()))->StopAttack();
+		(Cast<AXLCharacter>(Controller->GetPawn()))->StopItemSecondaryActivate();
 	}
 }
 
-void UXLCharacterInputComponent::Reload()
+void UXLCharacterInputComponent::ActivateTertiary()
 {
 	if (XLControllerCan::Reload(Controller))
 	{
-		(Cast<AXLCharacter>(Controller->GetPawn()))->Reload();
+		(Cast<AXLCharacter>(Controller->GetPawn()))->StartItemTertiaryActivate();
+	}
+}
+void UXLCharacterInputComponent::DeactivateTertiary()
+{
+	if (XLControllerCan::Reload(Controller))
+	{
+		(Cast<AXLCharacter>(Controller->GetPawn()))->StopItemTertiaryActivate();
 	}
 }
 

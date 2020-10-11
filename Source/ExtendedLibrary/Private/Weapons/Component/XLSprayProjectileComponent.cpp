@@ -1,6 +1,7 @@
 #include "ExtendedLibraryPCH.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "XLSprayProjectileComponent.h"
+#include "Weapons/Components/XLAimingComponent.h"
+#include "Weapons/Components/XLSprayProjectileComponent.h"
 
 UXLSprayProjectileComponent::UXLSprayProjectileComponent()
 {

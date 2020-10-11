@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLCharacterResourcesCan.h"
+#include "Cans/XLCharacterResourcesCan.h"
 
 bool XLCharacterResourcesCan::RegenerateHealth(UXLCharacterResources* Resources)
 {

@@ -1,11 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLImpactEffect.h"
+#include "Effects/XLImpactEffect.h"
 
 AXLImpactEffect::AXLImpactEffect()
 {
-	bAutoDestroyWhenFinished = true;
+	SetAutoDestroyWhenFinished(true);
 }
 
 void AXLImpactEffect::PostInitializeComponents()

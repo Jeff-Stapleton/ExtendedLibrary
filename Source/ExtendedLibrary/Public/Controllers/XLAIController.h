@@ -25,8 +25,8 @@ public:
 
 public:
 
-	virtual void Possess(class APawn* InPawn) override;
-	virtual void UnPossess() override;
+	virtual void OnPossess(class APawn* InPawn) override;
+	virtual void OnUnPossess() override;
 	virtual void BeginInactiveState() override;
 
 	void Respawn();

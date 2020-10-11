@@ -1,8 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLCharacterResources.h"
-#include "XLCharacterResourcesCan.h"
+#include "Data/Character/XLCharacterResources.h"
+#include "Data/Character/XLCharacterStats.h"
+#include "Cans/XLCharacterResourcesCan.h"
 
 UXLCharacterResources::UXLCharacterResources()
 {
@@ -14,7 +15,7 @@ UXLCharacterResources::UXLCharacterResources()
 	CurrentUltimate = MaxUltimate;
 	CurrentShield = MaxShield;
 
-	bReplicates = true;
+	SetIsReplicatedByDefault(true);
 }
 
 void UXLCharacterResources::Regenerate(float DeltaTime)

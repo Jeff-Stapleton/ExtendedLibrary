@@ -1,6 +1,6 @@
-#include "XLRecoilData.generated.h"
-
 #pragma once
+
+#include "XLRecoilData.generated.h"
 
 USTRUCT(BlueprintType)
 struct FRecoilData

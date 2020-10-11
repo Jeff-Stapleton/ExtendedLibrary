@@ -1,6 +1,9 @@
 #include "XLHitInfo.generated.h"
 
 #pragma once
+
+class AXLCharacter;
+
 /** replicated information on a hit we've taken */
 USTRUCT()
 struct FXLHitInfo
@@ -17,11 +20,11 @@ struct FXLHitInfo
 
 	/** Who hit us */
 	UPROPERTY()
-	TWeakObjectPtr<class AXLCharacter> PawnInstigator;
+	TWeakObjectPtr<AXLCharacter> PawnInstigator;
 
 	/** Who actually caused the damage */
 	UPROPERTY()
-	TWeakObjectPtr<class AActor> DamageCauser;
+	TWeakObjectPtr<AActor> DamageCauser;
 
 	/** Specifies which DamageEvent below describes the damage received. */
 	UPROPERTY()

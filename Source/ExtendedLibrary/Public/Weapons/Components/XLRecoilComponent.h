@@ -1,8 +1,11 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
-#include "XLRecoilData.h"
+#include "Structs/XLRecoilData.h"
 #include "XLRecoilComponent.generated.h"
+
+class AXLRangedWeapon;
+class AXLCharacter;
 
 UCLASS(Blueprintable)
 class EXTENDEDLIBRARY_API UXLRecoilComponent : public UActorComponent
@@ -35,8 +38,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Ranged)
 	float SettlingSpeed = 10.0f;
 
-	class AXLRangedWeapon* Owner;
-	class AXLCharacter* Character;
+	AXLRangedWeapon* Owner;
+	AXLCharacter* Character;
 
 	int32 RecoilIndex;
 

@@ -1,20 +1,38 @@
 #include "ExtendedLibraryPCH.h"
 #include "Pickups/XLOverlapPickup.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "Cans/XLPickupCan.h"
 
 AXLOverlapPickup::AXLOverlapPickup(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
-	OverlapVolume = ObjectInitializer.CreateDefaultSubobject<UCapsuleComponent>(this, TEXT("OverlapVolume"));
-
-	OverlapVolume->SetupAttachment(RootComponent);
-	OverlapVolume->InitCapsuleSize(40.0f, 50.0f);
-	OverlapVolume->SetCollisionObjectType(COLLISION_PICKUP);
+	OverlapVolume = ObjectInitializer.CreateDefaultSubobject<USphereComponent>(this, TEXT("OverlapVolume"));
+	OverlapVolume->InitSphereRadius(50.0f);
+	OverlapVolume->AlwaysLoadOnClient = true;
+	OverlapVolume->AlwaysLoadOnServer = true;
+	OverlapVolume->bTraceComplexOnMove = true;
+	OverlapVolume->SetCollisionProfileName(UCollisionProfile::Pawn_ProfileName);
 	OverlapVolume->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	OverlapVolume->SetCollisionObjectType(COLLISION_PICKUP);
 	OverlapVolume->SetCollisionResponseToAllChannels(ECR_Ignore);
-	OverlapVolume->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
 	OverlapVolume->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
+	OverlapVolume->SetCollisionResponseToChannel(ECC_WorldDynamic, ECR_Block);
+	OverlapVolume->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
 
-	//MovementComp->UpdatedComponent = OverlapVolume;
+	RootComponent = OverlapVolume;
+
+	Component->SetupAttachment(RootComponent);
+
+	MovementComp->UpdatedComponent = OverlapVolume;
+}
+
+void AXLOverlapPickup::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+
+	if (GetInstigator())
+	{
+		OverlapVolume->MoveIgnoreActors.Add(GetInstigator());
+	}
 }
 
 void AXLOverlapPickup::NotifyActorBeginOverlap(class AActor* Other)
@@ -24,11 +42,6 @@ void AXLOverlapPickup::NotifyActorBeginOverlap(class AActor* Other)
 	{
 		Super::NotifyActorBeginOverlap(Pawn);
 
-		OnPickedUp(Cast<AXLCharacter>(Pawn));
+		PickedUp(Cast<AXLCharacter>(Pawn));
 	}
-}
-
-void AXLOverlapPickup::OnPickedUp(class AXLCharacter* Pawn)
-{
-	Super::OnPickedUp(Pawn);
 }

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "XLAmmoComponent.h"
-#include "Components/ActorComponent.h"
-#include "Sound/SoundCue.h"
+#include "Weapons/Components/Interfaces/XLAmmoComponent.h"
 #include "XLReloadComponent.generated.h"
+
+class USoundCue;
 
 UCLASS(Blueprintable)
 class EXTENDEDLIBRARY_API UXLReloadComponent : public UXLAmmoComponent
@@ -12,21 +12,6 @@ class EXTENDEDLIBRARY_API UXLReloadComponent : public UXLAmmoComponent
 
 public: 
     class AXLRangedWeapon* Owner;
-
-	/** If true the weapon can always be reloaded to full clip */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
-	bool InfiniteAmmo = false;
-
-	/** If true the weapon never has to be reloaded  */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
-	bool InfiniteClip = false;
-
-	/** The max number of total ammo */
-	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = Resources)
-	float MaxAmmo = 125.0f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Resources)
-	float ReloadDuration = 2.0f;
 
 	UPROPERTY(EditDefaultsOnly, Category = Animation)
 	UAnimMontage* ReloadAnim;
@@ -41,13 +26,13 @@ public:
 
     void InitializeComponent() override;
 
-	UFUNCTION()
-	void DetermineAction();
+	void ConsumeAmmo() override;
 
-	UFUNCTION()
-	void ConsumeAmmo();
+	void Reload() override;
 
-	UFUNCTION()
-	void Reload();
+	//UFUNCTION(Reliable, Server, WithValidation)
+	//void ServerConsumeAmmo();
 
+	//UFUNCTION(Reliable, Server, WithValidation)
+	//void ServerReload(float ClipDelta);
 };

@@ -1,14 +1,13 @@
 // Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLFindPickup.h"
+#include "AI/Tasks/XLFindPickup.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyAllTypes.h"
-#include "XLAIController.h"
-#include "XLAICharacter.h"
+#include "Controllers/XLAIController.h"
+#include "Characters/XLAICharacter.h"
 //#include "Pickups/XLPickup_Ammo.h"
-#include "XLWeapon.h"
 
 UXLFindPickup::UXLFindPickup(const FObjectInitializer& ObjectInitializer) 
 	: Super(ObjectInitializer)

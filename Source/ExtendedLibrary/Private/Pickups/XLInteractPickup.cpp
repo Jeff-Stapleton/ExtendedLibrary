@@ -1,25 +1,21 @@
 #include "ExtendedLibraryPCH.h"
+#include "Cans/XLPickupCan.h"
 #include "Pickups/XLInteractPickup.h"
 
 AXLInteractPickup::AXLInteractPickup(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 }
 
-void AXLInteractPickup::OnInspect_Implementation(AActor* Instigator)
+void AXLInteractPickup::OnInspect_Implementation(AActor* InteractingActor)
 {
 	// Display interact keybinding and pickup name
 }
 
-void AXLInteractPickup::OnInteract_Implementation(AActor* Instigator)
+void AXLInteractPickup::OnInteract_Implementation(AActor* InteractingActor)
 {
-	AXLCharacter* Pawn = Cast<AXLCharacter>(Instigator);
+	AXLCharacter* Pawn = Cast<AXLCharacter>(InteractingActor);
 	if (XLPickupCan::BePickedUp(this, Pawn))
 	{
-		OnPickedUp(Cast<AXLCharacter>(Pawn));
+		PickedUp(Cast<AXLCharacter>(Pawn));
 	}
-}
-
-void AXLInteractPickup::OnPickedUp(class AXLCharacter* Pawn)
-{
-	Super::OnPickedUp(Pawn);
 }

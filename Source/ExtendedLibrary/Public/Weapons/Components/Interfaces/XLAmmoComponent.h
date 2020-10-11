@@ -1,6 +1,11 @@
 #pragma once
 
+#include "Enums/XLAmmoComponentState.h"
+#include "Structs/XLAmmoComponentConfig.h"
 #include "XLAmmoComponent.generated.h"
+
+class AXLRangedWeapon;
+class AXLProjectile;
 
 UCLASS()
 class EXTENDEDLIBRARY_API UXLAmmoComponent : public UActorComponent
@@ -8,16 +13,30 @@ class EXTENDEDLIBRARY_API UXLAmmoComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:
-	/** The amount of ammo in each clip */
+	
 	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = Resources)
-	float MaxClipAmmo = 25.0f;
-	UPROPERTY(Replicated, BlueprintReadWrite, Category = Resources)
 	float CurrentClipAmmo;
-	UPROPERTY(Replicated, BlueprintReadWrite, Category = Resources)
+	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = Resources)
 	float CurrentAmmo;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "XL|WeaponComponent")
+	FAmmoComponentConfig AmmoConfig;
+
+	UPROPERTY(BlueprintReadWrite, Category = "XL|WeaponComponent")
+	TEnumAsByte<EAmmoComponentState::Type> AmmoComponentState;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "XL | Weapon")
+	TSubclassOf<AXLProjectile> Projectile;
 
 	UXLAmmoComponent();
 	void InitializeComponent() override;
+	void BeginPlay() override;
 
-	class AXLRangedWeapon* GetWeapon();
+	AXLRangedWeapon* GetWeapon();
+
+	UFUNCTION()
+	virtual void Reload();
+
+	UFUNCTION()
+	virtual void ConsumeAmmo();
 };

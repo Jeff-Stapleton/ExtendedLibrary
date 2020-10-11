@@ -3,8 +3,12 @@
 #pragma once
 
 #include "Components/InputComponent.h"
-#include "XLControllerCan.h"
+#include "Cans/XLControllerCan.h"
 #include "XLCharacterInputComponent.generated.h"
+
+class AXLPlayerController;
+class APlayerController;
+class AXLCharacter;
 
 UCLASS()
 class EXTENDEDLIBRARY_API UXLCharacterInputComponent : public UInputComponent
@@ -13,14 +17,14 @@ class EXTENDEDLIBRARY_API UXLCharacterInputComponent : public UInputComponent
 
 public:
 
-	UXLCharacterInputComponent();
-
-	class AXLPlayerController* Controller;
-	class AXLCharacter* Pawn;
+	AXLPlayerController* Controller;
+	AXLCharacter* Pawn;
 
 public:
 
-	void Init(AXLPlayerController* NewController);
+	UXLCharacterInputComponent();
+
+	virtual void Init(APlayerController* NewController);
 
 	virtual void ToggleCamera();
 
@@ -37,9 +41,6 @@ public:
 	virtual void EquipItem();
 	virtual void StowItem();
 
-	//virtual void NextWeapon();
-	//virtual void PreviousWeapon();
-
 	virtual void FirstWeapon();
 	virtual void SecondWeapon();
 	virtual void ThirdWeapon();
@@ -47,6 +48,7 @@ public:
 	virtual void FifthWeapon();
 	virtual void SixthWeapon();
 	virtual void SeventhWeapon();
+	virtual void EighthWeapon();
 
 	virtual void Interact();
 
@@ -59,13 +61,14 @@ public:
 	virtual void StartSprint();
 	virtual void StopSprint();
 
-	virtual void StartAim();
-	virtual void StopAim();
+	virtual void ActivatePrimary();
+	virtual void DeactivatePrimary();
 
-	virtual void StartAttack();
-	virtual void StopAttack();
+	virtual void ActivateSecondary();
+	virtual void DeactivatedSecondary();
 
-	virtual void Reload();
+	virtual void ActivateTertiary();
+	virtual void DeactivateTertiary();
 
 	virtual void Melee();
 

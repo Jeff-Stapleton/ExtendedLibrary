@@ -1,11 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLWeaponStats.h"
+#include "Weapons/Components/XLWeaponStats.h"
 
 UXLWeaponStats::UXLWeaponStats()
 {
-	bReplicates = true;
+	SetIsReplicatedByDefault(true);
 }
 
 void UXLWeaponStats::BeginPlay()

@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLPlayerCameraManager.h"
+#include "Managers/XLPlayerCameraManager.h"
 
 AXLPlayerCameraManager::AXLPlayerCameraManager(const FObjectInitializer& ObjectInitializer) 
 	: Super(ObjectInitializer)

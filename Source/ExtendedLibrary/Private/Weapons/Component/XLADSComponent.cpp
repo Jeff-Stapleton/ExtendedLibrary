@@ -1,36 +1,80 @@
 #include "ExtendedLibraryPCH.h"
-#include "XLADSComponent.h"
+#include "Weapons/XLRangedWeapon.h"
+#include "Managers/XLPlayerCameraManager.h"
+#include "Weapons/Components/XLADSComponent.h"
 
 UXLADSComponent::UXLADSComponent()
 {
 	bWantsInitializeComponent = true;
+	SetIsReplicatedByDefault(true);
 }
-
 
 void UXLADSComponent::InitializeComponent()
 {
 	Super::InitializeComponent();
 
-	Owner = Cast<AXLRangedWeapon>(GetOwner());
+	//Owner = Cast<AXLRangedWeapon>(GetOwner());
 
-	Owner->TargetingStateDelegate.AddDynamic(this, &UXLADSComponent::DetermineAction);
+	GetWeapon()->ItemSecondaryStateDelegate.AddDynamic(this, &UXLADSComponent::DetermineAction);
+	//GetWeapon()->CharacterDeathDelegate.AddDynamic(this, &UXLADSComponent::StopAim);
 }
 
 void UXLADSComponent::DetermineAction()
 {
-	Character = Cast<AXLCharacter>(Owner->Character);
-	Controller = Cast<AXLPlayerController>(Character->GetController());
-	CameraManager = Cast<AXLPlayerCameraManager>(Controller->PlayerCameraManager);
-
-	if (Owner->TargetingState == ETargetingState::ADS)
+	if (GetWeapon()->SecondaryState == EItemSecondaryState::ADS)
 	{
-		CameraManager->FOVSpeed = Speed;
-		CameraManager->TargetFOV = FOV;
+		StartAim();
 	}
 	else
 	{
-		CameraManager->FOVSpeed = Speed;
-		CameraManager->TargetFOV = CameraManager->NormalFOV;
+		StopAim();
 	}
 }
 
+void UXLADSComponent::StartAim_Implementation()
+{
+	Character = Cast<AXLCharacter>(GetWeapon()->Character);
+	if (Character)
+	{
+		Controller = Cast<AXLPlayerController>(Character->GetController());
+		if (Controller)
+		{
+			CameraManager = Cast<AXLPlayerCameraManager>(Controller->PlayerCameraManager);
+
+			if (ScopeWidgetBP)
+			{
+				ScopeWidget = CreateWidget<UUserWidget>(GetWorld(), ScopeWidgetBP);
+				ScopeWidget->AddToViewport();
+			}
+
+			if (CameraManager)
+			{
+				CameraManager->FOVSpeed = Speed;
+				CameraManager->TargetFOV = FOV;
+			}
+		}
+	}
+}
+
+void UXLADSComponent::StopAim_Implementation()
+{
+	if (GetWeapon()->Character)
+	{
+		Character = Cast<AXLCharacter>(GetWeapon()->Character);
+		if (Character->GetController())
+		{
+			Controller = Cast<AXLPlayerController>(Character->GetController());
+			if (Controller->PlayerCameraManager)
+			{
+				CameraManager = Cast<AXLPlayerCameraManager>(Controller->PlayerCameraManager);
+				CameraManager->FOVSpeed = Speed;
+				CameraManager->TargetFOV = CameraManager->NormalFOV;
+			}
+		}
+	}
+	
+	if (ScopeWidget->IsValidLowLevelFast())
+	{
+		ScopeWidget->RemoveFromParent();
+	}
+}

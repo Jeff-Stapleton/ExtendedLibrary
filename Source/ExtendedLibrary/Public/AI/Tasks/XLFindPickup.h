@@ -2,7 +2,7 @@
 
 #pragma once
 #include "BehaviorTree/Tasks/BTTask_BlackboardBase.h"
-#include "XLGameMode.h"
+#include "Game/XLGameMode.h"
 #include "XLFindPickup.generated.h"
 
 // Bot AI Task that attempts to locate a pickup 

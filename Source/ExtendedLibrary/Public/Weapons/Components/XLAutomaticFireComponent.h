@@ -1,8 +1,13 @@
 #pragma once
 
-#include "XLFireComponent.h"
-#include "XLRangedWeaponCan.h"
+#include "Weapons/Components/Interfaces/XLFireComponent.h"
+#include "Cans/XLRangedWeaponCan.h"
+#include "Projectiles/XLProjectile.h"
 #include "XLAutomaticFireComponent.generated.h"
+
+class UXLAmmoComponent;
+class UXLAimingComponent;
+class USoundCue;
 
 UCLASS(Blueprintable)
 class EXTENDEDLIBRARY_API UXLAutomaticFireComponent : public UXLFireComponent
@@ -10,48 +15,41 @@ class EXTENDEDLIBRARY_API UXLAutomaticFireComponent : public UXLFireComponent
 	GENERATED_BODY()
 
 	UXLAutomaticFireComponent();
-	void InitializeComponent() override;
 
 public:
-	/** The amount of time that must pass before being able to attack again */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Base)
-	float TimeBetweenAttacks = 0.20f;
-
-	/** firing audio (bLoopedFireSound set) */
-	UPROPERTY(Transient)
-	UAudioComponent* FireAC;
 
 	/** single fire sound (bLoopedFireSound not set) */
-	UPROPERTY(EditDefaultsOnly, Category = Sound)
+	UPROPERTY(EditDefaultsOnly, Category = "XL | Weapon")
 	USoundCue* FireSound;
 
-	/** looped fire sound (bLoopedFireSound set) */
-	UPROPERTY(EditDefaultsOnly, Category = Sound)
-	USoundCue* FireLoopSound;
-
-	/** finished burst sound (bLoopedFireSound set) */
-	UPROPERTY(EditDefaultsOnly, Category = Sound)
-	USoundCue* FireFinishSound;
-
 	/** out of ammo sound */
-	UPROPERTY(EditDefaultsOnly, Category = Sound)
+	UPROPERTY(EditDefaultsOnly, Category = "XL | Weapon")
 	USoundCue* OutOfAmmoSound;
 
-	UPROPERTY(EditDefaultsOnly, Category = MuzzleFX)
-	FName MuzzleFXPoint;
+	UPROPERTY(EditDefaultsOnly, Category = "XL | Weapon")
+	FName MuzzleFXPoint = "Muzzle";
 
-	UPROPERTY(EditDefaultsOnly, Category = MuzzleFX)
+	UPROPERTY(EditDefaultsOnly, Category = "XL | Weapon")
 	UParticleSystem* MuzzleFX;
 
 	UPROPERTY(Transient)
 	UParticleSystemComponent* MuzzlePSC;
 
-	float LastAttackTime = 0.0f;
-	FTimerHandle FiringTimer;
+	/** firing audio (bLoopedFireSound set) */
+	UPROPERTY(Transient)
+	UAudioComponent* FireAC;
 
 public:
-	UFUNCTION()
-	void DetermineAction();
+
+	void DetermineAction() override;
+
+	UFUNCTION(Reliable, Server, WithValidation)
+	void ServerFireProjectile(FVector Origin, FVector ShootDir);
+
+	FVector GetAdjustedAim();
+	FVector GetAimDestination();
+	FVector GetAimOrigin();
+	FVector Trace(FVector Origin, FVector Target);
 
 protected:
 	void StartAttack();

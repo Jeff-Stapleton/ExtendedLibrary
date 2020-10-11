@@ -1,9 +1,11 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "Sound/SoundCue.h"
 #include "Structs/XLDecalData.h"
 #include "XLImpactEffect.generated.h"
+
+class UParticleSystem;
+class USoundCue;
 
 UCLASS(Abstract, Blueprintable)
 class AXLImpactEffect : public AActor

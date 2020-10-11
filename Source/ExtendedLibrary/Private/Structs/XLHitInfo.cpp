@@ -1,7 +1,7 @@
 // Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLHitInfo.h"
+#include "Structs/XLHitInfo.h"
 
 FXLHitInfo::FXLHitInfo()
 	: ActualDamage(0)

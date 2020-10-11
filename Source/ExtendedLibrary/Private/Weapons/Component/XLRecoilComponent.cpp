@@ -1,11 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLRecoilComponent.h"
+#include "Weapons/XLRangedWeapon.h"
+#include "Weapons/Components/XLRecoilComponent.h"
 
 UXLRecoilComponent::UXLRecoilComponent()
 {
-	bReplicates = true;
+	SetIsReplicatedByDefault(true);
     bWantsInitializeComponent = true;
 	PrimaryComponentTick.bCanEverTick = true;
 	RecoilIndex = 0;
@@ -120,14 +121,14 @@ void UXLRecoilComponent::ApplyRecoil_Implementation(float DeltaSeconds)
 {
 	if (PendingRecoil.Num() > 0)
 	{
-		float VerticalRecoil = CurrentRecoil.VerticalRecoil;
-		float HorizontalRecoil = CurrentRecoil.HorizontalRecoil;
+		float verticalRecoil = CurrentRecoil.VerticalRecoil;
+		float horizontalRecoil = CurrentRecoil.HorizontalRecoil;
 
 		CurrentRecoil.VerticalRecoil = FMath::FInterpTo(CurrentRecoil.VerticalRecoil, PendingRecoil[0].VerticalRecoil, DeltaSeconds, RecoilSpeed);
 		CurrentRecoil.HorizontalRecoil = FMath::FInterpTo(CurrentRecoil.HorizontalRecoil, PendingRecoil[0].HorizontalRecoil, DeltaSeconds, RecoilSpeed);
 
-		Owner->Character->AddControllerPitchInput(CurrentRecoil.VerticalRecoil - VerticalRecoil);
-		Owner->Character->AddControllerYawInput(CurrentRecoil.HorizontalRecoil - HorizontalRecoil);
+		Owner->Character->AddControllerPitchInput(CurrentRecoil.VerticalRecoil - verticalRecoil);
+		Owner->Character->AddControllerYawInput(CurrentRecoil.HorizontalRecoil - horizontalRecoil);
 
 		if (CurrentRecoil == PendingRecoil[0])
 		{

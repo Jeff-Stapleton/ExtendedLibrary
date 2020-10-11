@@ -3,6 +3,8 @@
 #include "Components/ActorComponent.h"
 #include "XLWeaponManager.generated.h"
 
+class AXLItem;
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class UXLWeaponManager : public UActorComponent
 {
@@ -11,10 +13,12 @@ class UXLWeaponManager : public UActorComponent
 public:
 
 	UPROPERTY(EditDefaultsOnly, Category = Inventory)
-	TArray<TSubclassOf<class AXLItem> > DefaultInventory;
+	TArray<TSubclassOf<AXLItem> > DefaultInventory;
 
 	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = Weapons)
-	TArray<class AXLItem*> Inventory;
+	TArray<AXLItem*> Inventory;
+
+public:
 
 	UXLWeaponManager();
 

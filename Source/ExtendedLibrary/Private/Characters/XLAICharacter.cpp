@@ -1,8 +1,8 @@
 // Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLAICharacter.h"
-#include "XLAIController.h"
+#include "Characters/XLAICharacter.h"
+#include "Controllers/XLAIController.h"
 
 AXLAICharacter::AXLAICharacter(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)

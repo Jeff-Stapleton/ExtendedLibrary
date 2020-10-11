@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLMovementComponent.h"
+#include "Characters/XLCharacter.h"
+#include "Components/Character/XLMovementComponent.h"
 
 UXLMovementComponent::UXLMovementComponent()
 {
@@ -32,8 +33,14 @@ void UXLMovementComponent::UpdateMovementSpeed()
 	}
 }
 
-void UXLMovementComponent::ModifyJumpHeight(float NewModifier)
+void UXLMovementComponent::ModifyJumpHeight(float HeightModifier)
 {
-	JumpVelocityModifier = NewModifier;
+	JumpVelocityModifier = HeightModifier;
 	JumpZVelocity = JumpVelocity * JumpVelocityModifier;
+}
+
+void UXLMovementComponent::ModifyMovementSpeed(float SpeedModifier)
+{
+	MovementSpeedModifier = SpeedModifier;
+	MaxWalkSpeed = BaseMovementSpeed * MovementSpeedModifier;
 }

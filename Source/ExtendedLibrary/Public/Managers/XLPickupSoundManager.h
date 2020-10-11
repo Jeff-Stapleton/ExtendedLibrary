@@ -3,6 +3,8 @@
 #include "Components/ActorComponent.h"
 #include "XLPickupSoundManager.generated.h"
 
+class USoundCue;
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class UXLPickupSoundManager : public UActorComponent
 {

@@ -1,8 +1,8 @@
 // Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLFindPointNearEnemy.h"
-#include "XLAIController.h"
+#include "AI/Tasks/XLFindPointNearEnemy.h"
+#include "Controllers/XLAIController.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyAllTypes.h"

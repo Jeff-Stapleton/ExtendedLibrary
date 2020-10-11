@@ -1,9 +1,9 @@
 // Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLSelectNextPatrolPoint.h"
-#include "XLAIController.h"
-#include "XLAICharacter.h"
+#include "AI/Tasks/XLSelectNextPatrolPoint.h"
+#include "Controllers/XLAIController.h"
+#include "Characters/XLAICharacter.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyAllTypes.h"
@@ -27,9 +27,9 @@ EBTNodeResult::Type UXLSelectNextPatrolPoint::ExecuteTask(UBehaviorTreeComponent
 	if (MyBot)
 	{
 		int32 Count = MyBot->Nodes.Num();
-		for (int32 Position = 0; Position < Count; Position++)
+		for (int32 position = 0; position < Count; position++)
 		{
-			const FVector Loc = MyBot->Nodes[Position]->GetActorLocation();
+			const FVector Loc = MyBot->Nodes[position]->GetActorLocation();
 			OwnerComp.GetBlackboardComponent()->SetValue<UBlackboardKeyType_Vector>(BlackboardKey.GetSelectedKeyID(), Loc);
 			if (Loc != FVector::ZeroVector)
 			{

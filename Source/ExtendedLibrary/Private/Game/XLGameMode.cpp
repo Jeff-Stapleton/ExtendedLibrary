@@ -1,10 +1,10 @@
 // Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLGameMode.h"
+#include "Game/XLGameMode.h"
 #include "Characters/XLCharacter.h"
 #include "Controllers/XLPlayerController.h"
-#include "XLPlayerState.h"
+#include "Online/XLPlayerState.h"
 
 AXLGameMode::AXLGameMode()
 {

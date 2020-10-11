@@ -1,4 +1,4 @@
 // Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLProjectileData.h"
+#include "Structs/XLProjectileData.h"

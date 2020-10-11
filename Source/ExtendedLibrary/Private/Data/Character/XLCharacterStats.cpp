@@ -1,11 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLCharacterStats.h"
+#include "Data/Character/XLCharacterStats.h"
 
 UXLCharacterStats::UXLCharacterStats()
 {
-	bReplicates = true;
+	SetIsReplicatedByDefault(true);
 }
 
 void UXLCharacterStats::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const

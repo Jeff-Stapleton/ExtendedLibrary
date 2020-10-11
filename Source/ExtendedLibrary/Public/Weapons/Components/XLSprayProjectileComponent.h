@@ -1,10 +1,6 @@
 #pragma once
 
-#include "XLRangedWeapon.h"
-#include "XLProjectile.h"
-#include "XLProjectileData.h"
-#include "XLProjectileComponent.h"
-#include "XLRangedWeapon.h"
+#include "Weapons/Components/Interfaces/XLProjectileComponent.h"
 #include "XLSprayProjectileComponent.generated.h"
 
 UCLASS(Blueprintable)

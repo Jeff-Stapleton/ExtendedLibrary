@@ -1,11 +1,9 @@
 #pragma once
 
-#include "XLRangedWeapon.h"
-#include "XLProjectile.h"
-#include "XLProjectileData.h"
-#include "XLProjectileComponent.h"
-#include "XLRangedWeapon.h"
+#include "Weapons/Components/Interfaces/XLProjectileComponent.h"
 #include "XLSingleProjectileComponent.generated.h"
+
+class AXLProjectile;
 
 UCLASS(Blueprintable)
 class EXTENDEDLIBRARY_API UXLSingleProjectileComponent : public UXLProjectileComponent
@@ -16,31 +14,9 @@ public:
 	UXLSingleProjectileComponent();
 	void InitializeComponent() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Base)
-	float MaxDamage = 19.0f;
-
-	/** The minimum amount of damage dealt possible */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Base)
-	float MinDamage = 19.0f;
-
-	/** type of damage */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Base)
-	TSubclassOf<UDamageType> DamageType;
-
-	/** The amount of force the attack applies */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Base)
-	float Force = 10000.0f;
-
-	/** Weapon ranges */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Base)
-	float MaxRange = 10000.0f;
-
-	UPROPERTY(EditDefaultsOnly, Category = TrailFX)
-	UParticleSystem* TrailFX;
-
 public:
 
-	UFUNCTION()
+	UFUNCTION(Reliable, Client)
 	void Fire();
 
 	UFUNCTION(Reliable, Server, WithValidation)

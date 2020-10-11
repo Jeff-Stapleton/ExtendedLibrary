@@ -1,13 +1,10 @@
 #pragma once
 
-#include "XLRangedWeapon.h"
-#include "XLCharacter.h"
-#include "XLPlayerController.h"
-#include "XLAIController.h"
+#include "Weapons/Components/Interfaces/XLTargetingComponent.h"
 #include "XLADSComponent.generated.h"
 
 UCLASS(Blueprintable)
-class EXTENDEDLIBRARY_API UXLADSComponent : public UActorComponent
+class EXTENDEDLIBRARY_API UXLADSComponent : public UXLTargetingComponent
 {
 	GENERATED_BODY()
 
@@ -15,23 +12,13 @@ class EXTENDEDLIBRARY_API UXLADSComponent : public UActorComponent
 
 	void InitializeComponent() override;
 
-public:
-	class AXLRangedWeapon* Owner;
-	class AXLCharacter* Character;
-	class AXLPlayerController* Controller;
-	class AXLPlayerCameraManager* CameraManager;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Base)
-	float DefaultFOV = 90;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Base)
-	float FOV = 45;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Base)
-	float Speed = 10.0f;
-
 private:
 	UFUNCTION()
 	void DetermineAction();
 
+	UFUNCTION(Reliable, Client)
+	void StartAim();
+
+	UFUNCTION(Reliable, Client)
+	void StopAim();
 };

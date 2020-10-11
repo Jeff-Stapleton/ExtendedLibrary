@@ -1,12 +1,17 @@
 #pragma once
 
-#include "XLWeapon.h"
-#include "XLWeaponAnimationManager.h"
-#include "XLWeaponSoundManager.h"
-#include "XLRangedWeaponCan.h"
-#include "XLRecoilData.h"
-#include "XLTargetingState.h"
+#include "Items/XLItem.h"
+#include "Cans/XLRangedWeaponCan.h"
+#include "Enums/XLTargetingState.h"
+#include "Enums/XLWeaponState.h"
 #include "XLRangedWeapon.generated.h"
+
+class UXLAimingComponent;
+class UXLProjectileComponent;
+class UXLAmmoComponent;
+class UXLRecoilComponent;
+class UXLFireComponent;
+class UXLTargetingComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponStateDelegate);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWeaponAimDelegate);
@@ -19,6 +24,7 @@ class EXTENDEDLIBRARY_API AXLRangedWeapon : public AXLItem
 	GENERATED_BODY()
 
 public:
+
 	UPROPERTY(BlueprintAssignable)
 	FWeaponStateDelegate WeaponStateDelegate;
 
@@ -35,40 +41,40 @@ public:
 	FReloadEventDelegate ReloadEventDelegate;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Components)
-	TSubclassOf<class UXLAimingComponent> AimingComponentBP;
+	TSubclassOf<UXLAimingComponent> AimingComponentBP;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Components)
-	TSubclassOf<class UXLProjectileComponent> ProjectileComponentBP;
+	TSubclassOf<UXLProjectileComponent> ProjectileComponentBP;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Components)
-	TSubclassOf<class UXLAmmoComponent> ReloadComponentBP;
+	TSubclassOf<UXLAmmoComponent> ReloadComponentBP;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Components)
-	TSubclassOf<class UXLRecoilComponent> RecoilComponentBP;
+	TSubclassOf<UXLRecoilComponent> RecoilComponentBP;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Components)
-	TSubclassOf<class UXLFireComponent> FiringComponentBP;
+	TSubclassOf<UXLFireComponent> FiringComponentBP;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Components)
-	TSubclassOf<class UXLADSComponent> TargetingComponentBP;
+	TSubclassOf<UXLTargetingComponent> TargetingComponentBP;
 
 	UPROPERTY(BlueprintReadWrite, Category = Aiming)
-	class UXLAimingComponent* AimingComponent;
+	UXLAimingComponent* AimingComponent;
 
 	UPROPERTY(BlueprintReadWrite, Category = Firing)
-	class UXLFireComponent* FiringComponent;
+	UXLFireComponent* FiringComponent;
 
 	UPROPERTY(BlueprintReadWrite, Category = Ballistics)
-	class UXLProjectileComponent* ProjectileComponent;
+	UXLProjectileComponent* ProjectileComponent;
 
 	UPROPERTY(BlueprintReadWrite, Category = Ammo)
-	class UXLAmmoComponent* ReloadComponent;
+	UXLAmmoComponent* ReloadComponent;
 
 	UPROPERTY(BlueprintReadWrite, Category = Firing)
-	class UXLRecoilComponent* RecoilComponent;
+	UXLRecoilComponent* RecoilComponent;
 
 	UPROPERTY(BlueprintReadWrite, Category = Targeting)
-	class UXLADSComponent* TargetingComponent;
+	UXLTargetingComponent* TargetingComponent;
 
 	UPROPERTY(BlueprintReadWrite, Replicated)
 	TEnumAsByte<EWeaponState::Type> WeaponState;

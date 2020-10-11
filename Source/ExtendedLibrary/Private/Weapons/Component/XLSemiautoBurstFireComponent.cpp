@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLSemiautoBurstFireComponent.h"
+#include "Weapons/Components/XLSemiautoBurstFireComponent.h"
 
 UXLSemiautoBurstFireComponent::UXLSemiautoBurstFireComponent()
 {
@@ -12,17 +12,21 @@ void UXLSemiautoBurstFireComponent::InitializeComponent()
 {
 	Super::InitializeComponent();
 
-	GetWeapon()->WeaponStateDelegate.AddDynamic(this, &UXLSemiautoBurstFireComponent::DetermineAction);
+	GetWeapon()->ItemPrimaryStateDelegate.AddDynamic(this, &UXLSemiautoBurstFireComponent::DetermineAction);
 }
 
 void UXLSemiautoBurstFireComponent::DetermineAction()
 {
-	if (GetWeapon()->WeaponState == EWeaponState::Firing)
+	if (GetWeapon()->PrimaryState == EWeaponState::Firing)
 	{
+		//GetWeapon()->PlayFX(MuzzleFX, MuzzleFXPoint);
+		//GetWeapon()->PlaySound(FireLoopSound);
 		StartAttack();
 	}
 	else
 	{
+		//GetWeapon()->StopFX();
+		//GetWeapon()->StopSound();
 		StopAttack();
 	}
 }
@@ -53,8 +57,10 @@ void UXLSemiautoBurstFireComponent::Fire()
 	{
 		if (XLRangedWeaponCan::Fire(GetWeapon()))
 		{
-			GetWeapon()->FireEventDelegate.Broadcast();
+			//GetWeapon()->FireEventDelegate.Broadcast();
 			LastAttackTime = GetWorld()->GetTimeSeconds();
+			GetWeapon()->PlayFX(MuzzleFX, MuzzleFXPoint);
+			GetWeapon()->PlaySound(FireLoopSound);
 		}
 		BurstCounter++;
 	}

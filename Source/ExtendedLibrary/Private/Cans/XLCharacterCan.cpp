@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLCharacterCan.h"
+#include "Cans/XLCharacterCan.h"
 
 bool XLCharacterCan::Jump(AXLCharacter* Character)
 {
@@ -28,7 +28,7 @@ bool XLCharacterCan::Move(AXLCharacter* Character)
 }
 bool XLCharacterCan::Strafe(AXLCharacter* Character)
 {
-	if (Character && Character->Controller)
+	if (Character && Character->Controller && Character->ActionState != EActionState::Sprinting)
 	{
 		return true;
 	}
@@ -131,9 +131,9 @@ bool XLCharacterCan::StopSprint(AXLCharacter* Character)
 }
 
 
-bool XLCharacterCan::StartEquip(AXLCharacter* Character, int32 Weapon)
+bool XLCharacterCan::StartEquip(AXLCharacter* Character, AXLItem* Weapon)
 {
-	if (Character && Character->GetController() && Weapon < Character->CharacterInventory->Inventory.Num() )
+	if (Character && Character->GetController() && Weapon)
 	{
 		return true;
 	}
@@ -156,7 +156,7 @@ bool XLCharacterCan::StopEquip(AXLCharacter* Character)
 
 bool XLCharacterCan::StartAim(AXLCharacter* Character)
 {
-	if (Character && Character->Controller && Character->CurrentItem < Character->CharacterInventory->Inventory.Num())
+	if (Character && Character->Controller && Character->CurrentItem &&Character->ActionState != EActionState::Sprinting)
 	{
 		return true;
 	}
@@ -167,7 +167,7 @@ bool XLCharacterCan::StartAim(AXLCharacter* Character)
 }
 bool XLCharacterCan::StopAim(AXLCharacter* Character)
 {
-	if (Character && Character->Controller && Character->CurrentItem < Character->CharacterInventory->Inventory.Num())
+	if (Character && Character->Controller && Character->CurrentItem)
 	{
 		return true;
 	}
@@ -179,7 +179,7 @@ bool XLCharacterCan::StopAim(AXLCharacter* Character)
 
 bool XLCharacterCan::StartAttack(AXLCharacter* Character)
 {
-	if (Character && Character->Controller && Character->CurrentItem < Character->CharacterInventory->Inventory.Num())
+	if (Character && Character->Controller && Character->CurrentItem && Character->ActionState != EActionState::Sprinting)
 	{
 		return true;
 	}
@@ -190,7 +190,7 @@ bool XLCharacterCan::StartAttack(AXLCharacter* Character)
 }
 bool XLCharacterCan::StopAttack(AXLCharacter* Character)
 {
-	if (Character && Character->Controller && Character->CurrentItem < Character->CharacterInventory->Inventory.Num())
+	if (Character && Character->Controller && Character->CurrentItem)
 	{
 		return true;
 	}
@@ -202,7 +202,7 @@ bool XLCharacterCan::StopAttack(AXLCharacter* Character)
 
 bool XLCharacterCan::StartReload(AXLCharacter* Character)
 {
-	if (Character && Character->Controller && Character->CurrentItem < Character->CharacterInventory->Inventory.Num())
+	if (Character && Character->Controller && Character->CurrentItem)
 	{
 		return true;
 	}

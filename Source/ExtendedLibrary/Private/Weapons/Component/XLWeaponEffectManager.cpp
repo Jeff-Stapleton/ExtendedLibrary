@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLWeaponEffectManager.h"
+#include "Weapons/XLRangedWeapon.h"
+#include "Weapons/Components/XLWeaponEffectManager.h"
 
 UXLWeaponEffectManager::UXLWeaponEffectManager()
 {

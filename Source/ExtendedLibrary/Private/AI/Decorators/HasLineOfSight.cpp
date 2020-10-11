@@ -1,12 +1,12 @@
 // Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 
 #include "ExtendedLibraryPCH.h"
-#include "HasLineOfSight.h"
+#include "AI/Decorators/HasLineOfSight.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
-#include "XLAICharacter.h"
-#include "XLAIController.h"
+#include "Characters/XLAICharacter.h"
+#include "Controllers/XLAIController.h"
 #include "Online/XLPlayerState.h"
 
 UHasLineOfSight::UHasLineOfSight(const FObjectInitializer& ObjectInitializer)
@@ -62,7 +62,6 @@ bool UHasLineOfSight::CalculateRawConditionValue(UBehaviorTreeComponent& OwnerCo
 
 bool UHasLineOfSight::LOSTrace(AActor* InActor, AActor* InEnemyActor, const FVector& EndLocation) const
 {
-	static FName LosTag = FName(TEXT("AILosTrace"));
 	AXLAIController* MyController = Cast<AXLAIController>(InActor);
 	AXLAICharacter* MyBot = MyController ? Cast<AXLAICharacter>(MyController->GetPawn()) : NULL; 
 
@@ -71,8 +70,7 @@ bool UHasLineOfSight::LOSTrace(AActor* InActor, AActor* InEnemyActor, const FVec
 		if (MyBot != NULL)
 		{
 			// Perform trace to retrieve hit info
-			FCollisionQueryParams TraceParams(LosTag, true, InActor);
-			TraceParams.bTraceAsyncScene = true;
+			FCollisionQueryParams TraceParams(SCENE_QUERY_STAT(AILosTrace), true, InActor);
 			
 			TraceParams.bReturnPhysicalMaterial = true;
 			TraceParams.AddIgnoredActor(MyBot);

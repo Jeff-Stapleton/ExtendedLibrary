@@ -1,25 +1,13 @@
 #include "Engine.h"
-#include "ModuleManager.h"
-#include "Internationalization.h"
-
-#include "Animation/AnimInstance.h"
-#include "Animation/AnimMontage.h"
-
+#include "Modules/ModuleManager.h"
+#include "Internationalization/Internationalization.h"
+#include "ParticleDefinitions.h"
+#include "SoundDefinitions.h"
 #include "Net/UnrealNetwork.h"
 
-#include "XLAirVehicle.h"
-#include "XLCharacter.h"
-#include "XLPlayerController.h"
-#include "XLCharacterStats.h"
-#include "XLItem.h"
-#include "XLRangedWeapon.h"
-#include "XLAimingComponent.h"
-#include "XLCharacterResources.h"
-#include "XLProjectileComponent.h"
-#include "XLAmmoComponent.h"
-#include "XLRecoilComponent.h"
-#include "XLFireComponent.h"
-#include "XLADSComponent.h"
+#include "Characters/XLCharacter.h"
+#include "Controllers/XLPlayerController.h"
+
 
 #define XL_SURFACE_Default			SurfaceType_Default
 #define XL_SURFACE_Concrete			SurfaceType1
@@ -31,6 +19,9 @@
 #define XL_SURFACE_Glass			SurfaceType7
 #define XL_SURFACE_Flesh			SurfaceType8
 #define XL_SURFACE_Energy			SurfaceType9
+#define XL_SURFACE_Bark				SurfaceType10
+#define XL_SURFACE_Vegetation		SurfaceType11
+#define XL_SURFACE_Plastic			SurfaceType12
 
 #define COLLISION_PHYSICAL_OBJECT	ECC_GameTraceChannel1
 #define COLLISION_PHASE_OBJECT		ECC_GameTraceChannel2

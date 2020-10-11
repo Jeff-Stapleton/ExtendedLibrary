@@ -1,20 +1,20 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLShellAmmoComponent.h"
+#include "Weapons/XLRangedWeapon.h"
+#include "Weapons/Components/XLShellAmmoComponent.h"
 
 UXLShellAmmoComponent::UXLShellAmmoComponent()
 {
 	bWantsInitializeComponent = true;
-	bReplicates = true;
 }
 
 void UXLShellAmmoComponent::InitializeComponent()
 {
     Super::InitializeComponent();
 
-	CurrentAmmo = MaxAmmo;
-	CurrentClipAmmo = MaxClipAmmo;
+	CurrentAmmo = AmmoConfig.MaxAmmo;
+	CurrentClipAmmo = AmmoConfig.MaxClipAmmo;
 
 	GetWeapon()->WeaponStateDelegate.AddDynamic(this, &UXLShellAmmoComponent::DetermineAction);
 	GetWeapon()->FireEventDelegate.AddDynamic(this, &UXLShellAmmoComponent::ConsumeAmmo);
@@ -31,14 +31,14 @@ void UXLShellAmmoComponent::DetermineAction()
 
 void UXLShellAmmoComponent::Reload()
 {
-	GetWeapon()->Character->PlayAnimMontage(ReloadAnim, AnimationRate);
+	GetWeapon()->Character->PlayAnimation(ReloadAnim, AnimationRate);
 	GetWeapon()->PlaySound(ReloadSound);
 	GetWeapon()->GetWorldTimerManager().SetTimer(ReloadTimer, this, &UXLShellAmmoComponent::LoadShell, ReloadDuration, false);
 }
 
 void UXLShellAmmoComponent::LoadShell()
 {
-	if (CurrentClipAmmo < MaxClipAmmo && CurrentAmmo > 0)
+	if (CurrentClipAmmo < AmmoConfig.MaxClipAmmo && CurrentAmmo > 0)
 	{
 		CurrentClipAmmo++;
 		if (!InfiniteAmmo)
@@ -47,7 +47,7 @@ void UXLShellAmmoComponent::LoadShell()
 		}
 	}
 
-	if (CurrentClipAmmo < MaxClipAmmo && CurrentAmmo > 0)
+	if (CurrentClipAmmo < AmmoConfig.MaxClipAmmo && CurrentAmmo > 0)
 	{
 		Reload();
 	}

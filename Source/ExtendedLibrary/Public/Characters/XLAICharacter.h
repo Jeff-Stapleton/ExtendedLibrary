@@ -2,8 +2,11 @@
 
 #pragma once
 
-#include "XLCharacter.h"
+#include "Characters/XLCharacter.h"
 #include "XLAICharacter.generated.h"
+
+class UBehaviorTree;
+class ATargetPoint;
 
 UCLASS()
 class EXTENDEDLIBRARY_API AXLAICharacter : public AXLCharacter
@@ -13,12 +16,10 @@ class EXTENDEDLIBRARY_API AXLAICharacter : public AXLCharacter
 public:
 
 	UPROPERTY(EditAnywhere, Category=Behavior)
-	class UBehaviorTree* BotBehavior;
-
-	//virtual bool IsFirstPerson() const override;
+	UBehaviorTree* BotBehavior;
 
 	virtual void FaceRotation(FRotator NewRotation, float DeltaTime = 0.f) override;
 
 	UPROPERTY(EditAnywhere, Category = Config)
-	TArray<class ATargetPoint*> Nodes;
+	TArray<ATargetPoint*> Nodes;
 };

@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
-#include "XLCharacter.h"
 #include "XLCharacterResources.generated.h"
+
+class AXLCharacter;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class UXLCharacterResources : public UActorComponent
@@ -12,7 +13,7 @@ class UXLCharacterResources : public UActorComponent
 public:
 	UXLCharacterResources();
 
-	class AXLCharacter* Character;
+	AXLCharacter* Character;
 
 	/** The amount of health the Pawn has */
 	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = Resources)

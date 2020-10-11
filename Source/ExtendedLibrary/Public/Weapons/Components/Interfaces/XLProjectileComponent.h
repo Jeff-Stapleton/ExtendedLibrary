@@ -1,8 +1,10 @@
 #pragma once
 
-#include "XLProjectile.h"
-#include "XLProjectileData.h"
+#include "Projectiles/XLProjectile.h"
+#include "Structs/XLProjectileData.h"
 #include "XLProjectileComponent.generated.h"
+
+class AXLRangedWeapon;
 
 UCLASS()
 class EXTENDEDLIBRARY_API UXLProjectileComponent : public UActorComponent
@@ -14,7 +16,7 @@ public:
 	UXLProjectileComponent();
 	void InitializeComponent() override;
 
-	class AXLRangedWeapon* GetWeapon();
+	AXLRangedWeapon* GetWeapon();
 
 	UPROPERTY(EditDefaultsOnly, Category = Config)
 	FXLProjectileData ProjectileData;

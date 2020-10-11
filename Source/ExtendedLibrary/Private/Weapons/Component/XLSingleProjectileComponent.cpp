@@ -1,9 +1,11 @@
 #include "ExtendedLibraryPCH.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "XLSingleProjectileComponent.h"
+#include "Weapons/Components/XLAimingComponent.h"
+#include "Weapons/Components/XLSingleProjectileComponent.h"
 
 UXLSingleProjectileComponent::UXLSingleProjectileComponent()
 {
+	SetIsReplicatedByDefault(true);
 	bWantsInitializeComponent = true;
 }
 
@@ -14,12 +16,12 @@ void UXLSingleProjectileComponent::InitializeComponent()
 	GetWeapon()->FireEventDelegate.AddDynamic(this, &UXLSingleProjectileComponent::Fire);
 }
 
-void UXLSingleProjectileComponent::Fire()
+void UXLSingleProjectileComponent::Fire_Implementation()
 {
 	const FVector Start = GetWeapon()->GetMuzzleLocation();
 
 	//Access this Via the weapon
-	const FVector End = GetWeapon()->AimingComponent->GetAdjustedAim();
+	const FVector End = GetWeapon()->AimingComponent->GetAdjustedAim(); // No more aiming component --  handle it in this class
 
 	ServerFireProjectile(Start, End);
 }
@@ -37,9 +39,9 @@ void UXLSingleProjectileComponent::ServerFireProjectile_Implementation(FVector O
 	{
 		//Projectile->Instigator = Instigator;
 		Projectile->SetOwner(GetWeapon());
-		AppyProjectileData(Projectile);
+		AppyProjectileData(Projectile); // Thinking about making projectiles completely independent
 		FVector test = (ShootDir - Origin).GetSafeNormal();
-		Projectile->InitVelocity(test);
+		Projectile->InitVelocity(test); 
 
 		UGameplayStatics::FinishSpawningActor(Projectile, SpawnTM);
 	}

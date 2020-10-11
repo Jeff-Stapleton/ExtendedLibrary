@@ -11,10 +11,8 @@ class EXTENDEDLIBRARY_API AXLInteractPickup : public AXLPickup, public IXLIntera
 
 public:
 
-	void OnInspect_Implementation(AActor* MyInstigator);
+	void OnInspect_Implementation(AActor* InteractingActor);
 
-	void OnInteract_Implementation(AActor* MyInstigator);
-
-	virtual void OnPickedUp(class AXLCharacter* Pawn) override;
+	void OnInteract_Implementation(AActor* InteractingActor);
 
 };

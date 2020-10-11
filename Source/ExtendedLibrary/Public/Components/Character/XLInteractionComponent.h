@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Interfaces/XLInteractionInterface.h"
+#include "Camera/XLCamera.h"
 #include "XLInteractionComponent.generated.h"
 
 UCLASS()

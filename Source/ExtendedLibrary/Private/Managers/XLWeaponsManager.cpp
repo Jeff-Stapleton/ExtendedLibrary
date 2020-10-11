@@ -1,16 +1,17 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLWeaponManager.h"
+#include "Items/XLItem.h"
+#include "Managers/XLWeaponManager.h"
 
 UXLWeaponManager::UXLWeaponManager()
 {
-	bReplicates = true;
+	SetIsReplicatedByDefault(true);
 }
 
 void UXLWeaponManager::DestroyInventory()
 {
-	/*if (Role < ROLE_Authority)
+	/*if (GetLocalRole() < ROLE_Authority)
 	{
 		return;
 	}*/

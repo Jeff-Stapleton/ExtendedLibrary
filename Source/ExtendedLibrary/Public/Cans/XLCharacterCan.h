@@ -22,7 +22,7 @@ public:
 	static bool StartSprint(AXLCharacter* Character);
 	static bool StopSprint(AXLCharacter* Character);
 
-	static bool StartEquip(AXLCharacter* Character, int32 Weapon);
+	static bool StartEquip(AXLCharacter* Character, AXLItem* Weapon);
 	static bool StopEquip(AXLCharacter* Character);
 
 	static bool StartAim(AXLCharacter* Character);

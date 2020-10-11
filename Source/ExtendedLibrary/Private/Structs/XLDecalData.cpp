@@ -1,2 +1,2 @@
 #include "ExtendedLibraryPCH.h"
-#include "XLDecalData.h"
+#include "Structs/XLDecalData.h"

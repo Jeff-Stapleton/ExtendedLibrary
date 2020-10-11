@@ -18,4 +18,9 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = Animation)
 	UAnimMontage* Death;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XL|Characters")
+	TSubclassOf<UAnimInstance> DefaultAnimClass;
+
+	UFUNCTION(BlueprintCallable)
+	void SetAnimClass(TSubclassOf<UAnimInstance> NewAnimClass);
 };

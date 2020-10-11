@@ -1,5 +1,6 @@
 #include "ExtendedLibraryPCH.h"
-#include "XLProjectileComponent.h"
+#include "Weapons/XLRangedWeapon.h"
+#include "Weapons/Components/Interfaces/XLProjectileComponent.h"
 
 UXLProjectileComponent::UXLProjectileComponent()
 {

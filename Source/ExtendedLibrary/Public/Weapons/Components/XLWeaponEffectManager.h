@@ -1,8 +1,11 @@
 #pragma once
 
 #include "Components/ActorComponent.h"
-#include "XLImpactEffect.h"
+#include "Enums/XLWeaponState.h"
 #include "XLWeaponEffectManager.generated.h"
+
+class AXLImpactEffect;
+class AXLRangedWeapon;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class UXLWeaponEffectManager : public UActorComponent
@@ -32,7 +35,7 @@ public:
 	UPROPERTY(Transient)
 	UParticleSystemComponent* MuzzlePSC;
 
-	class AXLRangedWeapon* Owner;
+	AXLRangedWeapon* Owner;
 
 public:
 	UXLWeaponEffectManager();

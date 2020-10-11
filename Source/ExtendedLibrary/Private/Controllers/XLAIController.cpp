@@ -1,17 +1,16 @@
 // Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 
 #include "ExtendedLibraryPCH.h"
-#include "XLAIController.h"
-#include "XLAICharacter.h"
-#include "XLActionCharacter.h"
-#include "XLHealthState.h"
+#include "Controllers/XLAIController.h"
+#include "Characters/XLAICharacter.h"
+#include "Characters/XLPlayerCharacter.h"
+#include "Enums/XLHealthState.h"
 #include "Online/XLPlayerState.h"
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Bool.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
-#include "XLWeapon.h"
 
 AXLAIController::AXLAIController(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -21,7 +20,7 @@ AXLAIController::AXLAIController(const FObjectInitializer& ObjectInitializer) : 
 	bWantsPlayerState = true;
 }
 
-void AXLAIController::Possess(APawn* InPawn)
+void AXLAIController::OnPossess(APawn* InPawn)
 {
 	Super::Possess(InPawn);
 
@@ -42,7 +41,7 @@ void AXLAIController::Possess(APawn* InPawn)
 	}
 }
 
-void AXLAIController::UnPossess()
+void AXLAIController::OnUnPossess()
 {
 	Super::UnPossess();
 
@@ -68,7 +67,7 @@ void AXLAIController::Respawn()
 void AXLAIController::ShootEnemy()
 {
 	AXLAICharacter* MyBot = Cast<AXLAICharacter>(GetPawn());
-	AXLItem* MyWeapon = MyBot ? MyBot->CharacterInventory->GetItem(MyBot->CurrentItem) : NULL;
+	AXLItem* MyWeapon = MyBot ? MyBot->CurrentItem : NULL;
 	if (MyWeapon == NULL)
 	{
 		return;
