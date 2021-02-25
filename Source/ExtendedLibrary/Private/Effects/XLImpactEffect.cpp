@@ -1,9 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
+#include "PhysicalMaterials/PhysicalMaterial.h"
+#include "Chaos/ChaosEngineInterface.h"
 #include "Effects/XLImpactEffect.h"
 
-AXLImpactEffect::AXLImpactEffect()
+AXLImpactEffect::AXLImpactEffect(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	SetAutoDestroyWhenFinished(true);
 }

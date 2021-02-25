@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "Effects/XLGameplayEffect.h"
 #include "Enums/XLItemPrimaryState.h"
 #include "Enums/XLItemSecondaryState.h"
 #include "Structs/XLItemSounds.h"
@@ -8,7 +9,7 @@
 #include "XLItem.generated.h"
 
 class AXLPickup;
-class AXLAction;
+class UXLGameplayAbility;
 class AXLCharacter;
 class USoundCue;
 class UParticleSystem;
@@ -29,11 +30,14 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "XL|Item")
 	FName Identifier;
 
-	UPROPERTY(BlueprintReadWrite, Category = "XL|Item")
-	TArray<TSubclassOf<AXLAction>> ActionBPs;
-	UPROPERTY(BlueprintReadWrite, Category = "XL|Item")
-	TArray<AXLAction*> Actions;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "XL|Item")
+	TArray<TSubclassOf<UXLGameplayAbility>> ItemAbilities;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "XL|Item")
+	TArray<TSubclassOf<UXLGameplayEffect>> ItemEffects;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "IO|Equipment")
+	USceneComponent* Root;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "XL|Item")
 	USkeletalMeshComponent* Mesh3P;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "XL|Item")
@@ -49,20 +53,6 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XL|Item")
 	TSubclassOf<UAnimInstance> AnimClass;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "XL|Item")
-	int32 MaxCount;
-	UPROPERTY(BlueprintReadWrite, Category = "XL|Item")
-	int32 Count;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "XL|Item")
-	float EquipDuration = 2.0f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "XL|Item")
-	float UnequipDuration = 2.0f;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "XL|Item")
-	bool IsToggleActivated;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "XL|Item")
 	FItemSounds ItemSounds;
@@ -98,7 +88,8 @@ public:
 
 	virtual void Tick(float DeltaSeconds) override;
 
-	void SetOwningPawn(AXLCharacter* Character);
+	UFUNCTION(BlueprintCallable, Category = "XL|Item")
+	void SetOwningPawn(AXLCharacter* NewOwner);
 
 	UFUNCTION()
 	void OnRep_MyPawn();
@@ -120,28 +111,23 @@ public:
 	virtual FVector GetSocketLocation(FName SocketName);
 
 	UFUNCTION(BlueprintCallable, Category = "XL|Item")
-	virtual void Equip(USkeletalMeshComponent* AttachMesh3P, FName AttachPoint);
+	virtual void Attach(USkeletalMeshComponent* AttachMesh3P, FName AttachPoint);
+
 
 	UFUNCTION(BlueprintCallable, Category = "XL|Item")
+	virtual void SetVisibility(bool Visibility, bool Include1PMesh);
+	UFUNCTION(Reliable, NetMulticast, Category = "XL|Item")
+	virtual void ServerSetVisibility(bool Visibility, bool Include1PMesh);
+
+	UFUNCTION(BlueprintCallable, Category = "XL|Item")
+	virtual void Detach();
+
+	virtual void Equip();
+
 	virtual void Unequip();
 
 	UFUNCTION(BlueprintCallable, Category = "XL|Item")
 	virtual void Drop();
-
-	UFUNCTION(BlueprintCallable, Category = "XL|Item")
-	virtual void PrimaryActivate();
-	UFUNCTION(BlueprintCallable, Category = "XL|Item")
-	virtual void PrimaryDeactivate();
-
-	UFUNCTION(BlueprintCallable, Category = "XL|Item")
-	virtual void SecondaryActivate();
-	UFUNCTION(BlueprintCallable, Category = "XL|Item")
-	virtual void SecondaryDeactivate();
-
-	UFUNCTION(BlueprintCallable, Category = "XL|Item")
-	virtual void TertiaryActivate();
-	UFUNCTION(BlueprintCallable, Category = "XL|Item")
-	virtual void TertiaryDeactivate();
 
 	virtual void TogglePerspective();
 

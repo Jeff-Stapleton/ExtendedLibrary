@@ -4,7 +4,7 @@
 #include "Projectiles/XLImpactFX.h"
 
 
-AXLImpactFX::AXLImpactFX()
+AXLImpactFX::AXLImpactFX(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	SetAutoDestroyWhenFinished(true);
 }

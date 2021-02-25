@@ -18,31 +18,6 @@ AXLPlayerCharacter::AXLPlayerCharacter(const FObjectInitializer& ObjectInitializ
 	Camera = CreateDefaultSubobject<UXLCamera>(TEXT("Camera"));
 	Camera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	Camera->bUsePawnControlRotation = false;
-
-	Head = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Head"));
-	UpperBody = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("UpperBody"));
-	LowerBody = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("LowerBody"));
-	Hands = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Hands"));
-	Feet = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Feet"));
-
-	Head->SetupAttachment(RootComponent);
-	UpperBody->SetupAttachment(RootComponent);
-	LowerBody->SetupAttachment(RootComponent);
-	Hands->SetupAttachment(RootComponent);
-	Feet->SetupAttachment(RootComponent);
-
-	//Ideally we'd adjust the skeletal meshes and not need these
-	Head->SetRelativeRotation(FRotator(0.0f, -90.0f, 0.0f));
-	Head->SetRelativeLocation(FVector(0.0f, 0.0f, -96.0f));
-	UpperBody->SetRelativeRotation(FRotator(0.0f, -90.0f, 0.0f));
-	UpperBody->SetRelativeLocation(FVector(0.0f, 0.0f, -96.0f));
-	LowerBody->SetRelativeRotation(FRotator(0.0f, -90.0f, 0.0f));
-	LowerBody->SetRelativeLocation(FVector(0.0f, 0.0f, -96.0f));
-	Hands->SetRelativeRotation(FRotator(0.0f, -90.0f, 0.0f));
-	Hands->SetRelativeLocation(FVector(0.0f, 0.0f, -96.0f));
-	Feet->SetRelativeRotation(FRotator(0.0f, -90.0f, 0.0f));
-	Feet->SetRelativeLocation(FVector(0.0f, 0.0f, -96.0f));
-
 }
 
 void AXLPlayerCharacter::BeginPlay()
@@ -72,23 +47,5 @@ void AXLPlayerCharacter::ToggleCamera()
 	else
 	{
 		//GetMesh()->SetOwnerNoSee(false);
-	}
-}
-
-void AXLPlayerCharacter::StartAim()
-{
-	Super::StartAim();
-	if (XLCharacterCan::StartAim(this))
-	{
-
-	}
-}
-
-void AXLPlayerCharacter::StopAim()
-{
-	Super::StopAim();
-	if (XLCharacterCan::StopAim(this))
-	{
-
 	}
 }

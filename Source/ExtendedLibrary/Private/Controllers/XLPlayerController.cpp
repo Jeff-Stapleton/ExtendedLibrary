@@ -54,17 +54,17 @@ void AXLPlayerController::SetupInputComponent()
 
 	check(InputComponent);
 
-	ResetInputMode();
+	//ResetInputMode();
 
-	CharacterInputComponent = NewObject<UXLCharacterInputComponent>(this);
-	CharacterInputComponent->Init(this);
+	//CharacterInputComponent = NewObject<UXLCharacterInputComponent>(this);
+	//CharacterInputComponent->Init(this);
 
-	if (UInputDelegateBinding::SupportsInputDelegate(GetClass()))
-	{
-		UInputDelegateBinding::BindInputDelegates(GetClass(), CharacterInputComponent);
-	}
+	//if (UInputDelegateBinding::SupportsInputDelegate(GetClass()))
+	//{
+	//	UInputDelegateBinding::BindInputDelegates(GetClass(), CharacterInputComponent);
+	//}
 
-	SetControllerInputMode(InputMode);
+	//SetControllerInputMode(InputMode);
 }
 
 void AXLPlayerController::SetControllerInputMode(TEnumAsByte<EInputMode::Type> Mode)

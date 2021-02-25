@@ -2,14 +2,15 @@
 
 #include "ExtendedLibraryPCH.h"
 #include "Characters/XLCharacter.h"
+#include "Data/XLCharacterAttributeSet.h"
 #include "Components/Character/XLMovementComponent.h"
 
 UXLMovementComponent::UXLMovementComponent()
 {
 	Character = Cast<AXLCharacter>(GetOwner());
 
-	JumpZVelocity = JumpVelocity * JumpVelocityModifier;
-	MaxWalkSpeed = BaseMovementSpeed * MovementSpeedModifier;
+	bWantsInitializeComponent = true;
+
 	CrouchedHalfHeight = 60.0f;
 }
 

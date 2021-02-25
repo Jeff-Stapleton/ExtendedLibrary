@@ -9,11 +9,11 @@ class USoundCue;
 UCLASS(Abstract, Blueprintable)
 class AXLImpactFX : public AActor
 {
-	GENERATED_BODY()
+	GENERATED_UCLASS_BODY()
 
 public: 
 
-	AXLImpactFX();
+	//AXLImpactFX();
 
 	/** default impact FX used when material specific override doesn't exist */
 	UPROPERTY(EditDefaultsOnly, Category = Defaults)

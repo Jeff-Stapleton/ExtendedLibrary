@@ -2,12 +2,16 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ExtendedLibraryPCH.h"
+#include "Action/XLAbilitySystemComponent.h"
+#include "Action/XLGameplayAbility.h"
+#include "Effects/XLGameplayEffect.h"
 #include "Characters/XLCharacter.h"
 #include "Cans/XLCharacterCan.h"
 #include "Components/Character/XLMovementComponent.h"
 #include "Components/Character/XLInteractionComponent.h"
 #include "Managers/XLInventoryManager.h"
 #include "Items/XLItem.h"
+#include "Data/XLCharacterAttributeSet.h"
 #include "Weapons/XLRangedWeapon.h"
 #include "Data/Character/XLCharacterResources.h"
 #include "Data/Character/XLCharacterStats.h"
@@ -15,12 +19,16 @@
 #include "Managers/XLPlayerEffectManager.h"
 #include "Components/Character/XLCoverComponent.h"
 
-
-///////////////////////////////////////// INITIALIZATION //////////////////////////////////////////
+//////////////////////////////////////////////// INITIALIZATION ///////////////////////////////////////////////////
 
 AXLCharacter::AXLCharacter(const FObjectInitializer& ObjectInitializer)
-	: Super(ObjectInitializer.SetDefaultSubobjectClass<UXLMovementComponent>(ACharacter::CharacterMovementComponentName))
+	: Super(ObjectInitializer.SetDefaultSubobjectClass<UXLMovementComponent>(ACharacter::CharacterMovementComponentName).DoNotCreateDefaultSubobject(ACharacter::MeshComponentName))
 {
+	AbilitySystemComponent = CreateDefaultSubobject<UXLAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
+	AbilitySystemComponent->SetIsReplicated(true);
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Full);
+
+	CharacterAttributes = CreateDefaultSubobject<UXLCharacterAttributeSet>(TEXT("CharacterAttributes"));
 	CharacterResources = CreateDefaultSubobject<UXLCharacterResources>(TEXT("CharacterResources"));
 	CharacterStats = CreateDefaultSubobject<UXLCharacterStats>(TEXT("CharacterStats"));
 	CharacterInventory = CreateDefaultSubobject<UXLInventoryManager>(TEXT("CharacterInventory"));
@@ -29,6 +37,34 @@ AXLCharacter::AXLCharacter(const FObjectInitializer& ObjectInitializer)
 	CoverComponent = CreateDefaultSubobject<UXLCoverComponent>(TEXT("CoverComponent"));
 	InteractionComponent = CreateDefaultSubobject<UXLInteractionComponent>(TEXT("InteractionComponent"));
 	MovementComponent = Cast<UXLMovementComponent>(GetMovementComponent());
+
+	Head = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Head"));
+	UpperBody = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("UpperBody"));
+	Arms = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Arms"));
+	LowerBody = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("LowerBody"));
+	Hands = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Hands"));
+	Feet = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Feet"));
+
+	Head->SetupAttachment(GetCapsuleComponent());
+	UpperBody->SetupAttachment(GetCapsuleComponent());
+	Arms->SetupAttachment(GetCapsuleComponent());
+	LowerBody->SetupAttachment(GetCapsuleComponent());
+	Hands->SetupAttachment(GetCapsuleComponent());
+	Feet->SetupAttachment(GetCapsuleComponent());
+
+	// Ideally we'd adjust the skeletal meshes and not need these
+	Head->SetRelativeRotation(FRotator(0.0f, -90.0f, 0.0f));
+	Head->SetRelativeLocation(FVector(0.0f, 0.0f, -96.0f));
+	UpperBody->SetRelativeRotation(FRotator(0.0f, -90.0f, 0.0f));
+	UpperBody->SetRelativeLocation(FVector(0.0f, 0.0f, -96.0f));
+	Arms->SetRelativeRotation(FRotator(0.0f, -90.0f, 0.0f));
+	Arms->SetRelativeLocation(FVector(0.0f, 0.0f, -96.0f));
+	LowerBody->SetRelativeRotation(FRotator(0.0f, -90.0f, 0.0f));
+	LowerBody->SetRelativeLocation(FVector(0.0f, 0.0f, -96.0f));
+	Hands->SetRelativeRotation(FRotator(0.0f, -90.0f, 0.0f));
+	Hands->SetRelativeLocation(FVector(0.0f, 0.0f, -96.0f));
+	Feet->SetRelativeRotation(FRotator(0.0f, -90.0f, 0.0f));
+	Feet->SetRelativeLocation(FVector(0.0f, 0.0f, -96.0f));
 
 	//GetMesh()->SetAnimInstanceClass(DefaultAnimClass);
 
@@ -50,28 +86,34 @@ AXLCharacter::AXLCharacter(const FObjectInitializer& ObjectInitializer)
 	CurrentItem = NULL;
 
 	NetCullDistanceSquared = 225000000.0;
+
+	bAbilitiesInitialized = false;
 }
 
 void AXLCharacter::BeginPlay()
 {
-	SpawnInventory();
+	//InitItems();
 
 	Super::BeginPlay();
+
+	check(AbilitySystemComponent);
+
+	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+
+	InitItems();
+	InitAbilities();
+	InitEffects();
+
+	bAbilitiesInitialized = true;
 }
 
 void AXLCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	//const UEnum* EnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("EActionState"), true);
-	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, EnumPtr->GetDisplayNameText(ActionState).ToString());
-
-	if (GetLocalRole() == ROLE_Authority)
-	{
-		//CharacterResources->Regenerate(DeltaSeconds);
-	}
-
 	InteractionComponent->Inspect();
+
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("Jump Height: %f"), CharacterAttributes->GetJumpHeight()));
 }
 
 void AXLCharacter::OnCameraUpdate(const FVector& CameraLocation, const FRotator& CameraRotation)
@@ -93,32 +135,180 @@ void AXLCharacter::OnCameraUpdate(const FVector& CameraLocation, const FRotator&
 	//PerspectiveMesh->SetRelativeLocationAndRotation(PitchedMesh.GetOrigin(), PitchedMesh.Rotator());
 }
 
-void AXLCharacter::SpawnInventory()
-{
-	if (GetLocalRole() == ROLE_Authority)
-	{
-		int32 NumWeaponClasses = CharacterInventory->DefaultInventory.Num();
-		for (int32 i = 0; i < NumWeaponClasses; i++)
-		{
-			if (CharacterInventory->DefaultInventory[i])
-			{
-				FActorSpawnParameters SpawnInfo;
-				SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-				AXLItem* NewWeapon = GetWorld()->SpawnActor<AXLItem>(CharacterInventory->DefaultInventory[i], SpawnInfo);
+//////////////////////////////////////////////////// ABILITIES ////////////////////////////////////////////////////
 
-				NewWeapon->SetOwningPawn(this);
-				CharacterInventory->Inventory.Add(NewWeapon);
-			}
+UAbilitySystemComponent * AXLCharacter::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
+void AXLCharacter::InitAbilities()
+{
+	if (HasAuthority())
+	{
+		for (TSubclassOf<UXLGameplayAbility> Ability : DefaultAbilities)
+		{
+			AddAbility(Ability);
 		}
 	}
 }
 
-void AXLCharacter::Setup()
+void AXLCharacter::InitEffects()
 {
-
+	for (TSubclassOf<UXLGameplayEffect> Effect : DefaultEffects)
+	{
+		AddEffect(Effect);
+	}
 }
 
-//////////////////////////////////////////////////// ACTIONS ////////////////////////////////////////////////////
+void AXLCharacter::AddAbility(TSubclassOf<UXLGameplayAbility> Ability)
+{
+	if (HasAuthority() && AbilitySystemComponent)
+	{
+		TSubclassOf<UXLGameplayAbility>& AbilityRef = Ability;
+
+		FName Id = AbilityRef.GetDefaultObject()->AbilityId;
+		FGameplayAbilitySpecHandle Handle = AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(AbilityRef, 1, INDEX_NONE, this));
+		Abilities.Add(FAbilityKeyPair(Id, Handle));
+	}
+	else
+	{
+		ServerAddAbility(Ability);
+	}
+}
+bool AXLCharacter::ServerAddAbility_Validate(TSubclassOf<UXLGameplayAbility> Ability)
+{
+	return true;
+}
+void AXLCharacter::ServerAddAbility_Implementation(TSubclassOf<UXLGameplayAbility> Ability)
+{
+	AddAbility(Ability);
+}
+
+void AXLCharacter::RemoveAbility(FName Id)
+{
+	if (HasAuthority() && AbilitySystemComponent)
+	{
+		for (FAbilityKeyPair Pair : Abilities)
+		{
+			if (Pair.Id == Id)
+			{
+				AbilitySystemComponent->ClearAbility(Pair.AbilityHandle);
+			}
+		}
+	}
+	else
+	{
+		ServerRemoveAbility(Id);
+	}
+}
+bool AXLCharacter::ServerRemoveAbility_Validate(FName Id)
+{
+	return true;
+}
+void AXLCharacter::ServerRemoveAbility_Implementation(FName Id)
+{
+	RemoveAbility(Id);
+}
+
+void AXLCharacter::AddEffect(TSubclassOf<UXLGameplayEffect> Effect)
+{
+	if (!HasAuthority())
+	{
+		ServerAddEffect(Effect);
+	}
+	if (AbilitySystemComponent)
+	{
+		TSubclassOf<UXLGameplayEffect>& EffectRef = Effect;
+
+		FGameplayEffectContextHandle EffectContext = AbilitySystemComponent->MakeEffectContext();
+		EffectContext.AddSourceObject(this);
+
+		FGameplayEffectSpecHandle EffectSpecHandle = AbilitySystemComponent->MakeOutgoingSpec(Effect, 1, EffectContext);
+
+		if (EffectSpecHandle.IsValid())
+		{
+			FName Id = EffectRef.GetDefaultObject()->EffectId;
+			FActiveGameplayEffectHandle EffectHandle = AbilitySystemComponent->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
+			Effects.Add(FEffectKeyPair(Id, EffectHandle));
+		}
+	}
+}
+bool AXLCharacter::ServerAddEffect_Validate(TSubclassOf<UXLGameplayEffect> Effect)
+{
+	return true;
+}
+void AXLCharacter::ServerAddEffect_Implementation(TSubclassOf<UXLGameplayEffect> Effect)
+{
+	AddEffect(Effect);
+}
+
+void AXLCharacter::RemoveEffect(FName Id)
+{
+	if (!HasAuthority())
+	{
+		ServerRemoveAbility(Id);
+	}
+	if (AbilitySystemComponent)
+	{
+		for (FEffectKeyPair Pair : Effects)
+		{
+			if (Pair.Id == Id)
+			{
+				AbilitySystemComponent->RemoveActiveGameplayEffect(Pair.EffectHandle);
+			}
+		}
+	}
+}
+bool AXLCharacter::ServerRemoveEffect_Validate(FName Id)
+{
+	return true;
+}
+void AXLCharacter::ServerRemoveEffect_Implementation(FName Id)
+{
+	RemoveEffect(Id);
+}
+
+void AXLCharacter::ActivateAbilityById(FName Id)
+{
+	check(AbilitySystemComponent);
+
+	for (FAbilityKeyPair Pair : Abilities)
+	{
+		if (Pair.Id == Id)
+		{
+			AbilitySystemComponent->TryActivateAbility(Pair.AbilityHandle);
+		}
+	}
+}
+
+void AXLCharacter::EndAbilityById(FName Id)
+{
+	check(AbilitySystemComponent);
+	
+	if (!HasAuthority())
+	{
+		ServerEndAbilityById(Id);
+	}
+
+	for (FAbilityKeyPair Pair : Abilities)
+	{
+		if (Pair.Id == Id)
+		{
+			AbilitySystemComponent->CancelAbilityHandle(Pair.AbilityHandle);
+		}
+	}
+}
+bool AXLCharacter::ServerEndAbilityById_Validate(FName Id)
+{
+	return true;
+}
+void AXLCharacter::ServerEndAbilityById_Implementation(FName Id)
+{
+	EndAbilityById(Id);
+}
+
+//////////////////////////////////////////////////// MOVEMENT /////////////////////////////////////////////////////
 
 void AXLCharacter::Move(float Value)
 {
@@ -169,26 +359,7 @@ void AXLCharacter::Look(float Direction)
 	}
 }
 
-void AXLCharacter::Jump()
-{
-	if (XLCharacterCan::Jump(this))
-	{
-		ActionState = EActionState::Jumping;
-		Super::Jump();
-		MovementComponent->UpdateMovementSpeed();
-	}
-}
-void AXLCharacter::Falling()
-{
-	PostureState = EPostureState::Airborne;
-	Super::Falling();
-}
-void AXLCharacter::Landed(const FHitResult& Hit)
-{
-	ActionState = EActionState::None;
-	PostureState = EPostureState::Standing;
-	Super::Landed(Hit);
-}
+/////////////////////////////////////////////////// INTERACTION ///////////////////////////////////////////////////
 
 void AXLCharacter::Interact()
 {
@@ -207,158 +378,66 @@ void AXLCharacter::ServerInteract_Implementation()
 	InteractionComponent->Interact();
 }
 
-void AXLCharacter::StartCrouch()
-{
-	if (XLCharacterCan::StartCrouch(this))
-	{
-		if (GetLocalRole() < ROLE_Authority)
-		{
-			ServerStartCrouch();
-		}
+//////////////////////////////////////////////////// EQUIPMENT ////////////////////////////////////////////////////
 
-		Crouch();
-		PostureState = EPostureState::Crouching;
-		MovementComponent->UpdateMovementSpeed();
+void AXLCharacter::InitItems()
+{
+	if (HasAuthority())
+	{
+		for (TSubclassOf<AXLItem> Item : DefaultItems)
+		{
+			AddItem(Item);
+		}
 	}
 }
-bool AXLCharacter::ServerStartCrouch_Validate()
+
+void AXLCharacter::AddItem(TSubclassOf<AXLItem> Item)
+{
+	if (HasAuthority())
+	{
+		FActorSpawnParameters SpawnInfo;
+		SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+		AXLItem* NewItem = GetWorld()->SpawnActor<AXLItem>(Item, SpawnInfo);
+
+		NewItem->SetOwningPawn(this);
+		NewItem->SetVisibility(false, true);
+		NewItem->Attach(Head, "Hand_R"); // Override get mesh and make a string num for sockets
+
+		Items.Add(NewItem);
+	}
+	else
+	{
+		ServerAddItem(Item);
+	}
+}
+bool AXLCharacter::ServerAddItem_Validate(TSubclassOf<AXLItem> Item)
 {
 	return true;
 }
-void AXLCharacter::ServerStartCrouch_Implementation()
+void AXLCharacter::ServerAddItem_Implementation(TSubclassOf<AXLItem> Item)
 {
-	StartCrouch();
-}
-
-void AXLCharacter::StopCrouch()
-{
-	if (XLCharacterCan::StopCrouch(this))
-	{
-		if (GetLocalRole() < ROLE_Authority)
-		{
-			ServerStopCrouch();
-		}
-
-		UnCrouch();
-		PostureState = EPostureState::Standing;
-		MovementComponent->UpdateMovementSpeed();
-	}
-}
-bool AXLCharacter::ServerStopCrouch_Validate()
-{
-	return true;
-}
-void AXLCharacter::ServerStopCrouch_Implementation()
-{
-	StopCrouch();
-}
-
-void AXLCharacter::StartProne()
-{
-	if (XLCharacterCan::StartProne(this))
-	{
-		if (GetLocalRole() < ROLE_Authority)
-		{
-			ServerStartProne();
-		}
-		PostureState = EPostureState::Prone;
-		MovementComponent->UpdateMovementSpeed();
-	}
-}
-bool AXLCharacter::ServerStartProne_Validate()
-{
-	return true;
-}
-void AXLCharacter::ServerStartProne_Implementation()
-{
-	StartProne();
-}
-
-void AXLCharacter::StopProne()
-{
-	if (XLCharacterCan::StopProne(this))
-	{
-		if (GetLocalRole() < ROLE_Authority)
-		{
-			ServerStopProne();
-		}
-		PostureState = EPostureState::Standing;
-		MovementComponent->UpdateMovementSpeed();
-	}
-}
-bool AXLCharacter::ServerStopProne_Validate()
-{
-	return true;
-}
-void AXLCharacter::ServerStopProne_Implementation()
-{
-	StopProne();
-}
-
-void AXLCharacter::StartSprint()
-{
-	if (XLCharacterCan::StartSprint(this))
-	{
-		if (GetLocalRole() < ROLE_Authority)
-		{
-			ServerStartSprint();
-		}
-		ActionState = EActionState::Sprinting;
-		MovementComponent->UpdateMovementSpeed();
-	}
-}
-bool AXLCharacter::ServerStartSprint_Validate()
-{
-	return true;
-}
-void AXLCharacter::ServerStartSprint_Implementation()
-{
-	StartSprint();
-}
-
-void AXLCharacter::StopSprint()
-{
-	if (XLCharacterCan::StopSprint(this))
-	{
-		if (GetLocalRole() < ROLE_Authority)
-		{
-			ServerStopSprint();
-		}
-		ActionState = EActionState::None;
-		MovementComponent->UpdateMovementSpeed();
-	}
-}
-bool AXLCharacter::ServerStopSprint_Validate()
-{
-	return true;
-}
-void AXLCharacter::ServerStopSprint_Implementation()
-{
-	StopSprint();
+	AddItem(Item);
 }
 
 void AXLCharacter::EquipItem(AXLItem* Item, FName Socket)
 {
-	if (XLCharacterCan::StartEquip(this, Item))
+	if (HasAuthority() && Item)
 	{
-		if (GetLocalRole() == ROLE_Authority)
+		CurrentItem = Item;
+		for (TSubclassOf<UXLGameplayAbility> Ability : CurrentItem->ItemAbilities)
 		{
-			HandleEquipItem(Item, Socket);
+			AddAbility(Ability);
 		}
-		else
+		for (TSubclassOf<UXLGameplayEffect> Effect : CurrentItem->ItemEffects)
 		{
-			ServerEquipItem(Item, Socket);
+			AddEffect(Effect);
 		}
+		SetAnimBlueprint(CurrentItem->AnimClass);
+		CurrentItem->SetVisibility(true, true);
 	}
-}
-void AXLCharacter::HandleEquipItem(AXLItem* Item, FName Socket)
-{
-	CurrentItem = Item;
-	if (CurrentItem)
+	else
 	{
-		CurrentItem->Equip(Head, "Hand_R");
-
-		CharacterAnimations->SetAnimClass(CurrentItem->AnimClass);
+		ServerEquipItem(Item, Socket);
 	}
 }
 bool AXLCharacter::ServerEquipItem_Validate(AXLItem* Item, FName Socket)
@@ -388,8 +467,11 @@ void AXLCharacter::HandleStowItem_Implementation(AXLItem* Item, USkeletalMeshCom
 {
 	if (CurrentItem)
 	{
-		CurrentItem->Equip(AttachedMesh3P, Socket);
-
+		for (TSubclassOf<UXLGameplayAbility> Ability : CurrentItem->ItemAbilities)
+		{
+			RemoveAbility(Ability.GetDefaultObject()->AbilityId);
+		}
+		CurrentItem->Attach(AttachedMesh3P, Socket);
 		CharacterAnimations->SetAnimClass(CharacterAnimations->DefaultAnimClass);
 	}
 	CurrentItem = NULL;
@@ -409,7 +491,7 @@ void AXLCharacter::SwitchItem(AXLItem* NextItem)
 	{
 		if (GetLocalRole() == ROLE_Authority)
 		{
-			float Duration = CurrentItem->UnequipDuration;
+			float Duration = 1.0f;//CurrentItem->UnequipDuration;
 			//StowItem(CurrentItem, "");
 
 			TimerDelegate_SwitchWeapon.BindUFunction(this, FName("EquipItem"), NextItem);
@@ -467,157 +549,12 @@ void AXLCharacter::OnRep_CurrentWeapon(AXLItem* PreviousWeapon)
 {
 	if (CurrentItem)
 	{
-		HandleEquipItem(CurrentItem, "Hand_R");
+		CurrentItem->SetVisibility(true, true);
+		SetAnimBlueprint(CurrentItem->AnimClass);
 	}
 }
 
-void AXLCharacter::StartAim()
-{
-	if (XLCharacterCan::StartAim(this))
-	{
-		AXLRangedWeapon* Weapon = Cast<AXLRangedWeapon>(CurrentItem);
-		if (Weapon)
-		{
-			Weapon->StartAiming();
-		}
-	}
-}
-void AXLCharacter::StopAim()
-{
-	if (XLCharacterCan::StopAim(this))
-	{
-		AXLRangedWeapon* Weapon = Cast<AXLRangedWeapon>(CurrentItem);
-		if (Weapon)
-		{
-			Weapon->StopAiming();
-		}
-	}
-}
-
-void AXLCharacter::StartAttack()
-{
-	if (XLCharacterCan::StartAttack(this))
-	{
-		AXLRangedWeapon* Weapon = Cast<AXLRangedWeapon>(CurrentItem);
-		if (Weapon)
-		{
-			Weapon->StartAttack();
-		}
-	}
-}
-void AXLCharacter::StopAttack()
-{
-	if (XLCharacterCan::StopAttack(this))
-	{
-		AXLRangedWeapon* Weapon = Cast<AXLRangedWeapon>(CurrentItem);
-		if (Weapon)
-		{
-			Weapon->StopAttack();
-		}
-	}
-}
-
-void AXLCharacter::StartItemPrimaryActivate()
-{
-	//TODO: Update can method with item equivalent
-	if (XLCharacterCan::StartAttack(this))
-	{
-		if (CurrentItem)
-		{
-			CurrentItem->PrimaryActivate();
-		}
-	}
-}
-void AXLCharacter::StopItemPrimaryActivate()
-{
-	//TODO: Update can method with item equivalent
-	if (XLCharacterCan::StopAttack(this))
-	{
-		if (CurrentItem)
-		{
-			CurrentItem->PrimaryDeactivate();
-		}
-	}
-}
-
-void AXLCharacter::StartItemSecondaryActivate()
-{
-	//TODO: Update can method with item equivalent
-	if (XLCharacterCan::StartAttack(this))
-	{
-		if (CurrentItem)
-		{
-			CurrentItem->SecondaryActivate();
-		}
-	}
-}
-void AXLCharacter::StopItemSecondaryActivate()
-{
-	//TODO: Update can method with item equivalent
-	if (XLCharacterCan::StopAttack(this))
-	{
-		if (CurrentItem)
-		{
-			CurrentItem->SecondaryDeactivate();
-		}
-	}
-}
-
-void AXLCharacter::StartItemTertiaryActivate()
-{
-	if (XLCharacterCan::StartAttack(this))
-	{
-		if (CurrentItem)
-		{
-			CurrentItem->TertiaryActivate();
-		}
-	}
-}
-void AXLCharacter::StopItemTertiaryActivate()
-{
-	if (XLCharacterCan::StartAttack(this))
-	{
-		if (CurrentItem)
-		{
-			CurrentItem->TertiaryActivate();
-		}
-	}
-}
-
-void AXLCharacter::Reload()
-{
-	if (XLCharacterCan::StartReload(this))
-	{
-		AXLRangedWeapon* Weapon = Cast<AXLRangedWeapon>(CurrentItem);
-		if (Weapon)
-		{
-			Weapon->Reload();
-		}
-	}
-}
-
-float AXLCharacter::Melee()
-{
-	return 0.0f;
-	//CharacterWeapon->Melee();
-}
-
-void AXLCharacter::StartAbility(int32 Ability)
-{
-	if (XLCharacterCan::StartAbility(this))
-	{
-		//CharacterAbilities->ActivateAbility(Ability);
-	}
-}
-void AXLCharacter::StopAbility(int32 Ability)
-{
-	if (XLCharacterCan::StopAbility(this))
-	{
-		//CharacterAbilities->DeactivateAbility(Ability);
-	}
-}
-
-//////////////////////////////////////////////////// DAMAGE /////////////////////////////////////////////////////
+///////////////////////////////////////////////////// DAMAGE //////////////////////////////////////////////////////
 
 float AXLCharacter::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser)
 {
@@ -707,8 +644,8 @@ void AXLCharacter::OnDeath(float KillingDamage, struct FDamageEvent const& Damag
 	const FPointDamageEvent* Temp = (const FPointDamageEvent*)&DamageEvent;
 
 	OnDeathEvent();
-	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	GetCapsuleComponent()->SetCollisionResponseToAllChannels(ECR_Ignore);
+	//GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	//GetCapsuleComponent()->SetCollisionResponseToAllChannels(ECR_Ignore);
 	SetLifeSpan(5.0f);
 }
 
@@ -793,6 +730,10 @@ void AXLCharacter::SetRagdollPhysics()
 		UpperBody->WakeAllRigidBodies();
 		UpperBody->bBlendPhysics = true;
 
+		Arms->SetSimulatePhysics(true);
+		Arms->WakeAllRigidBodies();
+		Arms->bBlendPhysics = true;
+
 		LowerBody->SetSimulatePhysics(true);
 		LowerBody->WakeAllRigidBodies();
 		LowerBody->bBlendPhysics = true;
@@ -829,11 +770,24 @@ void AXLCharacter::SetRagdollPhysics()
 	}
 }
 
+void AXLCharacter::SetAnimBlueprint(TSubclassOf<UAnimInstance> AnimBlueprint)
+{
+	Head->SetAnimInstanceClass(AnimBlueprint);
+}
+
+bool AXLCharacter::PlayAnimation_Validate(class UAnimMontage* AnimMontage, float InPlayRate, FName StartSectionName)
+{
+	return true;
+}
 void AXLCharacter::PlayAnimation_Implementation(class UAnimMontage* AnimMontage, float InPlayRate, FName StartSectionName)
+{
+	HandlePlayAnimation(AnimMontage, InPlayRate, StartSectionName);
+}
+void AXLCharacter::HandlePlayAnimation_Implementation(class UAnimMontage* AnimMontage, float InPlayRate, FName StartSectionName)
 {
 	if (GetNetMode() != NM_DedicatedServer)
 	{
-		USkeletalMeshComponent* UseMesh = GetMesh();
+		USkeletalMeshComponent* UseMesh = Head;
 		if (AnimMontage && UseMesh && UseMesh->AnimScriptInstance)
 		{
 			UseMesh->AnimScriptInstance->Montage_Play(AnimMontage, InPlayRate);
@@ -845,9 +799,8 @@ void AXLCharacter::StopAnimation_Implementation(class UAnimMontage* AnimMontage)
 {
 	if (GetNetMode() != NM_DedicatedServer)
 	{
-		USkeletalMeshComponent* UseMesh = GetMesh();
-		if (AnimMontage && UseMesh && UseMesh->AnimScriptInstance &&
-			UseMesh->AnimScriptInstance->Montage_IsPlaying(AnimMontage))
+		USkeletalMeshComponent* UseMesh = Head;
+		if (AnimMontage && UseMesh && UseMesh->AnimScriptInstance && UseMesh->AnimScriptInstance->Montage_IsPlaying(AnimMontage))
 		{
 			UseMesh->AnimScriptInstance->Montage_Stop(AnimMontage->BlendOut.GetBlendTime());
 		}
@@ -889,4 +842,7 @@ void AXLCharacter::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutL
 	DOREPLIFETIME_CONDITION(AXLCharacter, PostureState, COND_SkipOwner);
 
 	DOREPLIFETIME_CONDITION(AXLCharacter, LastHitInfo, COND_Custom);
+	DOREPLIFETIME(AXLCharacter, Abilities);
+	DOREPLIFETIME(AXLCharacter, Effects);
+	DOREPLIFETIME(AXLCharacter, Items);
 }

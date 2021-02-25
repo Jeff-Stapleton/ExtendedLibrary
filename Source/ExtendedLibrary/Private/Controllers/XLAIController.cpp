@@ -85,11 +85,11 @@ void AXLAIController::ShootEnemy()
 
 	if (bCanShoot)
 	{
-		MyBot->StartAttack();
+		//MyBot->StartAttack();
 	}
 	else
 	{
-		MyBot->StopAttack();
+		//MyBot->StopAttack();
 	}
 }
 
@@ -98,7 +98,7 @@ void AXLAIController::StopAttacking()
 	AXLAICharacter* MyBot = Cast<AXLAICharacter>(GetPawn());
 	if (MyBot)
 	{
-		MyBot->StopAttack();
+		//MyBot->StopAttack();
 	}
 	else
 	{

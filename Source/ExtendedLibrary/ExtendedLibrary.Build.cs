@@ -14,11 +14,15 @@ public class ExtendedLibrary : ModuleRules
 			{
 				"Core",
 				"CoreUObject",
-				"Engine",
-				"HTTP",
+                "Engine",
+                "GameplayAbilities",
+                "GameplayTags",
+                "GameplayTasks",
+                "HTTP",
 				"InputCore",
                 "NavigationSystem",
                 "OnlineSubsystem",
+                "PhysicsCore",
                 "PhysXVehicles",
             }
         );

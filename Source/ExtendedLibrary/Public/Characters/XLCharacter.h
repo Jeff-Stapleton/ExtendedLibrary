@@ -1,6 +1,10 @@
 #pragma once
 
 #include "GameFramework/Character.h"
+#include "Abilities/GameplayAbility.h"
+#include "AbilitySystemInterface.h"
+#include "GameplayEffectTypes.h"
+#include "GameplayEffect.h"
 
 #include "Enums/XLActionState.h"
 #include "Enums/XLCombatState.h"
@@ -10,11 +14,17 @@
 #include "Enums/XLTargetingState.h"
 
 #include "Structs/XLHitInfo.h"
+#include "Structs/XLAbilityKeyPair.h"
+#include "Structs/XLEffectKeyPair.h"
 
 #include "XLCharacter.generated.h"
 
 class AXLItem;
+class UXLGameplayAbility;
+class UXLGameplayEffect;
+class UXLAbilitySystemComponent;
 class UXLCharacterResources;
+class UXLCharacterAttributeSet;
 class UXLCharacterStats;
 class UXLAbilityManager;
 class UXLPlayerAnimationManager;
@@ -29,7 +39,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FLookingDelegate);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDeathDelegate);
 
 UCLASS()
-class EXTENDEDLIBRARY_API AXLCharacter : public ACharacter
+class EXTENDEDLIBRARY_API AXLCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -40,22 +50,28 @@ public:
 
 	///////////////////////////////////////////// STATES /////////////////////////////////////////////
 
-	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "XL|Character")
+	UPROPERTY(Replicated, BlueprintReadWrite, Category = "XL|Character")
 	TEnumAsByte<EActionState::Type> ActionState;
 
-	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "XL|Character")
+	UPROPERTY(Replicated, BlueprintReadWrite, Category = "XL|Character")
 	TEnumAsByte<ECombatState::Type> CombatState;
 
-	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "XL|Character")
+	UPROPERTY(Replicated, BlueprintReadWrite, Category = "XL|Character")
 	TEnumAsByte<EHealthState::Type> HealthState;
 
-	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "XL|Character")
+	UPROPERTY(Replicated, BlueprintReadWrite, Category = "XL|Character")
 	TEnumAsByte<EMovementState::Type> MovementState;
 
-	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category = "XL|Character")
+	UPROPERTY(Replicated, BlueprintReadWrite, Category = "XL|Character")
 	TEnumAsByte<EPostureState::Type> PostureState;
 
 	////////////////////////////////////////////// DATA //////////////////////////////////////////////
+
+	UPROPERTY(EditDefaultsOnly, Category = "XL|Character")
+	UXLAbilitySystemComponent* AbilitySystemComponent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "XL|Character")
+	UXLCharacterAttributeSet* CharacterAttributes;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "XL|Character")
 	UXLCharacterResources* CharacterResources;
@@ -92,6 +108,9 @@ public:
 	USkeletalMeshComponent* UpperBody;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Mesh)
+	USkeletalMeshComponent* Arms;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Mesh)
 	USkeletalMeshComponent* LowerBody;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Mesh)
@@ -108,7 +127,26 @@ public:
 	UPROPERTY(Transient, ReplicatedUsing = OnRep_CurrentWeapon, BlueprintReadWrite, Category = Weapons)
 	AXLItem* CurrentItem;
 
-	//const int32 UNDEFINED = MAX_int32;
+	UPROPERTY(Replicated, BlueprintReadWrite, Category = "XL|Character")
+	TArray<FAbilityKeyPair> Abilities;
+
+	UPROPERTY(Replicated, BlueprintReadWrite, Category = "XL|Character")
+	TArray<FEffectKeyPair> Effects;
+
+	UPROPERTY(Replicated, BlueprintReadWrite, Category = "XL|Character")
+	TArray<AXLItem*> Items;
+
+	UPROPERTY()
+	bool bAbilitiesInitialized;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "XL|Character")
+	TArray<TSubclassOf<UXLGameplayAbility>> DefaultAbilities;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "XL|Character")
+	TArray<TSubclassOf<UXLGameplayEffect>> DefaultEffects;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "XL|Character")
+	TArray<TSubclassOf<AXLItem>> DefaultItems;
 
 	FDeathDelegate DeathDelegate;
 	FLookingDelegate LookingDelegate;
@@ -116,6 +154,8 @@ public:
 	FTimerHandle TimerHandle_SwitchWeapon;
 
 public: 
+
+	/////////////////////////////////////////////// INITIALIZATION ////////////////////////////////////////////////////
 
 	AXLCharacter(const FObjectInitializer& ObjectInitializer);
 
@@ -128,57 +168,70 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "XL|Character")
 	FRotator AimOffset() const;
 
-	///////////////////////////////////////////// INPUT //////////////////////////////////////////////
+	//////////////////////////////////////////////////// ABILITIES ////////////////////////////////////////////////////
 
-	void Move(float Direction);
+	virtual class UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
-	void Strafe(float Direction);
+	UFUNCTION(BlueprintCallable, Category = "XL|Character")
+	void InitAbilities();
 
-	void Turn(float Direction);
-	void Look(float Direction);
+	UFUNCTION(BlueprintCallable, Category = "XL|Character")
+	void InitEffects();
 
-	void Jump() override;
-	void Falling() override;
-	void Landed(const FHitResult& Hit) override;
+	UFUNCTION(BlueprintCallable, Category = "XL|Character")
+	void AddAbility(TSubclassOf<UXLGameplayAbility> Ability);
+	UFUNCTION(Reliable, Server, WithValidation)
+	void ServerAddAbility(TSubclassOf<UXLGameplayAbility> Ability);
+
+	UFUNCTION(BlueprintCallable, Category = "XL|Character")
+	void RemoveAbility(FName Id);
+	UFUNCTION(Reliable, Server, WithValidation)
+	void ServerRemoveAbility(FName Id);
+
+	UFUNCTION(BlueprintCallable, Category = "XL|Character")
+	void AddEffect(TSubclassOf<UXLGameplayEffect> Effect);
+	UFUNCTION(Reliable, Server, WithValidation)
+	void ServerAddEffect(TSubclassOf<UXLGameplayEffect> Effect);
+
+	UFUNCTION(BlueprintCallable, Category = "XL|Character")
+	void RemoveEffect(FName Id);
+	UFUNCTION(Reliable, Server, WithValidation)
+	void ServerRemoveEffect(FName Id);
+
+	UFUNCTION(BlueprintCallable, Category = "XL|Character")
+	void ActivateAbilityById(FName Id);
+
+	UFUNCTION(BlueprintCallable, Category = "XL|Character")
+	void EndAbilityById(FName Id);
+	UFUNCTION(Reliable, Server, WithValidation)
+	void ServerEndAbilityById(FName Id);
+
+	/////////////////////////////////////////////////// INTERACTION ///////////////////////////////////////////////////
 
 	UFUNCTION(BlueprintCallable, Category = "XL|Character")
 	void Interact();
 	UFUNCTION(Reliable, Server, WithValidation)
 	void ServerInteract();
 
-	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	void StartCrouch();
-	UFUNCTION(Reliable, Server, WithValidation)
-	void ServerStartCrouch();
+	//////////////////////////////////////////////////// MOVEMENT /////////////////////////////////////////////////////
+
+	void Move(float Direction);
+	void Strafe(float Direction);
+
+	void Turn(float Direction);
+	void Look(float Direction);
+
+	//////////////////////////////////////////////////// EQUIPMENT ////////////////////////////////////////////////////
+
+	void InitItems();
 
 	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	void StopCrouch();
+	void AddItem(TSubclassOf<AXLItem> Item);
 	UFUNCTION(Reliable, Server, WithValidation)
-	void ServerStopCrouch();
-
-	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	void StartProne();
-	UFUNCTION(Reliable, Server, WithValidation)
-	void ServerStartProne();
-
-	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	void StopProne();
-	UFUNCTION(Reliable, Server, WithValidation)
-	void ServerStopProne();
-
-	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	void StartSprint();
-	UFUNCTION(Reliable, Server, WithValidation)
-	void ServerStartSprint();
-
-	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	void StopSprint();
-	UFUNCTION(Reliable, Server, WithValidation)
-	void ServerStopSprint();
+	void ServerAddItem(TSubclassOf<AXLItem> Item);
 
 	UFUNCTION(BlueprintCallable, Category = "XL|Character")
 	void EquipItem(AXLItem* Item, FName Socket);
-	void HandleEquipItem(AXLItem* Item, FName Socket);
 	UFUNCTION(Reliable, Server, WithValidation)
 	void ServerEquipItem(AXLItem* Item, FName Socket);
 
@@ -203,70 +256,32 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "XL|Character")
 	void OnRep_CurrentWeapon(AXLItem* PreviousWeapon);
 
-	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	virtual void StartAim(); //TODO: Delete this method -- Item paradigm is the future
-	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	virtual void StopAim(); //TODO: Delete this method -- Item paradigm is the future
-
-	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	void StartAttack(); //TODO: Delete this method -- Item paradigm is the future
-	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	void StopAttack(); //TODO: Delete this method -- Item paradigm is the future
-
-	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	void StartItemPrimaryActivate();
-	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	void StopItemPrimaryActivate();
-
-	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	void StartItemSecondaryActivate();
-	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	void StopItemSecondaryActivate();
-
-	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	void StartItemTertiaryActivate();
-	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	void StopItemTertiaryActivate();
-
-	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	void Reload();
-	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	float Melee();
-
-	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	void StartAbility(int32 Ability);
-	UFUNCTION(BlueprintCallable, Category = "XL|Character")
-	void StopAbility(int32 Ability);
-
-	///////////////////////////////////////// INITIALIZATION //////////////////////////////////////////
-
-	void Setup();
-
-	void SpawnInventory();
-
 	///////////////////////////////////////////// DAMAGE /////////////////////////////////////////////
 
 	UFUNCTION()
 	void OnRep_LastTakeHitInfo();
 
+	virtual float TakeDamage(float Damage, FDamageEvent const & DamageEvent, AController * EventInstigator, AActor * DamageCauser);
+
 	void ReplicateHit(float Damage, struct FDamageEvent const& DamageEvent, class APawn* InstigatingPawn, class AActor* DamageCauser, bool bKilled);
 
-	virtual float TakeDamage(float Damage, FDamageEvent const & DamageEvent, AController * EventInstigator, AActor * DamageCauser);
+	void PlayHit(float DamageTaken, FDamageEvent const & DamageEvent, APawn * PawnInstigator, AActor * DamageCauser);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnDeathEvent();
 
 	bool Die(float KillingDamage, FDamageEvent const & DamageEvent, AController * Killer, AActor * DamageCauser);
 
 	virtual void OnDeath(float KillingDamage, FDamageEvent const & DamageEvent, APawn * PawnInstigator, AActor * DamageCauser);
-
-	UFUNCTION(BlueprintImplementableEvent)
-	void OnDeathEvent();
-	
-	void PlayHit(float DamageTaken, FDamageEvent const & DamageEvent, APawn * PawnInstigator, AActor * DamageCauser);
-
+		
 	void SetRagdollPhysics();
 
 	/////////////////////////////////////////// ANIMATION ///////////////////////////////////////////
 
-	UFUNCTION(Reliable, NetMulticast)
+	UFUNCTION(BlueprintCallable, Category = "XL|Character")
+	void SetAnimBlueprint(TSubclassOf<UAnimInstance> AnimBlueprint);
+
+	UFUNCTION(Unreliable, Server, WithValidation)
 	void PlayAnimation(class UAnimMontage* AnimMontage, float InPlayRate = 1.f, FName StartSectionName = NAME_None);
 
 	UFUNCTION(Reliable, NetMulticast)
@@ -278,5 +293,10 @@ public:
 	////////////////////////////////////////// REPLICATION //////////////////////////////////////////
 
 	virtual void PreReplication(IRepChangedPropertyTracker & ChangedPropertyTracker) override;
+
+protected:
+
+	UFUNCTION(Unreliable, NetMulticast)
+	virtual void HandlePlayAnimation(class UAnimMontage* AnimMontage, float InPlayRate = 1.f, FName StartSectionName = NAME_None);
 
 };

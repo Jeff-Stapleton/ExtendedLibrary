@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Sound/SoundCue.h"
 #include "XLProjectileData.generated.h"
 
 class AXLProjectile;
@@ -11,6 +12,9 @@ struct FXLProjectileData
 
 	UPROPERTY(EditDefaultsOnly, Category = Projectile)
 	TSubclassOf<AXLProjectile> ProjectileClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = Defaults)
+	USoundCue* DefaultSound;
 
 	UPROPERTY(EditDefaultsOnly, Category = Projectile)
 	float ProjectileLife;

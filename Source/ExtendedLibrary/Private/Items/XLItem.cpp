@@ -8,6 +8,9 @@
 
 AXLItem::AXLItem()
 {
+	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+	RootComponent = Root;
+
 	Mesh1P = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh1P"));
 	Mesh1P->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::OnlyTickPoseWhenRendered;
 	Mesh1P->SetOnlyOwnerSee(true);
@@ -17,7 +20,8 @@ AXLItem::AXLItem()
 	Mesh1P->SetCollisionObjectType(ECC_WorldDynamic);
 	Mesh1P->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	Mesh1P->SetCollisionResponseToAllChannels(ECR_Ignore);
-	RootComponent = Mesh1P;
+	Mesh1P->SetupAttachment(Root);
+	Mesh1P->SetVisibility(false);
 
 	Mesh3P = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh3P"));
 	Mesh3P->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::OnlyTickPoseWhenRendered;
@@ -28,7 +32,8 @@ AXLItem::AXLItem()
 	//Mesh3P->SetCollisionResponseToChannel(COLLISION_WEAPON, ECR_Block);
 	Mesh3P->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
 	//Mesh3P->SetCollisionResponseToChannel(COLLISION_PROJECTILE, ECR_Block);
-
+	Mesh3P->SetupAttachment(Root);
+	Mesh3P->SetVisibility(false);
 	//NetCullDistanceSquared = 255000000.0;
 	//bNetUseOwnerRelevancy = false;
 
@@ -79,7 +84,7 @@ void AXLItem::OnRep_MyPawn()
 
 void AXLItem::Remove()
 {
-	Unequip();
+	Detach();
 
 	if (GetLocalRole() == ROLE_Authority)
 	{
@@ -179,9 +184,9 @@ FVector AXLItem::GetSocketLocation(FName SocketName)
 			{
 				return Mesh1P->GetSocketLocation(SocketName);
 			}
-			if (Character->GetMesh()->DoesSocketExist(SocketName))
+			if (Character->Head->DoesSocketExist(SocketName))
 			{
-				return Character->GetMesh()->GetSocketLocation(SocketName);
+				return Character->Head->GetSocketLocation(SocketName);
 			}
 		}
 		else
@@ -190,70 +195,82 @@ FVector AXLItem::GetSocketLocation(FName SocketName)
 			{
 				return Mesh3P->GetSocketLocation(SocketName);
 			}
-			if (Character->GetMesh()->DoesSocketExist(SocketName))
+			if (Character->Head->DoesSocketExist(SocketName))
 			{
-				return Character->GetMesh()->GetSocketLocation(SocketName);
+				return Character->Head->GetSocketLocation(SocketName);
 			}
 		}
 	}
 	return FVector::ZeroVector;
 }
 
-void AXLItem::Equip(USkeletalMeshComponent* AttachMesh3P, FName AttachPoint)
+void AXLItem::Attach(USkeletalMeshComponent* AttachMesh3P, FName AttachPoint)
 {
-	if (Tags.Contains("equipable") && Character)
-	{
-		Unequip();
-		if (Character->IsLocallyControlled())
-		{
-			//Mesh1P->AttachToComponent(AttachMesh1P, FAttachmentTransformRules::KeepRelativeTransform, AttachPoint);
-			Mesh3P->AttachToComponent(AttachMesh3P, FAttachmentTransformRules::KeepRelativeTransform, AttachPoint);
+	AttachToComponent(AttachMesh3P, FAttachmentTransformRules::KeepRelativeTransform, AttachPoint);
+	//AttachToActor(Character, FAttachmentTransformRules::KeepRelativeTransform, AttachPoint);
+	//if (Tags.Contains("equipable") && Character)
+	//{
+	//	Detach();
+	//	if (Character->IsLocallyControlled())
+	//	{
+	//		//AttachToComponent(AttachMesh3P, FAttachmentTransformRules::SnapToTargetNotIncludingScale, AttachPoint);
+	//		Mesh1P->AttachToComponent(AttachMesh3P, FAttachmentTransformRules::KeepRelativeTransform, AttachPoint);
+	//		Mesh3P->AttachToComponent(AttachMesh3P, FAttachmentTransformRules::KeepRelativeTransform, AttachPoint);
 
-			TogglePerspective();
-		}
-		else
-		{
-			Mesh3P->AttachToComponent(AttachMesh3P, FAttachmentTransformRules::KeepRelativeTransform, AttachPoint);
-		}
+	//		TogglePerspective();
+	//	}
+	//	else
+	//	{
+	//		//AttachToComponent(AttachMesh3P, FAttachmentTransformRules::SnapToTargetNotIncludingScale, AttachPoint);
+	//		Mesh1P->AttachToComponent(AttachMesh3P, FAttachmentTransformRules::KeepRelativeTransform, AttachPoint);
+	//		Mesh3P->AttachToComponent(AttachMesh3P, FAttachmentTransformRules::KeepRelativeTransform, AttachPoint);
+	//	}
+	//	//AttachToActor(Character, FAttachmentTransformRules::SnapToTargetNotIncludingScale, AttachPoint);
+	//}
+}
+
+void AXLItem::SetVisibility(bool Visibility, bool Include1PMesh)
+{
+	if (GetLocalRole() == ROLE_Authority)
+	{
+		ServerSetVisibility(Visibility, Include1PMesh);
 	}
+}
+
+void AXLItem::ServerSetVisibility_Implementation(bool Visibility, bool Include1PMesh)
+{
+	Mesh3P->SetVisibility(Visibility);
+	if (Include1PMesh)
+	{
+		Mesh1P->SetVisibility(Visibility);
+	}
+}
+
+
+
+void AXLItem::Detach()
+{
+	//DetachFromActor(FDetachmentTransformRules::KeepRelativeTransform);
+	Mesh3P->DetachFromComponent(FDetachmentTransformRules::KeepRelativeTransform);
+	Mesh1P->DetachFromComponent(FDetachmentTransformRules::KeepRelativeTransform);
+}
+
+void AXLItem::Equip()
+{
+	//if (Count > 0)
+	//{
+		//Mesh3P->SetVisibility(true);
+	//}
 }
 
 void AXLItem::Unequip()
 {
-	Mesh3P->DetachFromComponent(FDetachmentTransformRules::KeepRelativeTransform);
-	Mesh1P->DetachFromComponent(FDetachmentTransformRules::KeepRelativeTransform);
+	Mesh3P->SetVisibility(false);
 }
 
 void AXLItem::Drop()
 {
 	this->Destroy();
-}
-
-void AXLItem::PrimaryActivate() 
-{
-	// Not Implemented
-}
-void AXLItem::PrimaryDeactivate()
-{
-	// Not Implemented
-}
-
-void AXLItem::SecondaryActivate()
-{
-	// Not Implemented
-}
-void AXLItem::SecondaryDeactivate()
-{
-	// Not Implemented
-}
-
-void AXLItem::TertiaryActivate()
-{
-	// Not Implemented
-}
-void AXLItem::TertiaryDeactivate()
-{
-	// Not Implemented
 }
 
 void AXLItem::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const

@@ -31,8 +31,4 @@ public:
 
 	UFUNCTION()
 	void ToggleCamera();
-
-	void StartAim() override;
-	void StopAim() override;
-
 };

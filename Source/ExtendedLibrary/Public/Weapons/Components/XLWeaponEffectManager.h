@@ -6,6 +6,7 @@
 
 class AXLImpactEffect;
 class AXLRangedWeapon;
+class UMatineeCameraShake;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class UXLWeaponEffectManager : public UActorComponent
@@ -24,7 +25,7 @@ public:
 	TSubclassOf<AXLImpactEffect> ImpactTemplate;
 
 	UPROPERTY(EditDefaultsOnly, Category = CameraShake)
-	TSubclassOf<UCameraShake> FireCameraShake;
+	TSubclassOf<UMatineeCameraShake> FireCameraShake;
 
 	UPROPERTY(EditDefaultsOnly, Category = MuzzleFX)
 	UParticleSystem* MuzzleFX;

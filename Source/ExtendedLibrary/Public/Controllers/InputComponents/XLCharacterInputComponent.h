@@ -36,48 +36,20 @@ public:
 
 	virtual void Jump();
 
-	virtual void Dodge();
-
 	virtual void EquipItem();
 	virtual void StowItem();
-
-	virtual void FirstWeapon();
-	virtual void SecondWeapon();
-	virtual void ThirdWeapon();
-	virtual void FourthWeapon();
-	virtual void FifthWeapon();
-	virtual void SixthWeapon();
-	virtual void SeventhWeapon();
-	virtual void EighthWeapon();
 
 	virtual void Interact();
 
 	virtual void StartCrouch();
 	virtual void StopCrouch();
 
-	virtual void StartProne();
-	virtual void StopProne();
-
 	virtual void StartSprint();
 	virtual void StopSprint();
 
-	virtual void ActivatePrimary();
-	virtual void DeactivatePrimary();
+	virtual void StartActivateItemPrimary();
+	virtual void StopActivateItemPrimary();
 
-	virtual void ActivateSecondary();
-	virtual void DeactivatedSecondary();
-
-	virtual void ActivateTertiary();
-	virtual void DeactivateTertiary();
-
-	virtual void Melee();
-
-	virtual void StartAbility1();
-	virtual void StopAbility1();
-
-	virtual void StartAbility2();
-	virtual void StopAbility2();
-
-	virtual void StartAbility3();
-	virtual void StopAbility3();
+	virtual void StartActivateItemSecondary();
+	virtual void StopActivateItemSecondary();
 };

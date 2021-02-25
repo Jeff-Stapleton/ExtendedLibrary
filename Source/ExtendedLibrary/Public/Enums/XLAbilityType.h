@@ -1,12 +1,11 @@
 #pragma once
 
 UENUM(BlueprintType, Category = Ability)
-namespace EAbilityType
+enum class EAbilityType : uint8
 {
-	enum Type
-	{
-		Activate,
-		Channel,
-		Toggle
-	};
-}
+	None,
+	Confirm,
+	Cancel,
+	Jump,
+	Sprint
+};
